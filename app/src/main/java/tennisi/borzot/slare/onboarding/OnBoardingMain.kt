@@ -1,12 +1,16 @@
 package tennisi.borzot.slare.onboarding
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import tennisi.borzot.slare.MainActivity
 import tennisi.borzot.slare.R
 
 @Suppress("DEPRECATION")
@@ -17,9 +21,15 @@ class OnBoardingMain : AppCompatActivity() {
     var onBoardingViewPager: ViewPager? = null
     var next: TextView? = null
     var position = 0
+    var sharedPreference: SharedPreferences ? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (restorePrefData()){
+            val i = Intent(applicationContext, MainActivity::class.java)
+            startActivity(i)
+        }
         setContentView(R.layout.activity_on_boarding_main)
         tabLayout = findViewById(R.id.tab_indicator)
         next = findViewById(R.id.next_tv)
@@ -40,6 +50,11 @@ class OnBoardingMain : AppCompatActivity() {
             if (position < onBoardingData.size){
                 position++
                 onBoardingViewPager!!.currentItem = position
+            }
+            if (position == onBoardingData.size){
+                savePrefData()
+                val i = Intent(applicationContext, MainActivity::class.java)
+                startActivity(i)
             }
         }
 
@@ -67,6 +82,9 @@ class OnBoardingMain : AppCompatActivity() {
 
     }
 
+
+
+
     private fun setOnBoardingViewPagerAdapter(onBoardingData: List<OnBoardingData>){
         onBoardingViewPager = findViewById(R.id.screenPager)
         onBoardingViewPagerAdapter = OnBoardingViewPagerAdapter(this, onBoardingData)
@@ -74,6 +92,18 @@ class OnBoardingMain : AppCompatActivity() {
         tabLayout?.setupWithViewPager(onBoardingViewPager)
     }
 
+    @SuppressLint("CommitPrefEdits")
+    private fun savePrefData(){
+        sharedPreference = applicationContext.getSharedPreferences("pref", Context.MODE_PRIVATE)
+        val editor = sharedPreference!!.edit()
+        editor.putBoolean("isFirstTimeRun", true)
+        editor.apply()
+    }
+
+    private fun restorePrefData(): Boolean{
+        sharedPreference = applicationContext.getSharedPreferences("pref", Context.MODE_PRIVATE)
+        return sharedPreference!!.getBoolean("isFirstTimeRun", false)
+    }
 
     private fun hideSystemUI() {
         val decorView: View = window.decorView

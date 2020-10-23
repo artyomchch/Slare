@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-            //  hideSystemUI()
+        hideSystemUI()
         Toast.makeText(this, "Welcome", Toast.LENGTH_LONG).show()
     }
 
