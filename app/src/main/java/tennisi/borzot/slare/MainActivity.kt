@@ -148,6 +148,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
     private fun hideSystemUI() {
         val decorView: View = window.decorView
         val uiOptions = decorView.systemUiVisibility
