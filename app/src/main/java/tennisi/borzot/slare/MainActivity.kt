@@ -156,10 +156,10 @@ class MainActivity : AppCompatActivity() {
         newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_LOW_PROFILE
         newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_FULLSCREEN
         newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-        //newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_IMMERSIVE
+        newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_IMMERSIVE
         newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-        //   newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_VISIBLE
-        //  newUiOptions = newUiOptions or View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+        newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_VISIBLE
+        newUiOptions = newUiOptions or View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
         decorView.systemUiVisibility = newUiOptions
     }
 }
