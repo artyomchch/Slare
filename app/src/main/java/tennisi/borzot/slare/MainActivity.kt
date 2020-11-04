@@ -1,17 +1,17 @@
 package tennisi.borzot.slare
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import tennisi.borzot.slare.pager.PagerViewAdapter
-import java.text.FieldPosition
 
 private lateinit var mViewPager: ViewPager
+private lateinit var layoutAddCar: LinearLayout
 private lateinit var addBtn: ImageButton
 private lateinit var equBtn: ImageButton
 private lateinit var speedBtn: ImageButton
@@ -31,6 +31,10 @@ class MainActivity : AppCompatActivity() {
         // init views
         mViewPager = findViewById(R.id.m_view_pager)
 
+        //init layouts
+        layoutAddCar = findViewById(R.id.layoutAddCar)
+
+
         // init image buttons
         addBtn = findViewById(R.id.add_btn)
         equBtn = findViewById(R.id.equ_btn)
@@ -43,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         mViewPager.offscreenPageLimit  = 5
 
         // add page change listener
-        mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener{
+        mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(
                 position: Int,
                 positionOffset: Float,
@@ -62,13 +66,17 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-
-
+        layoutAddCar.isClickable = true;
+        layoutAddCar.setOnClickListener(
+            View.OnClickListener {
+                mViewPager.setCurrentItem(0, true)
+            }
+        )
 
 
 
         //buttons
-        addBtn.setOnClickListener{
+        layoutAddCar.setOnClickListener{
             mViewPager.setCurrentItem(0, true)
         }
         equBtn.setOnClickListener{
@@ -153,13 +161,13 @@ class MainActivity : AppCompatActivity() {
         val decorView: View = window.decorView
         val uiOptions = decorView.systemUiVisibility
         var newUiOptions = uiOptions
-        newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_LOW_PROFILE
-        newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_FULLSCREEN
+      //  newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_LOW_PROFILE
+     //   newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_FULLSCREEN
         newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_IMMERSIVE
-        newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-        newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_VISIBLE
-        newUiOptions = newUiOptions or View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+        //newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+      //  newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_VISIBLE
+     //   newUiOptions = newUiOptions or View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
         decorView.systemUiVisibility = newUiOptions
     }
 }

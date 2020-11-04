@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4FA372</color>
+    <color name="colorPrimary">#77B2D8</color>
     <color name="colorPrimaryDark">#A2C9EC</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="colorWeather">#E2EBF3</color>
@@ -12,4 +12,8 @@
     <color name="trans_purple">#7C6200EA</color>
     <color name="trans_blue">#862962FF</color>
     <color name="trans_yellow">#88FFD600</color>
+
+    // Menu color
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorDivider">#ECECEC</color>
 </resources>

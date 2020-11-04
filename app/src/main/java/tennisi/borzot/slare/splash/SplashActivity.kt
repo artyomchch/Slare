@@ -37,7 +37,7 @@ class SplashActivity : AppCompatActivity() {
         val uiOptions = decorView.systemUiVisibility
         var newUiOptions = uiOptions
         newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_LOW_PROFILE
-        newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_FULLSCREEN
+        //newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_FULLSCREEN
         newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         //newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_IMMERSIVE
         newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
