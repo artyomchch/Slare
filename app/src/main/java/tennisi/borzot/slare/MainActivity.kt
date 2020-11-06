@@ -3,20 +3,22 @@ package tennisi.borzot.slare
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import kotlinx.android.synthetic.main.activity_main.*
 import tennisi.borzot.slare.pager.PagerViewAdapter
 
 private lateinit var mViewPager: ViewPager
-private lateinit var layoutAddCar: LinearLayout
-private lateinit var addBtn: ImageButton
-private lateinit var equBtn: ImageButton
-private lateinit var speedBtn: ImageButton
-private lateinit var playerBtn: ImageButton
-private lateinit var setBtn: ImageButton
+
+private lateinit var addBtn: ImageView
+private lateinit var equBtn: ImageView
+private lateinit var speedBtn: ImageView
+private lateinit var playerBtn: ImageView
+private lateinit var setBtn: ImageView
 private lateinit var mPagerAdapter: PagerViewAdapter
 
 
@@ -31,8 +33,8 @@ class MainActivity : AppCompatActivity() {
         // init views
         mViewPager = findViewById(R.id.m_view_pager)
 
-        //init layouts
-        layoutAddCar = findViewById(R.id.layoutAddCar)
+
+
 
 
         // init image buttons
@@ -74,23 +76,36 @@ class MainActivity : AppCompatActivity() {
         )
 
 
+        layoutEqualizer.isClickable = true;
+        layoutEqualizer.setOnClickListener(
+            View.OnClickListener {
+                mViewPager.setCurrentItem(1, true)
+            }
+        )
 
-        //buttons
-        layoutAddCar.setOnClickListener{
-            mViewPager.setCurrentItem(0, true)
-        }
-        equBtn.setOnClickListener{
-            mViewPager.setCurrentItem(1, true)
-        }
-        speedBtn.setOnClickListener{
-            mViewPager.setCurrentItem(2, true)
-        }
-        playerBtn.setOnClickListener{
-            mViewPager.setCurrentItem(3, true)
-        }
-        setBtn.setOnClickListener{
-            mViewPager.setCurrentItem(4, true)
-        }
+        layoutSpeed.isClickable = true;
+        layoutSpeed.setOnClickListener(
+            View.OnClickListener {
+                mViewPager.setCurrentItem(2, true)
+            }
+        )
+
+        layoutPlayer.isClickable = true;
+        layoutPlayer.setOnClickListener(
+            View.OnClickListener {
+                mViewPager.setCurrentItem(3, true)
+            }
+        )
+
+
+        layoutSettings.isClickable = true;
+        layoutSettings.setOnClickListener(
+            View.OnClickListener {
+                mViewPager.setCurrentItem(4, true)
+            }
+        )
+
+
 
         //default tab
         mViewPager.currentItem = 2

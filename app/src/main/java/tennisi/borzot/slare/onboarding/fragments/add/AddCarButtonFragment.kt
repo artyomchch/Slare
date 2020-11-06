@@ -1,78 +1,59 @@
 package tennisi.borzot.slare.onboarding.fragments.add
 
+//import com.cunoraz.tagview.Tag
+//import com.cunoraz.tagview.TagView
+//import com.cunoraz.tagview.TagView.OnTagClickListener
+
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.cunoraz.tagview.Tag
-import com.cunoraz.tagview.TagView
-import com.cunoraz.tagview.TagView.OnTagClickListener
+import androidx.appcompat.widget.AppCompatRadioButton
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.fragment_add_car.*
 import kotlinx.android.synthetic.main.fragment_add_car.view.*
+import me.gujun.android.taggroup.TagGroup
 import tennisi.borzot.slare.R
 
 
 class AddCarButtonFragment(): BottomSheetDialogFragment() {
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val rbLeftButton : AppCompatRadioButton
+        val rbRightButton : AppCompatRadioButton
         val view = inflater.inflate(R.layout.fragment_add_car, container, false)
-        val tagGroup :TagView
+       // val tagCar :TagView
         var tagList: ArrayList<TagClass?>
-        tagGroup = view.tag_group
-        tagGroup.addTags(arrayOf("Tesla", "BMW", "KIA", "Mini", "Citroen", "Chevrolet", "Ferrari"))
-
-        tagGroup.setOnTagClickListener(object : OnTagClickListener {
-            override fun onTagClick(tag: Tag?, position: Int) {
-                if (tag != null) {
-                    editCarName.setText(tag.text)
-                }
-            }
-        })
-
-//        editCarName.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
-//
-//            }
-//
-//            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-//
-//            }
-//
-//            override fun afterTextChanged(s: Editable) {
-//
-//            }
-//        })
+      //  tagCar = view.tag_group_car
+     //   tagCar.addTags(arrayOf("Tesla", "BMW", "KIA", "Mini", "Citroen", "Chevrolet", "Ferrari"))
+        val mTagGroup = view.findViewById(R.id.tag_group) as TagGroup
+        mTagGroup.setTags(*arrayOf("Tesla", "BMW", "KIA", "Mini", "Citroen", "Chevrolet", "Ferrari"))
 
 
-        fun setTags(cs: CharSequence){
-            if (cs.toString().equals("")){
-                tagGroup.addTags(ArrayList<Tag>())
-                return
-            }
-
-            var text = cs.toString()
-            val tags: ArrayList<Tag> = ArrayList()
-            var tag: Tag
+        rbLeftButton = view.findViewById(R.id.rbLeft)
+        rbRightButton = view.findViewById(R.id.rbRight)
 
 
+        rbLeftButton.setOnClickListener {
+                view.rbLeft.setTextColor(Color.WHITE)
+                view.rbRight.setTextColor(Color.parseColor("#77B2D8"))
+        }
 
+        rbRightButton.setOnClickListener{
+                view.rbLeft.setTextColor(Color.parseColor("#77B2D8"))
+                view.rbRight.setTextColor(Color.WHITE)
         }
 
 
 
 
-
-
-
-        view.save_add_button.setOnClickListener {
+        view.cansel.setOnClickListener {
             dismiss()
         }
 

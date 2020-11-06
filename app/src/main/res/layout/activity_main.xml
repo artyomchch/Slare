@@ -30,7 +30,7 @@
             android:orientation="vertical"
             android:clickable="true">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/add_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -53,11 +53,12 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layoutEqualizer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/equ_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,11 +81,12 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layoutSpeed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/speed_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -107,11 +109,12 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layoutPlayer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/player_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -135,11 +138,12 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layoutSettings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/set_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -16,4 +16,7 @@
     // Menu color
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorDivider">#ECECEC</color>
+
+    // main color
+    <color name="mainBlue">#77B2D8</color>
 </resources>

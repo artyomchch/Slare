@@ -6,175 +6,145 @@
     android:id="@+id/fragment_add_car"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:background="@drawable/bottom_sheet_background"
     android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingTop="10dp"
     android:paddingRight="20dp"
-    android:paddingBottom="10dp"
-    android:background="@drawable/bottom_sheet_background">
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Select car brand:"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edit_car_brand"
+            android:layout_width="261dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:inputType="textPersonName" />
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="0dp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/tesla" />
+    </LinearLayout>
+
+
+    <me.gujun.android.taggroup.TagGroup
+        android:id="@+id/tag_group"
+        style="@style/TagGroup"
+        android:layout_height="25dp"
+        android:layout_marginTop="15dp"
+
+        app:atg_backgroundColor="#77B2D8"
+        app:atg_borderColor="#77B2D8"
+        app:atg_checkedBackgroundColor="#77B2D8"
+        app:atg_checkedBorderColor="#77B2D8"
+        app:atg_textColor="#FFFFFF" />
 
 
     <TextView
-        android:id="@+id/selectCar"
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Select car name:"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/edit_car_name"
+        android:layout_width="261dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Select mode:"
+        android:textSize="18sp" />
+
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:fontFamily="@font/manrope_bold"
-        android:gravity="center"
-        android:text="Select car brand:"
-        android:textSize="20sp" />
+        android:orientation="horizontal"
+        android:layout_marginTop="15dp">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/colorDivider"
-   />
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/rbLeft"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/radio_button_left_selector"
+            android:button="@color/trans_green"
+            android:checked="true"
+            android:gravity="center"
+            android:text="AUTO"
+            android:textColor="@color/colorWhite" />
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/rbRight"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:textColor="@color/mainBlue"
+            android:checked="false"
+            android:text="MANUAL"
+            android:background="@drawable/radio_button_right_selector"
+            android:gravity="center"
+            android:button="@color/trans_green"
+            android:layout_weight="1"
+            />
+    </RadioGroup>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="20dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:foregroundGravity="center_vertical"
-            app:srcCompat="@drawable/tesla" />
-
-        <EditText
-            android:id="@+id/editCarName"
-            android:layout_width="285dp"
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="21dp"
             android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            android:text="Save" />
 
+        <View
+            android:layout_width="50dp"
+            android:layout_height="0dp" />
+
+        <Button
+            android:id="@+id/cansel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="cancel" />
     </LinearLayout>
-
-    <com.cunoraz.tagview.TagView
-        android:id="@+id/tag_group"
-        android:layout_width="361dp"
-        android:layout_height="33dp"
-        android:layout_margin="10dp"
-        app:lineMargin="5dp"
-        app:tagMargin="5dp"
-        app:textPaddingBottom="5dp"
-        app:textPaddingLeft="8dp"
-        app:textPaddingRight="8dp"
-        app:textPaddingTop="5dp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/colorDivider" />
-
-    <TextView
-        android:id="@+id/selectName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:fontFamily="@font/manrope_bold"
-        android:gravity="center"
-        android:text="Select car name:"
-        android:textSize="20sp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/colorDivider"
-        />
-
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:fontFamily="@font/manrope_medium"
-        android:inputType="textPersonName"
-        android:text=""
-        android:textSize="20sp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/colorDivider"
-        />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
-        android:layout_marginBottom="7dp"
-        android:fontFamily="@font/manrope_bold"
-        android:gravity="center"
-        android:text="Select mode:"
-        android:textSize="24sp"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/colorDivider"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/auto"
-            android:layout_width="93dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/manrope_medium"
-            android:text="Авто" />
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switch1"
-            android:layout_width="10dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="133dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/manrope_medium"
-            android:text="Ручная" />
-
-    </LinearLayout>
-
-    <View
-    android:layout_width="match_parent"
-    android:layout_height="1dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
-    android:background="@color/colorDivider"
-    />
-
-    <Button
-        android:id="@+id/save_add_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="#4CAF50"
-        android:fontFamily="@font/manrope_bold"
-        android:text="Save" />
-
 
 </LinearLayout>

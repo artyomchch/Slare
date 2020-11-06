@@ -44,7 +44,7 @@ repositories {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     //tagView
-    implementation 'com.github.Cutta:TagView:1.3'
-
+   // implementation 'com.github.Cutta:TagView:1.3'
+    implementation 'me.gujun.android.taggroup:library:1.4@aar'
 
 }
