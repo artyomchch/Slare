@@ -1,20 +1,27 @@
 package tennisi.borzot.slare.onboarding.fragments.add
 
-//import com.cunoraz.tagview.Tag
-//import com.cunoraz.tagview.TagView
-//import com.cunoraz.tagview.TagView.OnTagClickListener
+
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatRadioButton
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
+import androidx.core.view.size
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.android.synthetic.main.fragment_add_car.*
 import kotlinx.android.synthetic.main.fragment_add_car.view.*
 import me.gujun.android.taggroup.TagGroup
 import tennisi.borzot.slare.R
+import tennisi.borzot.slare.strings.AppStrings
+import java.util.*
 
 
 class AddCarButtonFragment(): BottomSheetDialogFragment() {
@@ -25,21 +32,65 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val appStrings: AppStrings = AppStrings()
         val rbLeftButton : AppCompatRadioButton
         val rbRightButton : AppCompatRadioButton
         val view = inflater.inflate(R.layout.fragment_add_car, container, false)
-       // val tagCar :TagView
-        var tagList: ArrayList<TagClass?>
-      //  tagCar = view.tag_group_car
-     //   tagCar.addTags(arrayOf("Tesla", "BMW", "KIA", "Mini", "Citroen", "Chevrolet", "Ferrari"))
         val mTagGroup = view.findViewById(R.id.tag_group) as TagGroup
-        mTagGroup.setTags(*arrayOf("Tesla", "BMW", "KIA", "Mini", "Citroen", "Chevrolet", "Ferrari"))
-
 
         rbLeftButton = view.findViewById(R.id.rbLeft)
         rbRightButton = view.findViewById(R.id.rbRight)
 
 
+
+        //tag Group
+        mTagGroup.setTags(appStrings.cars)
+        mTagGroup.setOnTagClickListener(object : TagGroup.OnTagClickListener{
+            override fun onTagClick(tag: String?) {
+                edit_car_brand.setText(tag)
+                mTagGroup.setTags(arrayListOf())
+
+            }
+        })
+
+
+        //EditText
+        view.edit_car_brand.addTextChangedListener(object : TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                edit_car_brand.setSelection(p3)
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                mTagGroup.setTags(searchCarTags(appStrings.cars, p0.toString()))
+                imageAuto.setImageResource(appStrings.pictureCars[searchCarPicture(appStrings.cars, p0.toString())])
+
+                if (mTagGroup.tags.isNotEmpty()){
+                    if (p0.toString().contains(mTagGroup.tags[0])){
+                        tag_group.visibility = View.GONE
+                    }
+                    else tag_group.visibility = View.VISIBLE
+                }
+                else tag_group.visibility = View.GONE
+
+//                if (p0.toString().contains(mTagGroup.tags[0]) && mTagGroup.tags.isNotEmpty()){
+//                    tag_group.visibility = View.GONE
+//                }
+
+
+
+
+
+            }
+        })
+
+
+
+
+        //RadioButton
         rbLeftButton.setOnClickListener {
                 view.rbLeft.setTextColor(Color.WHITE)
                 view.rbRight.setTextColor(Color.parseColor("#77B2D8"))
@@ -52,8 +103,8 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
 
 
 
-
-        view.cansel.setOnClickListener {
+        //cancel button
+        view.cancel.setOnClickListener {
             dismiss()
         }
 
@@ -61,8 +112,34 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
     }
 
 
+    //Находка для тегов!!!
+    fun searchCarTags(carsList: ArrayList<String>, nameCar: String): ArrayList<String> {
+        val newArrayListCar: ArrayList<String> = arrayListOf()
+        val newArrayListCarRubbish: ArrayList<String> = arrayListOf()
+        for (i in carsList){
+            if (i.toLowerCase().indexOf(nameCar.toLowerCase())!= -1 && i.toLowerCase().indexOf(nameCar.toLowerCase()) == 0){
+                newArrayListCar.add(i)
+            }
+            else if (i.toLowerCase().indexOf(nameCar.toLowerCase())!= -1){
+                newArrayListCarRubbish.add(i)
+            }
+        }
+        for (i in newArrayListCarRubbish){
+            newArrayListCar.add(i)
+        }
 
+        return newArrayListCar
+    }
 
+    fun searchCarPicture(carsList: ArrayList<String>, carName: String): Int{
+        for ((c, i) in carsList.withIndex()){
+            if ( i == carName){
+                return c
+            }
+            else c
+        }
+        return carsList.size+1
+    }
 
 
 }

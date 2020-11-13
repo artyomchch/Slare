@@ -39,29 +39,35 @@
             android:inputType="textPersonName" />
 
         <View
-            android:layout_width="20dp"
+            android:layout_width="15dp"
             android:layout_height="0dp" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imageAuto"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/tesla" />
+            app:srcCompat="@drawable/bmw" />
     </LinearLayout>
 
 
     <me.gujun.android.taggroup.TagGroup
         android:id="@+id/tag_group"
         style="@style/TagGroup"
+        android:layout_width="326dp"
         android:layout_height="25dp"
-        android:layout_marginTop="15dp"
 
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="15dp"
         app:atg_backgroundColor="#77B2D8"
         app:atg_borderColor="#77B2D8"
         app:atg_checkedBackgroundColor="#77B2D8"
         app:atg_checkedBorderColor="#77B2D8"
-        app:atg_textColor="#FFFFFF" />
+        app:atg_isAppendMode="false"
+        app:atg_textColor="#FFFFFF"
+        app:atg_textSize="15sp"
+        app:atg_verticalPadding="3sp"
+        app:atg_verticalSpacing="5sp" />
 
 
     <TextView
@@ -78,7 +84,7 @@
         android:id="@+id/edit_car_name"
         android:layout_width="261dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-10dp"
+        android:layout_marginTop="7dp"
         android:inputType="textPersonName" />
 
     <TextView
@@ -94,13 +100,14 @@
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="15dp">
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatRadioButton
             android:id="@+id/rbLeft"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="30dp"
             android:layout_weight="1"
             android:background="@drawable/radio_button_left_selector"
             android:button="@color/trans_green"
@@ -108,43 +115,60 @@
             android:gravity="center"
             android:text="AUTO"
             android:textColor="@color/colorWhite" />
+
         <androidx.appcompat.widget.AppCompatRadioButton
             android:id="@+id/rbRight"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:textColor="@color/mainBlue"
-            android:checked="false"
-            android:text="MANUAL"
-            android:background="@drawable/radio_button_right_selector"
-            android:gravity="center"
-            android:button="@color/trans_green"
+            android:layout_width="13dp"
+            android:layout_height="30dp"
             android:layout_weight="1"
-            />
+            android:background="@drawable/radio_button_right_selector"
+            android:button="@color/trans_green"
+            android:checked="false"
+            android:gravity="center"
+            android:text="MANUAL"
+            android:textColor="@color/mainBlue" />
     </RadioGroup>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="60dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal">
+
+        <View
+            android:layout_width="4dp"
+            android:layout_height="0dp" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Save" />
+            android:background="@drawable/button_save"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Save"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
 
         <View
-            android:layout_width="50dp"
+            android:layout_width="30dp"
             android:layout_height="0dp" />
 
         <Button
-            android:id="@+id/cansel"
+            android:id="@+id/cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="cancel" />
+            android:background="@drawable/button_cancel"
+            android:fontFamily="@font/roboto_medium"
+            android:text="cancel"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="0dp" />
     </LinearLayout>
 
 </LinearLayout>
