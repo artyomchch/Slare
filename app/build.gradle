@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 30
@@ -24,6 +26,10 @@ android {
     }
 }
 
+realm {
+    syncEnabled = true
+}
+
 //tagView
 repositories {
     maven {
@@ -44,7 +50,6 @@ repositories {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     //tagView
-   // implementation 'com.github.Cutta:TagView:1.3'
     implementation 'me.gujun.android.taggroup:library:1.4@aar'
 
 }

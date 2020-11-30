@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main.*
 import tennisi.borzot.slare.pager.PagerViewAdapter
 

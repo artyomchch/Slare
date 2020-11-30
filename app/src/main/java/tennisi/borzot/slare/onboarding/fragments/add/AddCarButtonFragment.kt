@@ -8,20 +8,27 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.view.size
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import io.realm.Realm
+import io.realm.RealmConfiguration
+import io.realm.exceptions.RealmException
 import kotlinx.android.synthetic.main.fragment_add_car.*
 import kotlinx.android.synthetic.main.fragment_add_car.view.*
 import me.gujun.android.taggroup.TagGroup
 import tennisi.borzot.slare.R
+import tennisi.borzot.slare.database.Cars
 import tennisi.borzot.slare.strings.AppStrings
 import java.util.*
+import kotlin.math.log
 
 
 class AddCarButtonFragment(): BottomSheetDialogFragment() {
@@ -37,6 +44,11 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         val rbRightButton : AppCompatRadioButton
         val view = inflater.inflate(R.layout.fragment_add_car, container, false)
         val mTagGroup = view.findViewById(R.id.tag_group) as TagGroup
+        // RadioButton
+        var radioMode: Boolean = true
+
+        //realm
+        var realm: Realm = Realm.getDefaultInstance()
 
         rbLeftButton = view.findViewById(R.id.rbLeft)
         rbRightButton = view.findViewById(R.id.rbRight)
@@ -76,14 +88,6 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
                 }
                 else tag_group.visibility = View.GONE
 
-//                if (p0.toString().contains(mTagGroup.tags[0]) && mTagGroup.tags.isNotEmpty()){
-//                    tag_group.visibility = View.GONE
-//                }
-
-
-
-
-
             }
         })
 
@@ -94,13 +98,21 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         rbLeftButton.setOnClickListener {
                 view.rbLeft.setTextColor(Color.WHITE)
                 view.rbRight.setTextColor(Color.parseColor("#77B2D8"))
+                radioMode = true
         }
 
         rbRightButton.setOnClickListener{
                 view.rbLeft.setTextColor(Color.parseColor("#77B2D8"))
                 view.rbRight.setTextColor(Color.WHITE)
+                radioMode = false
         }
 
+
+
+        //save button
+        view.save.setOnClickListener {
+            addDBCar(realm, radioMode)
+        }
 
 
         //cancel button
@@ -108,7 +120,31 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
             dismiss()
         }
 
+
+
+
         return view
+    }
+
+
+
+
+    //add database
+    fun addDBCar(realm: Realm, mode: Boolean){
+        realm.beginTransaction()
+        try {
+            val car = realm.createObject(Cars::class.java, UUID.randomUUID().toString())
+            car.name = edit_car_brand.text.toString()
+            car.description = edit_car_name.text.toString()
+            car.mode = mode
+            car.image = imageAuto.drawable.alpha
+          //  car.id = UUID.randomUUID().toString()
+            Toast.makeText(context, "Realm works: ${car.name.toString()} \n ${car.description} \n $mode", Toast.LENGTH_LONG).show()
+            realm.commitTransaction()
+        }catch (e: RealmException){
+           Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
+            Log.e("Errrorr", e.message.toString() )
+        }
     }
 
 
@@ -140,6 +176,9 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         }
         return carsList.size+1
     }
+
+
+
 
 
 }
