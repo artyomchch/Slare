@@ -3,6 +3,7 @@ package tennisi.borzot.slare.onboarding.fragments.add
 
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatRadioButton
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.view.size
@@ -45,13 +47,15 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         val view = inflater.inflate(R.layout.fragment_add_car, container, false)
         val mTagGroup = view.findViewById(R.id.tag_group) as TagGroup
         // RadioButton
-        var radioMode: Boolean = true
+        var radioMode: String? = "auto"
 
         //realm
         var realm: Realm = Realm.getDefaultInstance()
 
         rbLeftButton = view.findViewById(R.id.rbLeft)
         rbRightButton = view.findViewById(R.id.rbRight)
+
+
 
 
 
@@ -94,17 +98,19 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
 
 
 
+
+
         //RadioButton
         rbLeftButton.setOnClickListener {
                 view.rbLeft.setTextColor(Color.WHITE)
                 view.rbRight.setTextColor(Color.parseColor("#77B2D8"))
-                radioMode = true
+                radioMode = "auto"
         }
 
         rbRightButton.setOnClickListener{
                 view.rbLeft.setTextColor(Color.parseColor("#77B2D8"))
                 view.rbRight.setTextColor(Color.WHITE)
-                radioMode = false
+                radioMode = "manual"
         }
 
 
@@ -118,6 +124,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         //cancel button
         view.cancel.setOnClickListener {
             dismiss()
+
         }
 
 
@@ -130,14 +137,17 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
 
 
     //add database
-    fun addDBCar(realm: Realm, mode: Boolean){
+    fun addDBCar(realm: Realm, mode: String?){
         realm.beginTransaction()
         try {
             val car = realm.createObject(Cars::class.java, UUID.randomUUID().toString())
             car.name = edit_car_brand.text.toString()
             car.description = edit_car_name.text.toString()
             car.mode = mode
-            car.image = imageAuto.drawable.alpha
+            car.image = imageAuto.drawable.toBitmap()
+            val bitmap: Bitmap = imageAuto.drawable.toBitmap()
+            Log.d("DB", bitmap.toString())
+
           //  car.id = UUID.randomUUID().toString()
             Toast.makeText(context, "Realm works: ${car.name.toString()} \n ${car.description} \n $mode", Toast.LENGTH_LONG).show()
             realm.commitTransaction()

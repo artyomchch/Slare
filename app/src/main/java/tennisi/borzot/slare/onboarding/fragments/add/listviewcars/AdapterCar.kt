@@ -23,13 +23,14 @@ class AdapterCar(var mCtx: Context, var resources: Int, var items: List<ModelCar
 
         val imageView: ImageView = view.findViewById(R.id.imageViewBrand)
         val brandText: TextView = view.findViewById(R.id.brandCarWriter)
-//        val mode: Boolean = view.findViewById(R.id.modeCarWriter)
+        val modeText: TextView = view.findViewById(R.id.modeCarWriter)
         val descriptionCar: TextView = view.findViewById(R.id.descriptionCarWriter)
 
         var mItem: ModelCars = items[position]
-        imageView.setImageDrawable(mCtx.resources.getDrawable(mItem.img))
+        imageView.setImageBitmap(mItem.img)
         brandText.text = mItem.brand
         descriptionCar.text = mItem.description
+        modeText.text = mItem.mode
 
 
         return view

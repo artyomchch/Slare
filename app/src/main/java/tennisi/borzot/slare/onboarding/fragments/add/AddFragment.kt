@@ -1,12 +1,14 @@
 package tennisi.borzot.slare.onboarding.fragments.add
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ListView
 import android.widget.Toast
+import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.realm.Realm
@@ -56,7 +58,9 @@ class AddFragment : Fragment() {
         val result1 = query.findAll()
 
         for (i in result1){
-            list.add(ModelCars(i.name, i.mode, i.description,R.drawable.speedlimit))
+            list.add(ModelCars(i.name, i.mode, i.description, i.image))
+            println(i.image)
+
         }
 
 
