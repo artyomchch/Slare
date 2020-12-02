@@ -12,7 +12,7 @@ open class Cars : RealmObject() {
     var name: String? = null
     var description: String? = null
     var mode: String? = null
-    var image: Bitmap? = null
+    var image: ByteArray? = null
 
 
 }

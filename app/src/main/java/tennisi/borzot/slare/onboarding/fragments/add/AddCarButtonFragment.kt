@@ -5,6 +5,7 @@ package tennisi.borzot.slare.onboarding.fragments.add
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Editable
@@ -16,12 +17,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.core.graphics.drawable.toBitmap
-import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
-import androidx.core.view.size
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.realm.Realm
-import io.realm.RealmConfiguration
 import io.realm.exceptions.RealmException
 import kotlinx.android.synthetic.main.fragment_add_car.*
 import kotlinx.android.synthetic.main.fragment_add_car.view.*
@@ -29,8 +26,8 @@ import me.gujun.android.taggroup.TagGroup
 import tennisi.borzot.slare.R
 import tennisi.borzot.slare.database.Cars
 import tennisi.borzot.slare.strings.AppStrings
+import java.io.ByteArrayOutputStream
 import java.util.*
-import kotlin.math.log
 
 
 class AddCarButtonFragment(): BottomSheetDialogFragment() {
@@ -61,7 +58,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
 
         //tag Group
         mTagGroup.setTags(appStrings.cars)
-        mTagGroup.setOnTagClickListener(object : TagGroup.OnTagClickListener{
+        mTagGroup.setOnTagClickListener(object : TagGroup.OnTagClickListener {
             override fun onTagClick(tag: String?) {
                 edit_car_brand.setText(tag)
                 mTagGroup.setTags(arrayListOf())
@@ -71,7 +68,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
 
 
         //EditText
-        view.edit_car_brand.addTextChangedListener(object : TextWatcher{
+        view.edit_car_brand.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
@@ -82,15 +79,18 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
 
             override fun afterTextChanged(p0: Editable?) {
                 mTagGroup.setTags(searchCarTags(appStrings.cars, p0.toString()))
-                imageAuto.setImageResource(appStrings.pictureCars[searchCarPicture(appStrings.cars, p0.toString())])
+                imageAuto.setImageResource(
+                    appStrings.pictureCars[searchCarPicture(
+                        appStrings.cars,
+                        p0.toString()
+                    )]
+                )
 
-                if (mTagGroup.tags.isNotEmpty()){
-                    if (p0.toString().contains(mTagGroup.tags[0])){
+                if (mTagGroup.tags.isNotEmpty()) {
+                    if (p0.toString().contains(mTagGroup.tags[0])) {
                         tag_group.visibility = View.GONE
-                    }
-                    else tag_group.visibility = View.VISIBLE
-                }
-                else tag_group.visibility = View.GONE
+                    } else tag_group.visibility = View.VISIBLE
+                } else tag_group.visibility = View.GONE
 
             }
         })
@@ -144,16 +144,20 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
             car.name = edit_car_brand.text.toString()
             car.description = edit_car_name.text.toString()
             car.mode = mode
-            car.image = imageAuto.drawable.toBitmap()
-            val bitmap: Bitmap = imageAuto.drawable.toBitmap()
-            Log.d("DB", bitmap.toString())
+            car.image = pictureToDB(imageAuto.drawable)
+//            val bitmap: Bitmap = imageAuto.drawable.toBitmap()
+//            Log.d("DB", bitmap.toString())
 
           //  car.id = UUID.randomUUID().toString()
-            Toast.makeText(context, "Realm works: ${car.name.toString()} \n ${car.description} \n $mode", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                context,
+                "Realm works: ${car.name.toString()} \n ${car.description} \n $mode",
+                Toast.LENGTH_LONG
+            ).show()
             realm.commitTransaction()
         }catch (e: RealmException){
            Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
-            Log.e("Errrorr", e.message.toString() )
+            Log.e("Errrorr", e.message.toString())
         }
     }
 
@@ -163,7 +167,9 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         val newArrayListCar: ArrayList<String> = arrayListOf()
         val newArrayListCarRubbish: ArrayList<String> = arrayListOf()
         for (i in carsList){
-            if (i.toLowerCase().indexOf(nameCar.toLowerCase())!= -1 && i.toLowerCase().indexOf(nameCar.toLowerCase()) == 0){
+            if (i.toLowerCase().indexOf(nameCar.toLowerCase())!= -1 && i.toLowerCase().indexOf(
+                    nameCar.toLowerCase()
+                ) == 0){
                 newArrayListCar.add(i)
             }
             else if (i.toLowerCase().indexOf(nameCar.toLowerCase())!= -1){
@@ -185,6 +191,15 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
             else c
         }
         return carsList.size+1
+    }
+
+    fun pictureToDB(image: Drawable): ByteArray{
+        val bitmap = (image as BitmapDrawable).bitmap
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        val bitmapdata: ByteArray = stream.toByteArray()
+
+        return bitmapdata
     }
 
 

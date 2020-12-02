@@ -2,8 +2,10 @@ package tennisi.borzot.slare.onboarding.fragments.add.listviewcars
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.ColorSpace
-import android.view.Display
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.cars_list.view.*
 import tennisi.borzot.slare.R
+
 
 @Suppress("DEPRECATION")
 class AdapterCar(var mCtx: Context, var resources: Int, var items: List<ModelCars>)
@@ -27,7 +30,7 @@ class AdapterCar(var mCtx: Context, var resources: Int, var items: List<ModelCar
         val descriptionCar: TextView = view.findViewById(R.id.descriptionCarWriter)
 
         var mItem: ModelCars = items[position]
-        imageView.setImageBitmap(mItem.img)
+        imageView.setImageBitmap(mItem.img?.let { BitmapFactory.decodeByteArray(mItem.img, 0 , it.size) })
         brandText.text = mItem.brand
         descriptionCar.text = mItem.description
         modeText.text = mItem.mode

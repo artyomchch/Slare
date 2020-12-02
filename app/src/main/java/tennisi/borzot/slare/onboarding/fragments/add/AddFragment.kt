@@ -60,7 +60,6 @@ class AddFragment : Fragment() {
         for (i in result1){
             list.add(ModelCars(i.name, i.mode, i.description, i.image))
             println(i.image)
-
         }
 
 
