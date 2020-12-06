@@ -193,7 +193,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         return carsList.size+1
     }
 
-    fun pictureToDB(image: Drawable): ByteArray{
+    private fun pictureToDB(image: Drawable): ByteArray{
         val bitmap = (image as BitmapDrawable).bitmap
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)

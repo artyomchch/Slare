@@ -14,11 +14,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import kotlinx.android.synthetic.main.cars_list.view.*
 import tennisi.borzot.slare.R
+import tennisi.borzot.slare.database.Cars
 
 
 @Suppress("DEPRECATION")
-class AdapterCar(var mCtx: Context, var resources: Int, var items: List<ModelCars>)
-    : ArrayAdapter<ModelCars>(mCtx, resources, items) {
+class AdapterCar(var mCtx: Context, var resources: Int, var items: List<Cars>)
+    : ArrayAdapter<Cars>(mCtx, resources, items) {
     @SuppressLint("UseCompatLoadingForDrawables", "ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val layoutInflater: LayoutInflater = LayoutInflater.from(mCtx)
@@ -29,9 +30,9 @@ class AdapterCar(var mCtx: Context, var resources: Int, var items: List<ModelCar
         val modeText: TextView = view.findViewById(R.id.modeCarWriter)
         val descriptionCar: TextView = view.findViewById(R.id.descriptionCarWriter)
 
-        var mItem: ModelCars = items[position]
-        imageView.setImageBitmap(mItem.img?.let { BitmapFactory.decodeByteArray(mItem.img, 0 , it.size) })
-        brandText.text = mItem.brand
+        var mItem: Cars = items[position]
+        imageView.setImageBitmap(mItem.image?.let { BitmapFactory.decodeByteArray(mItem.image, 0 , it.size) })
+        brandText.text = mItem.name
         descriptionCar.text = mItem.description
         modeText.text = mItem.mode
 
