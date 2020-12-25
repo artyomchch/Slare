@@ -25,7 +25,7 @@ class AppStrings {
         R.drawable.nissan, R.drawable.opel, R.drawable.peugeot, R.drawable.piaggio,
         R.drawable.pontiac, R.drawable.porsche, R.drawable.renault, R.drawable.smart,
         R.drawable.subaru, R.drawable.suzuki, R.drawable.symmotor, R.drawable.tesla,
-        R.drawable.tesla, R.drawable.toyota, R.drawable.triumph, R.drawable.tvs,
+        R.drawable.toyota, R.drawable.triumph, R.drawable.tvs,
         R.drawable.underground, R.drawable.vespa, R.drawable.victory, R.drawable.volvo,
         R.drawable.yamaha, R.drawable.no_car
     )

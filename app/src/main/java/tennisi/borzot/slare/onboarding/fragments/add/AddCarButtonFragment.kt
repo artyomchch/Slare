@@ -124,7 +124,6 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         //cancel button
         view.cancel.setOnClickListener {
             dismiss()
-
         }
 
 
@@ -159,6 +158,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
            Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
             Log.e("Errrorr", e.message.toString())
         }
+        dismiss()
     }
 
 
@@ -190,7 +190,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
             }
             else c
         }
-        return carsList.size+1
+        return carsList.size
     }
 
     private fun pictureToDB(image: Drawable): ByteArray{
