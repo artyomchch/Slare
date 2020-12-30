@@ -11,14 +11,12 @@
         android:name=".database.MyApplication"
         android:theme="@style/AppTheme">
         <activity android:name=".onboarding.OnBoardingMain"></activity>
-        <activity android:name=".onboarding.OnboardingScreen" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".splash.SplashActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

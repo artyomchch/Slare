@@ -1,6 +1,8 @@
 package tennisi.borzot.slare.onboarding.fragments.add
 
 import android.os.Bundle
+import android.os.Message
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,39 +40,37 @@ class AddFragment : Fragment() {
 
 
         var carlist: RealmResults<Cars> = realm.where<Cars>().findAll()
+        checkAuto(carlist, carListWarning)
         list.addAll(realm.copyFromRealm(carlist))
         listview.adapter = context?.let { AdapterCar(it, R.layout.cars_list, list) }
         // проверка на существования машины для TextView
-        carListWarning.visibility = View.INVISIBLE
+
+       // carListWarning.visibility = View.INVISIBLE
 
 
 
-
+        //listener on  new car
         realm.addChangeListener {
             list.clear()
             carlist = it.where<Cars>().findAll()
             list.addAll(it.copyFromRealm(carlist))
+            Log.d("vac", carlist.isEmpty().toString())
+            checkAuto(carlist, carListWarning)
+
             (listview.adapter as AdapterCar?)?.notifyDataSetChanged()
 
         }
 
 
+        //add car fragment
         fab.setOnClickListener {
             addCarButtonFragment.show(childFragmentManager, "addButtom")
 
         }
 
-//       listview.setOnClickListener() {
-//           Toast.makeText(context, "you click on idk what 1 ", Toast.LENGTH_LONG).show()
-//       }
-
+        //delete or remake choose car
         listview.onItemClickListener = AdapterView.OnItemClickListener{ parent, view, position, id ->
-            val selectedItemText = parent.getItemAtPosition(position)
-            Toast.makeText(context, "Selected : $selectedItemText     -> position: $position", Toast.LENGTH_SHORT).show()
-            addCarButtonFragment.show(childFragmentManager, "addButtom")
-            realm.executeTransaction { realm -> realm.deleteAll() }
-
-
+            deleteOrRemakeCar(list, realm, id, addCarButtonFragment)
         }
 
 
@@ -82,27 +82,23 @@ class AddFragment : Fragment() {
     }
 
 
-    fun deleteOrRemakeCar(view: View, realm: Realm){
+    fun deleteOrRemakeCar(listCar: MutableList<Cars>, realm: Realm, idCar: Long, carFragment: AddCarButtonFragment ){
 
+        val deleteSelectCar  = realm.where(Cars::class.java).equalTo("id", listCar.elementAt(idCar.toInt()).id.toString()).findAll()
+        for (cars in deleteSelectCar) {
+            realm.beginTransaction()
+            cars.deleteFromRealm()
+            realm.commitTransaction()
+        }
+        carFragment.show(childFragmentManager, "addButtom")
+    }
 
-//       listview.setOnItemClickListener{ parent: AdapterView<*>, view:View, position:Int, id->
-//            if (position == 0){
-//
-//            }
-//            if (position == 1){
-//                Toast.makeText(context, "you click on idk what 2 ", Toast.LENGTH_LONG).show()
-//            }
-//            if (position == 2){
-//                Toast.makeText(context, "you click on idk what 3", Toast.LENGTH_LONG).show()
-//            }
-//            if (position == 3){
-//                Toast.makeText(context, "you click on idk what 4", Toast.LENGTH_LONG).show()
-//            }
-//
-//        }
-
-
-
+    fun checkAuto(realm: RealmResults<Cars>, carTextView: TextView){
+        if (realm.isEmpty()){
+            carTextView.visibility = View.VISIBLE
+        }
+        else
+            carTextView.visibility = View.INVISIBLE
     }
 
 
