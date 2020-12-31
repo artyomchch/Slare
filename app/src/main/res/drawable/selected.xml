@@ -9,7 +9,7 @@
             android:useLevel="false"
             >
 
-            <solid android:color="#4FA372"/>
+            <solid android:color="@color/mainBlue"/>
 
         </shape>
     </item>

@@ -23,7 +23,7 @@
         android:layout_marginTop="30dp"
         android:fontFamily="@font/manrope_semi_bold"
         android:text="@string/speed_limit_first"
-        android:textColor="#4FA372"
+        android:textColor="@color/mainBlue"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

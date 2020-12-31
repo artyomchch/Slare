@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".onboarding.fragments.player.PlayerFragment"
+    tools:context=".fragments.player.PlayerFragment"
     android:background="@drawable/musicplayer">
 
     <!-- TODO: Update blank fragment layout -->

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EFEFEF"
+    android:background="@color/onBoarding"
     tools:context=".onboarding.OnBoardingMain">
 
     <androidx.viewpager.widget.ViewPager
@@ -39,7 +39,7 @@
             android:layout_marginEnd="40dp"
             android:fontFamily="@font/proximanova_regular"
             android:text="Next"
-            android:textColor="#4FA372"
+            android:textColor="@color/mainBlue"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"

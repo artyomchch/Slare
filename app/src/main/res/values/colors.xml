@@ -19,4 +19,6 @@
 
     // main color
     <color name="mainBlue">#77B2D8</color>
+    //onBoarding color
+    <color name="onBoarding">#EFEFEF</color>
 </resources>
