@@ -37,7 +37,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val appStrings: AppStrings = AppStrings()
+        val appStrings = AppStrings()
         val rbLeftButton : AppCompatRadioButton
         val rbRightButton : AppCompatRadioButton
         val view = inflater.inflate(R.layout.fragment_add_car, container, false)
@@ -144,10 +144,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
             car.description = edit_car_name.text.toString()
             car.mode = mode
             car.image = pictureToDB(imageAuto.drawable)
-//            val bitmap: Bitmap = imageAuto.drawable.toBitmap()
-//            Log.d("DB", bitmap.toString())
 
-          //  car.id = UUID.randomUUID().toString()
             Toast.makeText(
                 context,
                 "Realm works: ${car.name.toString()} \n ${car.description} \n $mode",

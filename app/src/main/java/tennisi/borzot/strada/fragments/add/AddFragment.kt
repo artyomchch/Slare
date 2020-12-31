@@ -34,14 +34,14 @@ class AddFragment : Fragment() {
         val carListWarning: TextView = view.findViewById(R.id.about_list_of_car)
 
         val listview = view.findViewById<ListView>(R.id.list_view_cars)
-        val list = mutableListOf<Cars>()
-        list.clear()
+        val listCar = mutableListOf<Cars>()
+        listCar.clear()
 
 
         var carlist: RealmResults<Cars> = realm.where<Cars>().findAll()
         checkAuto(carlist, carListWarning)
-        list.addAll(realm.copyFromRealm(carlist))
-        listview.adapter = context?.let { AdapterCar(it, R.layout.cars_list, list) }
+        listCar.addAll(realm.copyFromRealm(carlist))
+        listview.adapter = context?.let { AdapterCar(it, R.layout.cars_list, listCar) }
 
 
 
@@ -52,9 +52,9 @@ class AddFragment : Fragment() {
 
         //listener on  new car
         realm.addChangeListener {
-            list.clear()
+            listCar.clear()
             carlist = it.where<Cars>().findAll()
-            list.addAll(it.copyFromRealm(carlist))
+            listCar.addAll(it.copyFromRealm(carlist))
             Log.d("vac", carlist.isEmpty().toString())
             checkAuto(carlist, carListWarning)
 
@@ -73,7 +73,13 @@ class AddFragment : Fragment() {
 
         //delete or remake choose car
         listview.onItemClickListener = AdapterView.OnItemClickListener{ _, _, _, id ->
-            deleteOrRemakeCar(list, realm, id, addCarButtonFragment)
+
+            sendDataToCarButtonFragment(
+                listCar[id.toInt()].name.toString(),
+                listCar[id.toInt()].description.toString(),
+                listCar[id.toInt()].mode.toString()
+            )
+            deleteOrRemakeCar(listCar, realm, id, addCarButtonFragment)
         }
 
 
@@ -85,9 +91,17 @@ class AddFragment : Fragment() {
     }
 
 
-    fun deleteOrRemakeCar(listCar: MutableList<Cars>, realm: Realm, idCar: Long, carFragment: AddCarButtonFragment){
+    fun deleteOrRemakeCar(
+        listCar: MutableList<Cars>,
+        realm: Realm,
+        idCar: Long,
+        carFragment: AddCarButtonFragment
+    ){
 
-        val deleteSelectCar  = realm.where(Cars::class.java).equalTo("id", listCar.elementAt(idCar.toInt()).id.toString()).findAll()
+        val deleteSelectCar  = realm.where(Cars::class.java).equalTo(
+            "id",
+            listCar.elementAt(idCar.toInt()).id.toString()
+        ).findAll()
         for (cars in deleteSelectCar) {
             realm.beginTransaction()
             cars.deleteFromRealm()
@@ -95,6 +109,18 @@ class AddFragment : Fragment() {
         }
         carFragment.show(childFragmentManager, "addButtom")
     }
+
+
+    fun sendDataToCarButtonFragment(name: String, description: String, mode: String ){
+        val carButtonFragment = AddCarButtonFragment()
+        val bundle = Bundle()
+        bundle.putString("cName", name)
+        bundle.putString("cDescription", description)
+        bundle.putString("cMode", mode)
+        carButtonFragment.arguments = bundle
+    }
+
+
 
     fun checkAuto(realm: RealmResults<Cars>, carTextView: TextView){
         if (realm.isEmpty()){
