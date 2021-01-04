@@ -20,10 +20,8 @@ class SplashActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        hideSystemUI()
-
         setContentView(R.layout.activity_splash)
-
+        hideSystemUI()
 
         handler = Handler()
         handler.postDelayed({

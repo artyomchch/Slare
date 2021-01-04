@@ -13,8 +13,7 @@
         <activity android:name="tennisi.borzot.strada.onboarding.OnBoardingMain" />
         <activity android:name="tennisi.borzot.strada.MainActivity" />
         <activity
-            android:name="tennisi.borzot.strada.splash.SplashActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            android:name="tennisi.borzot.strada.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
