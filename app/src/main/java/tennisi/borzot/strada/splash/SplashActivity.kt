@@ -25,10 +25,10 @@ class SplashActivity : AppCompatActivity() {
 
         handler = Handler()
         handler.postDelayed({
-
             val intent = Intent(this, OnBoardingMain::class.java)
             startActivity(intent)
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+
             finish()
         }, 1500)
     }
@@ -48,14 +48,14 @@ class SplashActivity : AppCompatActivity() {
         val decorView: View = window.decorView
         val uiOptions = decorView.systemUiVisibility
         var newUiOptions = uiOptions
-        window.statusBarColor = Color.parseColor("#171717")
+        window.statusBarColor = Color.parseColor("#111111")
         newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_LOW_PROFILE
         //newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_FULLSCREEN
         newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         //newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_IMMERSIVE
         newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-     //   newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_VISIBLE
-      //  newUiOptions = newUiOptions or View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
+        //   newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_VISIBLE
+        //  newUiOptions = newUiOptions or View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
         decorView.systemUiVisibility = newUiOptions
     }
 

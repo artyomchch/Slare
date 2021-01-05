@@ -64,7 +64,7 @@
             android:gravity="center"
             android:paddingLeft="80dp"
             android:paddingRight="80dp"
-            android:text="Your speed fagot!"
+            android:text="Your speed !"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

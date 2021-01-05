@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.github.anastr.speedviewlib.SpeedView
 import com.github.anastr.speedviewlib.components.Section
+import com.github.anastr.speedviewlib.components.Style
 import tennisi.borzot.strada.R
 
 class SpeedFragment : Fragment() {
@@ -23,6 +24,11 @@ class SpeedFragment : Fragment() {
         val speedometer: SpeedView
         speedometer =  view.findViewById(R.id.speedView)
         speedometer.speedTo(250.0F, 8000)
+
+        speedometer.makeSections(5, Color.CYAN, Style.BUTT)
+        speedometer.sections[0].color = Color.GREEN
+        speedometer.sections[1].color = Color.BLUE
+        speedometer.sections[2].color = Color.RED
 
 //        speedometer.clearSections()
 //        speedometer.addSections(Section(0f, .1f, Color.LTGRAY)
