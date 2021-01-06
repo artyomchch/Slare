@@ -14,6 +14,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatRadioButton
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -42,6 +43,9 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         val rbRightButton : AppCompatRadioButton
         val view = inflater.inflate(R.layout.fragment_add_car, container, false)
         val mTagGroup = view.findViewById(R.id.tag_group) as TagGroup
+
+        val carEditBrand = view.findViewById(R.id.edit_car_brand) as EditText
+        var carEditName = view.findViewById(R.id.edit_car_name) as EditText
         // RadioButton
         var radioMode: String? = "auto"
 
@@ -50,6 +54,21 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
 
         rbLeftButton = view.findViewById(R.id.rbLeft)
         rbRightButton = view.findViewById(R.id.rbRight)
+
+
+
+
+        val arguments = arguments
+        if (arguments!= null){
+
+            val carName = arguments.getString("cName")
+            val carDescription = arguments.getString("cDescription")
+            val carMode = arguments.getString("cMode")
+            Log.d("War", "$carName     $carDescription     $carMode")
+                carEditBrand.setText(carName)
+                carEditName.setText(carDescription)
+        }
+
 
 
 
@@ -74,7 +93,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-               // edit_car_brand.setSelection(p3)
+
             }
 
             override fun afterTextChanged(p0: Editable?) {

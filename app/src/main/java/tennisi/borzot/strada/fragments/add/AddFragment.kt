@@ -79,7 +79,7 @@ class AddFragment : Fragment() {
                 listCar[id.toInt()].description.toString(),
                 listCar[id.toInt()].mode.toString()
             )
-            deleteOrRemakeCar(listCar, realm, id, addCarButtonFragment)
+            //deleteOrRemakeCar(listCar, realm, id, addCarButtonFragment)
         }
 
 
@@ -96,7 +96,8 @@ class AddFragment : Fragment() {
         realm: Realm,
         idCar: Long,
         carFragment: AddCarButtonFragment
-    ){
+    )
+    {
 
         val deleteSelectCar  = realm.where(Cars::class.java).equalTo(
             "id",
@@ -118,6 +119,7 @@ class AddFragment : Fragment() {
         bundle.putString("cDescription", description)
         bundle.putString("cMode", mode)
         carButtonFragment.arguments = bundle
+        carButtonFragment.show(childFragmentManager, "addButtom")
     }
 
 
