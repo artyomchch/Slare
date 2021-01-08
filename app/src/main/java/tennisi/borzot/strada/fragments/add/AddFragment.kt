@@ -66,7 +66,8 @@ class AddFragment : Fragment() {
         //add car fragment
         fab.setOnClickListener {
             if (!addCarButtonFragment.isAdded){
-                addCarButtonFragment.show(childFragmentManager, "addButtom")
+              //  addCarButtonFragment.show(childFragmentManager, "addButtom")
+                sendDataToCarButtonFragment("", "", "", "", byteArrayOf(), false)
             }
         }
 
@@ -75,9 +76,12 @@ class AddFragment : Fragment() {
         listview.onItemClickListener = AdapterView.OnItemClickListener{ _, _, _, id ->
 
             sendDataToCarButtonFragment(
+                listCar.elementAt(id.toInt()).id.toString(),
                 listCar[id.toInt()].name.toString(),
                 listCar[id.toInt()].description.toString(),
-                listCar[id.toInt()].mode.toString()
+                listCar[id.toInt()].mode.toString(),
+                listCar[id.toInt()].image,
+                true
             )
             //deleteOrRemakeCar(listCar, realm, id, addCarButtonFragment)
         }
@@ -112,12 +116,15 @@ class AddFragment : Fragment() {
     }
 
 
-    fun sendDataToCarButtonFragment(name: String, description: String, mode: String ){
+    fun sendDataToCarButtonFragment(id: String?, name: String, description: String, mode: String, img: ByteArray?, remake: Boolean ){
         val carButtonFragment = AddCarButtonFragment()
         val bundle = Bundle()
+        bundle.putString("cId", id)
         bundle.putString("cName", name)
         bundle.putString("cDescription", description)
         bundle.putString("cMode", mode)
+        bundle.putByteArray("cImage", img )
+        bundle.putBoolean("cMake", remake)
         carButtonFragment.arguments = bundle
         carButtonFragment.show(childFragmentManager, "addButtom")
     }

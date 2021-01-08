@@ -4,9 +4,11 @@ package tennisi.borzot.strada.fragments.add.floating_button
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.opengl.Visibility
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -14,9 +16,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatRadioButton
+import androidx.core.view.isVisible
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.realm.Realm
 import io.realm.exceptions.RealmException
@@ -42,31 +47,66 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         val rbLeftButton : AppCompatRadioButton
         val rbRightButton : AppCompatRadioButton
         val view = inflater.inflate(R.layout.fragment_add_car, container, false)
-        val mTagGroup = view.findViewById(R.id.tag_group) as TagGroup
+        var carId: String? = ""
+        var carName: String? = ""
+        var carDescription: String? = ""
 
+
+        var updateCarBrand: String? = ""
+        var updateCarDescription: String? = ""
+
+        val mTagGroup = view.findViewById(R.id.tag_group) as TagGroup
+        val carImage = view.findViewById(R.id.imageAuto) as ImageView
         val carEditBrand = view.findViewById(R.id.edit_car_brand) as EditText
-        var carEditName = view.findViewById(R.id.edit_car_name) as EditText
+        val carEditName = view.findViewById(R.id.edit_car_name) as EditText
+        val carCancel = view.findViewById(R.id.cancel) as Button
+        val carDelete = view.findViewById(R.id.delete) as Button
+        val carReCancel = view.findViewById(R.id.car_cancel) as Button
+        val carUpdate = view.findViewById(R.id.update) as Button
+        val carSave = view.findViewById(R.id.save) as Button
         // RadioButton
         var radioMode: String? = "auto"
 
         //realm
-        var realm: Realm = Realm.getDefaultInstance()
+        val realm: Realm = Realm.getDefaultInstance()
 
         rbLeftButton = view.findViewById(R.id.rbLeft)
         rbRightButton = view.findViewById(R.id.rbRight)
 
 
 
-
+        // передача аргументов с другого фрагмента
         val arguments = arguments
         if (arguments!= null){
-
-            val carName = arguments.getString("cName")
-            val carDescription = arguments.getString("cDescription")
+            carId = arguments.getString("cId")
+            carName = arguments.getString("cName")
+            carDescription = arguments.getString("cDescription")
             val carMode = arguments.getString("cMode")
-            Log.d("War", "$carName     $carDescription     $carMode")
+            val carPicture = arguments.getByteArray("cImage")
+            val remake = arguments.getBoolean("cMake")
+            Log.d("War", "$carId      $carName     $carDescription     $carMode")
                 carEditBrand.setText(carName)
                 carEditName.setText(carDescription)
+
+            if (remake){
+                carDelete.visibility = View.VISIBLE
+                carCancel.visibility =  View.GONE
+                carReCancel.visibility = View.VISIBLE
+                carSave.visibility = View.GONE
+
+                Log.d("War", "remake works!!,  $remake")
+            }
+            else {
+                carDelete.visibility = View.GONE
+                carCancel.visibility = View.VISIBLE
+                Log.d("War", "unremake works!!,  $remake")
+            }
+                // перевод с байткода в битмэп
+            carImage.setImageBitmap(carPicture?.size?.let {
+                BitmapFactory.decodeByteArray(carPicture, 0 ,
+                    it
+                )
+            })
         }
 
 
@@ -74,7 +114,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
 
 
 
-        //tag Group
+        //Слушатель на тэги
         mTagGroup.setTags(appStrings.cars)
         mTagGroup.setOnTagClickListener(object : TagGroup.OnTagClickListener {
             override fun onTagClick(tag: String?) {
@@ -86,8 +126,8 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         })
 
 
-        //EditText
-        view.edit_car_brand.addTextChangedListener(object : TextWatcher {
+        //слушатель на EditText Brand Edit
+        carEditBrand.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
@@ -97,6 +137,8 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
+
+                //work with tags
                 mTagGroup.setTags(searchCarTags(appStrings.cars, p0.toString()))
                 imageAuto.setImageResource(
                     appStrings.pictureCars[searchCarPicture(
@@ -104,14 +146,50 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
                         p0.toString()
                     )]
                 )
-
                 if (mTagGroup.tags.isNotEmpty()) {
                     if (p0.toString().contains(mTagGroup.tags[0])) {
                         tag_group.visibility = View.GONE
                     } else tag_group.visibility = View.VISIBLE
                 } else tag_group.visibility = View.GONE
 
+                //works with button view
+                if (p0.toString() != carName){
+                    carReCancel.visibility = View.GONE
+                    carUpdate.visibility = View.VISIBLE
+                    updateCarBrand = p0.toString()
+                }
+                else {
+                    carUpdate.visibility = View.GONE
+                    carReCancel.visibility = View.VISIBLE
+                   // updateCarBrand = ""
+                }
+
             }
+        })
+
+
+        carEditName.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                if (p0.toString() != carDescription){
+                    carReCancel.visibility = View.GONE
+                    carUpdate.visibility = View.VISIBLE
+                    updateCarDescription = p0.toString()
+                }
+                else {
+                    carUpdate.visibility = View.GONE
+                    carReCancel.visibility = View.VISIBLE
+                    //updateCarDescription = ""
+                }
+            }
+
         })
 
 
@@ -119,7 +197,8 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
 
 
 
-        //RadioButton
+
+        //Слушатель на RadioButton
         rbLeftButton.setOnClickListener {
                 view.rbLeft.setTextColor(Color.WHITE)
                 view.rbRight.setTextColor(Color.parseColor("#77B2D8"))
@@ -135,21 +214,36 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
 
 
         //save button
-        view.save.setOnClickListener {
+        carSave.setOnClickListener {
             addDBCar(realm, radioMode)
         }
 
 
         //cancel button
-        view.cancel.setOnClickListener {
+        carCancel.setOnClickListener {
             dismiss()
         }
 
+        //delete button
+        carDelete.setOnClickListener {
+            deleteCar(carId, realm)
+        }
+
+        //another cancel button
+        carReCancel.setOnClickListener {
+            dismiss()
+        }
+
+        //update button
+        carUpdate.setOnClickListener {
+            updateCar(carId, realm, updateCarBrand, updateCarDescription)
+        }
 
 
 
         return view
     }
+
 
 
 
@@ -178,6 +272,35 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
     }
 
 
+    //удаление из базы данных
+    fun deleteCar(car: String?, realm: Realm) {
+        val deleteSelectCar  = realm.where(Cars::class.java).equalTo(
+            "id", car
+        ).findAll()
+        for (cars in deleteSelectCar) {
+            realm.beginTransaction()
+            cars.deleteFromRealm()
+            realm.commitTransaction()
+        }
+        dismiss()
+        Toast.makeText(context, "Delete success ", Toast.LENGTH_LONG).show()
+    }
+
+    fun updateCar(car: String?, realm: Realm, updateCarBrand: String?, updateCarDescription: String?){
+        val updateSelectCar  = realm.where(Cars::class.java).equalTo(
+            "id", car
+        ).findAll()
+        for (cars in updateSelectCar){
+            realm.beginTransaction()
+            cars.name = updateCarBrand
+            cars.description = updateCarDescription
+            realm.commitTransaction()
+        }
+        dismiss()
+        Toast.makeText(context, "Update success ", Toast.LENGTH_LONG).show()
+    }
+
+
     //Находка для тегов!!!
     fun searchCarTags(carsList: ArrayList<String>, nameCar: String): ArrayList<String> {
         val newArrayListCar: ArrayList<String> = arrayListOf()
@@ -199,6 +322,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         return newArrayListCar
     }
 
+    // находка картинок под теги
     fun searchCarPicture(carsList: ArrayList<String>, carName: String): Int{
         for ((c, i) in carsList.withIndex()){
             if ( i == carName){
@@ -210,14 +334,18 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         return carsList.size
     }
 
+    // перевод найденных картинок в байткод
     private fun pictureToDB(image: Drawable): ByteArray{
         val bitmap = (image as BitmapDrawable).bitmap
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
         val bitmapdata: ByteArray = stream.toByteArray()
-
         return bitmapdata
     }
+
+
+
+
 
 
 
