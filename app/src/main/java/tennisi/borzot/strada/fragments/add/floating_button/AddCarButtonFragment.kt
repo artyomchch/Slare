@@ -161,7 +161,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
                 else {
                     carUpdate.visibility = View.GONE
                     carReCancel.visibility = View.VISIBLE
-                   // updateCarBrand = ""
+                    updateCarBrand = ""
                 }
 
             }
@@ -186,7 +186,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
                 else {
                     carUpdate.visibility = View.GONE
                     carReCancel.visibility = View.VISIBLE
-                    //updateCarDescription = ""
+                    updateCarDescription = ""
                 }
             }
 
@@ -292,8 +292,13 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         ).findAll()
         for (cars in updateSelectCar){
             realm.beginTransaction()
-            cars.name = updateCarBrand
-            cars.description = updateCarDescription
+            if (updateCarBrand!= ""){
+                cars.name = updateCarBrand
+            }
+            if (updateCarDescription != ""){
+                cars.description = updateCarDescription
+            }
+            cars.image = pictureToDB(imageAuto.drawable)
             realm.commitTransaction()
         }
         dismiss()
