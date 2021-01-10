@@ -50,6 +50,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         var carId: String? = ""
         var carName: String? = ""
         var carDescription: String? = ""
+        var remake: Boolean = true
 
 
         var updateCarBrand: String? = ""
@@ -83,7 +84,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
             carDescription = arguments.getString("cDescription")
             val carMode = arguments.getString("cMode")
             val carPicture = arguments.getByteArray("cImage")
-            val remake = arguments.getBoolean("cMake")
+            remake = arguments.getBoolean("cMake")
             Log.d("War", "$carId      $carName     $carDescription     $carMode")
                 carEditBrand.setText(carName)
                 carEditName.setText(carDescription)
@@ -93,6 +94,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
                 carCancel.visibility =  View.GONE
                 carReCancel.visibility = View.VISIBLE
                 carSave.visibility = View.GONE
+
 
                 Log.d("War", "remake works!!,  $remake")
             }
@@ -153,16 +155,19 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
                 } else tag_group.visibility = View.GONE
 
                 //works with button view
-                if (p0.toString() != carName){
-                    carReCancel.visibility = View.GONE
-                    carUpdate.visibility = View.VISIBLE
-                    updateCarBrand = p0.toString()
+                if (remake){
+                    if (p0.toString() != carName){
+                        carReCancel.visibility = View.GONE
+                        carUpdate.visibility = View.VISIBLE
+                        updateCarBrand = p0.toString()
+                    }
+                    else {
+                        carUpdate.visibility = View.GONE
+                        carReCancel.visibility = View.VISIBLE
+                        updateCarBrand = ""
+                    }
                 }
-                else {
-                    carUpdate.visibility = View.GONE
-                    carReCancel.visibility = View.VISIBLE
-                    updateCarBrand = ""
-                }
+
 
             }
         })
@@ -178,16 +183,19 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                if (p0.toString() != carDescription){
-                    carReCancel.visibility = View.GONE
-                    carUpdate.visibility = View.VISIBLE
-                    updateCarDescription = p0.toString()
+                if (remake){
+                    if (p0.toString() != carDescription){
+                        carReCancel.visibility = View.GONE
+                        carUpdate.visibility = View.VISIBLE
+                        updateCarDescription = p0.toString()
+                    }
+                    else {
+                        carUpdate.visibility = View.GONE
+                        carReCancel.visibility = View.VISIBLE
+                        updateCarDescription = ""
+                    }
                 }
-                else {
-                    carUpdate.visibility = View.GONE
-                    carReCancel.visibility = View.VISIBLE
-                    updateCarDescription = ""
-                }
+
             }
 
         })
