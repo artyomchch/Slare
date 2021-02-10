@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.opengl.Visibility
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -331,6 +330,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         for (i in newArrayListCarRubbish){
             newArrayListCar.add(i)
         }
+
 
         return newArrayListCar
     }

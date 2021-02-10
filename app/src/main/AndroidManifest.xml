@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="tennisi.borzot.strada.onboarding.OnBoardingMain" />
+        <activity android:name="tennisi.borzot.strada.onboarding.MVPOnBoarding.OnBoardingMain" />
         <activity android:name="tennisi.borzot.strada.MainActivity" />
 
     </application>

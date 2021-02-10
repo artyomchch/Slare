@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.onboarding
+package tennisi.borzot.strada.onboarding.MVPOnBoarding
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -17,9 +17,12 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import tennisi.borzot.strada.MainActivity
 import tennisi.borzot.strada.R
+import tennisi.borzot.strada.onboarding.OnBoardingViewPagerAdapter
 
 @Suppress("DEPRECATION")
-class OnBoardingMain : AppCompatActivity() {
+class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
+
+    private var presenter: OnBoardingPresenter? = null
 
     var onBoardingViewPagerAdapter: OnBoardingViewPagerAdapter? = null
     var tabLayout: TabLayout? = null
@@ -32,6 +35,9 @@ class OnBoardingMain : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        presenter = OnBoardingPresenter(this)
+        presenter!!.hideUI(window)
+
         if (restorePrefData()){
             val i = Intent(applicationContext, MainActivity::class.java)
             startActivity(i)
@@ -39,7 +45,7 @@ class OnBoardingMain : AppCompatActivity() {
         setContentView(R.layout.activity_on_boarding_main)
         tabLayout = findViewById(R.id.tab_indicator)
         next = findViewById(R.id.next_tv)
-        hideSystemUI()
+
 
 
         val onBoardingData:MutableList<OnBoardingData> = ArrayList()
@@ -111,25 +117,9 @@ class OnBoardingMain : AppCompatActivity() {
         return sharedPreference!!.getBoolean("isFirstTimeRun", false)
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    private fun hideSystemUI() {
-        // for status bar
-        val window: Window = window
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
 
 
-        val decorView: View = window.decorView
-        val uiOptions = decorView.systemUiVisibility
-        var newUiOptions = uiOptions
-        window.statusBarColor = Color.parseColor("#EFEFEF")
-        newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_LOW_PROFILE
-        //newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_FULLSCREEN
-        newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-        //newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_IMMERSIVE
-        newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-        //   newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_VISIBLE
-        //  newUiOptions = newUiOptions or View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
-        decorView.systemUiVisibility = newUiOptions
+    override fun initView() {
+
     }
 }
