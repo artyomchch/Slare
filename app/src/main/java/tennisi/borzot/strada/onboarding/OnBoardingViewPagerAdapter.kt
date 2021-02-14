@@ -1,6 +1,5 @@
 package tennisi.borzot.strada.onboarding
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +8,9 @@ import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.onboarding.MVPOnBoarding.OnBoardingData
+import tennisi.borzot.strada.onboarding.MVPOnBoarding.OnBoardingMain
 
-class OnBoardingViewPagerAdapter(private var context: Context, private var onBoardingDataList: List<OnBoardingData>): PagerAdapter() {
+class OnBoardingViewPagerAdapter(private var context: OnBoardingMain, private var onBoardingDataList: List<OnBoardingData>): PagerAdapter() {
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view == `object`

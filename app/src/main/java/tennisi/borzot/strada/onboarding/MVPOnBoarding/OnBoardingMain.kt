@@ -4,13 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.Window
-import android.view.WindowManager
+import android.util.Log
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.viewpager.widget.ViewPager
@@ -28,43 +25,42 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
     var tabLayout: TabLayout? = null
     var onBoardingViewPager: ViewPager? = null
     var next: TextView? = null
-    var position = 0
-    var sharedPreference: SharedPreferences ? = null
-
+    var position: Int = 0
+    var dataList: MutableList<OnBoardingData>? = null
+    var sharedPreference: SharedPreferences? = null
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = OnBoardingPresenter(this)
-        presenter!!.hideUI(window)
+        setContentView(R.layout.activity_on_boarding_main)
+        tabLayout = findViewById(R.id.tab_indicator)
+        next = findViewById(R.id.next_tv)
+        onBoardingViewPager = findViewById(R.id.screenPager)
 
         if (restorePrefData()){
             val i = Intent(applicationContext, MainActivity::class.java)
             startActivity(i)
         }
-        setContentView(R.layout.activity_on_boarding_main)
-        tabLayout = findViewById(R.id.tab_indicator)
-        next = findViewById(R.id.next_tv)
+
+        presenter?.savePrefData(application)
+        presenter = OnBoardingPresenter(this)
+        dataList = presenter!!.showDataSlide()
+        presenter!!.hideUI(window)
+        setOnBoardingViewPagerAdapter(dataList!!)
 
 
 
-        val onBoardingData:MutableList<OnBoardingData> = ArrayList()
-        onBoardingData.add(OnBoardingData("Check List",  "Possession her thoroughly remarkably terminated man continuing. Removed greater to do ability. You shy shall while but wrote marry.", R.drawable.checklist))
-        onBoardingData.add(OnBoardingData("Speedometer", "Was drawing natural fat respect husband. An as noisy an offer drawn blush place. These tried for way joy wrote witty.", R.drawable.speedometer))
-        onBoardingData.add(OnBoardingData("Speed limit", "Fulfilled direction use continual set him propriety continued. Saw met applauded favourite deficient engrossed concealed and her.", R.drawable.speedlimit))
-
-        setOnBoardingViewPagerAdapter(onBoardingData)
-
-        position = onBoardingViewPager!!.currentItem
 
 
-        next?.setOnClickListener(){
-            if (position < onBoardingData.size){
+
+
+        next!!.setOnClickListener(){
+            if (position < dataList!!.size){
                 position++
-                onBoardingViewPager!!.currentItem = position
+                onBoardingViewPager?.currentItem = position
             }
-            if (position == onBoardingData.size){
-                savePrefData()
+            if (position == dataList?.size){
+            //    savePrefData()
                 val i = Intent(applicationContext, MainActivity::class.java)
                 startActivity(i)
             }
@@ -74,11 +70,11 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
             @SuppressLint("SetTextI18n")
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 position = tab!!.position
-                if (tab.position == onBoardingData.size -1 ){
-                    next!!.text = "Get Started"
+                if (tab.position == dataList?.size?.minus(1) ){
+                    next?.text = "Get Started"
                 }
                 else{
-                    next!!.text = "Next"
+                    next?.text = "Next"
                 }
             }
 
@@ -97,12 +93,21 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
 
 
 
+
+
+
+
     private fun setOnBoardingViewPagerAdapter(onBoardingData: List<OnBoardingData>){
-        onBoardingViewPager = findViewById(R.id.screenPager)
         onBoardingViewPagerAdapter = OnBoardingViewPagerAdapter(this, onBoardingData)
-        onBoardingViewPager!!.adapter = onBoardingViewPagerAdapter
+        onBoardingViewPager?.adapter = onBoardingViewPagerAdapter
         tabLayout?.setupWithViewPager(onBoardingViewPager)
+        position = onBoardingViewPager!!.currentItem
     }
+
+
+
+
+
 
     @SuppressLint("CommitPrefEdits")
     private fun savePrefData(){
@@ -120,6 +125,8 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
 
 
     override fun initView() {
+        Log.d("try", "initView: trryr trtry trrt t tryyr")
+
 
     }
 }
