@@ -43,7 +43,7 @@ class OnBoardingModel:  OnBoardingInterface.Model {
     }
 
     override fun savePrefData(application: Application) {
-        sharedPreference =  application.getSharedPreferences("pref", Context.MODE_PRIVATE)
+        sharedPreference =  application.applicationContext.getSharedPreferences("pref", Context.MODE_PRIVATE)
         val editor = sharedPreference!!.edit()
         editor.putBoolean("isFirstTimeRun", true)
         editor.apply()

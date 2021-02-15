@@ -27,7 +27,6 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
     var next: TextView? = null
     var position: Int = 0
     var dataList: MutableList<OnBoardingData>? = null
-    var sharedPreference: SharedPreferences? = null
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,15 +36,13 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
         next = findViewById(R.id.next_tv)
         onBoardingViewPager = findViewById(R.id.screenPager)
 
-        if (restorePrefData()){
-            val i = Intent(applicationContext, MainActivity::class.java)
-            startActivity(i)
-        }
+
+        presenter = OnBoardingPresenter(this)
 
         presenter?.savePrefData(application)
-        presenter = OnBoardingPresenter(this)
-        dataList = presenter!!.showDataSlide()
         presenter!!.hideUI(window)
+
+        dataList = presenter!!.showDataSlide()
         setOnBoardingViewPagerAdapter(dataList!!)
 
 
@@ -60,7 +57,7 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
                 onBoardingViewPager?.currentItem = position
             }
             if (position == dataList?.size){
-            //    savePrefData()
+
                 val i = Intent(applicationContext, MainActivity::class.java)
                 startActivity(i)
             }
@@ -109,23 +106,8 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
 
 
 
-    @SuppressLint("CommitPrefEdits")
-    private fun savePrefData(){
-        sharedPreference = applicationContext.getSharedPreferences("pref", Context.MODE_PRIVATE)
-        val editor = sharedPreference!!.edit()
-        editor.putBoolean("isFirstTimeRun", true)
-        editor.apply()
-    }
-
-    private fun restorePrefData(): Boolean{
-        sharedPreference = applicationContext.getSharedPreferences("pref", Context.MODE_PRIVATE)
-        return sharedPreference!!.getBoolean("isFirstTimeRun", false)
-    }
-
-
-
     override fun initView() {
-        Log.d("try", "initView: trryr trtry trrt t tryyr")
+
 
 
     }

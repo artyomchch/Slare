@@ -18,27 +18,22 @@ class SplashActivity : AppCompatActivity(), SplashInterface.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
         presenter = SplashPresenter(this)
         presenter!!.hideUI(window)
-        waitPicture()
+        presenter!!.restorePrefData(this, intent)
 
     }
 
 
     override fun initView() {
+
+    }
+
+    override fun animation() {
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        finish()
     }
 
 
-
-    private fun waitPicture(){
-        val handler = Handler()
-        handler.postDelayed({
-            val intent = Intent(this, OnBoardingMain::class.java)
-            startActivity(intent)
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-            finish()
-        }, 1500)
-    }
 
 }
