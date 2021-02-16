@@ -14,8 +14,9 @@
             android:name="tennisi.borzot.strada.splash.SplashActivity">
 
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
+
             </intent-filter>
         </activity>
         <activity android:name="tennisi.borzot.strada.onboarding.MVPOnBoarding.OnBoardingMain" />

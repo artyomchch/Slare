@@ -1,18 +1,13 @@
 package tennisi.borzot.strada.onboarding.MVPOnBoarding
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import tennisi.borzot.strada.MainActivity
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.onboarding.OnBoardingViewPagerAdapter
 
@@ -21,11 +16,11 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
 
     private var presenter: OnBoardingPresenter? = null
 
-    var onBoardingViewPagerAdapter: OnBoardingViewPagerAdapter? = null
-    var tabLayout: TabLayout? = null
-    var onBoardingViewPager: ViewPager? = null
+    private var onBoardingViewPagerAdapter: OnBoardingViewPagerAdapter? = null
+    private var tabLayout: TabLayout? = null
+    private var onBoardingViewPager: ViewPager? = null
     var next: TextView? = null
-    var position: Int = 0
+
     var dataList: MutableList<OnBoardingData>? = null
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -36,38 +31,36 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
         next = findViewById(R.id.next_tv)
         onBoardingViewPager = findViewById(R.id.screenPager)
 
-
         presenter = OnBoardingPresenter(this)
-
         presenter?.savePrefData(application)
         presenter!!.hideUI(window)
 
-        dataList = presenter!!.showDataSlide()
-        setOnBoardingViewPagerAdapter(dataList!!)
+        dataList = presenter!!.getDataTitle()
+        presenter!!.viewPager()
+
+    }
 
 
+    override fun initViewPager(mutableList: MutableList<OnBoardingData>) {
+        onBoardingViewPagerAdapter = OnBoardingViewPagerAdapter(this, mutableList)
+        onBoardingViewPager?.adapter = onBoardingViewPagerAdapter
+        tabLayout?.setupWithViewPager(onBoardingViewPager)
+
+    }
 
 
-
-
-
+    override fun buttonNext() {
         next!!.setOnClickListener(){
-            if (position < dataList!!.size){
-                position++
-                onBoardingViewPager?.currentItem = position
-            }
-            if (position == dataList?.size){
-
-                val i = Intent(applicationContext, MainActivity::class.java)
-                startActivity(i)
-            }
+            presenter?.buttonNext(this, onBoardingViewPager!!)
         }
+    }
 
+    override fun tabNext() {
         tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+
             @SuppressLint("SetTextI18n")
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                position = tab!!.position
-                if (tab.position == dataList?.size?.minus(1) ){
+                if (tab!!.position == dataList?.size?.minus(1) ){
                     next?.text = "Get Started"
                 }
                 else{
@@ -75,40 +68,12 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
                 }
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
 
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-
-            }
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
 
         })
-
     }
 
 
-
-
-
-
-
-
-    private fun setOnBoardingViewPagerAdapter(onBoardingData: List<OnBoardingData>){
-        onBoardingViewPagerAdapter = OnBoardingViewPagerAdapter(this, onBoardingData)
-        onBoardingViewPager?.adapter = onBoardingViewPagerAdapter
-        tabLayout?.setupWithViewPager(onBoardingViewPager)
-        position = onBoardingViewPager!!.currentItem
-    }
-
-
-
-
-
-
-    override fun initView() {
-
-
-
-    }
 }

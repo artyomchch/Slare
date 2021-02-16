@@ -13,8 +13,15 @@ import tennisi.borzot.strada.R
 
 @Suppress("DEPRECATION")
 class OnBoardingModel:  OnBoardingInterface.Model {
-    private var onBoardingData:MutableList<OnBoardingData> = ArrayList()
+
     var sharedPreference: SharedPreferences? = null
+    var dataList: MutableList<OnBoardingData> = arrayListOf()
+
+    override fun createData() {
+        dataList.add(OnBoardingData("Check List",  "Possession her thoroughly remarkably terminated man continuing. Removed greater to do ability. You shy shall while but wrote marry.", R.drawable.checklist))
+        dataList.add(OnBoardingData("Speedometer", "Was drawing natural fat respect husband. An as noisy an offer drawn blush place. These tried for way joy wrote witty.", R.drawable.speedometer))
+        dataList.add(OnBoardingData("Speed limit", "Fulfilled direction use continual set him propriety continued. Saw met applauded favourite deficient engrossed concealed and her.", R.drawable.speedlimit))
+    }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun hideUI(window: Window) {
@@ -32,15 +39,7 @@ class OnBoardingModel:  OnBoardingInterface.Model {
 
     }
 
-    override fun getDataSlide(): MutableList<OnBoardingData> {
-        onBoardingData.add(OnBoardingData("Check List",  "Possession her thoroughly remarkably terminated man continuing. Removed greater to do ability. You shy shall while but wrote marry.", R.drawable.checklist))
-        onBoardingData.add(OnBoardingData("Speedometer", "Was drawing natural fat respect husband. An as noisy an offer drawn blush place. These tried for way joy wrote witty.", R.drawable.speedometer))
-        onBoardingData.add(OnBoardingData("Speed limit", "Fulfilled direction use continual set him propriety continued. Saw met applauded favourite deficient engrossed concealed and her.", R.drawable.speedlimit))
 
-
-
-        return onBoardingData
-    }
 
     override fun savePrefData(application: Application) {
         sharedPreference =  application.applicationContext.getSharedPreferences("pref", Context.MODE_PRIVATE)
@@ -48,6 +47,10 @@ class OnBoardingModel:  OnBoardingInterface.Model {
         editor.putBoolean("isFirstTimeRun", true)
         editor.apply()
     }
+
+    override fun getDataTitle(): MutableList<OnBoardingData> = dataList
+
+
 
 
 }

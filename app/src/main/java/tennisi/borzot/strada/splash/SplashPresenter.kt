@@ -27,7 +27,6 @@ class SplashPresenter(_view: SplashInterface.View): SplashInterface.Presenter {
 
     override fun restorePrefData(context: Context, intent: Intent) {
 
-        handler.post {  }
         handler.postDelayed({
             if (model.prefData(context)){
                 context.startActivity(Intent(context.applicationContext, MainActivity::class.java))
