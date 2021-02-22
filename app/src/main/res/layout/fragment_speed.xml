@@ -70,33 +70,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/add_car" />
 
-        <TextView
-            android:id="@+id/about_list_of_car"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
-            android:fontFamily="@font/roboto_regular"
-            android:gravity="center"
-            android:paddingLeft="80dp"
-            android:paddingRight="80dp"
-            android:text="Your speed !"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view"
-            app:layout_constraintVertical_bias="0.659" />
-
         <Button
             android:id="@+id/speed_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="139dp"
-            android:layout_marginTop="142dp"
-            android:layout_marginEnd="166dp"
+            android:layout_marginTop="37dp"
             android:text="Speed"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/about_list_of_car" />
+            app:layout_constraintTop_toBottomOf="@+id/start_button" />
+
+        <Button
+            android:id="@+id/start_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="71dp"
+            android:text="start"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/speedView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
