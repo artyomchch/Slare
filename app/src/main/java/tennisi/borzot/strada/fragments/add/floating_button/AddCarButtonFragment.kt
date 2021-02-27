@@ -34,7 +34,8 @@ import java.io.ByteArrayOutputStream
 import java.util.*
 
 
-class AddCarButtonFragment(): BottomSheetDialogFragment() {
+class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterface {
+    private val presenter: FragmentButtonPresenter? = null
 
     @SuppressLint("ResourceAsColor")
     override fun onCreateView(
@@ -42,6 +43,9 @@ class AddCarButtonFragment(): BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
+
         val appStrings = AppStrings()
         val rbLeftButton : AppCompatRadioButton
         val rbRightButton : AppCompatRadioButton
