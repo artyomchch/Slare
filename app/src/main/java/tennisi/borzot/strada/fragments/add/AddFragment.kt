@@ -68,6 +68,7 @@ class AddFragment : Fragment() {
             if (!addCarButtonFragment.isAdded){
               //  addCarButtonFragment.show(childFragmentManager, "addButtom")
                 sendDataToCarButtonFragment("", "", "", "", byteArrayOf(), false)
+
             }
         }
 

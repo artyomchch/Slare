@@ -10,9 +10,9 @@
     android:layout_marginRight="5dp"
     android:background="@drawable/bottom_sheet_background"
     android:orientation="vertical"
-    android:paddingLeft="20dp"
+    android:paddingLeft="15dp"
     android:paddingTop="10dp"
-    android:paddingRight="20dp"
+    android:paddingRight="15dp"
     android:paddingBottom="10dp">
 
     <TextView
@@ -33,19 +33,16 @@
 
         <EditText
             android:id="@+id/edit_car_brand"
-            android:layout_width="261dp"
+            android:layout_width="283dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
+            android:layout_marginRight="10dp"
             android:inputType="textPersonName" />
-
-        <View
-            android:layout_width="15dp"
-            android:layout_height="0dp" />
 
         <ImageView
             android:id="@+id/imageAuto"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/bmw" />
     </LinearLayout>
@@ -54,7 +51,7 @@
     <me.gujun.android.taggroup.TagGroup
         android:id="@+id/tag_group"
         style="@style/TagGroup"
-        android:layout_width="326dp"
+        android:layout_width="match_parent"
         android:layout_height="25dp"
 
         android:layout_marginLeft="4dp"
@@ -82,7 +79,7 @@
 
     <EditText
         android:id="@+id/edit_car_name"
-        android:layout_width="261dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
         android:inputType="textPersonName" />
@@ -94,7 +91,24 @@
         android:layout_marginLeft="4dp"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="Select mode:"
+        android:text="About car:"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/about_car"
+        android:layout_width="match_parent"
+        android:layout_marginTop="7dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Main car:"
         android:textSize="18sp" />
 
     <RadioGroup
@@ -113,7 +127,7 @@
             android:button="@color/trans_green"
             android:checked="true"
             android:gravity="center"
-            android:text="AUTO"
+            android:text="YES"
             android:textColor="@color/colorWhite" />
 
         <androidx.appcompat.widget.AppCompatRadioButton
@@ -125,15 +139,15 @@
             android:button="@color/trans_green"
             android:checked="false"
             android:gravity="center"
-            android:text="MANUAL"
+            android:text="NO"
             android:textColor="@color/mainBlue" />
     </RadioGroup>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
         <View
@@ -204,7 +218,7 @@
             android:visibility="gone" />
 
         <View
-            android:layout_width="10dp"
+            android:layout_width="4dp"
             android:layout_height="0dp" />
     </LinearLayout>
 

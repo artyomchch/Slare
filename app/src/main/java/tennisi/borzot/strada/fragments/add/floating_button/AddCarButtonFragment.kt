@@ -20,10 +20,8 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatRadioButton
-import androidx.core.view.isVisible
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.realm.Realm
-import io.realm.exceptions.RealmException
 import kotlinx.android.synthetic.main.fragment_add_car.*
 import kotlinx.android.synthetic.main.fragment_add_car.view.*
 import me.gujun.android.taggroup.TagGroup
@@ -34,8 +32,8 @@ import java.io.ByteArrayOutputStream
 import java.util.*
 
 
-class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterface {
-    private val presenter: FragmentButtonPresenter? = null
+class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterface.View {
+    private var presenter: FragmentButtonPresenter? = null
 
     @SuppressLint("ResourceAsColor")
     override fun onCreateView(
@@ -43,6 +41,8 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        presenter = FragmentButtonPresenter(this)
 
 
 
@@ -81,12 +81,14 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
 
         // передача аргументов с другого фрагмента
         val arguments = arguments
+
         if (arguments!= null){
             carId = arguments.getString("cId")
             carName = arguments.getString("cName")
             carDescription = arguments.getString("cDescription")
             val carMode = arguments.getString("cMode")
             val carPicture = arguments.getByteArray("cImage")
+
             remake = arguments.getBoolean("cMake")
             Log.d("War", "$carId      $carName     $carDescription     $carMode")
                 carEditBrand.setText(carName)
@@ -226,7 +228,8 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
 
         //save button
         carSave.setOnClickListener {
-            addDBCar(realm, radioMode)
+            presenter?.dataBaseAdd()
+            dismiss()
         }
 
 
@@ -252,35 +255,12 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
 
 
 
+
+
         return view
     }
 
 
-
-
-
-    //add database
-    fun addDBCar(realm: Realm, mode: String?){
-        realm.beginTransaction()
-        try {
-            val car = realm.createObject(Cars::class.java, UUID.randomUUID().toString())
-            car.name = edit_car_brand.text.toString()
-            car.description = edit_car_name.text.toString()
-            car.mode = mode
-            car.image = pictureToDB(imageAuto.drawable)
-
-            Toast.makeText(
-                context,
-                "Realm works: ${car.name.toString()} \n ${car.description} \n $mode",
-                Toast.LENGTH_LONG
-            ).show()
-            realm.commitTransaction()
-        }catch (e: RealmException){
-           Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
-            Log.e("Errrorr", e.message.toString())
-        }
-        dismiss()
-    }
 
 
     //удаление из базы данных
@@ -364,7 +344,27 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
 
 
 
+    override fun getBrand(): String = edit_car_brand.text.toString()
 
+    override fun getModel(): String = edit_car_name.text.toString()
+
+    override fun getDescription(): String = ""
+
+    override fun getImageCar(): Drawable = imageAuto.drawable
+
+    override fun getArgument(): Bundle = arguments!!
+
+
+
+
+    override fun logAddDb() {
+        Log.d("text works", "logAddDb: ")
+        Toast.makeText(context, "Realm works: Upload car", Toast.LENGTH_LONG).show()
+    }
+
+    override fun logDeleteDB() {
+        Toast.makeText(context, "Delete success ", Toast.LENGTH_LONG).show()
+    }
 
 
 

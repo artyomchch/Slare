@@ -52,6 +52,7 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
     override fun buttonNext() {
         next!!.setOnClickListener(){
             presenter?.buttonNext(this, onBoardingViewPager!!)
+
         }
     }
 
