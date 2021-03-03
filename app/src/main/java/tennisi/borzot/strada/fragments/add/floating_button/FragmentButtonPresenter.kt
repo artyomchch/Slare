@@ -1,8 +1,10 @@
 package tennisi.borzot.strada.fragments.add.floating_button
 
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 
 class FragmentButtonPresenter(_view: FragmentButtonInterface.View): FragmentButtonInterface.Presenter {
     private var view: FragmentButtonInterface.View = _view
@@ -10,7 +12,7 @@ class FragmentButtonPresenter(_view: FragmentButtonInterface.View): FragmentButt
     var TAG = "test presenter"
 
     init {
-
+        model.restoreData(view.getArgument())
     }
 
     override fun dataBaseAdd() {
@@ -20,15 +22,40 @@ class FragmentButtonPresenter(_view: FragmentButtonInterface.View): FragmentButt
                 view.getDescription(),
                 view.getImageCar())
         ){
+            view.closeFragment()
             view.logAddDb()
         }
-
-
     }
+
+
+    override fun searchInputTags(inputCar: String):ArrayList<String> = model.searchInputTags(inputCar)
+    override fun searchInputPicture(inputCar: String): Int = model.searchInputPicture(inputCar)
+
 
     override fun dataBaseDelete(argument: Bundle) {
 
     }
 
 
+
+
+
+    override fun setCarId(): String = model.setCarId()
+    override fun setCarBrand(): String = model.setCarBrand()
+    override fun setCarModel(): String = model.setCarModel()
+    override fun setCarPicture(): Bitmap = model.setCarPicture()
+    override fun setTagCars(): ArrayList<String> = model.getCarTag()
+
+
+
+
+
+
+    override fun getRemake(): Boolean = model.getCarChoose()
+
+
+
+
 }
+
+

@@ -1,10 +1,12 @@
 package tennisi.borzot.strada.fragments.add.floating_button
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import io.realm.Realm
 import io.realm.exceptions.RealmException
@@ -13,6 +15,7 @@ import tennisi.borzot.strada.R
 import tennisi.borzot.strada.database.Cars
 import java.io.ByteArrayOutputStream
 import java.util.*
+import kotlin.collections.ArrayList
 
 class FragmentButtonModel: FragmentButtonInterface.Model {
 
@@ -22,6 +25,7 @@ class FragmentButtonModel: FragmentButtonInterface.Model {
     var carDescription: String = ""
     var remake: Boolean = false
     lateinit var carPicture: ByteArray
+    lateinit var picture: Bitmap
 
 
 
@@ -43,6 +47,17 @@ class FragmentButtonModel: FragmentButtonInterface.Model {
     "Toyota" to R.drawable.toyota, "Triumph" to R.drawable.triumph, "TVS" to R.drawable.tvs,
     "Underground" to R.drawable.underground, "Vespa" to R.drawable.vespa, "Victory" to R.drawable.victory,
     "Volvo" to R.drawable.volvo, "Yamaha" to R.drawable.yamaha, "NoAuto" to R.drawable.noauto)
+
+    val carsTag: ArrayList<String> = arrayListOf("Acura", "Audi", "Bimota", "BMW", "Buick", "Cadillac", "Chevrolet",
+        "Citroen", "Daelim", "Derbi", "Ducati", "Ferrari", "Fiat", "Ford", "Harley-Davidson",
+        "Holden", "Honda", "Husqvarna", "Hyosung", "Hyundai", "Infiniti", "Jeep", "Kawasaki",
+        "KIA", "KTM", "Kymco", "Lexus", "Mazda", "Mercedes-Benz", "Mercury", "Mini", "Mitsubishi",
+        "Nissan", "Opel", "Peugeot", "Piaggio", "Pontiac", "Porsche", "Renault", "Smart", "Subaru",
+        "Suzuki", "SYM Motors", "Tesla", "Toyota", "Triumph", "TVS", "Underground", "Vespa",
+        "Victory", "Volvo", "Yamaha")
+
+
+
 
     val realm: Realm = Realm.getDefaultInstance()
 
@@ -80,10 +95,71 @@ class FragmentButtonModel: FragmentButtonInterface.Model {
         carBrand = argument.getString("cName")!!
         carModel = argument.getString("cDescription")!!
         //  val carMode = arguments.getString("cMode")
-        val carPicture = argument.getByteArray("cImage")
+        carPicture = argument.getByteArray("cImage")!!
         remake = argument.getBoolean("cMake")
         //  Log.d("War", "$carId      $carName     $carDescription     $carMode")
     }
+
+    override fun setCarId(): String = carId
+
+
+
+    override fun setCarBrand(): String = carBrand
+
+
+
+    override fun setCarModel(): String = carModel
+
+    override fun setCarPicture(): Bitmap = carPicture.size.let {
+        BitmapFactory.decodeByteArray(carPicture, 0 ,
+            it
+        )
+    }
+
+    override fun getCarChoose(): Boolean = remake
+    override fun getCarTag(): ArrayList<String> = carsTag
+
+    override fun searchInputTags(inputCar: String): ArrayList<String> {
+        val newArrayListCar: java.util.ArrayList<String> = arrayListOf()
+        val newArrayListCarRubbish: java.util.ArrayList<String> = arrayListOf()
+        for (i in carsTag){
+            if (i.toLowerCase().indexOf(inputCar.toLowerCase())!= -1 && i.toLowerCase().indexOf(
+                    inputCar.toLowerCase()
+                ) == 0){
+                newArrayListCar.add(i)
+            }
+            else if (i.toLowerCase().indexOf(inputCar.toLowerCase())!= -1){
+                newArrayListCarRubbish.add(i)
+            }
+        }
+        for (i in newArrayListCarRubbish){
+            newArrayListCar.add(i)
+        }
+
+
+        return newArrayListCar
+    }
+
+    override fun searchInputPicture(inputCar: String): Int {
+        for (i in autoPicture){
+            if (i.key == inputCar){
+                return i.value
+            }
+        }
+        return autoPicture.getValue("NoAuto")
+
+
+//        for ((c, i) in carsList.withIndex()){
+//            if ( i == carName){
+//                return c
+//            }
+//            else i.lastIndex
+//        }
+//
+//        return carsList.size
+
+    }
+
 
     // перевод найденных картинок в байткод
     private fun pictureToDB(image: Drawable): ByteArray{
@@ -93,6 +169,12 @@ class FragmentButtonModel: FragmentButtonInterface.Model {
         val bitmapdata: ByteArray = stream.toByteArray()
         return bitmapdata
     }
+
+
+
+
+
+
 
 
 }

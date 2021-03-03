@@ -3,8 +3,11 @@ package tennisi.borzot.strada.fragments.add.floating_button
 import android.app.Application
 import android.content.ClipDescription
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.os.Binder
 import android.os.Bundle
+import android.view.View
 import android.view.Window
 import androidx.viewpager.widget.ViewPager
 import tennisi.borzot.strada.onboarding.MVPOnBoarding.OnBoardingData
@@ -18,20 +21,37 @@ interface FragmentButtonInterface {
         fun getArgument(): Bundle
         fun logAddDb()
         fun logDeleteDB()
+        fun closeFragment()
+
+
 
     }
 
     interface Presenter{
         fun dataBaseAdd()
         fun dataBaseDelete(argument: Bundle)
-
-
+        fun setCarId():String
+        fun setCarBrand():String
+        fun setCarModel():String
+        fun setCarPicture():Bitmap
+        fun getRemake():Boolean
+        fun setTagCars(): ArrayList<String>
+        fun searchInputTags(inputCar: String): ArrayList<String>
+        fun searchInputPicture(inputCar: String): Int
     }
 
     interface Model{
         fun addDataToDB(brand: String, model: String, description: String, imageCar: Drawable):Boolean
         fun deleteDataToDB()
         fun restoreData(argument: Bundle)
+        fun setCarId():String
+        fun setCarBrand():String
+        fun setCarModel():String
+        fun setCarPicture():Bitmap
+        fun getCarChoose():Boolean
+        fun getCarTag(): ArrayList<String>
+        fun searchInputTags(inputCar: String): ArrayList<String>
+        fun searchInputPicture(inputCar: String): Int
 
     }
 

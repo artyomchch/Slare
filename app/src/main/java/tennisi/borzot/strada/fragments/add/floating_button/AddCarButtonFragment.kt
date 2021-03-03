@@ -45,15 +45,10 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
         presenter = FragmentButtonPresenter(this)
 
 
-
         val appStrings = AppStrings()
         val rbLeftButton : AppCompatRadioButton
         val rbRightButton : AppCompatRadioButton
         val view = inflater.inflate(R.layout.fragment_add_car, container, false)
-        var carId: String? = ""
-        var carName: String? = ""
-        var carDescription: String? = ""
-        var remake: Boolean = true
 
 
         var updateCarBrand: String? = ""
@@ -79,41 +74,19 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
 
 
 
-        // передача аргументов с другого фрагмента
-        val arguments = arguments
 
-        if (arguments!= null){
-            carId = arguments.getString("cId")
-            carName = arguments.getString("cName")
-            carDescription = arguments.getString("cDescription")
-            val carMode = arguments.getString("cMode")
-            val carPicture = arguments.getByteArray("cImage")
-
-            remake = arguments.getBoolean("cMake")
-            Log.d("War", "$carId      $carName     $carDescription     $carMode")
-                carEditBrand.setText(carName)
-                carEditName.setText(carDescription)
-
-            if (remake){
-                carDelete.visibility = View.VISIBLE
-                carCancel.visibility =  View.GONE
-                carReCancel.visibility = View.VISIBLE
-                carSave.visibility = View.GONE
-
-
-                Log.d("War", "remake works!!,  $remake")
-            }
-            else {
-                carDelete.visibility = View.GONE
-                carCancel.visibility = View.VISIBLE
-                Log.d("War", "unremake works!!,  $remake")
-            }
-                // перевод с байткода в битмэп
-            carImage.setImageBitmap(carPicture?.size?.let {
-                BitmapFactory.decodeByteArray(carPicture, 0 ,
-                    it
-                )
-            })
+        if (presenter!!.getRemake()){
+            carDelete.visibility = View.VISIBLE
+            carCancel.visibility =  View.GONE
+            carReCancel.visibility = View.VISIBLE
+            carSave.visibility = View.GONE
+            carEditBrand.setText(presenter?.setCarBrand())
+            carEditName.setText(presenter?.setCarModel())
+            carImage.setImageBitmap(presenter!!.setCarPicture())
+        }
+        else {
+            carDelete.visibility = View.GONE
+            carCancel.visibility = View.VISIBLE
         }
 
 
@@ -122,13 +95,11 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
 
 
         //Слушатель на тэги
-        mTagGroup.setTags(appStrings.cars)
+        mTagGroup.setTags(presenter!!.setTagCars())
         mTagGroup.setOnTagClickListener(object : TagGroup.OnTagClickListener {
             override fun onTagClick(tag: String?) {
-                edit_car_brand.setText(tag)
-                mTagGroup.setTags(arrayListOf())
-                edit_car_brand.setSelection(tag.toString().length)
-
+                carEditBrand.setText(tag)
+                carEditBrand.setSelection(tag.toString().length)
             }
         })
 
@@ -146,13 +117,9 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
             override fun afterTextChanged(p0: Editable?) {
 
                 //work with tags
-                mTagGroup.setTags(searchCarTags(appStrings.cars, p0.toString()))
-                imageAuto.setImageResource(
-                    appStrings.pictureCars[searchCarPicture(
-                        appStrings.cars,
-                        p0.toString()
-                    )]
-                )
+                mTagGroup.setTags(presenter!!.searchInputTags(p0.toString()))
+                imageAuto.setImageResource(presenter!!.searchInputPicture(p0.toString()))
+
                 if (mTagGroup.tags.isNotEmpty()) {
                     if (p0.toString().contains(mTagGroup.tags[0])) {
                         tag_group.visibility = View.GONE
@@ -160,8 +127,8 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
                 } else tag_group.visibility = View.GONE
 
                 //works with button view
-                if (remake){
-                    if (p0.toString() != carName){
+                if (presenter!!.getRemake()){
+                    if (p0.toString() != presenter!!.setCarBrand()){
                         carReCancel.visibility = View.GONE
                         carUpdate.visibility = View.VISIBLE
                         updateCarBrand = p0.toString()
@@ -188,8 +155,8 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                if (remake){
-                    if (p0.toString() != carDescription){
+                if (presenter!!.getRemake()){
+                    if (p0.toString() != presenter!!.setCarModel()){
                         carReCancel.visibility = View.GONE
                         carUpdate.visibility = View.VISIBLE
                         updateCarDescription = p0.toString()
@@ -229,7 +196,6 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
         //save button
         carSave.setOnClickListener {
             presenter?.dataBaseAdd()
-            dismiss()
         }
 
 
@@ -240,7 +206,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
 
         //delete button
         carDelete.setOnClickListener {
-            deleteCar(carId, realm)
+            deleteCar(presenter!!.setCarId(), realm)
         }
 
         //another cancel button
@@ -250,7 +216,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
 
         //update button
         carUpdate.setOnClickListener {
-            updateCar(carId, realm, updateCarBrand, updateCarDescription)
+            updateCar(presenter!!.setCarId(), realm, updateCarBrand, updateCarDescription)
         }
 
 
@@ -259,6 +225,10 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
 
         return view
     }
+
+
+
+
 
 
 
@@ -297,39 +267,9 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
     }
 
 
-    //Находка для тегов!!!
-    fun searchCarTags(carsList: ArrayList<String>, nameCar: String): ArrayList<String> {
-        val newArrayListCar: ArrayList<String> = arrayListOf()
-        val newArrayListCarRubbish: ArrayList<String> = arrayListOf()
-        for (i in carsList){
-            if (i.toLowerCase().indexOf(nameCar.toLowerCase())!= -1 && i.toLowerCase().indexOf(
-                    nameCar.toLowerCase()
-                ) == 0){
-                newArrayListCar.add(i)
-            }
-            else if (i.toLowerCase().indexOf(nameCar.toLowerCase())!= -1){
-                newArrayListCarRubbish.add(i)
-            }
-        }
-        for (i in newArrayListCarRubbish){
-            newArrayListCar.add(i)
-        }
 
 
-        return newArrayListCar
-    }
 
-    // находка картинок под теги
-    fun searchCarPicture(carsList: ArrayList<String>, carName: String): Int{
-        for ((c, i) in carsList.withIndex()){
-            if ( i == carName){
-                return c
-            }
-            else i.lastIndex
-        }
-
-        return carsList.size
-    }
 
     // перевод найденных картинок в байткод
     private fun pictureToDB(image: Drawable): ByteArray{
@@ -366,6 +306,9 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
         Toast.makeText(context, "Delete success ", Toast.LENGTH_LONG).show()
     }
 
+    override fun closeFragment() {
+        dismiss()
+    }
 
 
 }
