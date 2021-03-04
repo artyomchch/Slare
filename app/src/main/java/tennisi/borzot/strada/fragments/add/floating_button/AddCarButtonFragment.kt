@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.fragment_add_car.view.*
 import me.gujun.android.taggroup.TagGroup
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.database.Cars
-import tennisi.borzot.strada.strings.AppStrings
+
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -45,15 +45,10 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
         presenter = FragmentButtonPresenter(this)
 
 
-        val appStrings = AppStrings()
-        val rbLeftButton : AppCompatRadioButton
-        val rbRightButton : AppCompatRadioButton
         val view = inflater.inflate(R.layout.fragment_add_car, container, false)
 
-
-        var updateCarBrand: String? = ""
-        var updateCarDescription: String? = ""
-
+        val rbLeftButton = view.findViewById(R.id.rbLeft) as AppCompatRadioButton
+        val rbRightButton = view.findViewById(R.id.rbRight) as AppCompatRadioButton
         val mTagGroup = view.findViewById(R.id.tag_group) as TagGroup
         val carImage = view.findViewById(R.id.imageAuto) as ImageView
         val carEditBrand = view.findViewById(R.id.edit_car_brand) as EditText
@@ -65,13 +60,6 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
         val carSave = view.findViewById(R.id.save) as Button
         // RadioButton
         var radioMode: String? = "auto"
-
-        //realm
-        val realm: Realm = Realm.getDefaultInstance()
-
-        rbLeftButton = view.findViewById(R.id.rbLeft)
-        rbRightButton = view.findViewById(R.id.rbRight)
-
 
 
 
@@ -88,8 +76,6 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
             carDelete.visibility = View.GONE
             carCancel.visibility = View.VISIBLE
         }
-
-
 
 
 
@@ -131,12 +117,12 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
                     if (p0.toString() != presenter!!.setCarBrand()){
                         carReCancel.visibility = View.GONE
                         carUpdate.visibility = View.VISIBLE
-                        updateCarBrand = p0.toString()
+                        presenter!!.getUpdateCarBrand(p0.toString())
                     }
                     else {
                         carUpdate.visibility = View.GONE
                         carReCancel.visibility = View.VISIBLE
-                        updateCarBrand = ""
+                        presenter!!.getUpdateCarBrand("")
                     }
                 }
 
@@ -159,12 +145,13 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
                     if (p0.toString() != presenter!!.setCarModel()){
                         carReCancel.visibility = View.GONE
                         carUpdate.visibility = View.VISIBLE
-                        updateCarDescription = p0.toString()
+                        presenter!!.getUpdateCarModel(p0.toString())
+
                     }
                     else {
                         carUpdate.visibility = View.GONE
                         carReCancel.visibility = View.VISIBLE
-                        updateCarDescription = ""
+                        presenter!!.getUpdateCarModel("")
                     }
                 }
 
@@ -201,85 +188,27 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
 
         //cancel button
         carCancel.setOnClickListener {
-            dismiss()
+            closeFragment()
         }
 
         //delete button
         carDelete.setOnClickListener {
-            deleteCar(presenter!!.setCarId(), realm)
+            presenter!!.dataBaseDelete()
         }
 
         //another cancel button
         carReCancel.setOnClickListener {
-            dismiss()
+            closeFragment()
         }
 
         //update button
         carUpdate.setOnClickListener {
-            updateCar(presenter!!.setCarId(), realm, updateCarBrand, updateCarDescription)
+            presenter!!.dataBaseUpdate()
         }
-
-
-
 
 
         return view
     }
-
-
-
-
-
-
-
-
-    //удаление из базы данных
-    fun deleteCar(car: String?, realm: Realm) {
-        val deleteSelectCar  = realm.where(Cars::class.java).equalTo(
-            "id", car
-        ).findAll()
-        for (cars in deleteSelectCar) {
-            realm.beginTransaction()
-            cars.deleteFromRealm()
-            realm.commitTransaction()
-        }
-        dismiss()
-        Toast.makeText(context, "Delete success ", Toast.LENGTH_LONG).show()
-    }
-
-    fun updateCar(car: String?, realm: Realm, updateCarBrand: String?, updateCarDescription: String?){
-        val updateSelectCar  = realm.where(Cars::class.java).equalTo(
-            "id", car
-        ).findAll()
-        for (cars in updateSelectCar){
-            realm.beginTransaction()
-            if (updateCarBrand!= ""){
-                cars.name = updateCarBrand
-            }
-            if (updateCarDescription != ""){
-                cars.description = updateCarDescription
-            }
-            cars.image = pictureToDB(imageAuto.drawable)
-            realm.commitTransaction()
-        }
-        dismiss()
-        Toast.makeText(context, "Update success ", Toast.LENGTH_LONG).show()
-    }
-
-
-
-
-
-
-    // перевод найденных картинок в байткод
-    private fun pictureToDB(image: Drawable): ByteArray{
-        val bitmap = (image as BitmapDrawable).bitmap
-        val stream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-        val bitmapdata: ByteArray = stream.toByteArray()
-        return bitmapdata
-    }
-
 
 
 

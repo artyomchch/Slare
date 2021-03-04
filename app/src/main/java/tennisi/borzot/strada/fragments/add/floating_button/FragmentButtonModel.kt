@@ -5,12 +5,8 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
-import android.widget.ImageView
-import android.widget.Toast
 import io.realm.Realm
 import io.realm.exceptions.RealmException
-import kotlinx.android.synthetic.main.fragment_add_car.*
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.database.Cars
 import java.io.ByteArrayOutputStream
@@ -19,17 +15,22 @@ import kotlin.collections.ArrayList
 
 class FragmentButtonModel: FragmentButtonInterface.Model {
 
-    var carId: String = ""
-    var carBrand: String = ""
-    var carModel: String = ""
-    var carDescription: String = ""
-    var remake: Boolean = false
-    lateinit var carPicture: ByteArray
-    lateinit var picture: Bitmap
+    private var carId: String = ""
+    private var carBrand: String = ""
+    private var carModel: String = ""
+    private var carDescription: String = ""
+    private var remake: Boolean = false
+
+    private var carUpdateBrand: String = ""
+    private var carUpdateModel: String = ""
+    private var carUpdateDescription: String = ""
+
+    private lateinit var carPicture: ByteArray
 
 
 
-    val autoPicture: Map<String, Int> = mapOf("Acura" to R.drawable.acura, "Audi" to R.drawable.audi,
+
+    private val autoPicture: Map<String, Int> = mapOf("Acura" to R.drawable.acura, "Audi" to R.drawable.audi,
     "Bimota" to R.drawable.bimota, "BMW" to R.drawable.bmw, "Buick" to R.drawable.buick,
     "Cadillac" to R.drawable.cadillac, "Chevrolet" to R.drawable.chevrolet, "Citroen" to R.drawable.citroen,
     "Daelim" to R.drawable.daelim, "Derbi" to R.drawable.derbi, "Ducati" to R.drawable.ducati,
@@ -48,7 +49,7 @@ class FragmentButtonModel: FragmentButtonInterface.Model {
     "Underground" to R.drawable.underground, "Vespa" to R.drawable.vespa, "Victory" to R.drawable.victory,
     "Volvo" to R.drawable.volvo, "Yamaha" to R.drawable.yamaha, "NoAuto" to R.drawable.noauto)
 
-    val carsTag: ArrayList<String> = arrayListOf("Acura", "Audi", "Bimota", "BMW", "Buick", "Cadillac", "Chevrolet",
+    private val carsTag: ArrayList<String> = arrayListOf("Acura", "Audi", "Bimota", "BMW", "Buick", "Cadillac", "Chevrolet",
         "Citroen", "Daelim", "Derbi", "Ducati", "Ferrari", "Fiat", "Ford", "Harley-Davidson",
         "Holden", "Honda", "Husqvarna", "Hyosung", "Hyundai", "Infiniti", "Jeep", "Kawasaki",
         "KIA", "KTM", "Kymco", "Lexus", "Mazda", "Mercedes-Benz", "Mercury", "Mini", "Mitsubishi",
@@ -63,16 +64,16 @@ class FragmentButtonModel: FragmentButtonInterface.Model {
 
     override fun addDataToDB(brand: String, model: String, description: String, imageCar: Drawable): Boolean {
         realm.beginTransaction()
-        try {
+        return try {
             val car = realm.createObject(Cars::class.java, UUID.randomUUID().toString())
             car.name = brand
             car.description = model
             car.mode = description
             car.image = pictureToDB(imageCar)
             realm.commitTransaction()
-            return true
+            true
         }catch (e: RealmException){
-            return false
+            false
         }
 
 
@@ -90,6 +91,24 @@ class FragmentButtonModel: FragmentButtonInterface.Model {
 
     }
 
+    override fun dataBaseUpdate(imageCar: Drawable) {
+        val updateSelectCar  = realm.where(Cars::class.java).equalTo(
+            "id", carId
+        ).findAll()
+        for (cars in updateSelectCar){
+            realm.beginTransaction()
+            if (carUpdateBrand!= ""){
+                cars.name = carUpdateBrand
+            }
+            if (carUpdateModel != ""){
+                cars.description = carUpdateModel
+            }
+            cars.image = pictureToDB(imageCar)
+            realm.commitTransaction()
+        }
+
+    }
+
     override fun restoreData(argument: Bundle) {
         carId = argument.getString("cId")!!
         carBrand = argument.getString("cName")!!
@@ -97,18 +116,23 @@ class FragmentButtonModel: FragmentButtonInterface.Model {
         //  val carMode = arguments.getString("cMode")
         carPicture = argument.getByteArray("cImage")!!
         remake = argument.getBoolean("cMake")
-        //  Log.d("War", "$carId      $carName     $carDescription     $carMode")
+
     }
 
     override fun setCarId(): String = carId
-
-
-
     override fun setCarBrand(): String = carBrand
-
-
-
     override fun setCarModel(): String = carModel
+    override fun getUpdateCarBrand(updateBrand: String) {
+        carUpdateBrand = updateBrand
+    }
+
+    override fun getUpdateCarModel(updateModel: String) {
+        carUpdateModel = updateModel
+    }
+
+
+
+
 
     override fun setCarPicture(): Bitmap = carPicture.size.let {
         BitmapFactory.decodeByteArray(carPicture, 0 ,
@@ -148,16 +172,6 @@ class FragmentButtonModel: FragmentButtonInterface.Model {
         }
         return autoPicture.getValue("NoAuto")
 
-
-//        for ((c, i) in carsList.withIndex()){
-//            if ( i == carName){
-//                return c
-//            }
-//            else i.lastIndex
-//        }
-//
-//        return carsList.size
-
     }
 
 
@@ -166,14 +180,8 @@ class FragmentButtonModel: FragmentButtonInterface.Model {
         val bitmap = (image as BitmapDrawable).bitmap
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-        val bitmapdata: ByteArray = stream.toByteArray()
-        return bitmapdata
+        return stream.toByteArray()
     }
-
-
-
-
-
 
 
 

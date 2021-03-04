@@ -23,17 +23,18 @@ interface FragmentButtonInterface {
         fun logDeleteDB()
         fun closeFragment()
 
-
-
     }
 
     interface Presenter{
         fun dataBaseAdd()
-        fun dataBaseDelete(argument: Bundle)
+        fun dataBaseDelete()
+        fun dataBaseUpdate()
         fun setCarId():String
         fun setCarBrand():String
         fun setCarModel():String
         fun setCarPicture():Bitmap
+        fun getUpdateCarBrand(updateBrand: String)
+        fun getUpdateCarModel(updateModel: String)
         fun getRemake():Boolean
         fun setTagCars(): ArrayList<String>
         fun searchInputTags(inputCar: String): ArrayList<String>
@@ -43,10 +44,13 @@ interface FragmentButtonInterface {
     interface Model{
         fun addDataToDB(brand: String, model: String, description: String, imageCar: Drawable):Boolean
         fun deleteDataToDB()
+        fun dataBaseUpdate(imageCar: Drawable)
         fun restoreData(argument: Bundle)
         fun setCarId():String
         fun setCarBrand():String
         fun setCarModel():String
+        fun getUpdateCarBrand(updateBrand: String)
+        fun getUpdateCarModel(updateModel: String)
         fun setCarPicture():Bitmap
         fun getCarChoose():Boolean
         fun getCarTag(): ArrayList<String>

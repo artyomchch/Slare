@@ -27,14 +27,23 @@ class FragmentButtonPresenter(_view: FragmentButtonInterface.View): FragmentButt
         }
     }
 
+    override fun dataBaseDelete() {
+        model.deleteDataToDB()
+        view.closeFragment()
+    }
+
+
+    override fun dataBaseUpdate() {
+        model.dataBaseUpdate(view.getImageCar())
+        view.closeFragment()
+    }
+
+
 
     override fun searchInputTags(inputCar: String):ArrayList<String> = model.searchInputTags(inputCar)
     override fun searchInputPicture(inputCar: String): Int = model.searchInputPicture(inputCar)
 
 
-    override fun dataBaseDelete(argument: Bundle) {
-
-    }
 
 
 
@@ -45,6 +54,15 @@ class FragmentButtonPresenter(_view: FragmentButtonInterface.View): FragmentButt
     override fun setCarModel(): String = model.setCarModel()
     override fun setCarPicture(): Bitmap = model.setCarPicture()
     override fun setTagCars(): ArrayList<String> = model.getCarTag()
+
+    override fun getUpdateCarBrand(updateBrand: String) {
+       model.getUpdateCarBrand(updateBrand)
+    }
+    override fun getUpdateCarModel(updateModel: String) {
+        model.getUpdateCarModel(updateModel)
+    }
+
+
 
 
 
