@@ -23,15 +23,17 @@ class AdapterCar(var mCtx: Context, var resources: Int, var items: List<Cars>)
 
         val imageView: ImageView = view.findViewById(R.id.imageViewBrand)
         val brandText: TextView = view.findViewById(R.id.brandCarWriter)
-        val modeText: TextView = view.findViewById(R.id.modeCarWriter)
+        val modelText: TextView = view.findViewById(R.id.modelCarWriter)
         val descriptionCar: TextView = view.findViewById(R.id.descriptionCarWriter)
+        val modeText: TextView = view.findViewById(R.id.modeCarWriter)
 
-        var mItem: Cars = items[position]
+
+        val mItem: Cars = items[position]
         imageView.setImageBitmap(mItem.image?.let { BitmapFactory.decodeByteArray(mItem.image, 0 , it.size) })
-        brandText.text = mItem.name
-        descriptionCar.text = mItem.description
+        brandText.text = mItem.carBrand
+        modelText.text = mItem.carModel
+        descriptionCar.text = mItem.carDescription
         modeText.text = mItem.mode
-
 
         return view
     }

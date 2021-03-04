@@ -62,11 +62,9 @@ class FragmentButtonPresenter(_view: FragmentButtonInterface.View): FragmentButt
         model.getUpdateCarModel(updateModel)
     }
 
-
-
-
-
-
+    override fun getUpdateCarDescription(updateDescription: String) {
+        model.getUpdateCarDescription(updateDescription)
+    }
 
 
     override fun getRemake(): Boolean = model.getCarChoose()

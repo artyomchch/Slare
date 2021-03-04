@@ -35,6 +35,7 @@ interface FragmentButtonInterface {
         fun setCarPicture():Bitmap
         fun getUpdateCarBrand(updateBrand: String)
         fun getUpdateCarModel(updateModel: String)
+        fun getUpdateCarDescription(updateDescription: String)
         fun getRemake():Boolean
         fun setTagCars(): ArrayList<String>
         fun searchInputTags(inputCar: String): ArrayList<String>
@@ -51,6 +52,7 @@ interface FragmentButtonInterface {
         fun setCarModel():String
         fun getUpdateCarBrand(updateBrand: String)
         fun getUpdateCarModel(updateModel: String)
+        fun getUpdateCarDescription(updateDescription: String)
         fun setCarPicture():Bitmap
         fun getCarChoose():Boolean
         fun getCarTag(): ArrayList<String>

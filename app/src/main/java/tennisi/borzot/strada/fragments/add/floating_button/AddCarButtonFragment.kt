@@ -52,7 +52,8 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
         val mTagGroup = view.findViewById(R.id.tag_group) as TagGroup
         val carImage = view.findViewById(R.id.imageAuto) as ImageView
         val carEditBrand = view.findViewById(R.id.edit_car_brand) as EditText
-        val carEditName = view.findViewById(R.id.edit_car_name) as EditText
+        val carEditName = view.findViewById(R.id.edit_car_model) as EditText
+        val carEditDescription = view.findViewById(R.id.edit_car_description) as EditText
         val carCancel = view.findViewById(R.id.cancel) as Button
         val carDelete = view.findViewById(R.id.delete) as Button
         val carReCancel = view.findViewById(R.id.car_cancel) as Button
@@ -159,6 +160,34 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
 
         })
 
+        carEditDescription.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                if (presenter!!.getRemake()){
+                    if (p0.toString() != presenter!!.setCarDescription()){
+                        carReCancel.visibility = View.GONE
+                        carUpdate.visibility = View.VISIBLE
+                        presenter!!.getUpdateCarDescription(p0.toString())
+
+                    }
+                    else {
+                        carUpdate.visibility = View.GONE
+                        carReCancel.visibility = View.VISIBLE
+                        presenter!!.getUpdateCarDescription("")
+                    }
+                }
+
+            }
+
+        })
+
 
 
 
@@ -215,9 +244,9 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
 
     override fun getBrand(): String = edit_car_brand.text.toString()
 
-    override fun getModel(): String = edit_car_name.text.toString()
+    override fun getModel(): String = edit_car_model.text.toString()
 
-    override fun getDescription(): String = ""
+    override fun getDescription(): String = edit_car_description.text.toString()
 
     override fun getImageCar(): Drawable = imageAuto.drawable
 

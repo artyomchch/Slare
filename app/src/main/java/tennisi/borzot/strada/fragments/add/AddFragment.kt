@@ -67,7 +67,7 @@ class AddFragment : Fragment() {
         fab.setOnClickListener {
             if (!addCarButtonFragment.isAdded){
               //  addCarButtonFragment.show(childFragmentManager, "addButtom")
-                sendDataToCarButtonFragment("", "", "", "", byteArrayOf(), false)
+                sendDataToCarButtonFragment("", "", "", "", "", byteArrayOf(), false)
 
             }
         }
@@ -78,8 +78,9 @@ class AddFragment : Fragment() {
 
             sendDataToCarButtonFragment(
                 listCar.elementAt(id.toInt()).id.toString(),
-                listCar[id.toInt()].name.toString(),
-                listCar[id.toInt()].description.toString(),
+                listCar[id.toInt()].carBrand.toString(),
+                listCar[id.toInt()].carModel.toString(),
+                listCar[id.toInt()].carDescription.toString(),
                 listCar[id.toInt()].mode.toString(),
                 listCar[id.toInt()].image,
                 true
@@ -117,11 +118,12 @@ class AddFragment : Fragment() {
     }
 
 
-    fun sendDataToCarButtonFragment(id: String?, name: String, description: String, mode: String, img: ByteArray?, remake: Boolean ){
+    fun sendDataToCarButtonFragment(id: String?, brand: String, model: String, description: String, mode: String, img: ByteArray?, remake: Boolean ){
         val carButtonFragment = AddCarButtonFragment()
         val bundle = Bundle()
         bundle.putString("cId", id)
-        bundle.putString("cName", name)
+        bundle.putString("cBrand", brand)
+        bundle.putString("cModel", model)
         bundle.putString("cDescription", description)
         bundle.putString("cMode", mode)
         bundle.putByteArray("cImage", img )

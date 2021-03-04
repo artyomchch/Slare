@@ -66,9 +66,9 @@ class FragmentButtonModel: FragmentButtonInterface.Model {
         realm.beginTransaction()
         return try {
             val car = realm.createObject(Cars::class.java, UUID.randomUUID().toString())
-            car.name = brand
-            car.description = model
-            car.mode = description
+            car.carBrand = brand
+            car.carModel = model
+            car.carDescription = description
             car.image = pictureToDB(imageCar)
             realm.commitTransaction()
             true
@@ -98,10 +98,13 @@ class FragmentButtonModel: FragmentButtonInterface.Model {
         for (cars in updateSelectCar){
             realm.beginTransaction()
             if (carUpdateBrand!= ""){
-                cars.name = carUpdateBrand
+                cars.carBrand = carUpdateBrand
             }
             if (carUpdateModel != ""){
-                cars.description = carUpdateModel
+                cars.carModel = carUpdateModel
+            }
+            if (carUpdateDescription != ""){
+                cars.carDescription = carUpdateDescription
             }
             cars.image = pictureToDB(imageCar)
             realm.commitTransaction()
@@ -111,8 +114,9 @@ class FragmentButtonModel: FragmentButtonInterface.Model {
 
     override fun restoreData(argument: Bundle) {
         carId = argument.getString("cId")!!
-        carBrand = argument.getString("cName")!!
-        carModel = argument.getString("cDescription")!!
+        carBrand = argument.getString("cBrand")!!
+        carModel = argument.getString("cModel")!!
+        carDescription = argument.getString("cDescription")!!
         //  val carMode = arguments.getString("cMode")
         carPicture = argument.getByteArray("cImage")!!
         remake = argument.getBoolean("cMake")
@@ -130,8 +134,9 @@ class FragmentButtonModel: FragmentButtonInterface.Model {
         carUpdateModel = updateModel
     }
 
-
-
+    override fun getUpdateCarDescription(updateDescription: String) {
+        carUpdateDescription = updateDescription
+    }
 
 
     override fun setCarPicture(): Bitmap = carPicture.size.let {

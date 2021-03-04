@@ -74,11 +74,11 @@
         android:layout_marginLeft="4dp"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="Select car name:"
+        android:text="Select car model:"
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/edit_car_name"
+        android:id="@+id/edit_car_model"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="7dp"
@@ -95,7 +95,7 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/about_car"
+        android:id="@+id/edit_car_description"
         android:layout_width="match_parent"
         android:layout_marginTop="7dp"
         android:layout_height="wrap_content"
