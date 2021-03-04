@@ -126,6 +126,10 @@ class FragmentButtonModel: FragmentButtonInterface.Model {
     override fun setCarId(): String = carId
     override fun setCarBrand(): String = carBrand
     override fun setCarModel(): String = carModel
+    override fun setCarDescription(): String = carDescription
+
+
+
     override fun getUpdateCarBrand(updateBrand: String) {
         carUpdateBrand = updateBrand
     }

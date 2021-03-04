@@ -32,6 +32,7 @@ interface FragmentButtonInterface {
         fun setCarId():String
         fun setCarBrand():String
         fun setCarModel():String
+        fun setCarDescription():String
         fun setCarPicture():Bitmap
         fun getUpdateCarBrand(updateBrand: String)
         fun getUpdateCarModel(updateModel: String)
@@ -50,6 +51,7 @@ interface FragmentButtonInterface {
         fun setCarId():String
         fun setCarBrand():String
         fun setCarModel():String
+        fun setCarDescription():String
         fun getUpdateCarBrand(updateBrand: String)
         fun getUpdateCarModel(updateModel: String)
         fun getUpdateCarDescription(updateDescription: String)

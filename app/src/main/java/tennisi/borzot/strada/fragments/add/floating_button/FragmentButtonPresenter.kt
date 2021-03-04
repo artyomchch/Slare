@@ -52,6 +52,10 @@ class FragmentButtonPresenter(_view: FragmentButtonInterface.View): FragmentButt
     override fun setCarId(): String = model.setCarId()
     override fun setCarBrand(): String = model.setCarBrand()
     override fun setCarModel(): String = model.setCarModel()
+    override fun setCarDescription(): String = model.setCarDescription()
+
+
+
     override fun setCarPicture(): Bitmap = model.setCarPicture()
     override fun setTagCars(): ArrayList<String> = model.getCarTag()
 

@@ -71,6 +71,7 @@ class AddCarButtonFragment(): BottomSheetDialogFragment(), FragmentButtonInterfa
             carSave.visibility = View.GONE
             carEditBrand.setText(presenter?.setCarBrand())
             carEditName.setText(presenter?.setCarModel())
+            carEditDescription.setText(presenter?.setCarDescription())
             carImage.setImageBitmap(presenter!!.setCarPicture())
         }
         else {
