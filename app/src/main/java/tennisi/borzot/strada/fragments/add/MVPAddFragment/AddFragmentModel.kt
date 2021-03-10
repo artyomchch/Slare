@@ -49,6 +49,8 @@ class AddFragmentModel: AddFragmentInterface.Model {
     }
 
 
+    override fun getFragment(): AddCarButtonFragment = carButtonFragment
+
     private fun sendDataToCarButtonFragment(
         id: String?,
         brand: String,
@@ -71,8 +73,6 @@ class AddFragmentModel: AddFragmentInterface.Model {
         carButtonFragment = newFragment
 
     }
-
-    override fun getFragment(): AddCarButtonFragment = carButtonFragment
 
 
 

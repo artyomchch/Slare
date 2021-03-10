@@ -25,7 +25,7 @@ class AdapterCar(var mCtx: Context, var resources: Int, var items: List<Cars>)
         val brandText: TextView = view.findViewById(R.id.brandCarWriter)
         val modelText: TextView = view.findViewById(R.id.modelCarWriter)
         val descriptionCar: TextView = view.findViewById(R.id.descriptionCarWriter)
-        val modeText: TextView = view.findViewById(R.id.modeCarWriter)
+        //val modeText: TextView = view.findViewById(R.id.modeCarWriter)
 
 
         val mItem: Cars = items[position]
@@ -33,7 +33,7 @@ class AdapterCar(var mCtx: Context, var resources: Int, var items: List<Cars>)
         brandText.text = mItem.carBrand
         modelText.text = mItem.carModel
         descriptionCar.text = mItem.carDescription
-        modeText.text = mItem.mode
+     //   modeText.text = mItem.mode
 
         return view
     }
