@@ -3,7 +3,7 @@ package tennisi.borzot.strada.pager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import tennisi.borzot.strada.fragments.add.AddFragment
+import tennisi.borzot.strada.fragments.add.MVPAddFragment.AddFragment
 import tennisi.borzot.strada.fragments.equalizer.EqualizerFragment
 import tennisi.borzot.strada.fragments.player.PlayerFragment
 import tennisi.borzot.strada.fragments.settings.SettingsFragment
