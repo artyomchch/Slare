@@ -16,6 +16,7 @@ interface AddFragmentInterface {
         fun notifyChanges()
         fun saveData(id: Long)
         fun clearFragment()
+        fun getFragment(): AddCarButtonFragment
     }
 
     interface Model{

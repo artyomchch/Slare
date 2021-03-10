@@ -1,6 +1,7 @@
 package tennisi.borzot.strada.fragments.add.MVPAddFragment
 
 import tennisi.borzot.strada.database.Cars
+import tennisi.borzot.strada.fragments.add.floating_button.AddCarButtonFragment
 
 
 class AddFragmentPresenter(_view: AddFragmentInterface.View): AddFragmentInterface.Presenter {
@@ -30,6 +31,9 @@ class AddFragmentPresenter(_view: AddFragmentInterface.View): AddFragmentInterfa
         model.setEmptyData()
         view.showFragment(model.getFragment())
     }
+
+    override fun getFragment(): AddCarButtonFragment = model.getFragment()
+
 
 
 }

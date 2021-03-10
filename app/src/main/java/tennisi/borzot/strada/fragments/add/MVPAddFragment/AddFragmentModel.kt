@@ -58,7 +58,7 @@ class AddFragmentModel: AddFragmentInterface.Model {
         img: ByteArray?,
         remake: Boolean
     ) {
-
+        val newFragment = AddCarButtonFragment()
         val bundle = Bundle()
         bundle.putString("cId", id)
         bundle.putString("cBrand", brand)
@@ -67,8 +67,8 @@ class AddFragmentModel: AddFragmentInterface.Model {
         bundle.putString("cMode", mode)
         bundle.putByteArray("cImage", img )
         bundle.putBoolean("cMake", remake)
-        carButtonFragment.arguments = bundle
-
+        newFragment.arguments = bundle
+        carButtonFragment = newFragment
 
     }
 

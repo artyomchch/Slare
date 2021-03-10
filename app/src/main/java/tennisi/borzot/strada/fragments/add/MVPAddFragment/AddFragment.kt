@@ -32,7 +32,6 @@ class AddFragment : Fragment(),  AddFragmentInterface.View  {
         presenter = AddFragmentPresenter(this)
 
         val view = inflater.inflate(R.layout.fragment_add, container, false)
-        val addCarButtonFragment = AddCarButtonFragment()
         val fab : FloatingActionButton = view.findViewById(R.id.FAB_car)
 
         val realm: Realm = Realm.getDefaultInstance()
@@ -47,7 +46,6 @@ class AddFragment : Fragment(),  AddFragmentInterface.View  {
             carListWarning.visibility = View.INVISIBLE
 
 
-      //  listCar.addAll(realm.copyFromRealm(carlist))
         listview.adapter = context?.let { AdapterCar(it, R.layout.cars_list, presenter!!.getListCar()) }
 
 
@@ -67,7 +65,7 @@ class AddFragment : Fragment(),  AddFragmentInterface.View  {
 
         //add car fragment
         fab.setOnClickListener {
-            if (!addCarButtonFragment.isAdded){
+            if (!presenter!!.getFragment().isAdded){
                presenter!!.clearFragment()
 
             }
