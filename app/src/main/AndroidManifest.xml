@@ -2,26 +2,31 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tennisi.borzot.strada">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
     <application
+        android:name=".database.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:name="tennisi.borzot.strada.database.MyApplication"
         android:theme="@style/AppTheme">
-        <activity
-            android:name="tennisi.borzot.strada.splash.SplashActivity">
+        <service android:name=".services.speedService.SpeedService" />
 
+
+        <activity android:name=".splash.SplashActivity">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.MAIN" />
 
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name="tennisi.borzot.strada.onboarding.MVPOnBoarding.OnBoardingMain" />
-        <activity android:name="tennisi.borzot.strada.MainActivity" />
-
+        <activity android:name=".onboarding.MVPOnBoarding.OnBoardingMain" />
+        <activity android:name=".MainActivity" />
     </application>
+
 
 </manifest>
