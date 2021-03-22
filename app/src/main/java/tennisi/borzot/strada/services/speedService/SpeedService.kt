@@ -1,7 +1,6 @@
 package tennisi.borzot.strada.services.speedService
 
 import android.Manifest.permission.ACCESS_FINE_LOCATION
-import android.annotation.SuppressLint
 import android.app.Service
 import android.content.Context
 import android.content.Intent
@@ -11,26 +10,30 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.IBinder
 import android.util.Log
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import tennisi.borzot.strada.fragments.speed.SpeedFragment
-import java.util.jar.Manifest
 
 class SpeedService(): Service(), LocationListener {
     private lateinit var locationManager: LocationManager
     private var speedFragment: SpeedFragment? = null
     private val locationPermissionCode = 2
-    var speedD: Int = 0
+    var SPEED_COUNTER: Int = 0
+    val SPEED_ACTION = "speed.broadcast.receiver"
 
 
-
+    val intentBroadcastSpeed = Intent()
     override fun onBind(p0: Intent?): IBinder? {
         return null
     }
 
     override fun onCreate() {
         Log.d("serviceSpeed", "служба создается ${Thread.currentThread()} ")
-        getLocation()
+
+
+
+
+
+
         super.onCreate()
     }
 
@@ -42,7 +45,12 @@ class SpeedService(): Service(), LocationListener {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+
+
+
         Log.d("serviceSpeed", "Служба начинает свой запуск")
+        getLocation()
+
 
         return super.onStartCommand(intent, flags, startId)
     }
@@ -55,9 +63,17 @@ class SpeedService(): Service(), LocationListener {
     override fun onLocationChanged(location: Location) {
         location.latitude
         location.longitude
-         speedD =  (location.speed * 3600 / 1000).toInt()
-        speedFragment?.dd()
-        Log.d("serviceSpeed", "onLocationChanged: ${location.latitude} , ${location.longitude}, $speedD ")
+        SPEED_COUNTER =  (location.speed * 3600 / 1000).toInt()
+        intentBroadcastSpeed.action = SPEED_ACTION
+        intentBroadcastSpeed.putExtra("speed.broadcast.Message", SPEED_COUNTER.toString());
+        intentBroadcastSpeed.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        sendBroadcast(intentBroadcastSpeed)
+
+
+        Log.d(
+            "serviceSpeed",
+            "onLocationChanged: ${location.latitude} , ${location.longitude}, $SPEED_COUNTER "
+        )
     }
 
     private fun getLocation() {

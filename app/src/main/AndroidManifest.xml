@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tennisi.borzot.strada">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".database.MyApplication"
@@ -14,8 +14,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service android:name=".services.speedService.SpeedService" />
+        <receiver
+            android:name=".services.speedService.SpeedReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="speed.broadcast.receiver" />
+            </intent-filter>
+        </receiver>
 
+        <service android:name=".services.speedService.SpeedService" />
 
         <activity android:name=".splash.SplashActivity">
             <intent-filter>
@@ -27,6 +35,5 @@
         <activity android:name=".onboarding.MVPOnBoarding.OnBoardingMain" />
         <activity android:name=".MainActivity" />
     </application>
-
 
 </manifest>

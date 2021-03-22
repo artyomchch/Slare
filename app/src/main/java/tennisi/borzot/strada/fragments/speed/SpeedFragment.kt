@@ -1,33 +1,40 @@
 package tennisi.borzot.strada.fragments.speed
 
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.graphics.Color
-import android.location.LocationManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.github.anastr.speedviewlib.Gauge
 import com.github.anastr.speedviewlib.SpeedView
 import com.github.anastr.speedviewlib.components.Style
 import kotlinx.android.synthetic.main.fragment_speed.*
 import tennisi.borzot.strada.R
+import tennisi.borzot.strada.services.speedService.SpeedReceiver
 import tennisi.borzot.strada.services.speedService.SpeedService
-import java.util.jar.Manifest
 
 
 class SpeedFragment : Fragment() {
-
-
+    val speedReceiver = SpeedReceiver()
     private val locationPermissionCode = 2
+
+
+
+    override fun onResume() {
+        super.onResume()
+        activity?.registerReceiver(speedReceiver, IntentFilter("speed.broadcast.receiver"))
+
+    }
+
+
 
 
     override fun onCreateView(
@@ -38,11 +45,25 @@ class SpeedFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_speed, container, false)
         val spedd: Button = view.findViewById(R.id.speed_button)
         val start: Button = view.findViewById(R.id.start_button)
-        val speedService: SpeedService? = null
         val speedometer: SpeedView
         speedometer =  view.findViewById(R.id.speedView)
         var active = true
 
+
+
+
+
+
+        val receiver: BroadcastReceiver = object : BroadcastReceiver()
+        {
+            override fun onReceive(context: Context?, intent: Intent) {
+
+                intent.getStringExtra("speed.broadcast.Message")?.let { speedometer.speedTo(it.toFloat()) }
+                speedometer.speedTo(speedReceiver.speedCalc(), 600)
+            }
+
+        }
+        activity?.registerReceiver(receiver, IntentFilter("speed.broadcast.receiver"))
 
 
 
@@ -76,6 +97,7 @@ class SpeedFragment : Fragment() {
         )
 
         speedometer.onSpeedChangeListener = { gauge: Gauge, isSpeedUp: Boolean, isByTremble: Boolean ->
+
 
 
 
@@ -225,12 +247,14 @@ class SpeedFragment : Fragment() {
 
 
 
-    fun dd(){
-      //  speedService?.speedD?.toFloat()?.let { speedometer.speedTo(it) }
-    }
 
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         if (requestCode == locationPermissionCode) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(context, "Permission Granted", Toast.LENGTH_SHORT).show()
