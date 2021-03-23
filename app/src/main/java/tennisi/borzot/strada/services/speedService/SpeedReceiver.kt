@@ -11,9 +11,9 @@ class SpeedReceiver : BroadcastReceiver() {
     private var speed: Float = 0.0F
 
     override fun onReceive(context: Context, intent: Intent) {
-        Toast.makeText(context, "Текущая скорость: " +
-                intent.getStringExtra("speed.broadcast.Message"),
-            Toast.LENGTH_SHORT).show()
+//        Toast.makeText(context, "Текущая скорость: " +
+//                intent.getStringExtra("speed.broadcast.Message"),
+//            Toast.LENGTH_SHORT).show()
         speed = intent.getStringExtra("speed.broadcast.Message")!!.toFloat()
         Log.d("serviceSpeed", intent.getStringExtra("speed.broadcast.Message").toString())
     }

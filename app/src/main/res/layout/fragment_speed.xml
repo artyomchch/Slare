@@ -34,12 +34,13 @@
             app:sv_marksNumber="14"
             app:sv_maxSpeed="150"
             app:sv_minSpeed="0"
-            app:sv_speedTextColor="#77B2D8"
+            app:sv_speedTextColor="#FFF"
             app:sv_speedTextPosition="BOTTOM_CENTER"
             app:sv_speedTextSize="40sp"
             app:sv_startDegree="170"
             app:sv_tickNumber="15"
             app:sv_tickPadding="-15dp"
+            app:sv_unitTextColor="#FFF"
             app:sv_unitUnderSpeedText="true"
             app:sv_withTremble="false" />
 
@@ -74,8 +75,8 @@
             android:id="@+id/speed_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="37dp"
-            android:text="Speed"
+            android:layout_marginTop="15dp"
+            android:text="Stop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/start_button" />
