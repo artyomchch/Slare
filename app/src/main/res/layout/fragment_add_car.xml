@@ -19,7 +19,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="30dp"
         android:fontFamily="@font/roboto_medium"
         android:text="Select car brand:"
@@ -135,6 +135,7 @@
             android:layout_width="13dp"
             android:layout_height="30dp"
             android:layout_weight="1"
+
             android:background="@drawable/radio_button_right_selector"
             android:button="@color/trans_green"
             android:checked="false"

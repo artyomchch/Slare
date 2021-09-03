@@ -1,11 +1,11 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="MainTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">#77B2D8</item>
+        <item name="colorPrimaryDark">@color/colorWhite</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
     </style>
 
 
@@ -13,8 +13,6 @@
             parent="Theme.Design.Light.BottomSheetDialog">
             <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>
-
-
         <style name="AppModalStyle"
             parent="Widget.Design.BottomSheet.Modal">
           <item name="behavior_peekHeight">800dp</item>
@@ -22,5 +20,12 @@
             <item name="android:layout_marginRight">5dp</item>
             <item name="android:background">@drawable/bottom_sheet_background</item>
         </style>
+
+    <style name="SplashTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="colorPrimaryDark">@color/colorWhite</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 
     </resources>
