@@ -5,7 +5,7 @@ Project for Google Play
 Room, как локальная база данных. Сервис, для отслеживания и показа скорости. Firebase.
 
 1. Начало разработки
- + [User Flow Diagram](#UserFlowDiagram)
+ + [User Flow Diagram](# User Flow Diagram)
  + [Wireframes](#Headers)
  + [Протипирование](#Prot)
 2. Экраны и их описание
@@ -18,9 +18,7 @@ Room, как локальная база данных. Сервис, для от
  + [News Screen](#Code)
  + [Settings Screen](#Images)
 3. Gif
- + [Обратный слеш](#Backslash Escapes);
- + [Автоматические ссылки](#Automatic Links);
- + [Специальные символы HTML](#SpecialSymbol).
+ + [Приложение](#Backslash Escapes);
 4. Заключение
 
 # User Flow Diagram
