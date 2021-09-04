@@ -6,4 +6,6 @@ Room, как локальная база данных. Сервис, для от
 
 # User Flow Diagram
 
-![alt text](sourse/user_flow_part_1.png)
+![alt text](sourse/user_flow_diagram/user_flow_part_1.png)
+![alt text](sourse/user_flow_diagram/user_flow_part_2.png)
+![alt text](sourse/user_flow_diagram/user_flow_part_3.png)
