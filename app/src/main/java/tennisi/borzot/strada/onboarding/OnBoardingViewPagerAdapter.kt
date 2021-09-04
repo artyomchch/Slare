@@ -7,8 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
 import tennisi.borzot.strada.R
-import tennisi.borzot.strada.onboarding.MVPOnBoarding.OnBoardingData
-import tennisi.borzot.strada.onboarding.MVPOnBoarding.OnBoardingMain
+import tennisi.borzot.strada.onboarding.mvpOnBoarding.OnBoardingData
+import tennisi.borzot.strada.onboarding.mvpOnBoarding.OnBoardingMain
 
 class OnBoardingViewPagerAdapter(private var context: OnBoardingMain, private var onBoardingDataList: List<OnBoardingData>): PagerAdapter() {
 

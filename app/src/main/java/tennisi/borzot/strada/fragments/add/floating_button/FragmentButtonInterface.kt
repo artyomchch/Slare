@@ -1,16 +1,8 @@
 package tennisi.borzot.strada.fragments.add.floating_button
 
-import android.app.Application
-import android.content.ClipDescription
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.os.Binder
 import android.os.Bundle
-import android.view.View
-import android.view.Window
-import androidx.viewpager.widget.ViewPager
-import tennisi.borzot.strada.onboarding.MVPOnBoarding.OnBoardingData
 
 interface FragmentButtonInterface {
     interface View{

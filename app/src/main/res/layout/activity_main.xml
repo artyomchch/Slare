@@ -28,7 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:clickable="true">
+            android:clickable="true"
+            android:focusable="true">
 
             <ImageView
                 android:id="@+id/add_btn"
@@ -40,7 +41,8 @@
                 android:paddingLeft="15dp"
                 android:paddingTop="5dp"
                 android:paddingRight="15dp"
-                android:src="@drawable/ic_baseline_add_black" />
+                android:src="@drawable/ic_baseline_add_black"
+                android:contentDescription="@string/add_car_description" />
 
             <TextView
                 android:id="@+id/textView"
@@ -48,8 +50,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
                 android:gravity="center"
-                android:text="Add car"
-                android:textSize="10sp" />
+                android:text="@string/add_car"
+                android:textSize="@dimen/bottom_shape_navigation_size" />
         </LinearLayout>
 
         <LinearLayout
@@ -68,7 +70,8 @@
                 android:paddingLeft="15dp"
                 android:paddingTop="5dp"
                 android:paddingRight="15dp"
-                android:src="@drawable/ic_baseline_equalizer_black" />
+                android:src="@drawable/ic_baseline_equalizer_black"
+                android:contentDescription="@string/equalizer_description" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -76,8 +79,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
                 android:gravity="center"
-                android:text="Equalizer"
-                android:textSize="10sp" />
+                android:text="@string/equalizer"
+                android:textSize="@dimen/bottom_shape_navigation_size" />
         </LinearLayout>
 
         <LinearLayout
@@ -96,7 +99,8 @@
                 android:paddingLeft="15dp"
                 android:paddingTop="5dp"
                 android:paddingRight="15dp"
-                android:src="@drawable/ic_baseline_speed_black" />
+                android:src="@drawable/ic_baseline_speed_black"
+                android:contentDescription="@string/speed_description" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -104,8 +108,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
                 android:gravity="center"
-                android:text="Speed"
-                android:textSize="10sp" />
+                android:text="@string/speed"
+                android:textSize="@dimen/bottom_shape_navigation_size" />
         </LinearLayout>
 
         <LinearLayout
@@ -124,7 +128,8 @@
                 android:paddingLeft="15dp"
                 android:paddingTop="5dp"
                 android:paddingRight="15dp"
-                android:src="@drawable/ic_baseline_play_circle_filled_black" />
+                android:src="@drawable/ic_baseline_rss_feed_24"
+                android:contentDescription="@string/news_description" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -132,8 +137,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
                 android:gravity="center"
-                android:text="Player"
-                android:textSize="10sp" />
+                android:text="@string/news"
+                android:textSize="@dimen/bottom_shape_navigation_size" />
 
         </LinearLayout>
 
@@ -161,8 +166,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
                 android:gravity="center"
-                android:text="Settings"
-                android:textSize="10sp" />
+                android:text="@string/settings"
+                android:textSize="@dimen/bottom_shape_navigation_size" />
         </LinearLayout>
 
     </LinearLayout>
@@ -170,6 +175,5 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/m_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent"/>
 </RelativeLayout>

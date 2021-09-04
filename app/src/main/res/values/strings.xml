@@ -13,6 +13,16 @@
     <string name="speed_limit_first">Speed limit</string>
     <string name="speed_limit_text">Fulfilled direction use continual set him propriety continued. Saw met applauded favourite deficient engrossed concealed and her.
     </string>
+    //buttons string
+    <string name="news">News</string>
+    <string name="speed">Speed</string>
+    <string name="equalizer">Equalizer</string>
+    <string name="add_car">Add car</string>
+    <string name="settings">Settings</string>
+    <string name="add_car_description">add car description</string>
+    <string name="equalizer_description">equalizer description</string>
+    <string name="speed_description">speed description</string>
+    <string name="news_description">news description</string>
 
 
 </resources>

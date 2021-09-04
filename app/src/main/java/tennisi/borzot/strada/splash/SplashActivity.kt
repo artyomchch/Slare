@@ -3,8 +3,7 @@ package tennisi.borzot.strada.splash
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import tennisi.borzot.strada.R
-import tennisi.borzot.strada.onboarding.MVPOnBoarding.OnBoardingMain
+import tennisi.borzot.strada.onboarding.mvpOnBoarding.OnBoardingMain
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

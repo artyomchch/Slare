@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import tennisi.borzot.strada.fragments.add.MVPAddFragment.AddFragment
 import tennisi.borzot.strada.fragments.equalizer.EqualizerFragment
-import tennisi.borzot.strada.fragments.player.PlayerFragment
+import tennisi.borzot.strada.fragments.news.NewsFragment
 import tennisi.borzot.strada.fragments.settings.SettingsFragment
 import tennisi.borzot.strada.fragments.speed.SpeedFragment
 
@@ -27,7 +27,7 @@ internal class PagerViewAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
                 SpeedFragment()
             }
             3 -> {
-                PlayerFragment()
+                NewsFragment()
             }
             4 -> {
                 SettingsFragment()

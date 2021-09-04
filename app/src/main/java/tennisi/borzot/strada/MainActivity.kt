@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_main.*
 import tennisi.borzot.strada.pager.PagerViewAdapter
@@ -31,10 +30,6 @@ class MainActivity : AppCompatActivity() {
         // init views
         mViewPager = findViewById(R.id.m_view_pager)
 
-
-
-
-
         // init image buttons
         addBtn = findViewById(R.id.add_btn)
         equBtn = findViewById(R.id.equ_btn)
@@ -44,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         mPagerAdapter = PagerViewAdapter(supportFragmentManager)
         mViewPager.adapter = mPagerAdapter
-        mViewPager.offscreenPageLimit  = 5
+        mViewPager.offscreenPageLimit = 5
 
         // add page change listener
         mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -66,43 +61,32 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-        layoutAddCar.isClickable = true;
-        layoutAddCar.setOnClickListener(
-            View.OnClickListener {
-                mViewPager.setCurrentItem(0, true)
-            }
-        )
+        layoutAddCar.isClickable = true
+        layoutAddCar.setOnClickListener {
+            mViewPager.setCurrentItem(0, true)
+        }
 
 
-        layoutEqualizer.isClickable = true;
-        layoutEqualizer.setOnClickListener(
-            View.OnClickListener {
-                mViewPager.setCurrentItem(1, true)
-            }
-        )
+        layoutEqualizer.isClickable = true
+        layoutEqualizer.setOnClickListener {
+            mViewPager.setCurrentItem(1, true)
+        }
 
-        layoutSpeed.isClickable = true;
-        layoutSpeed.setOnClickListener(
-            View.OnClickListener {
-                mViewPager.setCurrentItem(2, true)
-            }
-        )
+        layoutSpeed.isClickable = true
+        layoutSpeed.setOnClickListener {
+            mViewPager.setCurrentItem(2, true)
+        }
 
-        layoutPlayer.isClickable = true;
-        layoutPlayer.setOnClickListener(
-            View.OnClickListener {
-                mViewPager.setCurrentItem(3, true)
-            }
-        )
+        layoutPlayer.isClickable = true
+        layoutPlayer.setOnClickListener {
+            mViewPager.setCurrentItem(3, true)
+        }
 
 
-        layoutSettings.isClickable = true;
-        layoutSettings.setOnClickListener(
-            View.OnClickListener {
-                mViewPager.setCurrentItem(4, true)
-            }
-        )
-
+        layoutSettings.isClickable = true
+        layoutSettings.setOnClickListener {
+            mViewPager.setCurrentItem(4, true)
+        }
 
 
         //default tab
@@ -113,74 +97,51 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun setCurrentFragment(fragment: Fragment){
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.m_view_pager, fragment)
-        }
-    }
-
-    private fun changingTabs(position: Int){
-        if (position == 0){
+    private fun changingTabs(position: Int) {
+        if (position == 0) {
             addBtn.setImageResource(R.drawable.ic_baseline_add_pink)
             equBtn.setImageResource(R.drawable.ic_baseline_equalizer_black)
             speedBtn.setImageResource(R.drawable.ic_baseline_speed_black)
-            playerBtn.setImageResource(R.drawable.ic_baseline_play_circle_filled_black)
+            playerBtn.setImageResource(R.drawable.ic_baseline_rss_feed_24)
             setBtn.setImageResource(R.drawable.ic_baseline_settings_black)
         }
-        if (position == 1){
+        if (position == 1) {
             addBtn.setImageResource(R.drawable.ic_baseline_add_black)
             equBtn.setImageResource(R.drawable.ic_baseline_equalizer_pink)
             speedBtn.setImageResource(R.drawable.ic_baseline_speed_black)
-            playerBtn.setImageResource(R.drawable.ic_baseline_play_circle_filled_black)
+            playerBtn.setImageResource(R.drawable.ic_baseline_rss_feed_24)
             setBtn.setImageResource(R.drawable.ic_baseline_settings_black)
         }
-        if (position == 2){
+        if (position == 2) {
             addBtn.setImageResource(R.drawable.ic_baseline_add_black)
             equBtn.setImageResource(R.drawable.ic_baseline_equalizer_black)
             speedBtn.setImageResource(R.drawable.ic_baseline_speed_pink)
-            playerBtn.setImageResource(R.drawable.ic_baseline_play_circle_filled_black)
+            playerBtn.setImageResource(R.drawable.ic_baseline_rss_feed_24)
             setBtn.setImageResource(R.drawable.ic_baseline_settings_black)
         }
-        if (position == 3){
+        if (position == 3) {
             addBtn.setImageResource(R.drawable.ic_baseline_add_black)
             equBtn.setImageResource(R.drawable.ic_baseline_equalizer_black)
             speedBtn.setImageResource(R.drawable.ic_baseline_speed_black)
-            playerBtn.setImageResource(R.drawable.ic_baseline_play_circle_filled_pink)
+            playerBtn.setImageResource(R.drawable.ic_baseline_rss_feed_24)
             setBtn.setImageResource(R.drawable.ic_baseline_settings_black)
         }
-        if (position == 4){
+        if (position == 4) {
             addBtn.setImageResource(R.drawable.ic_baseline_add_black)
             equBtn.setImageResource(R.drawable.ic_baseline_equalizer_black)
             speedBtn.setImageResource(R.drawable.ic_baseline_speed_black)
-            playerBtn.setImageResource(R.drawable.ic_baseline_play_circle_filled_black)
+            playerBtn.setImageResource(R.drawable.ic_baseline_rss_feed_24)
             setBtn.setImageResource(R.drawable.ic_baseline_settings_pink)
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     private fun hideSystemUI() {
         val decorView: View = window.decorView
         val uiOptions = decorView.systemUiVisibility
         var newUiOptions = uiOptions
-      //  newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_LOW_PROFILE
-     //   newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_FULLSCREEN
         newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_IMMERSIVE
-        //newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-      //  newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_VISIBLE
-     //   newUiOptions = newUiOptions or View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS
         decorView.systemUiVisibility = newUiOptions
     }
 }

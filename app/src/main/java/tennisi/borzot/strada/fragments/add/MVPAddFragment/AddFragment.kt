@@ -38,8 +38,6 @@ class AddFragment : Fragment(),  AddFragmentInterface.View  {
         val carListWarning: TextView = view.findViewById(R.id.about_list_of_car)
         val listview = view.findViewById<ListView>(R.id.list_view_cars)
 
-
-
         if (presenter!!.checkAuto()){
             carListWarning.visibility = View.VISIBLE
         }else
@@ -47,7 +45,6 @@ class AddFragment : Fragment(),  AddFragmentInterface.View  {
 
 
         listview.adapter = context?.let { AdapterCar(it, R.layout.cars_list, presenter!!.getListCar()) }
-
 
         //listener on  new car
         realm.addChangeListener {
@@ -82,10 +79,6 @@ class AddFragment : Fragment(),  AddFragmentInterface.View  {
 
         return view
     }
-
-
-
-
 
     override fun showFragment(carButtonFragment: AddCarButtonFragment) {
         carButtonFragment.show(childFragmentManager, "addButtom")

@@ -33,7 +33,7 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".onboarding.MVPOnBoarding.OnBoardingMain" />
+        <activity android:name=".onboarding.mvpOnBoarding.OnBoardingMain" />
         <activity android:name=".MainActivity" />
     </application>
 
