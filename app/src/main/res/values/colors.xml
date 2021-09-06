@@ -13,6 +13,9 @@
     <color name="trans_blue">#862962FF</color>
     <color name="trans_yellow">#88FFD600</color>
 
+    //color about white
+    <color name="meanWhite">#EAE8E8</color>
+
     // Menu color
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorDivider">#ECECEC</color>
@@ -21,4 +24,5 @@
     <color name="mainBlue">#77B2D8</color>
     //onBoarding color
     <color name="onBoarding">#EFEFEF</color>
+    <color name="black">#000</color>
 </resources>
