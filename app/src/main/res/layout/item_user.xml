@@ -56,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:targetApi="lollipop" />
+        tools:targetApi="lollipop"/>
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"

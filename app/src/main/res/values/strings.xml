@@ -26,6 +26,11 @@
     <string name="move_up">Move Up</string>
     <string name="move_down">Move Down</string>
     <string name="remove">Remove</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="failed_to_load_users">Failed to load users</string>
+    <string name="try_again">Try again</string>
+    <string name="no_users">No User</string>
 
 
 </resources>
