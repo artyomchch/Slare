@@ -12,13 +12,17 @@ class OnBoardingPresenter(_view: OnBoardingInterface.View) : OnBoardingInterface
     private var model: OnBoardingInterface.Model = OnBoardingModel()
 
     init {
-        model.createData()
+       // model.createData(application = Application())
         view.buttonNext()
         view.tabNext()
     }
 
     override fun savePrefData(application: Application) {
         model.savePrefData(application)
+    }
+
+    override fun createData(application: Application) {
+        model.createData(application)
     }
 
     override fun getDataTitle(): MutableList<OnBoardingData> {
@@ -35,7 +39,6 @@ class OnBoardingPresenter(_view: OnBoardingInterface.View) : OnBoardingInterface
             context.startActivity(Intent(context.applicationContext, MainActivity::class.java))
         }
     }
-
 
     override fun viewPager() {
         view.initViewPager(model.getDataTitle())

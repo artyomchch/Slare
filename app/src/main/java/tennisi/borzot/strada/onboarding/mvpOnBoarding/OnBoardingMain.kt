@@ -33,6 +33,7 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
 
 
         presenter = OnBoardingPresenter(this)
+        presenter?.createData(application)
         presenter?.savePrefData(application)
         dataList = presenter!!.getDataTitle()
         presenter!!.viewPager()

@@ -14,13 +14,14 @@ interface OnBoardingInterface {
 
     interface Presenter{
         fun savePrefData(application: Application)
+        fun createData(application: Application)
         fun getDataTitle(): MutableList<OnBoardingData>
         fun buttonNext(context: Context, viewPager: ViewPager)
         fun viewPager()
     }
 
     interface Model{
-        fun createData()
+        fun createData(application: Application)
         fun savePrefData(application: Application)
         fun getDataTitle(): MutableList<OnBoardingData>
     }

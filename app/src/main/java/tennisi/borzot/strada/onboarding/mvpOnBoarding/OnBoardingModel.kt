@@ -5,30 +5,37 @@ import android.content.Context
 import android.content.SharedPreferences
 import tennisi.borzot.strada.R
 
-class OnBoardingModel:  OnBoardingInterface.Model {
+class OnBoardingModel : OnBoardingInterface.Model {
 
     var sharedPreference: SharedPreferences? = null
     var dataList: MutableList<OnBoardingData> = arrayListOf()
 
-    override fun createData() {
-        dataList.add(OnBoardingData("Check List",  "Possession her thoroughly remarkably terminated man continuing. Removed greater to do ability. " +
-                "You shy shall while but wrote marry.", R.drawable.checklist))
-        dataList.add(OnBoardingData("Speedometer", "Was drawing natural fat respect husband. An as noisy an offer drawn blush place. These tried for " +
-                "way joy wrote witty.", R.drawable.speedometer))
-        dataList.add(OnBoardingData("Speed limit", "Fulfilled direction use continual set him propriety continued. Saw met applauded favourite " +
-                "deficient engrossed concealed and her.", R.drawable.speedlimit))
+    override fun createData(application: Application) {
+        dataList.add(
+            OnBoardingData(
+                application.getString(R.string.speed_limit), application.getString(R.string.desc_speed_limit), R.drawable.ic_speed_limit
+            )
+        )
+        dataList.add(
+            OnBoardingData(
+                application.getString(R.string.destructed), application.getString(R.string.desc_destructed), R.drawable.ic_dustructed
+            )
+        )
+        dataList.add(
+            OnBoardingData(
+                application.getString(R.string.permissions),application.getString(R.string.desc_permissions), R.drawable.ic_permission
+            )
+        )
     }
 
     override fun savePrefData(application: Application) {
-        sharedPreference =  application.applicationContext.getSharedPreferences("pref", Context.MODE_PRIVATE)
+        sharedPreference = application.applicationContext.getSharedPreferences(application.getString(R.string.pref), Context.MODE_PRIVATE)
         val editor = sharedPreference!!.edit()
         editor.putBoolean("isFirstTimeRun", true)
         editor.apply()
     }
 
     override fun getDataTitle(): MutableList<OnBoardingData> = dataList
-
-
 
 
 }
