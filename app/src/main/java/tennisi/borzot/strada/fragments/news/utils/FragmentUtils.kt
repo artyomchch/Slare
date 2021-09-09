@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 import tennisi.borzot.strada.database.MyApplication
+import tennisi.borzot.strada.fragments.news.Navigator
 import tennisi.borzot.strada.fragments.news.viewModel.NewsViewModel
+import tennisi.borzot.strada.fragments.news.viewModel.UserDetailsViewModel
 import java.lang.IllegalStateException
 
 class ViewModelFactory(
@@ -16,6 +18,9 @@ class ViewModelFactory(
             NewsViewModel::class.java -> {
                 NewsViewModel(app.usersService)
             }
+            UserDetailsViewModel::class.java -> {
+                UserDetailsViewModel(app.usersService)
+            }
             else -> {
                 throw IllegalStateException("Unknown view model class")
             }
@@ -25,3 +30,5 @@ class ViewModelFactory(
 }
 
 fun Fragment.factory() = ViewModelFactory(requireContext().applicationContext as MyApplication)
+
+fun Fragment.navigator() = requireActivity() as Navigator

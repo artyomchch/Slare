@@ -31,6 +31,7 @@
     <string name="failed_to_load_users">Failed to load users</string>
     <string name="try_again">Try again</string>
     <string name="no_users">No User</string>
+    <string name="user_has_been_deleted">User has been deleted</string>
 
 
 </resources>

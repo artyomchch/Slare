@@ -6,7 +6,10 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
-import kotlinx.android.synthetic.main.activity_main.*
+import tennisi.borzot.strada.databinding.ActivityMainBinding
+import tennisi.borzot.strada.fragments.news.Navigator
+import tennisi.borzot.strada.fragments.news.UserDetailsFragment
+import tennisi.borzot.strada.fragments.news.model.User
 import tennisi.borzot.strada.pager.PagerViewAdapter
 
 private lateinit var mViewPager: ViewPager
@@ -18,14 +21,15 @@ private lateinit var playerBtn: ImageView
 private lateinit var setBtn: ImageView
 private lateinit var mPagerAdapter: PagerViewAdapter
 
+private lateinit var binding: ActivityMainBinding
 
 @Suppress("DEPRECATION")
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Navigator {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         hideSystemUI()
-        Toast.makeText(this, "Welcome", Toast.LENGTH_LONG).show()
 
         // init views
         mViewPager = findViewById(R.id.m_view_pager)
@@ -61,30 +65,30 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-        layoutAddCar.isClickable = true
-        layoutAddCar.setOnClickListener {
+        binding.layoutAddCar.isClickable = true
+        binding.layoutAddCar.setOnClickListener {
             mViewPager.setCurrentItem(0, true)
         }
 
 
-        layoutEqualizer.isClickable = true
-        layoutEqualizer.setOnClickListener {
+        binding.layoutEqualizer.isClickable = true
+        binding.layoutEqualizer.setOnClickListener {
             mViewPager.setCurrentItem(1, true)
         }
 
-        layoutSpeed.isClickable = true
-        layoutSpeed.setOnClickListener {
+        binding.layoutSpeed.isClickable = true
+        binding.layoutSpeed.setOnClickListener {
             mViewPager.setCurrentItem(2, true)
         }
 
-        layoutPlayer.isClickable = true
-        layoutPlayer.setOnClickListener {
+        binding.layoutPlayer.isClickable = true
+        binding.layoutPlayer.setOnClickListener {
             mViewPager.setCurrentItem(3, true)
         }
 
 
-        layoutSettings.isClickable = true
-        layoutSettings.setOnClickListener {
+        binding.layoutSettings.isClickable = true
+        binding.layoutSettings.setOnClickListener {
             mViewPager.setCurrentItem(4, true)
         }
 
@@ -92,7 +96,6 @@ class MainActivity : AppCompatActivity() {
         //default tab
         mViewPager.currentItem = 2
         speedBtn.setImageResource(R.drawable.ic_baseline_speed_pink)
-
 
     }
 
@@ -123,7 +126,7 @@ class MainActivity : AppCompatActivity() {
             addBtn.setImageResource(R.drawable.ic_baseline_add_black)
             equBtn.setImageResource(R.drawable.ic_baseline_equalizer_black)
             speedBtn.setImageResource(R.drawable.ic_baseline_speed_black)
-            playerBtn.setImageResource(R.drawable.ic_baseline_rss_feed_24)
+            playerBtn.setImageResource(R.drawable.ic_baseline_rss_feed_blue)
             setBtn.setImageResource(R.drawable.ic_baseline_settings_black)
         }
         if (position == 4) {
@@ -143,5 +146,21 @@ class MainActivity : AppCompatActivity() {
         newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_IMMERSIVE
         decorView.systemUiVisibility = newUiOptions
+    }
+
+    override fun showDetails(user: User) {
+        supportFragmentManager.beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.m_view_pager, UserDetailsFragment.newInstance(user.id))
+            .commit()
+
+    }
+
+    override fun goBack() {
+        onBackPressed()
+    }
+
+    override fun toast(messageRes: Int) {
+        Toast.makeText(this, messageRes, Toast.LENGTH_SHORT).show()
     }
 }

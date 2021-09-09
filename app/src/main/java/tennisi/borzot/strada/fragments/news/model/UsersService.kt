@@ -1,6 +1,7 @@
 package tennisi.borzot.strada.fragments.news.model
 
 import com.github.javafaker.Faker
+import tennisi.borzot.strada.UserNotFoundException
 import java.nio.file.attribute.UserPrincipalLookupService
 import java.util.*
 
@@ -25,6 +26,14 @@ class UsersService {
 
     fun getUsers(): List<User>{
         return users
+    }
+
+    fun getById(id: Long):UserDetails{
+        val user = users.firstOrNull { it.id == id } ?: throw UserNotFoundException()
+        return UserDetails(
+            user = user,
+            details = Faker.instance().lorem().paragraphs(3).joinToString("\n\n")
+        )
     }
 
     fun deleteUser(user: User){

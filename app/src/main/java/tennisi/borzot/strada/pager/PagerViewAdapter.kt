@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import tennisi.borzot.strada.fragments.add.MVPAddFragment.AddFragment
 import tennisi.borzot.strada.fragments.equalizer.EqualizerFragment
 import tennisi.borzot.strada.fragments.news.NewsFragment
+import tennisi.borzot.strada.fragments.news.UserDetailsFragment
 import tennisi.borzot.strada.fragments.settings.SettingsFragment
 import tennisi.borzot.strada.fragments.speed.SpeedFragment
 

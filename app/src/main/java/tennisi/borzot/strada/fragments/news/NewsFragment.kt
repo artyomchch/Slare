@@ -14,6 +14,7 @@ import tennisi.borzot.strada.databinding.FragmentNewsBinding
 import tennisi.borzot.strada.fragments.news.model.User
 import tennisi.borzot.strada.fragments.news.model.UsersService
 import tennisi.borzot.strada.fragments.news.utils.factory
+import tennisi.borzot.strada.fragments.news.utils.navigator
 import tennisi.borzot.strada.fragments.news.viewModel.NewsViewModel
 
 
@@ -39,7 +40,7 @@ class NewsFragment : Fragment() {
             }
 
             override fun onUserDetails(user: User) {
-
+                navigator().showDetails(user)
             }
         })
 
