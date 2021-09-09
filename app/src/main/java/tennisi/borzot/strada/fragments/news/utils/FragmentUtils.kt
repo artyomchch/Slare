@@ -31,4 +31,4 @@ class ViewModelFactory(
 
 fun Fragment.factory() = ViewModelFactory(requireContext().applicationContext as MyApplication)
 
-fun Fragment.navigator() = requireActivity() as Navigator
+fun Fragment.navigator() = requireParentFragment() as Navigator

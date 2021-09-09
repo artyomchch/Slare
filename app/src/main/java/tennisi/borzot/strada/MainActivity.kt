@@ -23,13 +23,12 @@ private lateinit var mPagerAdapter: PagerViewAdapter
 
 private lateinit var binding: ActivityMainBinding
 
-@Suppress("DEPRECATION")
-class MainActivity : AppCompatActivity(), Navigator {
+
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        hideSystemUI()
 
         // init views
         mViewPager = findViewById(R.id.m_view_pager)
@@ -136,31 +135,5 @@ class MainActivity : AppCompatActivity(), Navigator {
             playerBtn.setImageResource(R.drawable.ic_baseline_rss_feed_24)
             setBtn.setImageResource(R.drawable.ic_baseline_settings_pink)
         }
-    }
-
-
-    private fun hideSystemUI() {
-        val decorView: View = window.decorView
-        val uiOptions = decorView.systemUiVisibility
-        var newUiOptions = uiOptions
-        newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-        newUiOptions = newUiOptions or View.SYSTEM_UI_FLAG_IMMERSIVE
-        decorView.systemUiVisibility = newUiOptions
-    }
-
-    override fun showDetails(user: User) {
-        supportFragmentManager.beginTransaction()
-            .addToBackStack(null)
-            .replace(R.id.m_view_pager, UserDetailsFragment.newInstance(user.id))
-            .commit()
-
-    }
-
-    override fun goBack() {
-        onBackPressed()
-    }
-
-    override fun toast(messageRes: Int) {
-        Toast.makeText(this, messageRes, Toast.LENGTH_SHORT).show()
     }
 }
