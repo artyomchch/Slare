@@ -4,6 +4,23 @@ Project for Google Play
 В работе используются многопоточность через corutines, работа с сетью Retrofit, для показа новостей.
 Room, как локальная база данных. Сервис, для отслеживания и показа скорости. Firebase.
 
+1. Начало разработки
+ + [User Flow Diagram](# User Flow Diagram)
+ + [Wireframes](#Headers)
+ + [Протипирование](#Prot)
+2. Экраны и их описание
+ + [Splash Screen](#Links)
+ + [OnBoarding](#Emphasis)
+ + [Add Car Fragment](#Code)
+ + [Add Screen](#Images)  
+ + [Equalizer Screen](#Links)
+ + [Speed Screen](#Emphasis)
+ + [News Screen](#Code)
+ + [Settings Screen](#Images)
+3. Gif
+ + [Приложение](#Backslash Escapes);
+4. Заключение
+
 # User Flow Diagram
 ###### На данной диаграмме показано взаимодейсвтия пользователя с ознокомительным экраном и регистрацией,а также фрагментом добавления автомобиля
 ![alt text](sourse/user_flow_diagram/user_flow_part_1.png)
