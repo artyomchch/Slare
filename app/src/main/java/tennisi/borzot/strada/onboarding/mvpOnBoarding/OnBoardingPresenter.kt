@@ -12,7 +12,6 @@ class OnBoardingPresenter(_view: OnBoardingInterface.View) : OnBoardingInterface
     private var model: OnBoardingInterface.Model = OnBoardingModel()
 
     init {
-       // model.createData(application = Application())
         view.buttonNext()
         view.tabNext()
     }

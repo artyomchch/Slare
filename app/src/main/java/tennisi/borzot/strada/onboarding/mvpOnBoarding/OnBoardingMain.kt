@@ -7,9 +7,10 @@ import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
+import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.ActivityOnBoardingMainBinding
 import tennisi.borzot.strada.onboarding.OnBoardingViewPagerAdapter
-import tennisi.borzot.strada.onboarding.viewModel.OnBoardingViewModel
+
 
 
 class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
@@ -17,7 +18,6 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
     private val binding: ActivityOnBoardingMainBinding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityOnBoardingMainBinding.inflate(layoutInflater)
     }
-    lateinit var  boardingMainModel: OnBoardingViewModel
 
 
     private var presenter: OnBoardingPresenter? = null
@@ -28,9 +28,6 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        boardingMainModel = ViewModelProvider(this).get(OnBoardingViewModel::class.java)
-
 
         presenter = OnBoardingPresenter(this)
         presenter?.createData(application)
@@ -55,13 +52,12 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
 
     override fun tabNext() {
         binding.tabIndicator.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
-            @SuppressLint("SetTextI18n")
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab!!.position == dataList?.size?.minus(1) ){
-                    binding.nextTv.text = "Get Started"
+                    binding.nextTv.text = getString(R.string.get_started_text)
                 }
                 else{
-                    binding.nextTv.text = "Next"
+                    binding.nextTv.text = getString(R.string.next_button)
                 }
             }
             override fun onTabUnselected(tab: TabLayout.Tab?) {}

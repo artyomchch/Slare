@@ -11,14 +11,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.realm.Realm
-import io.realm.RealmResults
-import io.realm.kotlin.where
-import kotlinx.android.synthetic.main.fragment_add.*
 import tennisi.borzot.strada.R
-import tennisi.borzot.strada.database.Cars
 import tennisi.borzot.strada.fragments.add.floating_button.AddCarButtonFragment
-import tennisi.borzot.strada.fragments.add.floating_button.FragmentButtonInterface
-import tennisi.borzot.strada.fragments.add.floating_button.FragmentButtonPresenter
 import tennisi.borzot.strada.fragments.add.listviewcars.AdapterCar
 
 
@@ -59,7 +53,6 @@ class AddFragment : Fragment(),  AddFragmentInterface.View  {
 
         }
 
-
         //add car fragment
         fab.setOnClickListener {
             if (!presenter!!.getFragment().isAdded){
@@ -67,7 +60,6 @@ class AddFragment : Fragment(),  AddFragmentInterface.View  {
 
             }
         }
-
 
         //delete or remake choose car
         listview.onItemClickListener = AdapterView.OnItemClickListener{ _, _, _, id ->

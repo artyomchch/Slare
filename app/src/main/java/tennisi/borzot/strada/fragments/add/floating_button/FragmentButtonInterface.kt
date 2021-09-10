@@ -10,7 +10,7 @@ interface FragmentButtonInterface {
         fun getModel():String
         fun getDescription(): String
         fun getImageCar(): Drawable
-        fun getArgument(): Bundle
+        fun getArgument(): Bundle?
         fun logAddDb()
         fun logDeleteDB()
         fun closeFragment()

@@ -2,14 +2,15 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item>
+
         <shape
             android:shape="ring"
-            android:thickness="4dp"
-            android:innerRadius="3dp"
+            android:thickness="1dp"
+            android:innerRadius="2.5dp"
             android:useLevel="false">
 
-            <solid android:color="@color/main_onBoarding_color"/>
-
+            <solid android:color="@color/mainOnBoardingColor"/>
         </shape>
+
     </item>
 </layer-list>

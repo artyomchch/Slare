@@ -13,17 +13,26 @@ class OnBoardingModel : OnBoardingInterface.Model {
     override fun createData(application: Application) {
         dataList.add(
             OnBoardingData(
-                application.getString(R.string.speed_limit), application.getString(R.string.desc_speed_limit), R.drawable.ic_speed_limit
+                application.getString(R.string.first_char_speed_limit),
+                application.getString(R.string.speed_limit),
+                application.getString(R.string.desc_speed_limit),
+                R.drawable.ic_speed_limit
             )
         )
         dataList.add(
             OnBoardingData(
-                application.getString(R.string.destructed), application.getString(R.string.desc_destructed), R.drawable.ic_dustructed
+                application.getString(R.string.first_char_destructed),
+                application.getString(R.string.destructed),
+                application.getString(R.string.desc_destructed),
+                R.drawable.ic_dustructed
             )
         )
         dataList.add(
             OnBoardingData(
-                application.getString(R.string.permissions),application.getString(R.string.desc_permissions), R.drawable.ic_permission
+                application.getString(R.string.first_char_permissions),
+                application.getString(R.string.permissions),
+                application.getString(R.string.desc_permissions),
+                R.drawable.ic_permission
             )
         )
     }
@@ -36,6 +45,5 @@ class OnBoardingModel : OnBoardingInterface.Model {
     }
 
     override fun getDataTitle(): MutableList<OnBoardingData> = dataList
-
 
 }

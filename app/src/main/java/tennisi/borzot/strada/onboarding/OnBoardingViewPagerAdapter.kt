@@ -10,7 +10,7 @@ import tennisi.borzot.strada.R
 import tennisi.borzot.strada.onboarding.mvpOnBoarding.OnBoardingData
 import tennisi.borzot.strada.onboarding.mvpOnBoarding.OnBoardingMain
 
-class OnBoardingViewPagerAdapter(private var context: OnBoardingMain, private var onBoardingDataList: List<OnBoardingData>): PagerAdapter() {
+class OnBoardingViewPagerAdapter(private var context: OnBoardingMain, private var onBoardingDataList: List<OnBoardingData>) : PagerAdapter() {
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view == `object`
@@ -21,23 +21,21 @@ class OnBoardingViewPagerAdapter(private var context: OnBoardingMain, private va
     }
 
     override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-       container.removeView(`object` as View)
+        container.removeView(`object` as View)
     }
 
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val view = LayoutInflater.from(context).inflate(R.layout.onboarding_screen_layout, null)
-        val imageView : ImageView
-        val titleob: TextView
-        val desc: TextView
 
+        val onBoardingImageView: ImageView = view.findViewById(R.id.onBoardingImageView)
+        val firstChar: TextView = view.findViewById(R.id.firstChar)
+        val mainText: TextView = view.findViewById(R.id.onBoardingMainText)
+        val desc: TextView = view.findViewById(R.id.onBoardingDescription)
 
-        imageView = view.findViewById(R.id.imageView)
-        titleob = view.findViewById(R.id.titleob)
-        desc = view.findViewById(R.id.desc)
-
-        imageView.setImageResource(onBoardingDataList[position].imageUrl)
-        titleob.text = onBoardingDataList[position].title
+        onBoardingImageView.setImageResource(onBoardingDataList[position].imageUrl)
+        firstChar.text = onBoardingDataList[position].firstChar
+        mainText.text = onBoardingDataList[position].title
         desc.text = onBoardingDataList[position].desc
 
         container.addView(view)

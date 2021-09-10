@@ -12,7 +12,7 @@ class FragmentButtonPresenter(_view: FragmentButtonInterface.View): FragmentButt
     var TAG = "test presenter"
 
     init {
-        model.restoreData(view.getArgument())
+        view.getArgument()?.let { model.restoreData(it) }
     }
 
     override fun dataBaseAdd() {
@@ -42,12 +42,6 @@ class FragmentButtonPresenter(_view: FragmentButtonInterface.View): FragmentButt
 
     override fun searchInputTags(inputCar: String):ArrayList<String> = model.searchInputTags(inputCar)
     override fun searchInputPicture(inputCar: String): Int = model.searchInputPicture(inputCar)
-
-
-
-
-
-
 
     override fun setCarId(): String = model.setCarId()
     override fun setCarBrand(): String = model.setCarBrand()

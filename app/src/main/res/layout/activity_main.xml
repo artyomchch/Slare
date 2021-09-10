@@ -47,7 +47,6 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
                 android:gravity="center"
                 android:text="@string/add_car"
                 android:textSize="@dimen/bottom_shape_navigation_size" />
@@ -76,7 +75,6 @@
                 android:id="@+id/textView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
                 android:gravity="center"
                 android:text="@string/equalizer"
                 android:textSize="@dimen/bottom_shape_navigation_size" />
@@ -105,7 +103,6 @@
                 android:id="@+id/textView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
                 android:gravity="center"
                 android:text="@string/speed"
                 android:textSize="@dimen/bottom_shape_navigation_size" />
@@ -134,7 +131,6 @@
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
                 android:gravity="center"
                 android:text="@string/news"
                 android:textSize="@dimen/bottom_shape_navigation_size" />
@@ -163,7 +159,6 @@
                 android:id="@+id/textView7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
                 android:gravity="center"
                 android:text="@string/settings"
                 android:textSize="@dimen/bottom_shape_navigation_size" />

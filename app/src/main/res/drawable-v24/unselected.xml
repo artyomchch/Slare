@@ -4,11 +4,11 @@
     <item>
         <shape
             android:shape="ring"
-            android:thickness="7dp"
+            android:thickness="3.5dp"
             android:innerRadius="0dp"
             android:useLevel="false">
 
-            <solid android:color="@color/indicator_onBoarding_color"/>
+            <solid android:color="@color/indicatorOnBoardingColor"/>
 
         </shape>
     </item>

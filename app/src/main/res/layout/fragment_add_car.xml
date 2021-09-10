@@ -21,7 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="30dp"
-        android:fontFamily="@font/roboto_medium"
         android:text="Select car brand:"
         android:textSize="18sp" />
 
@@ -73,7 +72,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="30dp"
-        android:fontFamily="@font/roboto_medium"
         android:text="Select car model:"
         android:textSize="18sp" />
 
@@ -90,7 +88,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="30dp"
-        android:fontFamily="@font/roboto_medium"
         android:text="About car:"
         android:textSize="18sp" />
 
@@ -107,7 +104,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="30dp"
-        android:fontFamily="@font/roboto_medium"
         android:text="Main car:"
         android:textSize="18sp" />
 
@@ -161,7 +157,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/button_save"
-            android:fontFamily="@font/roboto_medium"
             android:text="Save"
             android:textColor="@color/colorWhite"
             android:textSize="18sp" />
@@ -172,7 +167,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/button_save"
-            android:fontFamily="@font/roboto_medium"
             android:text="update"
             android:textColor="@color/colorWhite"
             android:textSize="18sp"
@@ -184,7 +178,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/button_cancel"
-            android:fontFamily="@font/roboto_medium"
             android:text="cancel"
             android:textColor="@color/colorWhite"
             android:textSize="18sp"
@@ -200,7 +193,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/button_cancel"
-            android:fontFamily="@font/roboto_medium"
             android:text="cancel"
             android:textColor="@color/colorWhite"
             android:textSize="18sp" />
@@ -212,7 +204,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/button_delete"
-            android:fontFamily="@font/roboto_medium"
             android:text="delete"
             android:textColor="@color/colorWhite"
             android:textSize="18sp"
