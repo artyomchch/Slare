@@ -4,12 +4,11 @@
     <item>
         <shape
             android:shape="ring"
-            android:thickness="3dp"
-            android:innerRadius="4dp"
-            android:useLevel="false"
-            >
+            android:thickness="4dp"
+            android:innerRadius="3dp"
+            android:useLevel="false">
 
-            <solid android:color="@color/mainBlue"/>
+            <solid android:color="@color/main_onBoarding_color"/>
 
         </shape>
     </item>

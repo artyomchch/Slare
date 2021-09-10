@@ -25,4 +25,6 @@
     //onBoarding color
     <color name="onBoarding">#EFEFEF</color>
     <color name="black">#000</color>
+    <color name="indicator_onBoarding_color">#B3000000</color>
+    <color name="main_onBoarding_color">#B3FF0000</color>
 </resources>
