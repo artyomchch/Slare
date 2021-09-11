@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".fragments.add.MVPAddFragment.AddFragment">
+    tools:context=".fragments.add.mvpAddFragment.AddFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.fragments.add.MVPAddFragment
+package tennisi.borzot.strada.fragments.add.mvpAddFragment
 
 import android.os.Bundle
 import io.realm.Realm

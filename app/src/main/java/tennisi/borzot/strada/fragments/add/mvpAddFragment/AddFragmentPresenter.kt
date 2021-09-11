@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.fragments.add.MVPAddFragment
+package tennisi.borzot.strada.fragments.add.mvpAddFragment
 
 import tennisi.borzot.strada.database.Cars
 import tennisi.borzot.strada.fragments.add.floating_button.AddCarButtonFragment

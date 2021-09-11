@@ -18,6 +18,8 @@ import com.github.anastr.speedviewlib.Gauge
 import com.github.anastr.speedviewlib.SpeedView
 import com.github.anastr.speedviewlib.components.Style
 import tennisi.borzot.strada.R
+import tennisi.borzot.strada.databinding.FragmentEqualizerBinding
+import tennisi.borzot.strada.databinding.FragmentSpeedBinding
 import tennisi.borzot.strada.services.speedService.SpeedReceiver
 import tennisi.borzot.strada.services.speedService.SpeedService
 
@@ -45,7 +47,7 @@ class SpeedFragment : Fragment(), SpeedInterface.View {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
+        val binding: FragmentSpeedBinding by lazy(LazyThreadSafetyMode.NONE) { FragmentSpeedBinding.inflate(inflater, container, false) }
         presenter = SpeedPresenter(this)
         val view = inflater.inflate(R.layout.fragment_speed, container, false)
         val stop: Button = view.findViewById(R.id.speed_button)
