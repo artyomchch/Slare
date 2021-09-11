@@ -9,6 +9,9 @@ import androidx.viewpager.widget.PagerAdapter
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.onboarding.mvpOnBoarding.OnBoardingData
 import tennisi.borzot.strada.onboarding.mvpOnBoarding.OnBoardingMain
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
+import android.text.SpannableString
 
 class OnBoardingViewPagerAdapter(private var context: OnBoardingMain, private var onBoardingDataList: List<OnBoardingData>) : PagerAdapter() {
 
@@ -29,13 +32,14 @@ class OnBoardingViewPagerAdapter(private var context: OnBoardingMain, private va
         val view = LayoutInflater.from(context).inflate(R.layout.onboarding_screen_layout, null)
 
         val onBoardingImageView: ImageView = view.findViewById(R.id.onBoardingImageView)
-        val firstChar: TextView = view.findViewById(R.id.firstChar)
         val mainText: TextView = view.findViewById(R.id.onBoardingMainText)
         val desc: TextView = view.findViewById(R.id.onBoardingDescription)
 
+
         onBoardingImageView.setImageResource(onBoardingDataList[position].imageUrl)
-        firstChar.text = onBoardingDataList[position].firstChar
-        mainText.text = onBoardingDataList[position].title
+        mainText.text = SpannableString(onBoardingDataList[position].title).apply {
+            setSpan(ForegroundColorSpan(context.getColor(R.color.mainOnBoardingColor)), 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
         desc.text = onBoardingDataList[position].desc
 
         container.addView(view)

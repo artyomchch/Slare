@@ -31,19 +31,17 @@
     <string name="try_again">Try again</string>
     <string name="no_users">No User</string>
     <string name="user_has_been_deleted">User has been deleted</string>
-    <string name="speed_limit">peed limit</string>
-    <string name="first_char_speed_limit">S</string>
-    <string name="desc_speed_limit">The choice of a speed that does not correspond to road conditions,  one of the most frequent causes of road accidents.</string>
-    <string name="destructed">o not be distracted</string>
-    <string name="first_char_destructed">D</string>
+    <string name="speed_limit">Speed limit</string>
+    <string name="desc_speed_limit">The choice of a speed that does not correspond to road conditions, one of the most frequent causes of road accidents.</string>
+    <string name="destructed">Do not be distracted</string>
     <string name="desc_destructed">Answering calls or interacting with other car gadgets, the driver loses concentration.</string>
-    <string name="permissions">llow permissions</string>
-    <string name="first_char_permissions">A</string>
+    <string name="permissions">Allow permissions</string>
     <string name="desc_permissions">To correctly display the correct speed of your movement, you must provide the device with access to location.</string>
     <string name="pref">pref</string>
     <string name="next_button">Next</string>
     <string name="some_description_about_app">some description about app</string>
     <string name="get_started_text">Get Started</string>
+    <string name="on_boarding_image">On boarding image</string>
 
 
 </resources>

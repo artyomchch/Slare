@@ -9,7 +9,7 @@
             android:innerRadius="2.5dp"
             android:useLevel="false">
 
-            <solid android:color="@color/mainOnBoardingColor"/>
+            <solid android:color="@color/mainOnBoardingColorTab"/>
         </shape>
 
     </item>

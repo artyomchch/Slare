@@ -18,15 +18,15 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="7dp"
+        android:layout_width="35dp"
+        android:layout_height="8dp"
         android:layout_marginStart="30dp"
-        android:layout_marginBottom="27dp"
+        android:layout_marginBottom="28dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:tabBackground="@drawable/indicator_selected"
-        app:tabPaddingStart="5dp"
-        app:tabPaddingEnd="5dp"
+        app:tabPaddingStart="6dp"
+        app:tabPaddingEnd="6dp"
         app:tabIndicator="@null" />
 
 
@@ -34,11 +34,14 @@
         android:id="@+id/next_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="23dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="13dp"
         android:text="@string/next_button"
+        android:fontFamily="@font/montserrat"
+        android:padding="10dp"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/standard_bigger"
+        android:background="?attr/selectableItemBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
