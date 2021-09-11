@@ -7,18 +7,15 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.github.anastr.speedviewlib.Gauge
 import com.github.anastr.speedviewlib.SpeedView
 import com.github.anastr.speedviewlib.components.Style
 import tennisi.borzot.strada.R
-import tennisi.borzot.strada.databinding.FragmentEqualizerBinding
 import tennisi.borzot.strada.databinding.FragmentSpeedBinding
 import tennisi.borzot.strada.services.speedService.SpeedReceiver
 import tennisi.borzot.strada.services.speedService.SpeedService
@@ -40,93 +37,68 @@ class SpeedFragment : Fragment(), SpeedInterface.View {
     }
 
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
+
         val binding: FragmentSpeedBinding by lazy(LazyThreadSafetyMode.NONE) { FragmentSpeedBinding.inflate(inflater, container, false) }
         presenter = SpeedPresenter(this)
-        val view = inflater.inflate(R.layout.fragment_speed, container, false)
-        val stop: Button = view.findViewById(R.id.speed_button)
-        val start: Button = view.findViewById(R.id.start_button)
-        val speedometer: SpeedView = view.findViewById(R.id.speedView)
+
+        binding.toolbarSpeedFragment.toolbar.title = getString(R.string.speed)
+
+        setSectionTicks(binding.speedView)
 
 
-        setSectionTicks(speedometer)
-
-
-
-
-        val receiver: BroadcastReceiver = object : BroadcastReceiver()
-        {
+        val receiver: BroadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent) {
-                if(getSpeedFromService){
-                   speedCurrentService =  intent.getStringExtra("speed.broadcast.Message")!!.toInt()
-                    intent.getStringExtra("speed.broadcast.Message")?.let { speedometer.speedTo(speedCurrentService.toFloat()) }
-                    speedometer.speedTextColor = Color.parseColor("#77B2D8")
-                    speedometer.unitTextColor = Color.parseColor("#000000")
+                if (getSpeedFromService) {
+                    speedCurrentService = intent.getStringExtra("speed.broadcast.Message")!!.toInt()
+                    intent.getStringExtra("speed.broadcast.Message")?.let { binding.speedView.speedTo(speedCurrentService.toFloat()) }
+                    binding.speedView.speedTextColor = Color.parseColor("#77B2D8")
+                    binding.speedView.unitTextColor = Color.parseColor("#000000")
 
                 }
-
             }
-
         }
         activity?.registerReceiver(receiver, IntentFilter("speed.broadcast.receiver"))
 
 
 
 
-        speedometer.onSpeedChangeListener = { gauge: Gauge, isSpeedUp: Boolean, isByTremble: Boolean ->
-                startAnimationTicks(speedometer, isSpeedUp)
+        binding.speedView.onSpeedChangeListener = { gauge: Gauge, isSpeedUp: Boolean, isByTremble: Boolean ->
+            startAnimationTicks(binding.speedView, isSpeedUp)
         }
 
 
 
-        start.setOnClickListener {
+        binding.startButton.setOnClickListener {
 
             val intent = Intent(context, SpeedService::class.java)
             if (context != null) {
-                context!!.startService(intent)
+                requireContext().startService(intent)
             }
             activeService = true
             stopService = false
-            speedometer.speedPercentTo(100, 1200)
+            binding.speedView.speedPercentTo(100, 1200)
         }
 
 
-
-
-        stop.setOnClickListener {
+        binding.stopButton.setOnClickListener {
             val intent = Intent(context, SpeedService::class.java)
 
             if (context != null) {
-                context!!.stopService(intent)
+                requireContext().stopService(intent)
             }
             activeService = false
             stopService = true
             getSpeedFromService = false
-            speedometer.speedPercentTo(100, 1200)
+            binding.speedView.speedPercentTo(100, 1200)
 
         }
 
-
-
-
-
-
-
-
-
-
-        return view
+        return binding.root
     }
-
-
-
-
 
 
     override fun onRequestPermissionsResult(
@@ -137,14 +109,11 @@ class SpeedFragment : Fragment(), SpeedInterface.View {
         if (requestCode == locationPermissionCode) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(context, "Permission Granted", Toast.LENGTH_SHORT).show()
-            }
-            else {
+            } else {
                 Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
             }
         }
     }
-
-
 
 
     private fun setSectionTicks(speedView: SpeedView) {
@@ -173,19 +142,18 @@ class SpeedFragment : Fragment(), SpeedInterface.View {
 
     }
 
-    private fun startAnimationTicks(speedView: SpeedView , isSpeedUp: Boolean){
-        if (activeService){
+    private fun startAnimationTicks(speedView: SpeedView, isSpeedUp: Boolean) {
+        if (activeService) {
             showTicksStart(speedView, isSpeedUp)
         }
         if (speedView.currentIntSpeed == 0 && activeService && !stopService
-        ){
+        ) {
             speedView.speedTextColor = Color.parseColor("#77B2D8")
             speedView.unitTextColor = Color.parseColor("#000000")
         }
-        if (stopService){
+        if (stopService) {
             clearTicksStop(speedView, isSpeedUp)
-        }
-        else if (stopService && !activeService){
+        } else if (stopService && !activeService) {
             speedView.speedTextColor = Color.parseColor("#FFFFFF")
             speedView.unitTextColor = Color.parseColor("#FFFFFF")
         }
@@ -194,98 +162,83 @@ class SpeedFragment : Fragment(), SpeedInterface.View {
     }
 
     private fun showTicksStart(speedView: SpeedView, isSpeedUp: Boolean) {
-        if (speedView.currentIntSpeed == 0 && isSpeedUp && !getSpeedFromService){
+        if (speedView.currentIntSpeed == 0 && isSpeedUp && !getSpeedFromService) {
             speedView.ticks = arrayListOf(
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f, .0f, .0f,
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f, .0f
             )
 
-        }
-        else if (speedView.currentIntSpeed == 10 && isSpeedUp && !getSpeedFromService){
+        } else if (speedView.currentIntSpeed == 10 && isSpeedUp && !getSpeedFromService) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .0f, .0f, .0f, .0f, .0f, .0f, .0f,
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 20 && isSpeedUp && !getSpeedFromService) {
+        } else if (speedView.currentIntSpeed == 20 && isSpeedUp && !getSpeedFromService) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .0f, .0f, .0f, .0f, .0f, .0f,
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 30 && isSpeedUp && !getSpeedFromService) {
+        } else if (speedView.currentIntSpeed == 30 && isSpeedUp && !getSpeedFromService) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, 0f, .0f, .0f, .0f, .0f,
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 40 && isSpeedUp && !getSpeedFromService) {
+        } else if (speedView.currentIntSpeed == 40 && isSpeedUp && !getSpeedFromService) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .0f, .0f, .0f, .0f,
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 50 && isSpeedUp && !getSpeedFromService){
+        } else if (speedView.currentIntSpeed == 50 && isSpeedUp && !getSpeedFromService) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .0f, .0f, .0f,
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 60 && isSpeedUp && !getSpeedFromService) {
+        } else if (speedView.currentIntSpeed == 60 && isSpeedUp && !getSpeedFromService) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .0f, .0f,
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 70 && isSpeedUp && !getSpeedFromService) {
+        } else if (speedView.currentIntSpeed == 70 && isSpeedUp && !getSpeedFromService) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .466f, .0f,
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 80 && isSpeedUp && !getSpeedFromService) {
+        } else if (speedView.currentIntSpeed == 80 && isSpeedUp && !getSpeedFromService) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .466f, .53f,
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 90 && isSpeedUp && !getSpeedFromService){
+        } else if (speedView.currentIntSpeed == 90 && isSpeedUp && !getSpeedFromService) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .466f, .53f,
                 .6f, .0f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 100 && isSpeedUp && !getSpeedFromService) {
+        } else if (speedView.currentIntSpeed == 100 && isSpeedUp && !getSpeedFromService) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .466f, .53f,
                 .6f, .666f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 110 && isSpeedUp && !getSpeedFromService) {
+        } else if (speedView.currentIntSpeed == 110 && isSpeedUp && !getSpeedFromService) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .466f, .53f,
                 .6f, .666f, .733f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 120 && isSpeedUp && !getSpeedFromService) {
+        } else if (speedView.currentIntSpeed == 120 && isSpeedUp && !getSpeedFromService) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .466f, .53f,
                 .6f, .666f, .733f, .8f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 130 && isSpeedUp && !getSpeedFromService) {
+        } else if (speedView.currentIntSpeed == 130 && isSpeedUp && !getSpeedFromService) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .466f, .53f,
                 .6f, .666f, .733f, .8f, .866f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 140 && isSpeedUp && !getSpeedFromService) {
+        } else if (speedView.currentIntSpeed == 140 && isSpeedUp && !getSpeedFromService) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .466f, .53f,
                 .6f, .666f, .733f, .8f, .866f, .933f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 150 && isSpeedUp && !getSpeedFromService) {
+        } else if (speedView.currentIntSpeed == 150 && isSpeedUp && !getSpeedFromService) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .466f, .53f,
                 .6f, .666f, .733f, .8f, .866f, .933f, .9999f
@@ -293,109 +246,93 @@ class SpeedFragment : Fragment(), SpeedInterface.View {
 
 
         }
-        if (speedView.currentIntSpeed == 150){
+        if (speedView.currentIntSpeed == 150) {
             getSpeedFromService = true
             speedView.speedPercentTo(0, 1200)
 
         }
 
 
-
     }
 
-    private fun clearTicksStop(speedView: SpeedView, isSpeedUp: Boolean){
-        if (speedView.currentIntSpeed == 0 && !isSpeedUp){
+    private fun clearTicksStop(speedView: SpeedView, isSpeedUp: Boolean) {
+        if (speedView.currentIntSpeed == 0 && !isSpeedUp) {
             speedView.ticks = arrayListOf(
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f, .0f, .0f,
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f, .0f
             )
 
-        }
-        else if (speedView.currentIntSpeed == 10 && !isSpeedUp){
+        } else if (speedView.currentIntSpeed == 10 && !isSpeedUp) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .0f, .0f, .0f, .0f, .0f, .0f, .0f,
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 20 && !isSpeedUp) {
+        } else if (speedView.currentIntSpeed == 20 && !isSpeedUp) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .0f, .0f, .0f, .0f, .0f, .0f,
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 30 && !isSpeedUp) {
+        } else if (speedView.currentIntSpeed == 30 && !isSpeedUp) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, 0f, .0f, .0f, .0f, .0f,
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 40 && !isSpeedUp) {
+        } else if (speedView.currentIntSpeed == 40 && !isSpeedUp) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .0f, .0f, .0f, .0f,
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 50 && !isSpeedUp){
+        } else if (speedView.currentIntSpeed == 50 && !isSpeedUp) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .0f, .0f, .0f,
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 60 && !isSpeedUp) {
+        } else if (speedView.currentIntSpeed == 60 && !isSpeedUp) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .0f, .0f,
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 70 && !isSpeedUp) {
+        } else if (speedView.currentIntSpeed == 70 && !isSpeedUp) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .466f, .0f,
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 80 && !isSpeedUp) {
+        } else if (speedView.currentIntSpeed == 80 && !isSpeedUp) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .466f, .53f,
                 .0f, .0f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 90 && !isSpeedUp){
+        } else if (speedView.currentIntSpeed == 90 && !isSpeedUp) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .466f, .53f,
                 .6f, .0f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 100 && !isSpeedUp) {
+        } else if (speedView.currentIntSpeed == 100 && !isSpeedUp) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .466f, .53f,
                 .6f, .666f, .0f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 110 && !isSpeedUp) {
+        } else if (speedView.currentIntSpeed == 110 && !isSpeedUp) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .466f, .53f,
                 .6f, .666f, .733f, .0f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 120 && !isSpeedUp) {
+        } else if (speedView.currentIntSpeed == 120 && !isSpeedUp) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .466f, .53f,
                 .6f, .666f, .733f, .8f, .0f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 130 && !isSpeedUp) {
+        } else if (speedView.currentIntSpeed == 130 && !isSpeedUp) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .466f, .53f,
                 .6f, .666f, .733f, .8f, .866f, .0f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 140 && !isSpeedUp) {
+        } else if (speedView.currentIntSpeed == 140 && !isSpeedUp) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .466f, .53f,
                 .6f, .666f, .733f, .8f, .866f, .933f, .0f
             )
-        }
-        else if (speedView.currentIntSpeed == 150 && !isSpeedUp) {
+        } else if (speedView.currentIntSpeed == 150 && !isSpeedUp) {
             speedView.ticks = arrayListOf(
                 .0f, .066f, .133f, .2f, .266f, .333f, .4f, .466f, .53f,
                 .6f, .666f, .733f, .8f, .866f, .933f, .9999f
@@ -403,7 +340,7 @@ class SpeedFragment : Fragment(), SpeedInterface.View {
 
 
         }
-        if (speedView.currentIntSpeed == 150){
+        if (speedView.currentIntSpeed == 150) {
             speedView.speedPercentTo(0, 1200)
             speedView.speedTextColor = Color.parseColor("#FFFFFF")
             speedView.unitTextColor = Color.parseColor("#FFFFFF")
@@ -413,7 +350,6 @@ class SpeedFragment : Fragment(), SpeedInterface.View {
 
 
     }
-
 
 
 }
