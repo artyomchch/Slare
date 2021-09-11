@@ -15,7 +15,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_indicator"
         android:layout_width="35dp"
@@ -28,7 +27,6 @@
         app:tabPaddingStart="6dp"
         app:tabPaddingEnd="6dp"
         app:tabIndicator="@null" />
-
 
     <TextView
         android:id="@+id/next_tv"
