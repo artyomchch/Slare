@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import tennisi.borzot.strada.databinding.FragmentNewsBinding
-import tennisi.borzot.strada.fragments.news.model.User
 import tennisi.borzot.strada.fragments.news.promisses.EmptyResult
 import tennisi.borzot.strada.fragments.news.promisses.ErrorResult
 import tennisi.borzot.strada.fragments.news.promisses.PendingResult
@@ -30,10 +29,9 @@ class NewsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding =  FragmentNewsBinding.inflate(inflater, container, false)
-
         adapter = UsersAdapter(viewModel)
 
-        viewModel.users.observe(viewLifecycleOwner, Observer {
+        viewModel.users.observe(viewLifecycleOwner,Observer {
             hideAll()
             when (it){
                 is SuccessResult ->{
@@ -47,7 +45,7 @@ class NewsFragment : Fragment() {
                     binding.progressBar.visibility = View.VISIBLE
                 }
                 is EmptyResult ->{
-                    binding.noUsersTextView.visibility = View.INVISIBLE
+                    binding.noUsersTextView.visibility = View.VISIBLE
                 }
             }
         })

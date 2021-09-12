@@ -26,8 +26,8 @@ class NewsViewModel(
     private val _actionShowToast = MutableLiveData<Event<Int>>()
     val actionShowToast: LiveData<Event<Int>> = _actionShowToast
 
-    private val userIdsInProgress = mutableListOf<Long>()
-    private var userResult: Result<List<User>> = EmptyResult()
+    private val userIdsInProgress = mutableSetOf<Long>()
+    private var usersResult: Result<List<User>> = EmptyResult()
         set(value) {
             field = value
             notifyUpdates()
@@ -35,7 +35,7 @@ class NewsViewModel(
 
 
     private val listener: UsersListener = {
-        userResult = if (it.isEmpty()) {
+        usersResult = if (it.isEmpty()) {
             EmptyResult()
         } else {
             SuccessResult(it)
@@ -85,11 +85,11 @@ class NewsViewModel(
         _actionShowDetails.value = Event(user)
     }
 
-    fun loadUsers() {
-        userResult = PendingResult()
+    private fun loadUsers() {
+        usersResult = PendingResult()
         usersService.loadUsers()
             .onError {
-                userResult = ErrorResult(it)
+                usersResult = ErrorResult(it)
             }
             .autoCancel()
     }
@@ -106,14 +106,10 @@ class NewsViewModel(
 
     private fun isInProgress(user: User): Boolean = userIdsInProgress.contains(user.id)
 
-
     private fun notifyUpdates() {
-        _users.postValue(userResult.map { users ->
+        _users.postValue(usersResult.map { users ->
             users.map { user -> UserListItem(user, isInProgress(user)) }
         })
     }
-
-
-
 
 }

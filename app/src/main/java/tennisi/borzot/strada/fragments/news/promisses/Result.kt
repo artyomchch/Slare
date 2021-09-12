@@ -2,6 +2,7 @@ package tennisi.borzot.strada.fragments.news.promisses
 
 sealed class Result<T>{
 
+    @Suppress("UNCHECKED_CAST")
     fun <R> map(mapper: (T) -> R): Result<R> {
         if (this is SuccessResult) return SuccessResult(mapper(data))
         return this as Result<R>

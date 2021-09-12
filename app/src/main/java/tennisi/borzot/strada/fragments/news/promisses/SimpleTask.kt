@@ -11,16 +11,16 @@ private val handler = Handler(Looper.getMainLooper())
 
 class SimpleTask<T>(
     private val callable: Callable<T>
-): Task<T> {
+) : Task<T> {
 
     private val future: Future<*>
     private var result: Result<T> = PendingResult()
 
     init {
-        future = executorService.submit{
-            try {
+        future = executorService.submit {
+            result = try {
                 SuccessResult(callable.call())
-            } catch (e: Throwable){
+            } catch (e: Throwable) {
                 ErrorResult(e)
             }
             notifyListeners()
@@ -29,7 +29,6 @@ class SimpleTask<T>(
 
     private var valueCallback: Callback<T>? = null
     private var errorCallback: Callback<Throwable>? = null
-
 
     override fun onSuccess(callback: Callback<T>): Task<T> {
         this.valueCallback = callback
@@ -44,7 +43,7 @@ class SimpleTask<T>(
     }
 
     override fun cancel() {
-       clear()
+        clear()
         future.cancel(true)
     }
 
@@ -55,23 +54,22 @@ class SimpleTask<T>(
         else throw (result as ErrorResult).error
     }
 
-    private fun notifyListeners(){
-        handler.post{
-            val result  = this.result
+    private fun notifyListeners() {
+        handler.post {
+            val result = this.result
             val callback = this.valueCallback
             val errorCallback = this.errorCallback
-            if (result is SuccessResult && callback != null){
+            if (result is SuccessResult && callback != null) {
                 callback(result.data)
                 clear()
-            } else if (result is ErrorResult && errorCallback != null){
+            } else if (result is ErrorResult && errorCallback != null) {
                 errorCallback.invoke(result.error)
+                clear()
             }
         }
-
-
     }
 
-    private fun clear(){
+    private fun clear() {
         valueCallback = null
         errorCallback = null
     }

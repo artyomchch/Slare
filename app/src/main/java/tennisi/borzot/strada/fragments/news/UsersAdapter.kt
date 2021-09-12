@@ -54,17 +54,18 @@ class UsersAdapter(private val actionListener: UserActionListener) : RecyclerVie
     override fun onBindViewHolder(holder: UsersViewHolder, position: Int) {
         val userListItem = users[position]
         val user = userListItem.user
+
         with(holder.binding) {
             holder.itemView.tag = user
             moreImageViewButton.tag = user
 
-            if (userListItem.isInProgress){
+            if (userListItem.isInProgress) {
                 moreImageViewButton.visibility = View.INVISIBLE
-                itemProgressBar.visibility  = View.VISIBLE
+                itemProgressBar.visibility = View.VISIBLE
                 holder.binding.root.setOnClickListener(null)
-            }else{
+            } else {
                 moreImageViewButton.visibility = View.VISIBLE
-                itemProgressBar.visibility  = View.GONE
+                itemProgressBar.visibility = View.GONE
                 holder.binding.root.setOnClickListener(this@UsersAdapter)
             }
 

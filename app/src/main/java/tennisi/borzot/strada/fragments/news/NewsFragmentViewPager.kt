@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.FragmentNewsViewPagerBinding
 import tennisi.borzot.strada.fragments.news.model.User
@@ -15,6 +16,7 @@ import tennisi.borzot.strada.fragments.news.model.User
 class NewsFragmentViewPager : Fragment(), Navigator {
 
     private lateinit var binding: FragmentNewsViewPagerBinding
+    private val actions = mutableListOf<() -> Unit>()
 
 
     override fun onCreateView(
@@ -39,21 +41,37 @@ class NewsFragmentViewPager : Fragment(), Navigator {
     }
 
     override fun showDetails(user: User) {
-        childFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, UserDetailsFragment.newInstance(user.id))
-            .addToBackStack(null)
-            .commit()
+        runWhenActive {
+            childFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, UserDetailsFragment.newInstance(user.id))
+                .addToBackStack(null)
+                .commit()
+        }
+
     }
 
     override fun goBack() {
-        if (childFragmentManager.popBackStackImmediate()){
-            childFragmentManager.popBackStack()
-        } else
-            activity?.finish()
+        runWhenActive {
+            if (childFragmentManager.popBackStackImmediate()){
+                childFragmentManager.popBackStack()
+            } else
+                activity?.finish()
+        }
+
 
     }
 
     override fun toast(messageRes: Int) {
         Toast.makeText(context, messageRes, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun runWhenActive(action: () -> Unit) {
+        if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
+            // activity is active -> just execute the action
+            action()
+        } else {
+            // activity is not active -> add action to queue
+            actions += action
+        }
     }
 }

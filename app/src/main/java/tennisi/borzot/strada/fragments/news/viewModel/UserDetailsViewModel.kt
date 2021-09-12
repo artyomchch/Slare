@@ -35,7 +35,7 @@ class UserDetailsViewModel(
     }
 
     fun loadUser(userId: Long){
-        if (currentState.userDetailsResult is SuccessResult) return
+        if (currentState.userDetailsResult !is EmptyResult) return
 
         _state.value = currentState.copy(userDetailsResult = PendingResult())
 
