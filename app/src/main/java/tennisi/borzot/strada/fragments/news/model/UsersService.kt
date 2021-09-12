@@ -19,7 +19,7 @@ class UsersService {
 
 
     fun loadUsers(): Task<Unit> = SimpleTask<Unit>(Callable { // асинхронный таск
-        Thread.sleep(1000)
+        Thread.sleep(2000)
         val faker = Faker.instance()
         IMAGES.shuffle()
         users = (1..100).map { User(
@@ -34,7 +34,7 @@ class UsersService {
 
 
     fun getById(id: Long): Task<UserDetails> = SimpleTask<UserDetails>(Callable {
-        Thread.sleep(1000)
+        Thread.sleep(2000)
         val user = users.firstOrNull { it.id == id } ?: throw UserNotFoundException()
         return@Callable UserDetails(
             user = user,
@@ -44,7 +44,7 @@ class UsersService {
 
 
     fun deleteUser(user: User): Task<Unit> = SimpleTask<Unit>(Callable {
-        Thread.sleep(1000)
+        Thread.sleep(2000)
         val indexToDelete = users.indexOfFirst{it.id == user.id}
         if (indexToDelete != -1){
             users.removeAt(indexToDelete)
@@ -53,7 +53,7 @@ class UsersService {
     })
 
     fun moveUser(user: User, moveBy: Int): Task<Unit> = SimpleTask<Unit>(Callable {
-        Thread.sleep(1000)
+        Thread.sleep(2000)
         val oldIndex = users.indexOfFirst{it.id == user.id}
         if (oldIndex == -1) return@Callable
         val newIndex = oldIndex + moveBy

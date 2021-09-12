@@ -67,10 +67,8 @@ class NewsFragmentViewPager : Fragment(), Navigator {
 
     private fun runWhenActive(action: () -> Unit) {
         if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
-            // activity is active -> just execute the action
             action()
         } else {
-            // activity is not active -> add action to queue
             actions += action
         }
     }

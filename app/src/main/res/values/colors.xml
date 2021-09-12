@@ -25,6 +25,7 @@
     //onBoarding color
     <color name="onBoarding">#EFEFEF</color>
     <color name="black">#000</color>
+    <color name="blackButton">#333333</color>
     <color name="indicatorOnBoardingColor">#B3000000</color>
     <color name="mainOnBoardingColorTab">#B3FF0000</color>
     <color name="mainOnBoardingColor">#FF0000</color>

@@ -22,7 +22,7 @@ class OnBoardingModel : OnBoardingInterface.Model {
             OnBoardingData(
                 application.getString(R.string.destructed),
                 application.getString(R.string.desc_destructed),
-                R.drawable.ic_dustructed
+                R.drawable.ic_destructed
             )
         )
         dataList.add(

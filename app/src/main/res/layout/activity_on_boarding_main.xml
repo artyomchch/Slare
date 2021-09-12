@@ -44,5 +44,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="29dp"
+        android:textAllCaps="false"
+        android:textSize="@dimen/standard_bigger"
+        android:background="@drawable/button_rounded"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/next_button"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
