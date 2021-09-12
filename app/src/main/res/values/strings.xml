@@ -44,6 +44,9 @@
     <string name="some_description_about_app">some description about app</string>
     <string name="get_started_text">Get Started</string>
     <string name="on_boarding_image">On boarding image</string>
+    <string name="cant_load_user_details">Can\'t load user details</string>
+    <string name="cant_delete_user">Can\'t delete user</string>
+    <string name="cant_move_user">Can\'t move user</string>
 
 
 </resources>

@@ -2,11 +2,6 @@ package tennisi.borzot.strada.fragments.news.promisses
 
 import android.os.Handler
 import android.os.Looper
-import tennisi.borzot.strada.fragments.news.model.ErrorResult
-import tennisi.borzot.strada.fragments.news.model.PendingResult
-import tennisi.borzot.strada.fragments.news.model.Result
-import tennisi.borzot.strada.fragments.news.model.SuccessResult
-import java.lang.Error
 import java.util.concurrent.Callable
 import java.util.concurrent.Executors
 import java.util.concurrent.Future
