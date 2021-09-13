@@ -13,7 +13,8 @@ import tennisi.borzot.strada.fragments.news.promisses.Result
 import tennisi.borzot.strada.fragments.news.promisses.SuccessResult
 
 class UserDetailsViewModel(
-    private val usersService: UsersService
+    private val usersService: UsersService,
+    private val userId: Long
 ): BaseViewModel() {
 
     private val _state = MutableLiveData<State>()
@@ -32,25 +33,7 @@ class UserDetailsViewModel(
             userDetailsResult = EmptyResult(),
             deletingInProgress = false
         )
-    }
-
-    fun loadUser(userId: Long){
-        if (currentState.userDetailsResult !is EmptyResult) return
-
-        _state.value = currentState.copy(userDetailsResult = PendingResult())
-
-        usersService.getById(userId)
-            .onSuccess {
-                _state.value = currentState.copy(userDetailsResult = SuccessResult(it))
-            }
-            .onError {
-                _actionShowToast.value = Event(R.string.cant_load_user_details)
-                _actionGoBack.value = Event(Unit)
-            }
-            .autoCancel()
-
-
-
+        loadUser()
     }
 
     fun deleteUser(){
@@ -67,6 +50,25 @@ class UserDetailsViewModel(
                 _actionShowToast.value = Event(R.string.cant_delete_user)
             }
             .autoCancel()
+    }
+
+    private fun loadUser(){
+        if (currentState.userDetailsResult !is EmptyResult) return
+
+        _state.value = currentState.copy(userDetailsResult = PendingResult())
+
+        usersService.getById(userId)
+            .onSuccess {
+                _state.value = currentState.copy(userDetailsResult = SuccessResult(it))
+            }
+            .onError {
+                _actionShowToast.value = Event(R.string.cant_load_user_details)
+                _actionGoBack.value = Event(Unit)
+            }
+            .autoCancel()
+
+
+
     }
 
     data class State(

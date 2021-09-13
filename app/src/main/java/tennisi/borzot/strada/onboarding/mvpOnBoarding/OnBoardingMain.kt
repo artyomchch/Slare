@@ -1,16 +1,14 @@
 package tennisi.borzot.strada.onboarding.mvpOnBoarding
 
-import android.annotation.SuppressLint
+import android.graphics.Typeface
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.tabs.TabLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.ViewPager
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.ActivityOnBoardingMainBinding
 import tennisi.borzot.strada.onboarding.OnBoardingViewPagerAdapter
-
 
 
 class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
@@ -18,7 +16,6 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
     private val binding: ActivityOnBoardingMainBinding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityOnBoardingMainBinding.inflate(layoutInflater)
     }
-
 
     private var presenter: OnBoardingPresenter? = null
     private var onBoardingViewPagerAdapter: OnBoardingViewPagerAdapter? = null
@@ -34,34 +31,36 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
         presenter?.savePrefData(application)
         dataList = presenter!!.getDataTitle()
         presenter!!.viewPager()
+
+        binding.nextButton.typeface = Typeface.createFromAsset(assets, "montserrat.ttf")
     }
 
 
     override fun initViewPager(mutableList: MutableList<OnBoardingData>) {
         onBoardingViewPagerAdapter = OnBoardingViewPagerAdapter(this, mutableList)
         binding.screenPager.adapter = onBoardingViewPagerAdapter
-        binding.tabIndicator.setupWithViewPager(binding.screenPager)
+        binding.wormDotsIndicator.setViewPager(binding.screenPager)
     }
 
 
     override fun buttonNext() {
-        binding.nextTv.setOnClickListener{
+        binding.nextButton.setOnClickListener {
             presenter?.buttonNext(this, binding.screenPager)
         }
     }
 
     override fun tabNext() {
-        binding.tabIndicator.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                if (tab!!.position == dataList?.size?.minus(1) ){
-                    binding.nextTv.text = getString(R.string.get_started_text)
-                }
-                else{
-                    binding.nextTv.text = getString(R.string.next_button)
-                }
+        binding.screenPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+
+            override fun onPageSelected(position: Int) {
+                if (position <= 1) {
+                    binding.nextButton.text = getString(R.string.next_button)
+                } else
+                    binding.nextButton.text = getString(R.string.get_started_text)
             }
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
+
+            override fun onPageScrollStateChanged(state: Int) {}
         })
     }
 }

@@ -14,18 +14,16 @@ import tennisi.borzot.strada.databinding.FragmentUserDetailsBinding
 import tennisi.borzot.strada.fragments.news.promisses.SuccessResult
 import tennisi.borzot.strada.fragments.news.utils.factory
 import tennisi.borzot.strada.fragments.news.utils.navigator
+import tennisi.borzot.strada.fragments.news.utils.viewModelCreator
 import tennisi.borzot.strada.fragments.news.viewModel.UserDetailsViewModel
 
 class UserDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentUserDetailsBinding
-    private val viewModel: UserDetailsViewModel by viewModels { factory() }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.loadUser(requireArguments().getLong(ARG_USER_ID))
+    private val viewModel: UserDetailsViewModel by viewModelCreator {
+        UserDetailsViewModel(it.usersService, requireArguments().getLong(ARG_USER_ID))
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

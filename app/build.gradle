@@ -5,7 +5,7 @@ apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "tennisi.borzot.slare"
@@ -32,7 +32,6 @@ realm {
     syncEnabled = true
 }
 
-//tagView
 repositories {
     maven {
         url "https://jitpack.io"
@@ -42,11 +41,11 @@ repositories {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
-    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     //tagView
     implementation 'me.gujun.android.taggroup:library:1.4@aar'
@@ -54,7 +53,7 @@ dependencies {
     implementation 'com.github.anastr:speedviewlib:1.5.3'
     //View Model
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     //Recycler View
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     //JavaFaker
@@ -65,5 +64,7 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     //fragment
     implementation 'androidx.fragment:fragment-ktx:1.3.5'
-    //api
+    //News Api
+    //Dots Indicator
+    implementation 'com.tbuonomo:dotsindicator:4.2'
 }
