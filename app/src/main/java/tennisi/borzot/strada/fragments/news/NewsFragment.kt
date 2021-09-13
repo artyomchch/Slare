@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import tennisi.borzot.strada.databinding.FragmentNewsBinding
 import tennisi.borzot.strada.fragments.news.promisses.EmptyResult
@@ -60,6 +61,11 @@ class NewsFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context)
         binding.userRecycler.layoutManager = layoutManager
         binding.userRecycler.adapter = adapter
+        val itemAnimator = binding.userRecycler.itemAnimator
+        if (itemAnimator is DefaultItemAnimator){
+            itemAnimator.supportsChangeAnimations = false
+        }
+
 
         return binding.root
     }

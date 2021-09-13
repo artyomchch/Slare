@@ -1,52 +1,45 @@
 <resources>
     <string name="app_name">Strada</string>
-    <string name="author">Powered by Artyom Kozlov</string>
-
-    <string name="check_list_first">Check List</string>
-    <string name="check_list_text">Possession her thoroughly remarkably terminated man continuing. Removed greater to do ability. You shy shall while but wrote marry.
-    </string>
-
-    <string name="speedometer_first">Speedometer</string>
-    <string name="speedometer_text">Was drawing natural fat respect husband. An as noisy an offer drawn blush place. These tried for way joy wrote witty.
-    </string>
-
-    <string name="speed_limit_first">Speed limit</string>
-    <string name="speed_limit_text">Fulfilled direction use continual set him propriety continued. Saw met applauded favourite deficient engrossed concealed and her.
-    </string>
+    //main menu strings
     <string name="news">News</string>
     <string name="speed">Speed</string>
     <string name="equalizer">Equalizer</string>
-    <string name="add_car">Add car</string>
     <string name="settings">Settings</string>
     <string name="vehicle">Vehicle</string>
 
+    <string name="add_car">Add car</string>
     <string name="add_car_description">add car description</string>
     <string name="equalizer_description">equalizer description</string>
     <string name="speed_description">speed description</string>
     <string name="news_description">news description</string>
+    //news strings
     <string name="move_up">Move Up</string>
     <string name="move_down">Move Down</string>
     <string name="remove">Remove</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fire">Fire</string>
+    <string name="unemployed">[Unemployed]</string>
+    //news logs strings
     <string name="failed_to_load_users">Failed to load users</string>
     <string name="try_again">Try again</string>
     <string name="no_users">No User</string>
     <string name="user_has_been_deleted">User has been deleted</string>
+    <string name="cant_load_user_details">Can\'t load user details</string>
+    <string name="cant_delete_user">Can\'t delete user</string>
+    <string name="cant_move_user">Can\'t move user</string>
+    //onBoarding strings
     <string name="speed_limit">Speed limit warning</string>
     <string name="desc_speed_limit">The choice of a speed that does not correspond to road conditions, one of the most frequent causes of road accidents.</string>
     <string name="destructed">Do not be distracted</string>
     <string name="desc_destructed">Answering calls or interacting with other car gadgets, the driver loses concentration.</string>
     <string name="permissions">Allow permissions</string>
     <string name="desc_permissions">To correctly display the correct speed of your movement, you must provide the device with access to location.</string>
-    <string name="pref">pref</string>
     <string name="next_button">Next</string>
     <string name="some_description_about_app">some description about app</string>
     <string name="get_started_text">Get Started</string>
     <string name="on_boarding_image">On boarding image</string>
-    <string name="cant_load_user_details">Can\'t load user details</string>
-    <string name="cant_delete_user">Can\'t delete user</string>
-    <string name="cant_move_user">Can\'t move user</string>
+
+    <string name="pref">pref</string>
+    <string name="cant_fire_user">Can\'t fire user</string>
 
 
 </resources>

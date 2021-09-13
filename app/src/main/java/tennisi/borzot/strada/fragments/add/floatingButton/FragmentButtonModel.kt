@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.fragments.add.floating_button
+package tennisi.borzot.strada.fragments.add.floatingButton
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory

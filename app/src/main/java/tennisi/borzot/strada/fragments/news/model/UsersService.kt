@@ -7,6 +7,7 @@ import tennisi.borzot.strada.fragments.news.promisses.Task
 import java.nio.file.attribute.UserPrincipalLookupService
 import java.util.*
 import java.util.concurrent.Callable
+import kotlin.collections.ArrayList
 
 typealias UsersListener = (users: List<User>) -> Unit
 
@@ -47,6 +48,7 @@ class UsersService {
         Thread.sleep(2000)
         val indexToDelete = users.indexOfFirst{it.id == user.id}
         if (indexToDelete != -1){
+            users = ArrayList(users)
             users.removeAt(indexToDelete)
             notifyChanges()
         }
@@ -58,8 +60,20 @@ class UsersService {
         if (oldIndex == -1) return@Callable
         val newIndex = oldIndex + moveBy
         if (newIndex < 0 || newIndex >= users.size) return@Callable
+        users = ArrayList(users)
         Collections.swap(users, oldIndex, newIndex)
         notifyChanges()
+    })
+
+    fun fireUser(user: User): Task<Unit> = SimpleTask<Unit>(Callable {
+        Thread.sleep(2000)
+        val index = users.indexOfFirst{it.id == user.id}
+        if (index == -1) return@Callable
+        val updatedUser = users[index].copy(company = "")
+        users = ArrayList(users)
+        users[index] = updatedUser
+        notifyChanges()
+
     })
 
     fun addListener(listener: UsersListener){

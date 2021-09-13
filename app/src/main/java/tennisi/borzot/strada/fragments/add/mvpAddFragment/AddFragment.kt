@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import io.realm.Realm
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.FragmentAddBinding
-import tennisi.borzot.strada.fragments.add.floating_button.AddCarButtonFragment
+import tennisi.borzot.strada.fragments.add.floatingButton.AddCarButtonFragment
 import tennisi.borzot.strada.fragments.add.listviewcars.AdapterCar
 
 

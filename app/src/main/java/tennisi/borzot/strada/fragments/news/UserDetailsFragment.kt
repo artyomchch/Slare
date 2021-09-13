@@ -6,13 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.FragmentUserDetailsBinding
 import tennisi.borzot.strada.fragments.news.promisses.SuccessResult
-import tennisi.borzot.strada.fragments.news.utils.factory
 import tennisi.borzot.strada.fragments.news.utils.navigator
 import tennisi.borzot.strada.fragments.news.utils.viewModelCreator
 import tennisi.borzot.strada.fragments.news.viewModel.UserDetailsViewModel
@@ -39,7 +37,7 @@ class UserDetailsFragment : Fragment() {
         })
 
         viewModel.state.observe(viewLifecycleOwner, Observer {
-            binding.contentContainer.visibility = if (it.showContent){
+            binding.contentContainer.visibility = if (it.showContent) {
                 val userDetails = (it.userDetailsResult as SuccessResult).data
                 binding.userNameTextView.text = userDetails.user.name
                 if (userDetails.user.photo.isNotBlank()) {
@@ -54,7 +52,7 @@ class UserDetailsFragment : Fragment() {
                 }
                 binding.userDetailsTextView.text = userDetails.details
                 View.VISIBLE
-            }else{
+            } else {
                 View.GONE
             }
             binding.progressBar.visibility = if (it.showProgress) View.VISIBLE else View.GONE

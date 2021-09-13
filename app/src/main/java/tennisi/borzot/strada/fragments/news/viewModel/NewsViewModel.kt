@@ -85,6 +85,21 @@ class NewsViewModel(
         _actionShowDetails.value = Event(user)
     }
 
+    override fun onUserFire(user: User) {
+        if (isInProgress(user)) return
+        addProgressTo(user)
+        usersService.fireUser(user)
+            .onSuccess {
+                removeProgressFrom(user)
+            }
+            .onError {
+                removeProgressFrom(user)
+                _actionShowToast.value = Event(R.string.cant_fire_user)
+            }
+            .autoCancel()
+
+    }
+
     private fun loadUsers() {
         usersResult = PendingResult()
         usersService.loadUsers()
