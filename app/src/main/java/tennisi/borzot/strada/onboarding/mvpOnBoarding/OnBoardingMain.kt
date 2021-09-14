@@ -6,13 +6,11 @@ import android.graphics.Typeface
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import androidx.viewpager.widget.ViewPager
 import tennisi.borzot.strada.MainActivity
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.ActivityOnBoardingMainBinding
 import tennisi.borzot.strada.onboarding.OnBoardingViewPagerAdapter
-
 
 
 class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
@@ -25,8 +23,7 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
     private var onBoardingViewPagerAdapter: OnBoardingViewPagerAdapter? = null
     var dataList: MutableList<OnBoardingData>? = null
 
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){}
-    val singlePermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+    private val singlePermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
         when {
             granted -> {
                 startActivity(Intent(this, MainActivity::class.java))
@@ -39,7 +36,6 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
             }
         }
     }
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +51,6 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
 
         binding.nextButton.typeface = Typeface.createFromAsset(assets, "montserrat.ttf")
     }
-
 
     override fun initViewPager(mutableList: MutableList<OnBoardingData>) {
         onBoardingViewPagerAdapter = OnBoardingViewPagerAdapter(this, mutableList)
@@ -85,7 +80,7 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
         })
     }
 
-    override fun requestPermission(){
+    override fun requestPermission() {
         if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
             // доступ к камере запрещен, нужно объяснить зачем нам требуется разрешение
         } else {
