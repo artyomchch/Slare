@@ -1,14 +1,18 @@
 package tennisi.borzot.strada.onboarding.mvpOnBoarding
 
+import android.Manifest
+import android.content.Intent
 import android.graphics.Typeface
-import android.os.Build
 import android.os.Bundle
-import androidx.annotation.RequiresApi
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.viewpager.widget.ViewPager
+import tennisi.borzot.strada.MainActivity
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.ActivityOnBoardingMainBinding
 import tennisi.borzot.strada.onboarding.OnBoardingViewPagerAdapter
+
 
 
 class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
@@ -21,10 +25,27 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
     private var onBoardingViewPagerAdapter: OnBoardingViewPagerAdapter? = null
     var dataList: MutableList<OnBoardingData>? = null
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){}
+    val singlePermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        when {
+            granted -> {
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+            !shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+            else -> {
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+        }
+    }
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
 
         presenter = OnBoardingPresenter(this)
         presenter?.createData(application)
@@ -46,12 +67,14 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
     override fun buttonNext() {
         binding.nextButton.setOnClickListener {
             presenter?.buttonNext(this, binding.screenPager)
+
         }
     }
 
     override fun tabNext() {
         binding.screenPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
+            override fun onPageScrollStateChanged(state: Int) {}
 
             override fun onPageSelected(position: Int) {
                 if (position <= 1) {
@@ -59,8 +82,15 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
                 } else
                     binding.nextButton.text = getString(R.string.get_started_text)
             }
-
-            override fun onPageScrollStateChanged(state: Int) {}
         })
+    }
+
+    override fun requestPermission(){
+        if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            // доступ к камере запрещен, нужно объяснить зачем нам требуется разрешение
+        } else {
+            singlePermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+
     }
 }

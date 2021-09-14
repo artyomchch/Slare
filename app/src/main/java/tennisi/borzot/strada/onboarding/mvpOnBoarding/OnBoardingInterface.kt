@@ -10,6 +10,7 @@ interface OnBoardingInterface {
         fun buttonNext()
         fun tabNext()
         fun initViewPager(mutableList: MutableList<OnBoardingData>)
+        fun requestPermission()
     }
 
     interface Presenter{
