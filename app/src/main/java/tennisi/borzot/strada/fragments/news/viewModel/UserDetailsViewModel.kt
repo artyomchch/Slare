@@ -2,6 +2,8 @@ package tennisi.borzot.strada.fragments.news.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.UserNotFoundException
 import tennisi.borzot.strada.fragments.news.model.User
@@ -33,7 +35,10 @@ class UserDetailsViewModel(
             userDetailsResult = EmptyResult(),
             deletingInProgress = false
         )
-        loadUser()
+        viewModelScope.launch {
+            loadUser()
+        }
+
     }
 
     fun deleteUser(){
@@ -52,7 +57,7 @@ class UserDetailsViewModel(
             .autoCancel()
     }
 
-    private fun loadUser(){
+    private suspend fun loadUser(){
         if (currentState.userDetailsResult !is EmptyResult) return
 
         _state.value = currentState.copy(userDetailsResult = PendingResult())
@@ -66,8 +71,6 @@ class UserDetailsViewModel(
                 _actionGoBack.value = Event(Unit)
             }
             .autoCancel()
-
-
 
     }
 

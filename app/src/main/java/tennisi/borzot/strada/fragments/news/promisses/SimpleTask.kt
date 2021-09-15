@@ -73,4 +73,8 @@ class SimpleTask<T>(
         valueCallback = null
         errorCallback = null
     }
+
+    override fun enqueue(dispatcher: Dispatcher, callback: Callback<T>) {
+
+    }
 }

@@ -2,6 +2,11 @@ package tennisi.borzot.strada.fragments.news.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.fragments.news.UserActionListener
 import tennisi.borzot.strada.fragments.news.model.*
@@ -43,10 +48,16 @@ class NewsViewModel(
 
     }
 
-    init {
-        usersService.addListener(listener)
-        loadUsers()
-    }
+
+   init{
+       usersService.addListener(listener)
+       viewModelScope.launch {
+           loadUsers()
+       }
+
+   }
+
+
 
     override fun onCleared() {
         super.onCleared()
@@ -100,13 +111,13 @@ class NewsViewModel(
 
     }
 
-    private fun loadUsers() {
+    private suspend fun loadUsers() {
         usersResult = PendingResult()
         usersService.loadUsers()
-            .onError {
-                usersResult = ErrorResult(it)
-            }
-            .autoCancel()
+//            .onError {
+//                usersResult = ErrorResult(it)
+//            }
+//            .autoCancel()
     }
 
     private fun addProgressTo(user: User) {

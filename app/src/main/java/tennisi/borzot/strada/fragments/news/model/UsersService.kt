@@ -19,7 +19,7 @@ class UsersService {
     private val listeners = mutableSetOf<UsersListener>()
 
 
-    fun loadUsers(): Task<Unit> = SimpleTask<Unit>(Callable { // асинхронный таск
+    suspend fun loadUsers() = SimpleTask<Unit>(Callable { // асинхронный таск
         Thread.sleep(2000)
         val faker = Faker.instance()
         IMAGES.shuffle()
@@ -31,17 +31,17 @@ class UsersService {
         )}.toMutableList()
         loaded = true
         notifyChanges()
-    })
+    }).suspend()
 
 
-    fun getById(id: Long): Task<UserDetails> = SimpleTask<UserDetails>(Callable {
+    suspend fun getById(id: Long) = SimpleTask<UserDetails>(Callable {
         Thread.sleep(2000)
         val user = users.firstOrNull { it.id == id } ?: throw UserNotFoundException()
         return@Callable UserDetails(
             user = user,
             details = Faker.instance().lorem().paragraphs(3).joinToString("\n\n")
         )
-    })
+    }).suspend()
 
 
     fun deleteUser(user: User): Task<Unit> = SimpleTask<Unit>(Callable {
