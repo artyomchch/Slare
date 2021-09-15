@@ -10,7 +10,6 @@ class OnBoardingPresenter(_view: OnBoardingInterface.View) : OnBoardingInterface
 
     private var view: OnBoardingInterface.View = _view
     private var model: OnBoardingInterface.Model = OnBoardingModel()
-    private var showPermission = false
 
     init {
         view.buttonNext()
@@ -37,7 +36,6 @@ class OnBoardingPresenter(_view: OnBoardingInterface.View) : OnBoardingInterface
         }
         if (position == model.getDataTitle().size) {
             view.requestPermission()
-            //context.startActivity(Intent(context.applicationContext, MainActivity::class.java))
         }
     }
 
