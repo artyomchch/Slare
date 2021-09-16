@@ -5,8 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import tennisi.borzot.strada.R
-import tennisi.borzot.strada.UserNotFoundException
-import tennisi.borzot.strada.fragments.news.model.User
 import tennisi.borzot.strada.fragments.news.model.UserDetails
 import tennisi.borzot.strada.fragments.news.model.UsersService
 import tennisi.borzot.strada.fragments.news.promisses.EmptyResult
@@ -17,7 +15,7 @@ import tennisi.borzot.strada.fragments.news.promisses.SuccessResult
 class UserDetailsViewModel(
     private val usersService: UsersService,
     private val userId: Long
-): BaseViewModel() {
+) : BaseViewModel() {
 
     private val _state = MutableLiveData<State>()
     val state: LiveData<State> = _state
@@ -30,6 +28,8 @@ class UserDetailsViewModel(
 
     private val currentState: State get() = state.value!!
 
+    private lateinit var data: UserDetails
+
     init {
         _state.value = State(
             userDetailsResult = EmptyResult(),
@@ -41,36 +41,43 @@ class UserDetailsViewModel(
 
     }
 
-    fun deleteUser(){
-       val userDetailsResult = currentState.userDetailsResult
-        if(userDetailsResult !is SuccessResult) return
+    fun deleteUser() = viewModelScope.launch {
+        val userDetailsResult = currentState.userDetailsResult
+        if (userDetailsResult !is SuccessResult)
+            _state.value?.showProgress
+        _state.value?.enableDeleteButton
         _state.value = currentState.copy(deletingInProgress = true)
-        usersService.deleteUser(userDetailsResult.data.user)
-            .onSuccess {
-                _actionShowToast.value = Event(R.string.user_has_been_deleted)
-                _actionGoBack.value = Event(Unit)
-            }
-            .onError {
-                _state.value = currentState.copy(deletingInProgress = false)
-                _actionShowToast.value = Event(R.string.cant_delete_user)
-            }
-            .autoCancel()
+        usersService.deleteUser(data.user)
+        try {
+            _state.value?.showProgress
+            _actionShowToast.value = Event(R.string.user_has_been_deleted)
+            _actionGoBack.value = Event(Unit)
+            _state.value?.enableDeleteButton
+        } catch (e: Exception) {
+            _state.value = currentState.copy(deletingInProgress = false)
+            _actionShowToast.value = Event(R.string.cant_delete_user)
+        } finally {
+
+        }
+
+
+        //.autoCancel()
     }
 
-    private suspend fun loadUser(){
-        if (currentState.userDetailsResult !is EmptyResult) return
+    private suspend fun loadUser() {
+        if (currentState.userDetailsResult !is EmptyResult)
+            _state.value?.showProgress
+            _state.value = currentState.copy(userDetailsResult = PendingResult())
+        try {
+            data = usersService.getById(userId)
+            _state.value = currentState.copy(userDetailsResult = SuccessResult(data))
+        } catch (e: Exception) {
+            _actionShowToast.value = Event(R.string.cant_load_user_details)
+            _actionGoBack.value = Event(Unit)
+        } finally {
 
-        _state.value = currentState.copy(userDetailsResult = PendingResult())
+        }
 
-        usersService.getById(userId)
-            .onSuccess {
-                _state.value = currentState.copy(userDetailsResult = SuccessResult(it))
-            }
-            .onError {
-                _actionShowToast.value = Event(R.string.cant_load_user_details)
-                _actionGoBack.value = Event(Unit)
-            }
-            .autoCancel()
 
     }
 
@@ -78,7 +85,7 @@ class UserDetailsViewModel(
         val userDetailsResult: Result<UserDetails>,
         private val deletingInProgress: Boolean
 
-    ){
+    ) {
         val showContent: Boolean get() = userDetailsResult is SuccessResult
         val showProgress: Boolean get() = userDetailsResult is PendingResult || deletingInProgress
         val enableDeleteButton: Boolean get() = !deletingInProgress

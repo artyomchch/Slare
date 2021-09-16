@@ -1,7 +1,14 @@
 package tennisi.borzot.strada.fragments.news.viewModel
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import tennisi.borzot.strada.fragments.news.promisses.Task
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import tennisi.borzot.strada.R
+import tennisi.borzot.strada.fragments.news.promisses.SuccessResult
+
+
+typealias MutableLiveResult<T> = MutableLiveData<Result<T>>
 
 class Event<T>(
     private val value: T
@@ -16,14 +23,25 @@ class Event<T>(
 }
 
 open class BaseViewModel : ViewModel() {
-    private val tasks = mutableListOf<Task<*>>()
 
-    override fun onCleared() {
-        super.onCleared()
-        tasks.forEach { it.cancel() }
+
+    fun <T> into(liveResult: MutableLiveResult<T>, block: suspend () -> T){
+        viewModelScope.launch {
+//            try {
+//                liveResult.postValue(SuccessResult())
+//            }
+        }
     }
 
-    fun <T> Task<T>.autoCancel() {
-        tasks.add(this)
-    }
+//    private val tasks = mutableListOf<Task<*>>()
+//
+//    override fun onCleared() {
+//        super.onCleared()
+//        tasks.forEach { it.cancel() }
+//    }
+//
+//    fun <T> Task<T>.autoCancel() {
+//        tasks.add(this)
+//    }
+
 }

@@ -1,12 +1,9 @@
 package tennisi.borzot.strada.fragments.news.model
 
 import com.github.javafaker.Faker
+import kotlinx.coroutines.delay
 import tennisi.borzot.strada.UserNotFoundException
-import tennisi.borzot.strada.fragments.news.promisses.SimpleTask
-import tennisi.borzot.strada.fragments.news.promisses.Task
-import java.nio.file.attribute.UserPrincipalLookupService
 import java.util.*
-import java.util.concurrent.Callable
 import kotlin.collections.ArrayList
 
 typealias UsersListener = (users: List<User>) -> Unit
@@ -19,80 +16,81 @@ class UsersService {
     private val listeners = mutableSetOf<UsersListener>()
 
 
-    suspend fun loadUsers() = SimpleTask<Unit>(Callable { // асинхронный таск
-        Thread.sleep(2000)
+    suspend fun loadUsers() {// асинхронный таск
+        delay(2000)
         val faker = Faker.instance()
         IMAGES.shuffle()
-        users = (1..100).map { User(
-            id = it.toLong(),
-            name = faker.name().name(),
-            company = faker.company().name(),
-            photo = IMAGES[it % IMAGES.size]
-        )}.toMutableList()
+        users = (1..100).map {
+            User(
+                id = it.toLong(),
+                name = faker.name().name(),
+                company = faker.company().name(),
+                photo = IMAGES[it % IMAGES.size]
+            )
+        }.toMutableList()
         loaded = true
         notifyChanges()
-    }).suspend()
+    }
 
 
-    suspend fun getById(id: Long) = SimpleTask<UserDetails>(Callable {
-        Thread.sleep(2000)
+    suspend fun getById(id: Long): UserDetails {
+        delay(2000)
         val user = users.firstOrNull { it.id == id } ?: throw UserNotFoundException()
-        return@Callable UserDetails(
+        return UserDetails(
             user = user,
             details = Faker.instance().lorem().paragraphs(3).joinToString("\n\n")
         )
-    }).suspend()
+    }
 
 
-    fun deleteUser(user: User): Task<Unit> = SimpleTask<Unit>(Callable {
-        Thread.sleep(2000)
-        val indexToDelete = users.indexOfFirst{it.id == user.id}
-        if (indexToDelete != -1){
+     suspend fun deleteUser(user: User): Unit {
+        delay(2000)
+        val indexToDelete = users.indexOfFirst { it.id == user.id }
+        if (indexToDelete != -1) {
             users = ArrayList(users)
             users.removeAt(indexToDelete)
             notifyChanges()
         }
-    })
+    }
 
-    fun moveUser(user: User, moveBy: Int): Task<Unit> = SimpleTask<Unit>(Callable {
-        Thread.sleep(2000)
-        val oldIndex = users.indexOfFirst{it.id == user.id}
-        if (oldIndex == -1) return@Callable
+    suspend fun moveUser(user: User, moveBy: Int): Unit {
+        delay(2000)
+        val oldIndex = users.indexOfFirst { it.id == user.id }
+        if (oldIndex == -1) return
         val newIndex = oldIndex + moveBy
-        if (newIndex < 0 || newIndex >= users.size) return@Callable
+        if (newIndex < 0 || newIndex >= users.size) return
         users = ArrayList(users)
         Collections.swap(users, oldIndex, newIndex)
         notifyChanges()
-    })
+    }
 
-    fun fireUser(user: User): Task<Unit> = SimpleTask<Unit>(Callable {
-        Thread.sleep(2000)
-        val index = users.indexOfFirst{it.id == user.id}
-        if (index == -1) return@Callable
+    suspend fun fireUser(user: User): Unit {
+        delay(2000)
+        val index = users.indexOfFirst { it.id == user.id }
+        if (index == -1) return
         val updatedUser = users[index].copy(company = "")
         users = ArrayList(users)
         users[index] = updatedUser
         notifyChanges()
+    }
 
-    })
-
-    fun addListener(listener: UsersListener){
+    fun addListener(listener: UsersListener) {
         listeners.add(listener)
-        if (loaded){
+        if (loaded) {
             listener.invoke(users)
         }
     }
 
-    fun removeListener(listener: UsersListener){
+    fun removeListener(listener: UsersListener) {
         listeners.remove(listener)
     }
 
-    private fun notifyChanges(){
+    private fun notifyChanges() {
         if (!loaded) return
-        listeners.forEach{it.invoke(users)}
+        listeners.forEach { it.invoke(users) }
     }
 
-    companion object{
+    companion object {
         private val IMAGES = mutableListOf(
             "https://images.unsplash.com/photo-1600267185393-e158a98703de?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&ixid=MnwxfDB8MXxyYW5kb218fHx8fHx8fHwxNjI0MDE0NjQ0&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=800",
             "https://images.unsplash.com/photo-1579710039144-85d6bdffddc9?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=600&ixid=MnwxfDB8MXxyYW5kb218fHx8fHx8fHwxNjI0MDE0Njk1&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=800",

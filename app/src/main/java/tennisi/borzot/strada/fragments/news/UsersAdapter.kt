@@ -10,19 +10,20 @@ import androidx.appcompat.widget.CustomPopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.Job
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.ItemUserBinding
 import tennisi.borzot.strada.fragments.news.model.User
 import tennisi.borzot.strada.fragments.news.viewModel.UserListItem
 
 interface UserActionListener {
-    fun onUserMove(user: User, moveBy: Int)
+    fun onUserMove(user: User, moveBy: Int): Job
 
-    fun onUserDelete(user: User)
+    fun onUserDelete(user: User): Job
 
     fun onUserDetails(user: User)
 
-    fun onUserFire(user: User)
+    fun onUserFire(user: User): Job
 }
 
 class UsersDiffCallback(

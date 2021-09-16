@@ -14,6 +14,8 @@ class SuccessResult<T>(
     val data: T
 ) : Result<T>()
 
+
+
 class ErrorResult<T>(
     val error: Throwable
 ) : Result<T>()
