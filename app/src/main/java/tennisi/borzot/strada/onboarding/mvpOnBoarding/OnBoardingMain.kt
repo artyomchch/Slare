@@ -11,6 +11,7 @@ import tennisi.borzot.strada.MainActivity
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.ActivityOnBoardingMainBinding
 import tennisi.borzot.strada.onboarding.OnBoardingViewPagerAdapter
+import tennisi.borzot.strada.services.firebase.SignInActivity
 
 
 class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
@@ -26,13 +27,13 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
     private val singlePermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
         when {
             granted -> {
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, SignInActivity::class.java))
             }
             !shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, SignInActivity::class.java))
             }
             else -> {
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, SignInActivity::class.java))
             }
         }
     }

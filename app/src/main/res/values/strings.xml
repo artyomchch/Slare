@@ -26,6 +26,7 @@
     <string name="cant_load_user_details">Can\'t load user details</string>
     <string name="cant_delete_user">Can\'t delete user</string>
     <string name="cant_move_user">Can\'t move user</string>
+    <string name="cant_fire_user">Can\'t fire user</string>
     //onBoarding strings
     <string name="speed_limit">Speed limit warning</string>
     <string name="desc_speed_limit">The choice of a speed that does not correspond to road conditions, one of the most frequent causes of road accidents.</string>
@@ -39,7 +40,9 @@
     <string name="on_boarding_image">On boarding image</string>
 
     <string name="pref">pref</string>
-    <string name="cant_fire_user">Can\'t fire user</string>
+    //Sign In strings
+    <string name="community_description">Welcome to the club, buddy</string>
+    <string name="skip">Skip</string>
 
 
 </resources>
