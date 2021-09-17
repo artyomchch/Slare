@@ -27,13 +27,13 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
     private val singlePermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
         when {
             granted -> {
-                startActivity(Intent(this, SignInActivity::class.java))
+                startActivityWithTransition()
             }
             !shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
-                startActivity(Intent(this, SignInActivity::class.java))
+                startActivityWithTransition()
             }
             else -> {
-                startActivity(Intent(this, SignInActivity::class.java))
+                startActivityWithTransition()
             }
         }
     }
@@ -88,5 +88,10 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
             singlePermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
 
+    }
+
+    fun startActivityWithTransition(){
+        startActivity(Intent(this, SignInActivity::class.java))
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 }

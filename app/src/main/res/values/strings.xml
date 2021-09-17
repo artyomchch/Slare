@@ -41,8 +41,9 @@
 
     <string name="pref">pref</string>
     //Sign In strings
-    <string name="community_description">Welcome to the club, buddy</string>
+    <string name="community_description">Welcome to the community</string>
     <string name="skip">Skip</string>
+
 
 
 </resources>

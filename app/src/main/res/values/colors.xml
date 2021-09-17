@@ -30,4 +30,7 @@
     <color name="mainOnBoardingColorTab">#B3FF0000</color>
     <color name="mainOnBoardingColor">#FF0000</color>
     <color name="onBoardingTextColorDescription">#474747</color>
+
+    //icon color
+    <color name="ic_launcher_background">#171718</color>
 </resources>
