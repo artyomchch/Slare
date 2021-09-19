@@ -30,7 +30,7 @@
     //onBoarding strings
     <string name="speed_limit">Speed limit warning</string>
     <string name="desc_speed_limit">The choice of a speed that does not correspond to road conditions, one of the most frequent causes of road accidents.</string>
-    <string name="destructed">Do not be distracted</string>
+    <string name="destructed">Do not be destructed</string>
     <string name="desc_destructed">Answering calls or interacting with other car gadgets, the driver loses concentration.</string>
     <string name="permissions">Allow permissions</string>
     <string name="desc_permissions">To correctly display the correct speed of your movement, you must provide the device with access to location.</string>
