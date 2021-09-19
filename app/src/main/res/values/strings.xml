@@ -41,10 +41,12 @@
 
     <string name="pref">pref</string>
     //Sign In strings
-    <string name="community_description">Welcome to the community</string>
+    <string name="community_title">Welcome to Strada</string>
+    <string name="community_description">Login with your Google account and get a pleasant experience from using our application.</string>
     <string name="skip">Skip</string>
     <string name="information">Information</string>
     <string name="information_description">Authentication is allowed to share and save your sound profile settings for a specific vehicle. The data is not confidential and is stored in Google services.</string>
+    <string name="community_question"><u>Why use an account?</u></string>
     <string name="accept">Accept</string>
 
 

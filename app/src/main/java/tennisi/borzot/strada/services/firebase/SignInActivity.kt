@@ -1,6 +1,7 @@
 package tennisi.borzot.strada.services.firebase
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -45,11 +46,13 @@ class SignInActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }
 
+        binding.scipButton.typeface = Typeface.createFromAsset(assets, "montserrat.ttf")
+
         binding.signInButton.setOnClickListener {
             signIn()
         }
 
-        binding.informationButton.setOnClickListener {
+        binding.communityQuestion.setOnClickListener {
             MaterialAlertDialogBuilder(this, R.style.AlertDialogTheme)
                 .setTitle(getString(R.string.information))
                 .setMessage(getString(R.string.information_description))

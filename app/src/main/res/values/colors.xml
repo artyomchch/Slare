@@ -15,13 +15,12 @@
 
     //color about white
     <color name="meanWhite">#EAE8E8</color>
-
     // Menu color
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorDivider">#ECECEC</color>
-
     // main color
     <color name="mainBlue">#77B2D8</color>
+
     //onBoarding color
     <color name="onBoarding">#EFEFEF</color>
     <color name="black">#000</color>
@@ -33,4 +32,8 @@
 
     //icon color
     <color name="ic_launcher_background">#171718</color>
+
+    //Sign in color
+    <color name="signInTitleColor">#333333</color>
+    <color name="signInDescriptionColor">#333333</color>
 </resources>
