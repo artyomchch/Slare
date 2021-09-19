@@ -1,10 +1,8 @@
-package tennisi.borzot.strada.onboarding.mvpOnBoarding
+package tennisi.borzot.strada.onBoarding.mvpOnBoarding
 
 import android.app.Application
 import android.content.Context
-import android.content.Intent
 import androidx.viewpager.widget.ViewPager
-import tennisi.borzot.strada.MainActivity
 
 class OnBoardingPresenter(_view: OnBoardingInterface.View) : OnBoardingInterface.Presenter {
 

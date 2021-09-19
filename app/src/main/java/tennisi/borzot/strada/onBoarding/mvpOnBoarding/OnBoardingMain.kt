@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.onboarding.mvpOnBoarding
+package tennisi.borzot.strada.onBoarding.mvpOnBoarding
 
 import android.Manifest
 import android.content.Intent
@@ -7,10 +7,9 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
-import tennisi.borzot.strada.MainActivity
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.ActivityOnBoardingMainBinding
-import tennisi.borzot.strada.onboarding.OnBoardingViewPagerAdapter
+import tennisi.borzot.strada.onBoarding.OnBoardingViewPagerAdapter
 import tennisi.borzot.strada.services.firebase.SignInActivity
 
 

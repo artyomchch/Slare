@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.onboarding.mvpOnBoarding
+package tennisi.borzot.strada.onBoarding.mvpOnBoarding
 
 import android.app.Application
 import android.content.Context

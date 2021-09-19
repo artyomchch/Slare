@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.onboarding
+package tennisi.borzot.strada.onBoarding
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.viewpager.widget.PagerAdapter
 import tennisi.borzot.strada.R
-import tennisi.borzot.strada.onboarding.mvpOnBoarding.OnBoardingData
-import tennisi.borzot.strada.onboarding.mvpOnBoarding.OnBoardingMain
+import tennisi.borzot.strada.onBoarding.mvpOnBoarding.OnBoardingData
+import tennisi.borzot.strada.onBoarding.mvpOnBoarding.OnBoardingMain
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.SpannableString

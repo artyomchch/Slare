@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.onboarding.mvpOnBoarding
+package tennisi.borzot.strada.onBoarding.mvpOnBoarding
 
 data class OnBoardingData(
     val title: String,

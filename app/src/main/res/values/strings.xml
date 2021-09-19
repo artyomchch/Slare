@@ -43,7 +43,9 @@
     //Sign In strings
     <string name="community_description">Welcome to the community</string>
     <string name="skip">Skip</string>
-
+    <string name="information">Information</string>
+    <string name="information_description">Authentication is allowed to share and save your sound profile settings for a specific vehicle. The data is not confidential and is stored in Google services.</string>
+    <string name="accept">Accept</string>
 
 
 </resources>

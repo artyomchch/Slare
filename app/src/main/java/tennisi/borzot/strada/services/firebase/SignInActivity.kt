@@ -8,6 +8,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
@@ -46,6 +47,14 @@ class SignInActivity : AppCompatActivity() {
 
         binding.signInButton.setOnClickListener {
             signIn()
+        }
+
+        binding.informationButton.setOnClickListener {
+            MaterialAlertDialogBuilder(this, R.style.AlertDialogTheme)
+                .setTitle(getString(R.string.information))
+                .setMessage(getString(R.string.information_description))
+                .setPositiveButton(getString(R.string.accept)) { _, _ -> }
+                .show()
         }
 
 
