@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         Glide.with(this)
             .load(currentUser?.photoUrl)
             .circleCrop()
-            .into(binding.mainFragmentToolbar.toolbarImage)
+            .into(binding.mainFragmentToolbar.toolbarImageSignIn)
 
         // add page change listener
         binding.mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 
         //default tab
         binding.mViewPager.currentItem = 2
-        binding.speedBtn.setImageResource(R.drawable.ic_baseline_speed_pink)
+        binding.speedBtn.setImageResource(R.drawable.ic_baseline_speed_purple)
 
     }
 
@@ -89,7 +89,8 @@ class MainActivity : AppCompatActivity() {
     private fun changingTabs(position: Int) {
         if (position == 0) {
             binding.mainFragmentToolbar.toolbarText.text = getString(R.string.vehicle)
-            binding.addBtn.setImageResource(R.drawable.ic_baseline_add_pink)
+            binding.mainFragmentToolbar.toolbarImageItem.setImageResource(R.drawable.ic_baseline_add_purple)
+            binding.addBtn.setImageResource(R.drawable.ic_baseline_add_purple)
             binding.equBtn.setImageResource(R.drawable.ic_baseline_equalizer_black)
             binding.speedBtn.setImageResource(R.drawable.ic_baseline_speed_black)
             binding.newsBtn.setImageResource(R.drawable.ic_baseline_rss_feed_24)
@@ -97,35 +98,39 @@ class MainActivity : AppCompatActivity() {
         }
         if (position == 1) {
             binding.mainFragmentToolbar.toolbarText.text = getString(R.string.equalizer)
+            binding.mainFragmentToolbar.toolbarImageItem.setImageResource(R.drawable.ic_baseline_equalizer_purple)
             binding.addBtn.setImageResource(R.drawable.ic_baseline_add_black)
-            binding.equBtn.setImageResource(R.drawable.ic_baseline_equalizer_pink)
+            binding.equBtn.setImageResource(R.drawable.ic_baseline_equalizer_purple)
             binding.speedBtn.setImageResource(R.drawable.ic_baseline_speed_black)
             binding.newsBtn.setImageResource(R.drawable.ic_baseline_rss_feed_24)
             binding.setBtn.setImageResource(R.drawable.ic_baseline_settings_black)
         }
         if (position == 2) {
             binding.mainFragmentToolbar.toolbarText.text = getString(R.string.speed)
+            binding.mainFragmentToolbar.toolbarImageItem.setImageResource(R.drawable.ic_baseline_speed_purple)
             binding.addBtn.setImageResource(R.drawable.ic_baseline_add_black)
             binding.equBtn.setImageResource(R.drawable.ic_baseline_equalizer_black)
-            binding.speedBtn.setImageResource(R.drawable.ic_baseline_speed_pink)
+            binding.speedBtn.setImageResource(R.drawable.ic_baseline_speed_purple)
             binding.newsBtn.setImageResource(R.drawable.ic_baseline_rss_feed_24)
             binding.setBtn.setImageResource(R.drawable.ic_baseline_settings_black)
         }
         if (position == 3) {
             binding.mainFragmentToolbar.toolbarText.text = getString(R.string.news)
+            binding.mainFragmentToolbar.toolbarImageItem.setImageResource(R.drawable.ic_baseline_rss_feed_purple)
             binding.addBtn.setImageResource(R.drawable.ic_baseline_add_black)
             binding.equBtn.setImageResource(R.drawable.ic_baseline_equalizer_black)
             binding.speedBtn.setImageResource(R.drawable.ic_baseline_speed_black)
-            binding.newsBtn.setImageResource(R.drawable.ic_baseline_rss_feed_blue)
+            binding.newsBtn.setImageResource(R.drawable.ic_baseline_rss_feed_purple)
             binding.setBtn.setImageResource(R.drawable.ic_baseline_settings_black)
         }
         if (position == 4) {
             binding.mainFragmentToolbar.toolbarText.text = getString(R.string.settings)
+            binding.mainFragmentToolbar.toolbarImageItem.setImageResource(R.drawable.ic_baseline_settings_purple)
             binding.addBtn.setImageResource(R.drawable.ic_baseline_add_black)
             binding.equBtn.setImageResource(R.drawable.ic_baseline_equalizer_black)
             binding.speedBtn.setImageResource(R.drawable.ic_baseline_speed_black)
             binding.newsBtn.setImageResource(R.drawable.ic_baseline_rss_feed_24)
-            binding.setBtn.setImageResource(R.drawable.ic_baseline_settings_pink)
+            binding.setBtn.setImageResource(R.drawable.ic_baseline_settings_purple)
         }
     }
 }
