@@ -23,10 +23,9 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_image_item"
-                android:layout_marginStart="9dp"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_user_avatar"
+                android:src="@drawable/ic_baseline_equalizer_purple"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>

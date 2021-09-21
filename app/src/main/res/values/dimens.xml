@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="bottom_shape_navigation_size">10sp</dimen>
+    <dimen name="bottom_shape_navigation_size">11sp</dimen>
     <dimen name="main_title_size">34sp</dimen>
 
     <dimen name="sign_in_size">28sp</dimen>

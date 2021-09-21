@@ -39,12 +39,10 @@
                 android:id="@+id/add_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
                 android:contentDescription="@string/add_car_description"
-                android:paddingLeft="15dp"
+                android:paddingLeft="20dp"
                 android:paddingTop="5dp"
-                android:paddingRight="15dp"
+                android:paddingRight="20dp"
                 android:src="@drawable/ic_baseline_add_black" />
 
             <TextView
@@ -68,12 +66,10 @@
                 android:id="@+id/equ_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
                 android:contentDescription="@string/equalizer_description"
-                android:paddingLeft="15dp"
+                android:paddingStart="20dp"
                 android:paddingTop="5dp"
-                android:paddingRight="15dp"
+                android:paddingEnd="20dp"
                 android:src="@drawable/ic_baseline_equalizer_black" />
 
             <TextView
@@ -97,12 +93,11 @@
                 android:id="@+id/speed_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
                 android:contentDescription="@string/speed_description"
-                android:paddingLeft="15dp"
+                android:paddingStart="20dp"
                 android:paddingTop="5dp"
-                android:paddingRight="15dp"
+                android:paddingEnd="20dp"
+
                 android:src="@drawable/ic_baseline_speed_black" />
 
             <TextView
@@ -126,12 +121,10 @@
                 android:id="@+id/news_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
                 android:contentDescription="@string/news_description"
-                android:paddingLeft="15dp"
+                android:paddingStart="20dp"
                 android:paddingTop="5dp"
-                android:paddingRight="15dp"
+                android:paddingEnd="20dp"
                 android:src="@drawable/ic_baseline_rss_feed_24" />
 
             <TextView
@@ -156,11 +149,9 @@
                 android:id="@+id/set_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:paddingLeft="15dp"
+                android:paddingStart="20dp"
                 android:paddingTop="5dp"
-                android:paddingRight="15dp"
+                android:paddingEnd="20dp"
                 android:src="@drawable/ic_baseline_settings_black" />
 
             <TextView
