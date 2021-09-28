@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.Job
 import tennisi.borzot.strada.R
+import tennisi.borzot.strada.databinding.ItemNewsBinding
 import tennisi.borzot.strada.databinding.ItemUserBinding
 import tennisi.borzot.strada.fragments.news.model.User
 import tennisi.borzot.strada.fragments.news.viewModel.UserListItem
@@ -60,9 +61,9 @@ class UsersAdapter(private val actionListener: UserActionListener) : RecyclerVie
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemUserBinding.inflate(inflater, parent, false)
+        val binding = ItemNewsBinding.inflate(inflater, parent, false)
 
-        binding.moreImageViewButton.setOnClickListener(this)
+        binding.changeElement.setOnClickListener(this)
 
         return UsersViewHolder(binding)
     }
@@ -86,30 +87,30 @@ class UsersAdapter(private val actionListener: UserActionListener) : RecyclerVie
 
         with(holder.binding) {
             holder.itemView.tag = user
-            moreImageViewButton.tag = user
+            changeElement.tag = user
 
             if (userListItem.isInProgress) {
-                moreImageViewButton.visibility = View.INVISIBLE
-                itemProgressBar.visibility = View.VISIBLE
+                changeElement.visibility = View.INVISIBLE
+                newsProgressBar.visibility = View.VISIBLE
                 holder.binding.root.setOnClickListener(null)
             } else {
-                moreImageViewButton.visibility = View.VISIBLE
-                itemProgressBar.visibility = View.GONE
+                changeElement.visibility = View.VISIBLE
+                newsProgressBar.visibility = View.GONE
                 holder.binding.root.setOnClickListener(this@UsersAdapter)
             }
 
-            userNameTextView.text = user.name
-            userCompanyTextView.text = if (user.company.isNotBlank()) user.company else context.getString(R.string.unemployed)
+            titleNews.text = user.name
+            descNews.text = if (user.company.isNotBlank()) user.company else context.getString(R.string.unemployed)
             if (user.photo.isNotBlank()) {
-                Glide.with(photoImageView.context)
+                Glide.with(imageNews.context)
                     .load(user.photo)
-                    .circleCrop()
+                   // .circleCrop()
                     .placeholder(R.drawable.ic_user_avatar)
                     .error(R.drawable.ic_user_avatar)
-                    .into(photoImageView)
+                    .into(imageNews)
             } else {
-                Glide.with(photoImageView.context).clear(photoImageView)
-                photoImageView.setImageResource(R.drawable.ic_user_avatar)
+                Glide.with(imageNews.context).clear(imageNews)
+                imageNews.setImageResource(R.drawable.ic_user_avatar)
             }
         }
     }
@@ -168,7 +169,7 @@ class UsersAdapter(private val actionListener: UserActionListener) : RecyclerVie
         private const val ID_FIRE = 4
     }
 
-    class UsersViewHolder(val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root)
+    class UsersViewHolder(val binding: ItemNewsBinding) : RecyclerView.ViewHolder(binding.root)
 
 
 }
