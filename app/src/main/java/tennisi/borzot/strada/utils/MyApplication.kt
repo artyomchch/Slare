@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.database
+package tennisi.borzot.strada.utils
 
 import android.app.Application
 import io.realm.Realm

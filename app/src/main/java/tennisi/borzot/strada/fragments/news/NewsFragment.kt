@@ -1,6 +1,7 @@
 package tennisi.borzot.strada.fragments.news
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,6 +58,10 @@ class NewsFragment : Fragment() {
         viewModel.actionShowToast.observe(viewLifecycleOwner, Observer {
             it.getValue()?.let { messageRes -> navigator().toast(messageRes) }
         })
+
+        viewModel.newsResponse.observe(viewLifecycleOwner){
+            Log.d("network",  it.articles.toString())
+        }
 
         val layoutManager = LinearLayoutManager(context)
         binding.userRecycler.layoutManager = layoutManager

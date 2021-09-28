@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.FragmentUserDetailsBinding
@@ -29,14 +28,14 @@ class UserDetailsFragment : Fragment() {
     ): View {
         binding = FragmentUserDetailsBinding.inflate(layoutInflater, container, false)
 
-        viewModel.actionShowToast.observe(viewLifecycleOwner, Observer {
+        viewModel.actionShowToast.observe(viewLifecycleOwner, {
             it.getValue()?.let { messageRes -> navigator().toast(messageRes) }
         })
-        viewModel.actionGoBack.observe(viewLifecycleOwner, Observer {
+        viewModel.actionGoBack.observe(viewLifecycleOwner, {
             it.getValue()?.let { navigator().goBack() }
         })
 
-        viewModel.state.observe(viewLifecycleOwner, Observer {
+        viewModel.state.observe(viewLifecycleOwner, {
             binding.contentContainer.visibility = if (it.showContent) {
                 val userDetails = (it.userDetailsResult as SuccessResult).data
                 binding.userNameTextView.text = userDetails.user.name

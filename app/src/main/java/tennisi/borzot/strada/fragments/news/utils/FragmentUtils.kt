@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import tennisi.borzot.strada.database.MyApplication
+import tennisi.borzot.strada.utils.MyApplication
 import tennisi.borzot.strada.fragments.news.Navigator
 import tennisi.borzot.strada.fragments.news.viewModel.NewsViewModel
 

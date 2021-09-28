@@ -3,6 +3,8 @@ package tennisi.borzot.strada.fragments.news.model
 import com.github.javafaker.Faker
 import kotlinx.coroutines.delay
 import tennisi.borzot.strada.UserNotFoundException
+import tennisi.borzot.strada.network.RetrofitInstance
+import tennisi.borzot.strada.network.pojo.NewsItem
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -13,12 +15,13 @@ class UsersService {
     private var users = mutableListOf<User>()
     private var loaded = false
 
+
     private val listeners = mutableSetOf<UsersListener>()
 
 
     suspend fun loadUsers() {// асинхронный таск
-        delay(2000)
         val faker = Faker.instance()
+        delay(2000)
         IMAGES.shuffle()
         users = (1..100).map {
             User(
@@ -43,7 +46,7 @@ class UsersService {
     }
 
 
-     suspend fun deleteUser(user: User): Unit {
+     suspend fun deleteUser(user: User) {
         delay(2000)
         val indexToDelete = users.indexOfFirst { it.id == user.id }
         if (indexToDelete != -1) {
@@ -53,7 +56,7 @@ class UsersService {
         }
     }
 
-    suspend fun moveUser(user: User, moveBy: Int): Unit {
+    suspend fun moveUser(user: User, moveBy: Int) {
         delay(2000)
         val oldIndex = users.indexOfFirst { it.id == user.id }
         if (oldIndex == -1) return
@@ -64,7 +67,7 @@ class UsersService {
         notifyChanges()
     }
 
-    suspend fun fireUser(user: User): Unit {
+    suspend fun fireUser(user: User) {
         delay(2000)
         val index = users.indexOfFirst { it.id == user.id }
         if (index == -1) return
@@ -72,6 +75,10 @@ class UsersService {
         users = ArrayList(users)
         users[index] = updatedUser
         notifyChanges()
+    }
+
+    suspend fun loadPost(): NewsItem {
+        return RetrofitInstance.api.getPost()
     }
 
     fun addListener(listener: UsersListener) {

@@ -3,12 +3,18 @@ package tennisi.borzot.strada.fragments.news.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.fragments.news.UserActionListener
-import tennisi.borzot.strada.fragments.news.model.*
-import tennisi.borzot.strada.fragments.news.promisses.*
-import java.lang.Exception
+import tennisi.borzot.strada.fragments.news.model.User
+import tennisi.borzot.strada.fragments.news.model.UsersListener
+import tennisi.borzot.strada.fragments.news.model.UsersService
+import tennisi.borzot.strada.fragments.news.promisses.EmptyResult
+import tennisi.borzot.strada.fragments.news.promisses.PendingResult
+import tennisi.borzot.strada.fragments.news.promisses.Result
+import tennisi.borzot.strada.fragments.news.promisses.SuccessResult
+import tennisi.borzot.strada.network.pojo.NewsItem
 
 data class UserListItem(
     val user: User,
@@ -28,6 +34,8 @@ class NewsViewModel(
     private val _actionShowToast = MutableLiveData<Event<Int>>()
     val actionShowToast: LiveData<Event<Int>> = _actionShowToast
 
+    val newsResponse: MutableLiveData<NewsItem> = MutableLiveData()
+
     private val userIdsInProgress = mutableSetOf<Long>()
     private var usersResult: Result<List<User>> = EmptyResult()
         set(value) {
@@ -42,18 +50,16 @@ class NewsViewModel(
         } else {
             SuccessResult(it)
         }
-
     }
 
 
-   init{
-       usersService.addListener(listener)
-       viewModelScope.launch {
-           loadUsers()
-       }
-
-   }
-
+    init {
+        usersService.addListener(listener)
+        viewModelScope.launch {
+            loadUsers()
+            loadPost()
+        }
+    }
 
 
     override fun onCleared() {
@@ -70,17 +76,12 @@ class NewsViewModel(
             usersService.moveUser(user, moveBy)
             removeProgressFrom(user)
 
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
             removeProgressFrom(user)
             _actionShowToast.value = Event(R.string.cant_move_user)
         }
-          //  .onSuccess {
 
-         //   }
-         //   .onError {
-
-            }
+    }
 
     override fun onUserDelete(user: User): Job = viewModelScope.launch {
         if (isInProgress(user))
@@ -90,18 +91,10 @@ class NewsViewModel(
         try {
 
             removeProgressFrom(user)
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
             removeProgressFrom(user)
             _actionShowToast.value = Event(R.string.cant_delete_user)  //  .onSuccess {
         }
-//            .onSuccess {
-//
-//            }
-//            .onError {
-//
-//            }
-        //  .autoCancel()
     }
 
     override fun onUserDetails(user: User) {
@@ -115,35 +108,23 @@ class NewsViewModel(
         usersService.fireUser(user)
         try {
             removeProgressFrom(user)
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
             removeProgressFrom(user)
             _actionShowToast.value = Event(R.string.cant_fire_user)//  .onSuccess {
         }
-//            .onSuccess {
-//
-//            }
-//            .onError {
-//
-//            }
-        //  .autoCancel()
     }
 
 
-    private suspend fun loadUsers()  {
+    private suspend fun loadUsers() {
         usersResult = PendingResult()
         usersService.loadUsers()
-        try {
+    }
 
+    private fun loadPost(){
+        viewModelScope.launch {
+            val response = usersService.loadPost()
+            newsResponse.value = response
         }
-        catch (e: Exception) {
-            //  .onSuccess {
-         //   usersResult = ErrorResult(it)
-        }
-        //  .onError() {
-        //
-        // }
-        //  .autoCancel()
     }
 
     private fun addProgressTo(user: User) {
