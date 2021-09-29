@@ -60,9 +60,7 @@ class UserDetailsFragment : Fragment() {
 
 
 
-        binding.deleteButton.setOnClickListener {
-            viewModel.deleteUser()
-        }
+
 
         return binding.root
     }

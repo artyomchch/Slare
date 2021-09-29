@@ -41,29 +41,6 @@ class UserDetailsViewModel(
 
     }
 
-    fun deleteUser() = viewModelScope.launch {
-        val userDetailsResult = currentState.userDetailsResult
-        if (userDetailsResult !is SuccessResult)
-            _state.value?.showProgress
-        _state.value?.enableDeleteButton
-        _state.value = currentState.copy(deletingInProgress = true)
-        usersService.deleteUser(data.user)
-        try {
-            _state.value?.showProgress
-            _actionShowToast.value = Event(R.string.user_has_been_deleted)
-            _actionGoBack.value = Event(Unit)
-            _state.value?.enableDeleteButton
-        } catch (e: Exception) {
-            _state.value = currentState.copy(deletingInProgress = false)
-            _actionShowToast.value = Event(R.string.cant_delete_user)
-        } finally {
-
-        }
-
-
-        //.autoCancel()
-    }
-
     private suspend fun loadUser() {
         if (currentState.userDetailsResult !is EmptyResult)
             _state.value?.showProgress
@@ -77,8 +54,6 @@ class UserDetailsViewModel(
         } finally {
 
         }
-
-
     }
 
     data class State(

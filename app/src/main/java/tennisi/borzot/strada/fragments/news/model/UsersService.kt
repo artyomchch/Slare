@@ -46,36 +46,6 @@ class UsersService {
     }
 
 
-     suspend fun deleteUser(user: User) {
-        delay(2000)
-        val indexToDelete = users.indexOfFirst { it.id == user.id }
-        if (indexToDelete != -1) {
-            users = ArrayList(users)
-            users.removeAt(indexToDelete)
-            notifyChanges()
-        }
-    }
-
-    suspend fun moveUser(user: User, moveBy: Int) {
-        delay(2000)
-        val oldIndex = users.indexOfFirst { it.id == user.id }
-        if (oldIndex == -1) return
-        val newIndex = oldIndex + moveBy
-        if (newIndex < 0 || newIndex >= users.size) return
-        users = ArrayList(users)
-        Collections.swap(users, oldIndex, newIndex)
-        notifyChanges()
-    }
-
-    suspend fun fireUser(user: User) {
-        delay(2000)
-        val index = users.indexOfFirst { it.id == user.id }
-        if (index == -1) return
-        val updatedUser = users[index].copy(company = "")
-        users = ArrayList(users)
-        users[index] = updatedUser
-        notifyChanges()
-    }
 
     suspend fun loadPost(): NewsItem {
         return RetrofitInstance.api.getPost()
