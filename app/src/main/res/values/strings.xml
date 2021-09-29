@@ -13,6 +13,7 @@
     <string name="speed_description">speed description</string>
     <string name="news_description">news description</string>
     //news strings
+    <string name="marker_dot"> \u2022 </string>
     <string name="move_up">Move Up</string>
     <string name="move_down">Move Down</string>
     <string name="remove">Remove</string>

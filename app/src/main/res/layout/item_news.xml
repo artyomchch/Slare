@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
         app:cardBackgroundColor="#F4F4F4"
+        app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,7 +22,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/imageNews"
+                android:id="@+id/image_news"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -29,48 +30,48 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/authorText"
+                android:id="@+id/author_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#FF0101"
+                android:textColor="#F1F1F1"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="16dp"
                 android:text="Some Author"
-                app:layout_constraintBottom_toBottomOf="@+id/imageNews"
-                app:layout_constraintStart_toStartOf="@+id/imageNews" />
+                app:layout_constraintBottom_toBottomOf="@+id/image_news"
+                app:layout_constraintStart_toStartOf="@+id/image_news" />
 
             <ImageView
-                android:id="@+id/shadowBottom"
+                android:id="@+id/shadow_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:src="@drawable/shadow_bottom"
-                app:layout_constraintBottom_toBottomOf="@+id/imageNews"
-                app:layout_constraintEnd_toEndOf="@+id/imageNews"
-                app:layout_constraintStart_toStartOf="@+id/imageNews" />
+                app:layout_constraintBottom_toBottomOf="@+id/image_news"
+                app:layout_constraintEnd_toEndOf="@+id/image_news"
+                app:layout_constraintStart_toStartOf="@+id/image_news" />
 
             <ProgressBar
-                android:id="@+id/newsProgressBar"
+                android:id="@+id/news_progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/imageNews"
-                app:layout_constraintEnd_toEndOf="@+id/imageNews"
-                app:layout_constraintStart_toStartOf="@+id/imageNews"
-                app:layout_constraintTop_toTopOf="@+id/imageNews" />
+                app:layout_constraintBottom_toBottomOf="@+id/image_news"
+                app:layout_constraintEnd_toEndOf="@+id/image_news"
+                app:layout_constraintStart_toStartOf="@+id/image_news"
+                app:layout_constraintTop_toTopOf="@+id/image_news" />
 
             <FrameLayout
-                android:id="@+id/layoutDate"
+                android:id="@+id/layout_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/round_white"
                 android:padding="5dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageNews"
-                app:layout_constraintEnd_toEndOf="@+id/imageNews">
+                app:layout_constraintBottom_toBottomOf="@+id/image_news"
+                app:layout_constraintEnd_toEndOf="@+id/image_news">
 
                 <ImageView
-                    android:id="@+id/changeElement"
+                    android:id="@+id/change_element"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_marginLeft="5dp"
@@ -79,7 +80,7 @@
                     android:src="@drawable/ic_baseline_date" />
 
                 <TextView
-                    android:id="@+id/publishedAt"
+                    android:id="@+id/published_at"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="27dp"
@@ -91,7 +92,9 @@
             </FrameLayout>
 
             <TextView
-                android:id="@+id/titleNews"
+                android:id="@+id/title_news"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -99,37 +102,41 @@
                 android:layout_marginEnd="10dp"
                 android:text="Some text title"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageNews" />
+                app:layout_constraintTop_toBottomOf="@+id/image_news" />
 
             <TextView
-                android:id="@+id/descNews"
+                android:id="@+id/desc_news"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:maxLines="3"
                 android:layout_marginEnd="10dp"
                 android:text="Some text description"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleNews" />
+                app:layout_constraintTop_toBottomOf="@+id/title_news" />
 
             <TextView
-                android:id="@+id/sourceNews"
+                android:id="@+id/source_news"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Some text source"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/descNews" />
+                app:layout_constraintTop_toBottomOf="@+id/desc_news" />
 
             <TextView
-                android:id="@+id/timeNews"
+                android:id="@+id/time_news"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="10dp"
                 android:text="Some text time"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/sourceNews" />
+                app:layout_constraintStart_toEndOf="@+id/source_news" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
