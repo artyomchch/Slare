@@ -8,12 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import tennisi.borzot.strada.R
+import tennisi.borzot.strada.network.pojo.Article
 import tennisi.borzot.strada.network.pojo.NewsItem
 import tennisi.borzot.strada.utils.DateUtils
 
 class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsItemViewHolder>() {
 
-    var newsList = listOf<NewsItem>()
+    var newsList = listOf<Article>()
     set(value){
         field = value
         notifyDataSetChanged()
@@ -25,7 +26,7 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsItemViewHolder>
     }
 
     override fun onBindViewHolder(viewHolder: NewsItemViewHolder, position: Int) {
-        val newsItem = newsList[position].articles[position]
+        val newsItem = newsList[position]
         Glide.with(viewHolder.itemView)
             .load(newsItem.urlToImage)
             .centerCrop()
