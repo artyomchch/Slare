@@ -14,11 +14,7 @@
     <string name="news_description">news description</string>
     //news strings
     <string name="marker_dot"> \u2022 </string>
-    <string name="move_up">Move Up</string>
-    <string name="move_down">Move Down</string>
-    <string name="remove">Remove</string>
-    <string name="fire">Fire</string>
-    <string name="unemployed">[Unemployed]</string>
+
     //news logs strings
     <string name="failed_to_load_users">Failed to load users</string>
     <string name="try_again">Try again</string>
@@ -49,6 +45,8 @@
     <string name="information_description">Authentication is allowed to share and save your sound profile settings for a specific vehicle. The data is not confidential and is stored in Google services.</string>
     <string name="community_question"><u>Why use an account?</u></string>
     <string name="accept">Accept</string>
+    //Add car fragment
+    <string name="add_car_warning_text">You don\'t have cars in the list yet, click on the icon to add it</string>
 
 
 </resources>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".fragments.add.mvpAddFragment.AddFragment">
+    tools:context=".fragments.add.presentation.AddFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,7 +42,7 @@
             android:gravity="center"
             android:paddingLeft="80dp"
             android:paddingRight="80dp"
-            android:text="You don't have cars in the list yet, click on the icon to add it"
+            android:text="@string/add_car_warning_text"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

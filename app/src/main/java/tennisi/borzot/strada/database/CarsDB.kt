@@ -5,7 +5,7 @@ import io.realm.annotations.PrimaryKey
 import io.realm.annotations.RealmClass
 
 @RealmClass
-open class Cars : RealmObject() {
+open class CarsDB : RealmObject() {
     @PrimaryKey
     var id: String? = null
     var carBrand: String? = null
