@@ -82,7 +82,7 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
 
     override fun requestPermission() {
         if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
-            // доступ к камере запрещен, нужно объяснить зачем нам требуется разрешение
+            singlePermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         } else {
             singlePermission.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }

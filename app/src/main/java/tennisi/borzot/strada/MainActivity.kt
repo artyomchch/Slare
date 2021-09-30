@@ -24,10 +24,10 @@ class MainActivity : AppCompatActivity() {
         binding.mViewPager.offscreenPageLimit = 5
 
         auth = FirebaseAuth.getInstance()
-        val currentUser = auth.currentUser
+
 
         Glide.with(this)
-            .load(currentUser?.photoUrl)
+            .load(auth.currentUser?.photoUrl)
             .circleCrop()
             .into(binding.mainFragmentToolbar.toolbarImage)
 
@@ -56,7 +56,6 @@ class MainActivity : AppCompatActivity() {
             binding.mViewPager.setCurrentItem(0, true)
         }
 
-
         binding.layoutEqualizer.isClickable = true
         binding.layoutEqualizer.setOnClickListener {
             binding.mViewPager.setCurrentItem(1, true)
@@ -72,12 +71,10 @@ class MainActivity : AppCompatActivity() {
             binding.mViewPager.setCurrentItem(3, true)
         }
 
-
         binding.layoutSettings.isClickable = true
         binding.layoutSettings.setOnClickListener {
             binding.mViewPager.setCurrentItem(4, true)
         }
-
 
         //default tab
         binding.mViewPager.currentItem = 2
