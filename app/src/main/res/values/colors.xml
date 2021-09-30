@@ -36,4 +36,9 @@
     //Sign in color
     <color name="signInTitleColor">#333333</color>
     <color name="signInDescriptionColor">#333333</color>
+
+    //main color
+    <color name="purple">#731BE4</color>
+
+
 </resources>
