@@ -20,6 +20,7 @@ import tennisi.borzot.strada.utils.DateUtils
 class NewsFragment : Fragment() {
 
     private lateinit var binding: FragmentNewsBinding
+    private lateinit var adapter: NewsListAdapter
 
     private lateinit var viewModel: NewsFragmentViewModel
     override fun onCreateView(
@@ -27,13 +28,20 @@ class NewsFragment : Fragment() {
     ): View {
         binding = FragmentNewsBinding.inflate(inflater, container, false)
 
+        setupRecyclerView()
         viewModel = ViewModelProvider(this)[NewsFragmentViewModel::class.java]
         viewModel.newsResponse.observe(viewLifecycleOwner) {
-            showList(it)
+           // showList(it)
+            adapter.newsList = it
         }
 
 
         return binding.root
+    }
+
+    private fun setupRecyclerView(){
+        adapter = NewsListAdapter()
+        binding.newsRecycler.adapter = adapter
     }
 
     private fun showList(list: List<Article>){
