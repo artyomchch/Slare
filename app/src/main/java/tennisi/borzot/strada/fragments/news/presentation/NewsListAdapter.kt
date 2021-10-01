@@ -1,5 +1,6 @@
 package tennisi.borzot.strada.fragments.news.presentation
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,16 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.network.pojo.Article
-import tennisi.borzot.strada.network.pojo.NewsItem
 import tennisi.borzot.strada.utils.DateUtils
 
 class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsItemViewHolder>() {
 
     var newsList = listOf<Article>()
-    set(value){
-        field = value
-        notifyDataSetChanged()
-    }
+        @SuppressLint("NotifyDataSetChanged")
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news, parent, false)
