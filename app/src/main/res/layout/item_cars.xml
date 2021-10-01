@@ -28,11 +28,11 @@
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="10dp"
+                android:contentDescription="@string/brand_car_item"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/noauto"
-                android:contentDescription="@string/brand_car_item" />
+                app:srcCompat="@drawable/noauto" />
 
             <LinearLayout
                 android:layout_width="wrap_content"

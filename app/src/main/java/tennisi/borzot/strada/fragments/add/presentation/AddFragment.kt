@@ -4,14 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import tennisi.borzot.strada.databinding.FragmentAddBinding
 
 
 class AddFragment : Fragment() {
 
-    private lateinit var adapter: CarsListAdapter
+    private lateinit var carsListAdapter: CarsListAdapter
     private lateinit var viewModel: AddFragmentViewModel
 
     private var _binding: FragmentAddBinding? = null
@@ -29,15 +32,52 @@ class AddFragment : Fragment() {
         setupRecyclerView()
         viewModel = ViewModelProvider(this)[(AddFragmentViewModel::class.java)]
         viewModel.carList.observe(viewLifecycleOwner) {
-            adapter.carsList = it
+            carsListAdapter.submitList(it)
         }
 
         return binding.root
     }
 
     private fun setupRecyclerView() {
-        adapter = CarsListAdapter()
-        binding.carsRecycler.adapter = adapter
+
+        with(binding.carsRecycler) {
+            carsListAdapter = CarsListAdapter()
+            adapter = carsListAdapter
+            recycledViewPool.setMaxRecycledViews(CarsListAdapter.VIEW_TYPE_ENABLED, CarsListAdapter.MAX_POOL_SIZE)
+            recycledViewPool.setMaxRecycledViews(CarsListAdapter.VIEW_TYPE_DISABLED, CarsListAdapter.MAX_POOL_SIZE)
+        }
+
+        setupOnLongClickListener()
+        setupClickListener()
+        setupSwipeListener()
+    }
+
+    private fun setupSwipeListener() {
+        val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val item = carsListAdapter.currentList[viewHolder.layoutPosition]
+                viewModel.deleteCarItem(item)
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(callback)
+        itemTouchHelper.attachToRecyclerView(binding.carsRecycler)
+    }
+
+    private fun setupClickListener() {
+        carsListAdapter.onCarItemClickListener = {
+            Toast.makeText(context, it.id.toString(), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setupOnLongClickListener() {
+        carsListAdapter.onCarItemLongClickListener = {
+            viewModel.changeEnableState(it)
+        }
     }
 
     override fun onDestroyView() {

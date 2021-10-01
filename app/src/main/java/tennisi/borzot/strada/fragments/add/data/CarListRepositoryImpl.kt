@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import tennisi.borzot.strada.fragments.add.domain.CarItem
 import tennisi.borzot.strada.fragments.add.domain.CarListRepository
+import kotlin.random.Random
 
 object CarListRepositoryImpl : CarListRepository {
 
@@ -13,8 +14,8 @@ object CarListRepositoryImpl : CarListRepository {
     private var autoIncrementId = 0
 
     init {
-        for (i in 0 until 100) {
-            val item = CarItem("Name $i", "Brand $i", "Model $i", "Description $i")
+        for (i in 0 until 1000) {
+            val item = CarItem("Name $i", "Brand $i", "Model $i", "Description $i",  Random.nextBoolean())
             addCarItem(item)
         }
     }

@@ -5,6 +5,7 @@ data class CarItem(
     val brand: String,
     val model: String,
     val description: String,
+    val enable: Boolean,
     var id: Int = UNDEFINED_ID
 ){
     companion object{

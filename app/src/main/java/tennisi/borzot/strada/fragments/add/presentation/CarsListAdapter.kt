@@ -1,44 +1,55 @@
 package tennisi.borzot.strada.fragments.add.presentation
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.fragments.add.domain.CarItem
 
-class CarsListAdapter : RecyclerView.Adapter<CarsListAdapter.CarsItemViewHolder>() {
+class CarsListAdapter : ListAdapter<CarItem, CarItemViewHolder>(CarItemDiffCallback()) {
 
-    var carsList = listOf<CarItem>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
+    var onCarItemLongClickListener: ((CarItem) -> Unit)? = null
+    var onCarItemClickListener: ((CarItem) -> Unit)? = null
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarItemViewHolder {
+        val layout = when (viewType) {
+            VIEW_TYPE_DISABLED -> R.layout.item_cars_disable
+            VIEW_TYPE_ENABLED -> R.layout.item_cars
+            else -> throw RuntimeException("Unknown view type: $viewType")
         }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarsItemViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_cars, parent, false)
-        return CarsItemViewHolder(view)
+        val view = LayoutInflater.from(parent.context).inflate(layout, parent, false)
+        return CarItemViewHolder(view)
     }
 
-    override fun onBindViewHolder(viewHolder: CarsItemViewHolder, position: Int) {
-        val carsItem = carsList[position]
+    override fun onBindViewHolder(viewHolder: CarItemViewHolder, position: Int) {
+        val carsItem = getItem(position)
 
         viewHolder.nameOfCar.text = carsItem.name
         viewHolder.brandOfCar.text = carsItem.brand
         viewHolder.modelOfCar.text = carsItem.model
+        viewHolder.itemView.setOnLongClickListener {
+            onCarItemLongClickListener?.invoke(carsItem)
+            true
+        }
+        viewHolder.itemView.setOnClickListener {
+            onCarItemClickListener?.invoke(carsItem)
+        }
 
     }
 
-    override fun getItemCount(): Int {
-        return carsList.size
+    override fun getItemViewType(position: Int): Int {
+        val item = getItem(position)
+        return if (item.enable) {
+            VIEW_TYPE_ENABLED
+        } else {
+            VIEW_TYPE_DISABLED
+        }
     }
 
-    class CarsItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    companion object {
+        const val VIEW_TYPE_ENABLED = 100
+        const val VIEW_TYPE_DISABLED = 101
 
-        val nameOfCar: TextView = view.findViewById(R.id.text_name_of_car)
-        val brandOfCar: TextView = view.findViewById(R.id.text_brand_of_car)
-        val modelOfCar: TextView = view.findViewById(R.id.text_model_of_car)
-
+        const val MAX_POOL_SIZE = 10
     }
 }

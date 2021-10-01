@@ -11,7 +11,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="#63065DE4"
+        android:background="?attr/selectableItemBackground"
+        app:cardBackgroundColor="#8DB7F6"
         app:cardCornerRadius="10dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +32,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/acura" />
+                app:srcCompat="@drawable/noauto" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
