@@ -10,16 +10,23 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingTop="55dp"
+        android:paddingBottom="49dp"
+        >
 
 
-        <include
-            android:id="@+id/toolbarCarFragment"
-            layout="@layout/tool_bar"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/cars_recycler"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_cars" />
 
 
         <TextView
@@ -27,6 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="100dp"
+            android:visibility="gone"
             android:gravity="center"
             android:paddingLeft="80dp"
             android:paddingRight="80dp"
@@ -34,8 +42,7 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbarCarFragment" />
+            app:layout_constraintStart_toStartOf="parent" />
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -43,14 +50,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="18dp"
-            android:layout_marginBottom="70dp"
+            android:layout_marginBottom="21dp"
             android:clickable="true"
             android:focusable="true"
             android:src="@drawable/ic_baseline_add_white"
             app:backgroundTint="@color/purple"
             app:backgroundTintMode="add"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/it_s_fab_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

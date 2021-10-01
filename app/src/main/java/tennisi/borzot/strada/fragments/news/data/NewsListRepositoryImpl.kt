@@ -1,5 +1,6 @@
 package tennisi.borzot.strada.fragments.news.data
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import tennisi.borzot.strada.fragments.news.domain.NewsListRepository
 import tennisi.borzot.strada.network.RetrofitInstance
@@ -17,6 +18,10 @@ object NewsListRepositoryImpl: NewsListRepository {
 
     suspend fun getPost(): List<Article> {
         return RetrofitInstance.api.getPost().articles
+    }
+
+    override fun getNewsList(): LiveData<List<Article>> {
+        TODO("Not yet implemented")
     }
 
 }

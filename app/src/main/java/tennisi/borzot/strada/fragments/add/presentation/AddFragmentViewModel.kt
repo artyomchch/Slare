@@ -2,12 +2,11 @@ package tennisi.borzot.strada.fragments.add.presentation
 
 import androidx.lifecycle.ViewModel
 import tennisi.borzot.strada.fragments.add.data.CarListRepositoryImpl
-import tennisi.borzot.strada.fragments.add.domain.CarListRepository
 import tennisi.borzot.strada.fragments.add.domain.DeleteCarItemUseCase
 import tennisi.borzot.strada.fragments.add.domain.EditCarItemUseCase
 import tennisi.borzot.strada.fragments.add.domain.GetCarListUseCase
 
-class AddFragmentViewModel: ViewModel() {
+class AddFragmentViewModel : ViewModel() {
 
 
     private val repository = CarListRepositoryImpl

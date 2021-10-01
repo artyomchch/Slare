@@ -50,6 +50,8 @@
     <string name="name_of_car">Name of car</string>
     <string name="brand_of_car">Brand of car</string>
     <string name="model_of_car">Model of car</string>
+    <string name="it_s_fab_button">it\'s FAB button</string>
+    <string name="brand_car_item">Brand car item</string>
 
 
 </resources>
