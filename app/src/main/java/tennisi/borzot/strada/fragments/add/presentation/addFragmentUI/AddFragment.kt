@@ -1,15 +1,15 @@
-package tennisi.borzot.strada.fragments.add.presentation
+package tennisi.borzot.strada.fragments.add.presentation.addFragmentUI
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import tennisi.borzot.strada.databinding.FragmentAddBinding
+import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemActivity
 
 
 class AddFragment : Fragment() {
@@ -33,6 +33,10 @@ class AddFragment : Fragment() {
         viewModel = ViewModelProvider(this)[(AddFragmentViewModel::class.java)]
         viewModel.carList.observe(viewLifecycleOwner) {
             carsListAdapter.submitList(it)
+        }
+        binding.carAddFab.setOnClickListener {
+            val intent = context?.let { it1 -> CarItemActivity.newIntentAddItem(it1.applicationContext) }
+            startActivity(intent)
         }
 
         return binding.root
@@ -70,7 +74,9 @@ class AddFragment : Fragment() {
 
     private fun setupClickListener() {
         carsListAdapter.onCarItemClickListener = {
-            Toast.makeText(context, it.id.toString(), Toast.LENGTH_SHORT).show()
+            val intent = context?.let { it1 -> CarItemActivity.newIntentEditItem(it1.applicationContext, it.id) }
+            startActivity(intent)
+
         }
     }
 

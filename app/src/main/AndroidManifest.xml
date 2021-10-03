@@ -15,6 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/MainTheme">
         <activity
+            android:windowSoftInputMode="adjustResize"
+            android:name=".fragments.add.presentation.carItemUI.CarItemActivity"
+            android:exported="true" />
+        <activity
             android:name=".services.firebase.SignInActivity"
             android:exported="true" />
 
@@ -31,7 +35,7 @@
 
         <activity
             android:name=".splash.SplashActivity"
-            android:exported = "true"
+            android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />

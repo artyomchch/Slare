@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.fragments.add.presentation
+package tennisi.borzot.strada.fragments.add.presentation.addFragmentUI
 
 import androidx.lifecycle.ViewModel
 import tennisi.borzot.strada.fragments.add.data.CarListRepositoryImpl

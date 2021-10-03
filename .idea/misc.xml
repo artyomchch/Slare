@@ -8,6 +8,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/drawable/button_rounded.xml" value="0.5" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/drawable/ic_baseline_add_black.xml" value="0.2394736842105263" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/drawable/ic_baseline_add_pink.xml" value="0.17280701754385966" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/drawable/ic_baseline_add_white.xml" value="0.1899122807017544" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/drawable/ic_baseline_equalizer_pink.xml" value="0.3223684210526316" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/drawable/ic_baseline_equalizer_purple.xml" value="0.17280701754385966" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/drawable/ic_baseline_play_circle_filled_black.xml" value="0.2394736842105263" />
@@ -32,13 +33,14 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/drawable/shadow_bottom.xml" value="0.27314814814814814" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/drawable/splash.xml" value="0.18771929824561404" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/layout-v21/item_user.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/layout/activity_car_item.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/layout/activity_main.xml" value="0.2528263103802672" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/layout/activity_on_boarding_main.xml" value="0.67" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/layout/activity_sign_in.xml" value="0.22" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/layout/activity_splash.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/layout/car_list_enable.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/layout/cars_list.xml" value="0.482897384305835" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/layout/fragment_add.xml" value="0.22509057971014493" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/layout/fragment_add.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/layout/fragment_add_car.xml" value="0.22916666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/layout/fragment_news.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/layout/fragment_news_view_pager.xml" value="0.22587719298245615" />
@@ -51,7 +53,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/layout/item_news.xml" value="0.40460526315789475" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/layout/item_user.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/layout/onboarding_screen_layout.xml" value="0.33" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/layout/tool_bar.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/layout/tool_bar.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2394736842105263" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2394736842105263" />
       </map>

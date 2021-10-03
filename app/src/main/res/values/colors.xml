@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#77B2D8</color>
-    <color name="colorPrimaryDark">#A2C9EC</color>
-    <color name="colorAccent">#03DAC5</color>
-    <color name="colorWeather">#E2EBF3</color>
-    <color name="colorCar">#7F9488</color>
+    <color name="colorPrimary">#1A237E</color>
+    <color name="colorPrimaryDark">#FF6F00</color>
+    <color name="colorAccent">#731BE4</color>
+
 
     // Transparent colors
     <color name="trans_green">#7525d366</color>

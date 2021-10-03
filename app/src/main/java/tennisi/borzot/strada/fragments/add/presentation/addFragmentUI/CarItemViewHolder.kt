@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.fragments.add.presentation
+package tennisi.borzot.strada.fragments.add.presentation.addFragmentUI
 
 import android.view.View
 import android.widget.TextView

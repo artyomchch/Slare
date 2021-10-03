@@ -1,0 +1,111 @@
+package tennisi.borzot.strada.fragments.add.presentation.carItemUI
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import tennisi.borzot.strada.fragments.add.data.CarListRepositoryImpl
+import tennisi.borzot.strada.fragments.add.domain.AddCarItemUseCase
+import tennisi.borzot.strada.fragments.add.domain.CarItem
+import tennisi.borzot.strada.fragments.add.domain.EditCarItemUseCase
+import tennisi.borzot.strada.fragments.add.domain.GetCarItemUseCase
+
+class CarItemViewModel : ViewModel() {
+
+    private val repository = CarListRepositoryImpl
+
+    private val getCarItemUseCase = GetCarItemUseCase(repository)
+    private val addCarItemUseCase = AddCarItemUseCase(repository)
+    private val editCarItemUseCase = EditCarItemUseCase(repository)
+
+    private val _errorInputName = MutableLiveData<Boolean>()
+    val errorInputName: LiveData<Boolean>
+        get() = _errorInputName
+
+    private val _errorInputBrand = MutableLiveData<Boolean>()
+    val errorInputBrand: LiveData<Boolean>
+        get() = _errorInputBrand
+
+    private val _errorInputModel = MutableLiveData<Boolean>()
+    val errorInputModel: LiveData<Boolean>
+        get() = _errorInputModel
+
+    private val _shouldCloseScreen = MutableLiveData<Unit>()
+    val shouldCloseScreen: LiveData<Unit>
+        get() = _shouldCloseScreen
+
+    private val _carItem = MutableLiveData<CarItem>()
+    val carItem: LiveData<CarItem>
+        get() = _carItem
+
+
+    fun getCarItem(carItemId: Int) {
+        val item = getCarItemUseCase.getCarItem(carItemId)
+        _carItem.value = item
+    }
+
+    fun addCarItem(inputName: String?, inputBrand: String?, inputModel: String?) {
+        val name = parseName(inputName)
+        val brand = parseName(inputBrand)
+        val model = parseName(inputModel)
+        val fieldsValid = validateInput(name, brand, model)
+        if (fieldsValid) {
+            val carItem = CarItem(name, brand, model, true)
+            addCarItemUseCase.addCarItem(carItem)
+            finishWork()
+        }
+
+    }
+
+    fun editCarItem(inputName: String?, inputBrand: String?, inputModel: String?) {
+        val name = parseName(inputName)
+        val brand = parseName(inputBrand)
+        val model = parseName(inputModel)
+        val fieldsValid = validateInput(name, brand, model)
+        if (fieldsValid) {
+            _carItem.value?.let {
+                val item = it.copy(name = name, brand = brand, model = model)
+                editCarItemUseCase.editCarItem(item)
+                finishWork()
+            }
+
+        }
+
+    }
+
+    private fun parseName(inputName: String?): String {
+        return inputName?.trim() ?: ""
+    }
+
+    private fun validateInput(name: String, brand: String, model: String): Boolean {
+        var result = true
+        if (name.isBlank()) {
+            _errorInputName.value = true
+            result = false
+        }
+        if (brand.isBlank()) {
+            _errorInputBrand.value = true
+            result = false
+        }
+        if (model.isBlank()) {
+            _errorInputModel.value = true
+            result = false
+        }
+        return result
+    }
+
+    fun resetErrorInputName() {
+        _errorInputName.value = false
+    }
+
+    fun resetErrorInputBrand() {
+        _errorInputBrand.value = false
+    }
+
+    fun resetErrorInputModel() {
+        _errorInputModel.value = false
+    }
+
+    fun finishWork(){
+        _shouldCloseScreen.value = Unit
+    }
+}

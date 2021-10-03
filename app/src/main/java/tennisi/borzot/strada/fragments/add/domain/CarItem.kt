@@ -4,7 +4,6 @@ data class CarItem(
     val name: String,
     val brand: String,
     val model: String,
-    val description: String,
     val enable: Boolean,
     var id: Int = UNDEFINED_ID
 ){

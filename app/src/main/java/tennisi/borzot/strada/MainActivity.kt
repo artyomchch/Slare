@@ -37,9 +37,7 @@ class MainActivity : AppCompatActivity() {
                 position: Int,
                 positionOffset: Float,
                 positionOffsetPixels: Int
-            ) {
-
-            }
+            ) {}
 
             override fun onPageSelected(position: Int) {
                 changingTabs(position)

@@ -15,7 +15,7 @@ object CarListRepositoryImpl : CarListRepository {
 
     init {
         for (i in 0 until 1000) {
-            val item = CarItem("Name $i", "Brand $i", "Model $i", "Description $i",  Random.nextBoolean())
+            val item = CarItem("Name $i", "Brand $i", "Model $i", Random.nextBoolean())
             addCarItem(item)
         }
     }

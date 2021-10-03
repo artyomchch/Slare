@@ -52,6 +52,13 @@
     <string name="model_of_car">Model of car</string>
     <string name="it_s_fab_button">it\'s FAB button</string>
     <string name="brand_car_item">Brand car item</string>
+    //Car Item fragment
+    <string name="save">Save</string>
+    <string name="add_vehicle">Add vehicle</string>
+    <string name="edit_vehicle">Edit vehicle</string>
+    <string name="hint_name">Name:</string>
+    <string name="hint_brand">Brand:</string>
+    <string name="hint_model">Model:</string>
 
 
 </resources>

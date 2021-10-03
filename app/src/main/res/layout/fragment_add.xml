@@ -5,15 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".fragments.add.presentation.AddFragment">
+    tools:context=".fragments.add.presentation.addFragmentUI.AddFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="55dp"
-        android:paddingBottom="49dp"
-        >
+        android:paddingBottom="49dp">
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -34,31 +33,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="100dp"
-            android:visibility="gone"
             android:gravity="center"
             android:paddingLeft="80dp"
             android:paddingRight="80dp"
             android:text="@string/add_car_warning_text"
             android:textSize="18sp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/FAB_car"
+            android:id="@+id/car_add_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="18dp"
-            android:layout_marginBottom="21dp"
-            android:clickable="true"
-            android:focusable="true"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
             android:src="@drawable/ic_baseline_add_white"
-            app:backgroundTint="@color/purple"
-            app:backgroundTintMode="add"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/cars_recycler"
             app:layout_constraintEnd_toEndOf="parent"
-            android:contentDescription="@string/it_s_fab_button" />
+            android:contentDescription="@string/add_car" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
