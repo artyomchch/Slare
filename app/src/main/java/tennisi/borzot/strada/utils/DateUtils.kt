@@ -24,20 +24,20 @@ object DateUtils {
         return isTime
     }
 
-    fun dateFormat(oldstringDate: String?): String? {
+    fun dateFormat(oldStringDate: String?): String? {
         val newDate: String?
         val dateFormat = SimpleDateFormat("E, d MMM yyyy", Locale(getCountry()))
         newDate = try {
-            val date: Date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(oldstringDate!!)!!
+            val date: Date = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").parse(oldStringDate!!)!!
             dateFormat.format(date)
         } catch (e: ParseException) {
             e.printStackTrace()
-            oldstringDate
+            oldStringDate
         }
         return newDate
     }
 
-    fun getCountry(): String {
+    private fun getCountry(): String {
         val locale = Locale.getDefault()
         val country = java.lang.String.valueOf(locale.country)
         return country.toLowerCase()

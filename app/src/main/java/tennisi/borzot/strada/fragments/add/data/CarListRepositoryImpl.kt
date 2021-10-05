@@ -14,7 +14,7 @@ object CarListRepositoryImpl : CarListRepository {
     private var autoIncrementId = 0
 
     init {
-        for (i in 0 until 1000) {
+        for (i in 0 until 20) {
             val item = CarItem("Name $i", "Brand $i", "Model $i", Random.nextBoolean())
             addCarItem(item)
         }

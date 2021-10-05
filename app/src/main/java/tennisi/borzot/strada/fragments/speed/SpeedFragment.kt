@@ -66,7 +66,7 @@ class SpeedFragment : Fragment(), SpeedInterface.View {
 
 
 
-        binding.speedView.onSpeedChangeListener = { gauge: Gauge, isSpeedUp: Boolean, isByTremble: Boolean ->
+        binding.speedView.onSpeedChangeListener = { _: Gauge, isSpeedUp: Boolean, _: Boolean ->
             startAnimationTicks(binding.speedView, isSpeedUp)
         }
 

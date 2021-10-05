@@ -9,7 +9,7 @@ import tennisi.borzot.strada.fragments.news.presentation.NewsFragment
 import tennisi.borzot.strada.fragments.settings.SettingsFragment
 import tennisi.borzot.strada.fragments.speed.SpeedFragment
 
-@Suppress("DEPRECATION")
+
 internal class PagerViewAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
     override fun getCount(): Int {
         return 5

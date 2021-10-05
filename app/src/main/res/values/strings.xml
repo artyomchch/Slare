@@ -59,6 +59,9 @@
     <string name="hint_name">Name:</string>
     <string name="hint_brand">Brand:</string>
     <string name="hint_model">Model:</string>
+    <string name="invalid_name">Invalid name</string>
+    <string name="invalid_brand">Invalid brand</string>
+    <string name="invalid_model">Invalid model</string>
 
 
 </resources>

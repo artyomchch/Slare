@@ -76,7 +76,6 @@ class AddFragment : Fragment() {
         carsListAdapter.onCarItemClickListener = {
             val intent = context?.let { it1 -> CarItemActivity.newIntentEditItem(it1.applicationContext, it.id) }
             startActivity(intent)
-
         }
     }
 
