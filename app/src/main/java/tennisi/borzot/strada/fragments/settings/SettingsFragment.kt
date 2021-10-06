@@ -19,7 +19,7 @@ class SettingsFragment : Fragment() {
 
         val binding: FragmentSettingsBinding by lazy(LazyThreadSafetyMode.NONE) { FragmentSettingsBinding.inflate(inflater, container, false) }
 
-        binding.toolbarSettingsFragment.toolbar.title = getString(R.string.settings)
+    //    binding.toolbarSettingsFragment.toolbar.title = getString(R.string.settings)
         Glide.with(this)
             .asGif()
             .load("https://i.imgur.com/Mn9dJcJ.gif")

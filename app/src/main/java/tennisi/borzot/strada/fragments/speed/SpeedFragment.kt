@@ -45,7 +45,7 @@ class SpeedFragment : Fragment(), SpeedInterface.View {
         val binding: FragmentSpeedBinding by lazy(LazyThreadSafetyMode.NONE) { FragmentSpeedBinding.inflate(inflater, container, false) }
         presenter = SpeedPresenter(this)
 
-        binding.toolbarSpeedFragment.toolbar.title = getString(R.string.speed)
+
 
         setSectionTicks(binding.speedView)
 

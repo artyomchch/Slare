@@ -18,7 +18,7 @@ class EqualizerFragment : Fragment() {
     ): View {
         val binding: FragmentEqualizerBinding by lazy(LazyThreadSafetyMode.NONE) { FragmentEqualizerBinding.inflate(inflater, container, false) }
 
-        binding.toolbarEqualizerFragment.toolbar.title = getString(R.string.equalizer)
+     //   binding.toolbarEqualizerFragment.toolbar.title = getString(R.string.equalizer)
 
         Glide.with(this)
             .asGif()
