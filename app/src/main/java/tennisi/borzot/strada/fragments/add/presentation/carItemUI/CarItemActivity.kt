@@ -140,7 +140,7 @@ class CarItemActivity : AppCompatActivity() {
 //
     private fun parseIntent() {
         if (!intent.hasExtra(EXTRA_SCREEN_MODE)) {
-            throw RuntimeException("Param screen mode if absent")
+            throw RuntimeException("Param screen mode is absent")
         }
         val mode = intent.getStringExtra(EXTRA_SCREEN_MODE)
         if (mode != MODE_EDIT && mode != MODE_ADD) {
@@ -148,8 +148,8 @@ class CarItemActivity : AppCompatActivity() {
         }
         screenMode = mode
         if (screenMode == MODE_EDIT) {
-            if (!intent.hasExtra(EXTRA_SCREEN_MODE)) {
-                throw RuntimeException("Param shop item id id absent")
+            if (!intent.hasExtra(EXTRA_CAR_ITEM_ID)) {
+                throw RuntimeException("Param shop item id is absent")
             }
             carItemId = intent.getIntExtra(EXTRA_CAR_ITEM_ID, CarItem.UNDEFINED_ID)
         }
@@ -179,7 +179,7 @@ class CarItemActivity : AppCompatActivity() {
         private const val EXTRA_SCREEN_MODE = "extra_mode"
         private const val EXTRA_CAR_ITEM_ID = "extra_item"
         private const val MODE_EDIT = "mode_edit"
-        private const val MODE_ADD = "mode add"
+        private const val MODE_ADD = "mode_add"
         private const val MODE_UNKNOWN = ""
 
         fun newIntentAddItem(context: Context): Intent {

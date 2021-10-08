@@ -152,8 +152,8 @@ class CarItemFragment : Fragment() {
 
     private fun parseParams() {
         val args = requireArguments()
-        if (args.containsKey(SCREEN_MODE)) {
-            throw RuntimeException("Param screen mode if absent")
+        if (!args.containsKey(SCREEN_MODE)) {
+            throw RuntimeException("Param screen mode is absent")
         }
         val mode = args.getString(SCREEN_MODE)
         if (mode != MODE_EDIT && mode != MODE_ADD) {
@@ -162,7 +162,7 @@ class CarItemFragment : Fragment() {
         screenMode = mode
         if (screenMode == MODE_EDIT) {
             if (!args.containsKey(CAR_ITEM_ID)) {
-                throw RuntimeException("Param shop item id id absent")
+                throw RuntimeException("Param shop item id is absent")
             }
             carItemId = args.getInt(CAR_ITEM_ID, CarItem.UNDEFINED_ID)
         }
@@ -198,7 +198,7 @@ class CarItemFragment : Fragment() {
         private const val SCREEN_MODE = "extra_mode"
         private const val CAR_ITEM_ID = "extra_item"
         private const val MODE_EDIT = "mode_edit"
-        private const val MODE_ADD = "mode add"
+        private const val MODE_ADD = "mode_add"
         private const val MODE_UNKNOWN = ""
 
         fun newInstanceAddItem(): CarItemFragment {
