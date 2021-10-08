@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.FragmentAddBinding
 import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemActivity
+import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemFragment
 
 
 class AddFragment : Fragment() {
@@ -35,12 +38,34 @@ class AddFragment : Fragment() {
             carsListAdapter.submitList(it)
         }
         binding.carAddFab.setOnClickListener {
-            val intent = context?.let { it1 -> CarItemActivity.newIntentAddItem(it1.applicationContext) }
-            startActivity(intent)
+            if (isOnePaneMode()){
+                val intent = context?.let { it1 -> CarItemActivity.newIntentAddItem(it1.applicationContext) }
+                startActivity(intent)
+            } else {
+                launchFragment(CarItemFragment.newInstanceAddItem())
+            }
+
+
         }
 
         return binding.root
     }
+
+    private fun isOnePaneMode(): Boolean{
+        return binding.carItemContainer == null
+    }
+
+    private fun launchFragment(fragment: Fragment){
+        parentFragmentManager.apply {
+            popBackStack()
+            beginTransaction()
+                .replace(R.id.car_item_container, fragment)
+                .addToBackStack(null)
+                .commit()
+        }
+    }
+
+
 
     private fun setupRecyclerView() {
 
@@ -74,8 +99,14 @@ class AddFragment : Fragment() {
 
     private fun setupClickListener() {
         carsListAdapter.onCarItemClickListener = {
-            val intent = context?.let { it1 -> CarItemActivity.newIntentEditItem(it1.applicationContext, it.id) }
-            startActivity(intent)
+            if (isOnePaneMode()){
+                val intent = context?.let { it1 -> CarItemActivity.newIntentEditItem(it1.applicationContext, it.id) }
+                startActivity(intent)
+            }
+            else{
+                launchFragment(CarItemFragment.newInstanceEditItem(it.id))
+            }
+
         }
     }
 
