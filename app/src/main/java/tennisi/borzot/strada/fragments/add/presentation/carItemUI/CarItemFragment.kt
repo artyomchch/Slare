@@ -1,18 +1,19 @@
 package tennisi.borzot.strada.fragments.add.presentation.carItemUI
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import tennisi.borzot.strada.MainActivity
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.FragmentCarItemBinding
 import tennisi.borzot.strada.fragments.add.domain.CarItem
+import tennisi.borzot.strada.utils.KeyboardUtils
 
 class CarItemFragment : Fragment() {
 
@@ -21,8 +22,19 @@ class CarItemFragment : Fragment() {
         get() = _binding ?: throw RuntimeException("FragmentCarItemBinding == null")
 
     private lateinit var viewModel: CarItemViewModel
+    private lateinit var onSaveButtonClickListener: OnSaveButtonClickListener
+
     private var screenMode: String = MODE_UNKNOWN
     private var carItemId: Int = CarItem.UNDEFINED_ID
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnSaveButtonClickListener){
+            onSaveButtonClickListener = context
+        } else {
+            throw RuntimeException("Activity must implement OnItemSelectedListener")
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +49,6 @@ class CarItemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setToolBar()
         viewModel = ViewModelProvider(this)[CarItemViewModel::class.java]
         addChangeTextListeners()
         launchRightMode()
@@ -122,7 +133,6 @@ class CarItemFragment : Fragment() {
 
     private fun launchEditMode() {
         with(binding) {
-        //    addChangeCarToolbar.toolbarText.text = getString(R.string.edit_vehicle)
             viewModel.getCarItem(carItemId)
             viewModel.carItem.observe(viewLifecycleOwner) {
 
@@ -133,6 +143,7 @@ class CarItemFragment : Fragment() {
             }
             saveButton.setOnClickListener {
                 viewModel.editCarItem(editNameField.text?.toString(), editBrandField.text?.toString(), editModelField.text?.toString())
+                onSaveButtonClickListener.onSaveButtonClick()
             }
         }
 
@@ -141,9 +152,9 @@ class CarItemFragment : Fragment() {
 
     private fun launchAddMode() {
         with(binding) {
-       //     addChangeCarToolbar.toolbarText.text = getString(R.string.add_vehicle)
             saveButton.setOnClickListener {
                 viewModel.addCarItem(editNameField.text?.toString(), editBrandField.text?.toString(), editModelField.text?.toString())
+                onSaveButtonClickListener.onSaveButtonClick()
             }
         }
 
@@ -168,29 +179,15 @@ class CarItemFragment : Fragment() {
         }
     }
 
-    private fun setToolBar() {
-//        with(binding) {
-//            addChangeCarToolbar.toolbarImageSignIn.visibility = View.GONE
-//            addChangeCarToolbar.toolbarImageItem.apply {
-//                setImageResource(R.drawable.ic_arrow_back)
-//                background = with(TypedValue()) {
-//                    context.theme.resolveAttribute(
-//                        R.attr.selectableItemBackground, this, true
-//                    )
-//                    ContextCompat.getDrawable(context, resourceId)
-//                }
-//                setOnClickListener {
-//                    activity?.onBackPressed()
-//                }
-//            }
-//        }
-
-    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    interface OnSaveButtonClickListener{
+
+        fun onSaveButtonClick()
     }
 
     companion object {

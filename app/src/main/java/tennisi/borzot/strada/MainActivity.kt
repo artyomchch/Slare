@@ -1,18 +1,22 @@
 package tennisi.borzot.strada
 
+import android.app.Activity
 import android.os.Bundle
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import tennisi.borzot.strada.databinding.ActivityMainBinding
 import tennisi.borzot.strada.fragments.add.presentation.addFragmentUI.AddFragment
+import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemFragment
 import tennisi.borzot.strada.fragments.equalizer.EqualizerFragment
 import tennisi.borzot.strada.fragments.news.presentation.NewsFragment
 import tennisi.borzot.strada.fragments.settings.SettingsFragment
 import tennisi.borzot.strada.fragments.speed.SpeedFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AddFragment.OnItemSelectedListener, CarItemFragment.OnSaveButtonClickListener {
 
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val addFragment = AddFragment()
@@ -83,9 +87,37 @@ class MainActivity : AppCompatActivity() {
 
     private fun setResource(title: String, imageResource: Int) {
         with(binding) {
-            mainFragmentToolbar.toolbarText.text = title
-            mainFragmentToolbar.toolbarImageItem.setImageResource(imageResource)
+            mainFragmentToolbar.apply {
+                toolbarText.text = title
+                toolbarImageItem.setImageResource(imageResource)
+            }
         }
+    }
+
+    private fun hideResource() {
+        with(binding) {
+            mainFragmentToolbar.linearLayoutToolBar.visibility = View.GONE
+            bottomNavigationMenu.visibility = View.GONE
+        }
+    }
+
+    private fun showResource(){
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+        with(binding) {
+            mainFragmentToolbar.linearLayoutToolBar.visibility = View.VISIBLE
+            bottomNavigationMenu.visibility = View.VISIBLE
+        }
+
+    }
+
+
+    override fun onItemSelected() {
+        hideResource()
+    }
+
+    override fun onSaveButtonClick() {
+        showResource()
     }
 
 

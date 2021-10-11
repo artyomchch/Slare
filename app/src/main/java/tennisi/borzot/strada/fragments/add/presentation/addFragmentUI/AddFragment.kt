@@ -1,5 +1,6 @@
 package tennisi.borzot.strada.fragments.add.presentation.addFragmentUI
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,11 +18,21 @@ class AddFragment : Fragment() {
 
     private lateinit var carsListAdapter: CarsListAdapter
     private lateinit var viewModel: AddFragmentViewModel
+    private lateinit var onItemSelectedListener: OnItemSelectedListener
 
     private var _binding: FragmentAddBinding? = null
     private val binding: FragmentAddBinding
         get() = _binding ?: throw RuntimeException("FragmentAddBinding == null")
 
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnItemSelectedListener){
+            onItemSelectedListener = context
+        } else {
+            throw RuntimeException("Activity must implement OnItemSelectedListener")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,38 +47,30 @@ class AddFragment : Fragment() {
             carsListAdapter.submitList(it)
         }
         binding.carAddFab.setOnClickListener {
-            if (isOnePaneMode()){
-               // val intent = context?.let { it1 -> CarItemActivity.newIntentAddItem(it1.applicationContext) }
-              //  startActivity(intent)
-                parentFragmentManager.apply {
-                    popBackStack()
-                    beginTransaction()
-                        .replace(R.id.main_car_add_container, CarItemFragment.newInstanceAddItem())
-                        .addToBackStack(null)
-                        .commit()
-                }
+            if (isOnePaneMode()) {
+                launchFragment(R.id.main_car_add_container, CarItemFragment.newInstanceAddItem())
+                onItemSelectedListener.onItemSelected()
             } else {
-                launchFragment(CarItemFragment.newInstanceAddItem())
+                launchFragment(R.id.car_item_container, CarItemFragment.newInstanceAddItem())
             }
         }
 
         return binding.root
     }
 
-    private fun isOnePaneMode(): Boolean{
+    private fun isOnePaneMode(): Boolean {
         return binding.carItemContainer == null
     }
 
-    private fun launchFragment(fragment: Fragment){
+    private fun launchFragment(currentFragment: Int, fragment: Fragment) {
         parentFragmentManager.apply {
             popBackStack()
             beginTransaction()
-                .replace(R.id.car_item_container, fragment)
+                .replace(currentFragment, fragment)
                 .addToBackStack(null)
                 .commit()
         }
     }
-
 
 
     private fun setupRecyclerView() {
@@ -104,19 +107,11 @@ class AddFragment : Fragment() {
 
     private fun setupClickListener() {
         carsListAdapter.onCarItemClickListener = {
-            if (isOnePaneMode()){
-//                val intent = context?.let { it1 -> CarItemActivity.newIntentEditItem(it1.applicationContext, it.id) }
-//                startActivity(intent)
-                parentFragmentManager.apply {
-                    popBackStack()
-                    beginTransaction()
-                        .replace(R.id.main_car_add_container, CarItemFragment.newInstanceEditItem(it.id))
-                        .addToBackStack(null)
-                        .commit()
-                }
-            }
-            else{
-                launchFragment(CarItemFragment.newInstanceEditItem(it.id))
+            if (isOnePaneMode()) {
+                launchFragment(R.id.main_car_add_container, CarItemFragment.newInstanceEditItem(it.id))
+                onItemSelectedListener.onItemSelected()
+            } else {
+                launchFragment(R.id.car_item_container, CarItemFragment.newInstanceEditItem(it.id))
             }
 
         }
@@ -131,5 +126,10 @@ class AddFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    interface OnItemSelectedListener{
+
+        fun onItemSelected()
     }
 }
