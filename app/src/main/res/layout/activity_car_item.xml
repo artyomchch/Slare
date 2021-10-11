@@ -5,5 +5,5 @@
     android:id="@+id/car_item_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.add.presentation.carItemUI.CarItemActivity"
+
     tools:layout="@layout/fragment_car_item" />

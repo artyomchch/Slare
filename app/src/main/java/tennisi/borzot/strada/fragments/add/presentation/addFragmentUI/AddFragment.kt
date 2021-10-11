@@ -5,13 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.FragmentAddBinding
-import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemActivity
 import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemFragment
 
 
@@ -39,13 +37,18 @@ class AddFragment : Fragment() {
         }
         binding.carAddFab.setOnClickListener {
             if (isOnePaneMode()){
-                val intent = context?.let { it1 -> CarItemActivity.newIntentAddItem(it1.applicationContext) }
-                startActivity(intent)
+               // val intent = context?.let { it1 -> CarItemActivity.newIntentAddItem(it1.applicationContext) }
+              //  startActivity(intent)
+                parentFragmentManager.apply {
+                    popBackStack()
+                    beginTransaction()
+                        .replace(R.id.main_car_add_container, CarItemFragment.newInstanceAddItem())
+                        .addToBackStack(null)
+                        .commit()
+                }
             } else {
                 launchFragment(CarItemFragment.newInstanceAddItem())
             }
-
-
         }
 
         return binding.root
@@ -72,8 +75,10 @@ class AddFragment : Fragment() {
         with(binding.carsRecycler) {
             carsListAdapter = CarsListAdapter()
             adapter = carsListAdapter
-            recycledViewPool.setMaxRecycledViews(CarsListAdapter.VIEW_TYPE_ENABLED, CarsListAdapter.MAX_POOL_SIZE)
-            recycledViewPool.setMaxRecycledViews(CarsListAdapter.VIEW_TYPE_DISABLED, CarsListAdapter.MAX_POOL_SIZE)
+            recycledViewPool.apply {
+                setMaxRecycledViews(CarsListAdapter.VIEW_TYPE_ENABLED, CarsListAdapter.MAX_POOL_SIZE)
+                setMaxRecycledViews(CarsListAdapter.VIEW_TYPE_DISABLED, CarsListAdapter.MAX_POOL_SIZE)
+            }
         }
 
         setupOnLongClickListener()
@@ -100,8 +105,15 @@ class AddFragment : Fragment() {
     private fun setupClickListener() {
         carsListAdapter.onCarItemClickListener = {
             if (isOnePaneMode()){
-                val intent = context?.let { it1 -> CarItemActivity.newIntentEditItem(it1.applicationContext, it.id) }
-                startActivity(intent)
+//                val intent = context?.let { it1 -> CarItemActivity.newIntentEditItem(it1.applicationContext, it.id) }
+//                startActivity(intent)
+                parentFragmentManager.apply {
+                    popBackStack()
+                    beginTransaction()
+                        .replace(R.id.main_car_add_container, CarItemFragment.newInstanceEditItem(it.id))
+                        .addToBackStack(null)
+                        .commit()
+                }
             }
             else{
                 launchFragment(CarItemFragment.newInstanceEditItem(it.id))

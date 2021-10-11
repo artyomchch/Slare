@@ -122,7 +122,7 @@ class CarItemFragment : Fragment() {
 
     private fun launchEditMode() {
         with(binding) {
-            addChangeCarToolbar.toolbarText.text = getString(R.string.edit_vehicle)
+        //    addChangeCarToolbar.toolbarText.text = getString(R.string.edit_vehicle)
             viewModel.getCarItem(carItemId)
             viewModel.carItem.observe(viewLifecycleOwner) {
 
@@ -141,7 +141,7 @@ class CarItemFragment : Fragment() {
 
     private fun launchAddMode() {
         with(binding) {
-            addChangeCarToolbar.toolbarText.text = getString(R.string.add_vehicle)
+       //     addChangeCarToolbar.toolbarText.text = getString(R.string.add_vehicle)
             saveButton.setOnClickListener {
                 viewModel.addCarItem(editNameField.text?.toString(), editBrandField.text?.toString(), editModelField.text?.toString())
             }
@@ -169,21 +169,21 @@ class CarItemFragment : Fragment() {
     }
 
     private fun setToolBar() {
-        with(binding) {
-            addChangeCarToolbar.toolbarImageSignIn.visibility = View.GONE
-            addChangeCarToolbar.toolbarImageItem.apply {
-                setImageResource(R.drawable.ic_arrow_back)
-                background = with(TypedValue()) {
-                    context.theme.resolveAttribute(
-                        R.attr.selectableItemBackground, this, true
-                    )
-                    ContextCompat.getDrawable(context, resourceId)
-                }
-                setOnClickListener {
-                    activity?.onBackPressed()
-                }
-            }
-        }
+//        with(binding) {
+//            addChangeCarToolbar.toolbarImageSignIn.visibility = View.GONE
+//            addChangeCarToolbar.toolbarImageItem.apply {
+//                setImageResource(R.drawable.ic_arrow_back)
+//                background = with(TypedValue()) {
+//                    context.theme.resolveAttribute(
+//                        R.attr.selectableItemBackground, this, true
+//                    )
+//                    ContextCompat.getDrawable(context, resourceId)
+//                }
+//                setOnClickListener {
+//                    activity?.onBackPressed()
+//                }
+//            }
+//        }
 
     }
 
