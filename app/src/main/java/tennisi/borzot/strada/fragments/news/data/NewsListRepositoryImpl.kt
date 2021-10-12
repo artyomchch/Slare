@@ -2,26 +2,33 @@ package tennisi.borzot.strada.fragments.news.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import tennisi.borzot.strada.fragments.news.domain.NewsListRepository
 import tennisi.borzot.strada.network.RetrofitInstance
 import tennisi.borzot.strada.network.pojo.Article
-import tennisi.borzot.strada.network.pojo.NewsItem
 
-object NewsListRepositoryImpl: NewsListRepository {
+object NewsListRepositoryImpl : NewsListRepository {
 
-    private val newsArticlesLD = MutableLiveData<NewsItem>()
+    private val newsArticlesLD = MutableLiveData<List<Article>>()
+    private var newsList = listOf<Article>()
 
     init {
-
+        CoroutineScope(context = Dispatchers.IO).launch {
+            newsList = getPost()
+            updateList()
+        }
     }
 
-
-    suspend fun getPost(): List<Article> {
+    private suspend fun getPost(): List<Article> {
         return RetrofitInstance.api.getPost().articles
     }
 
-    override fun getNewsList(): LiveData<List<Article>> {
-        TODO("Not yet implemented")
+    override fun getNewsList(): LiveData<List<Article>> = newsArticlesLD
+
+    private fun updateList() {
+        newsArticlesLD.postValue(newsList.toList())
     }
 
 }

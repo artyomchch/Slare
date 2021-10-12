@@ -1,27 +1,15 @@
 package tennisi.borzot.strada.fragments.news.presentation
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
 import tennisi.borzot.strada.fragments.news.data.NewsListRepositoryImpl
-import tennisi.borzot.strada.network.pojo.Article
-import tennisi.borzot.strada.network.pojo.NewsItem
+import tennisi.borzot.strada.fragments.news.domain.GetNewsListUseCase
 
-class NewsFragmentViewModel: ViewModel() {
+class NewsFragmentViewModel : ViewModel() {
 
     private val repository = NewsListRepositoryImpl
-    val newsResponse: MutableLiveData<List<Article>> = MutableLiveData()
+    private val getNewsListUseCase = GetNewsListUseCase(repository)
 
-    init {
-        getPostNews()
-    }
+    val newsList = getNewsListUseCase.getNewsList()
 
-    private fun getPostNews(){
-        viewModelScope.launch {
-             val response = repository.getPost()
-               newsResponse.value = response
-        }
-    }
 
 }

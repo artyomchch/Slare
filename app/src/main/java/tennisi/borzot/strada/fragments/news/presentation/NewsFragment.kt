@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import tennisi.borzot.strada.databinding.FragmentAddBinding
 import tennisi.borzot.strada.databinding.FragmentNewsBinding
 
 class NewsFragment : Fragment() {
@@ -25,7 +24,7 @@ class NewsFragment : Fragment() {
 
         setupRecyclerView()
         viewModel = ViewModelProvider(this)[NewsFragmentViewModel::class.java]
-        viewModel.newsResponse.observe(viewLifecycleOwner) {
+        viewModel.newsList.observe(viewLifecycleOwner) {
             adapter.newsList = it
         }
 
