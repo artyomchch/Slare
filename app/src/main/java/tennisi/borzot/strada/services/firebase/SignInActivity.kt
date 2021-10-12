@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import tennisi.borzot.strada.MainActivity
+import tennisi.borzot.strada.homeScreen.presentation.MainActivity
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.ActivitySignInBinding
 
