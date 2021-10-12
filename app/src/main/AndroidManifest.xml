@@ -15,10 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/MainTheme">
         <activity
-            android:windowSoftInputMode="adjustResize"
-            android:name=".fragments.add.presentation.carItemUI.CarItemActivity"
-            android:exported="true" />
-        <activity
             android:name=".services.firebase.SignInActivity"
             android:exported="true" />
 
@@ -44,7 +40,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".onBoarding.mvpOnBoarding.OnBoardingMain" />
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity" />
     </application>
 
 </manifest>

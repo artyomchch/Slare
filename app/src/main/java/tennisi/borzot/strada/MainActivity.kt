@@ -1,9 +1,7 @@
 package tennisi.borzot.strada
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -15,6 +13,7 @@ import tennisi.borzot.strada.fragments.equalizer.EqualizerFragment
 import tennisi.borzot.strada.fragments.news.presentation.NewsFragment
 import tennisi.borzot.strada.fragments.settings.SettingsFragment
 import tennisi.borzot.strada.fragments.speed.SpeedFragment
+import tennisi.borzot.strada.utils.KeyboardUtils
 
 class MainActivity : AppCompatActivity(), AddFragment.OnItemSelectedListener, CarItemFragment.OnSaveButtonClickListener {
 
@@ -101,14 +100,12 @@ class MainActivity : AppCompatActivity(), AddFragment.OnItemSelectedListener, Ca
         }
     }
 
-    private fun showResource(){
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+    private fun showResource() {
         with(binding) {
             mainFragmentToolbar.linearLayoutToolBar.visibility = View.VISIBLE
             bottomNavigationMenu.visibility = View.VISIBLE
         }
-
+        KeyboardUtils.hideKeyboard(this)
     }
 
 

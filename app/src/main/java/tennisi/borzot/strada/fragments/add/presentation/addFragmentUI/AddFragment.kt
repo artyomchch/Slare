@@ -2,6 +2,7 @@ package tennisi.borzot.strada.fragments.add.presentation.addFragmentUI
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +28,8 @@ class AddFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnItemSelectedListener){
+        if (context is OnItemSelectedListener) {
+            Log.d("onAttach", "onAttach:  work")
             onItemSelectedListener = context
         } else {
             throw RuntimeException("Activity must implement OnItemSelectedListener")
@@ -40,7 +42,6 @@ class AddFragment : Fragment() {
     ): View {
 
         _binding = FragmentAddBinding.inflate(inflater, container, false)
-
         setupRecyclerView()
         viewModel = ViewModelProvider(this)[(AddFragmentViewModel::class.java)]
         viewModel.carList.observe(viewLifecycleOwner) {
@@ -57,6 +58,7 @@ class AddFragment : Fragment() {
 
         return binding.root
     }
+
 
     private fun isOnePaneMode(): Boolean {
         return binding.carItemContainer == null
@@ -128,8 +130,9 @@ class AddFragment : Fragment() {
         _binding = null
     }
 
-    interface OnItemSelectedListener{
+    interface OnItemSelectedListener {
 
         fun onItemSelected()
+
     }
 }

@@ -9,11 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import tennisi.borzot.strada.MainActivity
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.FragmentCarItemBinding
 import tennisi.borzot.strada.fragments.add.domain.CarItem
-import tennisi.borzot.strada.utils.KeyboardUtils
+
 
 class CarItemFragment : Fragment() {
 
@@ -29,11 +28,16 @@ class CarItemFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnSaveButtonClickListener){
+        if (context is OnSaveButtonClickListener) {
             onSaveButtonClickListener = context
         } else {
             throw RuntimeException("Activity must implement OnItemSelectedListener")
         }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        onSaveButtonClickListener.onSaveButtonClick()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -143,7 +147,6 @@ class CarItemFragment : Fragment() {
             }
             saveButton.setOnClickListener {
                 viewModel.editCarItem(editNameField.text?.toString(), editBrandField.text?.toString(), editModelField.text?.toString())
-                onSaveButtonClickListener.onSaveButtonClick()
             }
         }
 
@@ -154,10 +157,8 @@ class CarItemFragment : Fragment() {
         with(binding) {
             saveButton.setOnClickListener {
                 viewModel.addCarItem(editNameField.text?.toString(), editBrandField.text?.toString(), editModelField.text?.toString())
-                onSaveButtonClickListener.onSaveButtonClick()
             }
         }
-
 
     }
 
@@ -185,7 +186,7 @@ class CarItemFragment : Fragment() {
         _binding = null
     }
 
-    interface OnSaveButtonClickListener{
+    interface OnSaveButtonClickListener {
 
         fun onSaveButtonClick()
     }

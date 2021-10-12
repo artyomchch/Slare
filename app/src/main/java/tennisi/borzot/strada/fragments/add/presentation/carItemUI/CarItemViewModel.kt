@@ -67,9 +67,20 @@ class CarItemViewModel : ViewModel() {
                 editCarItemUseCase.editCarItem(item)
                 finishWork()
             }
-
         }
 
+    }
+
+    fun resetErrorInputName() {
+        _errorInputName.value = false
+    }
+
+    fun resetErrorInputBrand() {
+        _errorInputBrand.value = false
+    }
+
+    fun resetErrorInputModel() {
+        _errorInputModel.value = false
     }
 
     private fun parseName(inputName: String?): String {
@@ -93,19 +104,7 @@ class CarItemViewModel : ViewModel() {
         return result
     }
 
-    fun resetErrorInputName() {
-        _errorInputName.value = false
-    }
-
-    fun resetErrorInputBrand() {
-        _errorInputBrand.value = false
-    }
-
-    fun resetErrorInputModel() {
-        _errorInputModel.value = false
-    }
-
-    fun finishWork(){
+    private fun finishWork() {
         _shouldCloseScreen.value = Unit
     }
 }
