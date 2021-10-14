@@ -38,7 +38,8 @@ class MainActivity : AppCompatActivity(), AddFragment.OnItemSelectedListener, Ca
         observeViewModel()
         authentication()
 
-      //  replaceFragment(setFragment(viewModel.currentNameFragment.value.toString()))
+        replaceFragment(setFragment(viewModel.currentNameFragment.value.toString()))
+        //changingTabs()
         selectedListener()
         //   binding.bottomNavigationMenu.menu.findItem(R.id.speedFragment).isChecked = true
         //   setResource(getString(R.string.speed), R.drawable.ic_baseline_speed_purple)
@@ -66,6 +67,7 @@ class MainActivity : AppCompatActivity(), AddFragment.OnItemSelectedListener, Ca
         Glide.with(this)
             .load(currentUser?.photoUrl)
             .circleCrop()
+            .placeholder(R.drawable.ic_user_avatar)
             .into(binding.mainFragmentToolbar.toolbarImageSignIn)
     }
 

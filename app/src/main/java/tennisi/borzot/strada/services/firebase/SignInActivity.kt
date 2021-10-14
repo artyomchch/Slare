@@ -80,14 +80,15 @@ class SignInActivity : AppCompatActivity() {
     private fun signInWithGoogle() {
         val signInClient = getClient()
         launcher.launch(signInClient.signInIntent)
-        startActivity(Intent(this, MainActivity::class.java))
-        finish()
+
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
                 Log.d("TAG", "firebaseAuthWithGoogle: Google SignIn done")
             } else {
                 Log.d("TAG", "firebaseAuthWithGoogle: Google SignIn error")
