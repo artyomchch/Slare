@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import tennisi.borzot.strada.R
@@ -49,7 +50,11 @@ class AddFragment : Fragment() {
         }
         binding.carAddFab.setOnClickListener {
             if (isOnePaneMode()) {
-                launchFragment(R.id.main_car_add_container, CarItemFragment.newInstanceAddItem())
+                // launchFragment(R.id.main_car_add_container, CarItemFragment.newInstanceAddItem())
+                val args = Bundle().apply {
+                    putString(CarItemFragment.SCREEN_MODE, CarItemFragment.MODE_ADD)
+                }
+                findNavController().navigate(R.id.action_addFragment_to_carItemFragment, args)
                 onItemSelectedListener.onItemSelected()
             } else {
                 launchFragment(R.id.car_item_container, CarItemFragment.newInstanceAddItem())
@@ -65,13 +70,14 @@ class AddFragment : Fragment() {
     }
 
     private fun launchFragment(currentFragment: Int, fragment: Fragment) {
-        parentFragmentManager.apply {
+        childFragmentManager.apply {
             popBackStack()
             beginTransaction()
                 .replace(currentFragment, fragment)
                 .addToBackStack(null)
                 .commit()
         }
+
     }
 
 
@@ -110,7 +116,12 @@ class AddFragment : Fragment() {
     private fun setupClickListener() {
         carsListAdapter.onCarItemClickListener = {
             if (isOnePaneMode()) {
-                launchFragment(R.id.main_car_add_container, CarItemFragment.newInstanceEditItem(it.id))
+                val args = Bundle().apply {
+                    putString(CarItemFragment.SCREEN_MODE, CarItemFragment.MODE_EDIT)
+                    putInt(CarItemFragment.CAR_ITEM_ID, it.id)
+                }
+                findNavController().navigate(R.id.action_addFragment_to_carItemFragment, args)
+                //launchFragment(R.id.main_car_add_container, CarItemFragment.newInstanceEditItem(it.id))
                 onItemSelectedListener.onItemSelected()
             } else {
                 launchFragment(R.id.car_item_container, CarItemFragment.newInstanceEditItem(it.id))

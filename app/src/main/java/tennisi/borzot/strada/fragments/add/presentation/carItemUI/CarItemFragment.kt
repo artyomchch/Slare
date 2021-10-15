@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.FragmentCarItemBinding
 import tennisi.borzot.strada.fragments.add.domain.CarItem
@@ -19,6 +20,8 @@ class CarItemFragment : Fragment() {
     private var _binding: FragmentCarItemBinding? = null
     private val binding: FragmentCarItemBinding
         get() = _binding ?: throw RuntimeException("FragmentCarItemBinding == null")
+
+    //private val args1 by navArgs<CarItemFragmentArgs>()
 
     private lateinit var viewModel: CarItemViewModel
     private lateinit var onSaveButtonClickListener: OnSaveButtonClickListener
@@ -193,10 +196,10 @@ class CarItemFragment : Fragment() {
 
     companion object {
 
-        private const val SCREEN_MODE = "extra_mode"
-        private const val CAR_ITEM_ID = "extra_item"
-        private const val MODE_EDIT = "mode_edit"
-        private const val MODE_ADD = "mode_add"
+         const val SCREEN_MODE = "extra_mode"
+        const val CAR_ITEM_ID = "extra_item"
+         const val MODE_EDIT = "mode_edit"
+         const val MODE_ADD = "mode_add"
         private const val MODE_UNKNOWN = ""
 
         fun newInstanceAddItem(): CarItemFragment {

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/speed_fragment_navigation"
+    app:startDestination="@id/speedFragment">
+
+    <fragment
+        android:id="@+id/speedFragment"
+        android:name="tennisi.borzot.strada.fragments.speed.SpeedFragment"
+        android:label="fragment_speed"
+        tools:layout="@layout/fragment_speed" />
+</navigation>

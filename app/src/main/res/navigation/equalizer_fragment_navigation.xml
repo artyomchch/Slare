@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/equalizer_fragment_navigation"
+    app:startDestination="@id/equalizerFragment">
+
+    <fragment
+        android:id="@+id/equalizerFragment"
+        android:name="tennisi.borzot.strada.fragments.equalizer.EqualizerFragment"
+        android:label="fragment_equalizer"
+        tools:layout="@layout/fragment_equalizer" />
+</navigation>

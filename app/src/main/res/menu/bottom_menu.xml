@@ -2,23 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/addFragment"
+        android:id="@+id/add_fragment_navigation"
         android:icon="@drawable/ic_baseline_add_black"
         android:title="@string/add_car" />
     <item
-        android:id="@+id/equalizerFragment"
+        android:id="@+id/equalizer_fragment_navigation"
         android:icon="@drawable/ic_baseline_equalizer_black"
         android:title="@string/equalizer" />
     <item
-        android:id="@+id/speedFragment"
+        android:id="@+id/speed_fragment_navigation"
         android:icon="@drawable/ic_baseline_speed_black"
         android:title="@string/speed" />
     <item
-        android:id="@+id/newsFragment"
+        android:id="@+id/news_fragment_navigation"
         android:icon="@drawable/ic_baseline_rss_feed_24"
         android:title="@string/news" />
     <item
-        android:id="@+id/settingsFragment"
+        android:id="@+id/settings_fragment_navigation"
         android:icon="@drawable/ic_baseline_settings_black"
         android:title="@string/settings" />
 </menu>
