@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import tennisi.borzot.strada.fragments.add.data.CarListRepositoryImpl
-import tennisi.borzot.strada.fragments.add.domain.AddCarItemUseCase
-import tennisi.borzot.strada.fragments.add.domain.CarItem
-import tennisi.borzot.strada.fragments.add.domain.EditCarItemUseCase
-import tennisi.borzot.strada.fragments.add.domain.GetCarItemUseCase
+import tennisi.borzot.strada.fragments.add.domain.usecases.AddCarItemUseCase
+import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
+import tennisi.borzot.strada.fragments.add.domain.usecases.EditCarItemUseCase
+import tennisi.borzot.strada.fragments.add.domain.usecases.GetCarItemUseCase
 
 class CarItemViewModel : ViewModel() {
 

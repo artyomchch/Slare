@@ -1,7 +1,7 @@
 package tennisi.borzot.strada.fragments.add.presentation.addFragmentUI
 
 import androidx.recyclerview.widget.DiffUtil
-import tennisi.borzot.strada.fragments.add.domain.CarItem
+import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
 
 class CarItemDiffCallback : DiffUtil.ItemCallback<CarItem>() {
     override fun areItemsTheSame(oldItem: CarItem, newItem: CarItem): Boolean {

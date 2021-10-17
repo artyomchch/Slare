@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.FragmentCarItemBinding
-import tennisi.borzot.strada.fragments.add.domain.CarItem
 
 
 class CarItemFragment : Fragment() {
@@ -21,13 +20,10 @@ class CarItemFragment : Fragment() {
     private val binding: FragmentCarItemBinding
         get() = _binding ?: throw RuntimeException("FragmentCarItemBinding == null")
 
-    //private val args1 by navArgs<CarItemFragmentArgs>()
+    private val args by navArgs<CarItemFragmentArgs>()
 
     private lateinit var viewModel: CarItemViewModel
     private lateinit var onSaveButtonClickListener: OnSaveButtonClickListener
-
-    private var screenMode: String = MODE_UNKNOWN
-    private var carItemId: Int = CarItem.UNDEFINED_ID
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -41,11 +37,6 @@ class CarItemFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         onSaveButtonClickListener.onSaveButtonClick()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        parseParams()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -97,7 +88,7 @@ class CarItemFragment : Fragment() {
     }
 
     private fun launchRightMode() {
-        when (screenMode) {
+        when (args.mode.toString()) {
             MODE_EDIT -> launchEditMode()
             MODE_ADD -> launchAddMode()
         }
@@ -140,7 +131,7 @@ class CarItemFragment : Fragment() {
 
     private fun launchEditMode() {
         with(binding) {
-            viewModel.getCarItem(carItemId)
+            viewModel.getCarItem(args.id)
             viewModel.carItem.observe(viewLifecycleOwner) {
 
                 editNameField.setText(it.name)
@@ -165,25 +156,6 @@ class CarItemFragment : Fragment() {
 
     }
 
-    private fun parseParams() {
-        val args = requireArguments()
-        if (!args.containsKey(SCREEN_MODE)) {
-            throw RuntimeException("Param screen mode is absent")
-        }
-        val mode = args.getString(SCREEN_MODE)
-        if (mode != MODE_EDIT && mode != MODE_ADD) {
-            throw RuntimeException("Unknown screen mode $mode")
-        }
-        screenMode = mode
-        if (screenMode == MODE_EDIT) {
-            if (!args.containsKey(CAR_ITEM_ID)) {
-                throw RuntimeException("Param shop item id is absent")
-            }
-            carItemId = args.getInt(CAR_ITEM_ID, CarItem.UNDEFINED_ID)
-        }
-    }
-
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -195,29 +167,7 @@ class CarItemFragment : Fragment() {
     }
 
     companion object {
-
-         const val SCREEN_MODE = "extra_mode"
-        const val CAR_ITEM_ID = "extra_item"
-         const val MODE_EDIT = "mode_edit"
-         const val MODE_ADD = "mode_add"
-        private const val MODE_UNKNOWN = ""
-
-        fun newInstanceAddItem(): CarItemFragment {
-            return CarItemFragment().apply {
-                arguments = Bundle().apply {
-                    putString(SCREEN_MODE, MODE_ADD)
-                }
-            }
-        }
-
-        fun newInstanceEditItem(carItemId: Int): CarItemFragment {
-            return CarItemFragment().apply {
-                arguments = Bundle().apply {
-                    putString(SCREEN_MODE, MODE_EDIT)
-                    putInt(CAR_ITEM_ID, carItemId)
-                }
-            }
-        }
-
+        const val MODE_EDIT = "EDIT"
+        const val MODE_ADD = "ADD"
     }
 }

@@ -1,9 +1,12 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'realm-android'
-apply plugin: 'androidx.navigation.safeargs'
-apply plugin: 'com.google.gms.google-services'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'realm-android'
+    id 'androidx.navigation.safeargs'
+    id 'com.google.gms.google-services'
+    id 'kotlin-parcelize'
+}
 
 android {
     compileSdkVersion 31

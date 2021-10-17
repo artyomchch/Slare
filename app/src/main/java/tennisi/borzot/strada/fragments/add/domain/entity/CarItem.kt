@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.fragments.add.domain
+package tennisi.borzot.strada.fragments.add.domain.entity
 
 data class CarItem(
     val name: String,
