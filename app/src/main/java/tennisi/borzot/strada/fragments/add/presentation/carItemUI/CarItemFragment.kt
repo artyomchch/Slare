@@ -143,8 +143,6 @@ class CarItemFragment : Fragment() {
                 viewModel.editCarItem(editNameField.text?.toString(), editBrandField.text?.toString(), editModelField.text?.toString())
             }
         }
-
-
     }
 
     private fun launchAddMode() {

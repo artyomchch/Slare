@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    >
+    android:fillViewport="true">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,8 +12,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".fragments.add.presentation.carItemUI.CarItemFragment">
-
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/name_text_field"
@@ -80,7 +77,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

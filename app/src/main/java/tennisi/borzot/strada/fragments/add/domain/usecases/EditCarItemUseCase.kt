@@ -5,7 +5,8 @@ import tennisi.borzot.strada.fragments.add.domain.repository.CarListRepository
 
 class EditCarItemUseCase(private val carListRepository: CarListRepository) {
 
-    fun editCarItem(carItemId: CarItem) {
+    operator fun invoke(carItemId: CarItem){
         carListRepository.editCarItem(carItemId)
     }
+
 }

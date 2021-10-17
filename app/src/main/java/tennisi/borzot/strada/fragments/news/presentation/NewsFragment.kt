@@ -24,8 +24,10 @@ class NewsFragment : Fragment() {
 
         setupRecyclerView()
         viewModel = ViewModelProvider(this)[NewsFragmentViewModel::class.java]
+
         viewModel.newsList.observe(viewLifecycleOwner) {
             adapter.newsList = it
+            binding.progressBarNews.visibility = View.GONE
         }
 
         return binding.root

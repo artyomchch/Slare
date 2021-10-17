@@ -39,7 +39,7 @@ class CarItemViewModel : ViewModel() {
 
 
     fun getCarItem(carItemId: Int) {
-        val item = getCarItemUseCase.getCarItem(carItemId)
+        val item = getCarItemUseCase(carItemId)
         _carItem.value = item
     }
 
@@ -50,7 +50,7 @@ class CarItemViewModel : ViewModel() {
         val fieldsValid = validateInput(name, brand, model)
         if (fieldsValid) {
             val carItem = CarItem(name, brand, model, true)
-            addCarItemUseCase.addCarItem(carItem)
+            addCarItemUseCase(carItem)
             finishWork()
         }
 
@@ -64,7 +64,7 @@ class CarItemViewModel : ViewModel() {
         if (fieldsValid) {
             _carItem.value?.let {
                 val item = it.copy(name = name, brand = brand, model = model)
-                editCarItemUseCase.editCarItem(item)
+                editCarItemUseCase(item)
                 finishWork()
             }
         }

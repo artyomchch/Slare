@@ -6,8 +6,6 @@ import tennisi.borzot.strada.fragments.add.domain.repository.CarListRepository
 
 class GetCarListUseCase(private val carListRepository: CarListRepository) {
 
-    fun getCarList(): LiveData<List<CarItem>> {
-        return carListRepository.getCarList()
-    }
+    operator fun invoke():LiveData<List<CarItem>> = carListRepository.getCarList()
 
 }

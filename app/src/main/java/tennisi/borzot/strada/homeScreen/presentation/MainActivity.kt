@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity(), AddFragment.OnItemSelectedListener, Ca
 
     }
 
-
     private fun observeViewModel() {
         viewModel.currentNameFragment.observe(this) {
             Log.d("logFragment", "observeViewModel: $it ")
@@ -119,6 +118,5 @@ class MainActivity : AppCompatActivity(), AddFragment.OnItemSelectedListener, Ca
         private const val FRAGMENT_NEWS = "fragment_news"
         private const val FRAGMENT_SETTINGS = "fragment_settings"
     }
-
 
 }

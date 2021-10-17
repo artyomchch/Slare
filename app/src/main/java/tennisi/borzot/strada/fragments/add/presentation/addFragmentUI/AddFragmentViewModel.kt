@@ -18,13 +18,13 @@ class AddFragmentViewModel : ViewModel() {
 
     fun changeEnableState(carItem: CarItem){
         val newItem = carItem.copy(enable = !carItem.enable)
-        editCarItemUseCase.editCarItem(newItem)
+        editCarItemUseCase(newItem)
     }
 
     fun deleteCarItem(carItem: CarItem) {
-        deleteCarItemUseCase.deleteCarItem(carItem)
+        deleteCarItemUseCase(carItem)
     }
 
-    val carList = getCarListUseCase.getCarList()
+    val carList = getCarListUseCase.invoke()
 
 }

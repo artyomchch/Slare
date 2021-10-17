@@ -5,7 +5,8 @@ import tennisi.borzot.strada.fragments.add.domain.repository.CarListRepository
 
 class DeleteCarItemUseCase(private val carListRepository: CarListRepository) {
 
-    fun deleteCarItem(carItem: CarItem) {
+    operator fun invoke(carItem: CarItem){
         carListRepository.deleteCarItem(carItem)
     }
+
 }
