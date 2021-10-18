@@ -12,11 +12,9 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.ActivityMainBinding
-import tennisi.borzot.strada.fragments.add.presentation.addFragmentUI.AddFragment
 import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemFragment
-import tennisi.borzot.strada.utils.KeyboardUtils
 
-class MainActivity : AppCompatActivity(), AddFragment.OnItemSelectedListener, CarItemFragment.OnSaveButtonClickListener {
+class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListener {
 
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var viewModel: MainActivityViewModel
@@ -99,7 +97,6 @@ class MainActivity : AppCompatActivity(), AddFragment.OnItemSelectedListener, Ca
             mainFragmentToolbar.linearLayoutToolBar.visibility = View.VISIBLE
             bottomNavigationMenu.visibility = View.VISIBLE
         }
-        KeyboardUtils.hideKeyboard(this)
     }
 
 

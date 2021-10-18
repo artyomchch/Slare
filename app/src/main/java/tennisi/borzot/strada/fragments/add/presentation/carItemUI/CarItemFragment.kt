@@ -24,14 +24,18 @@ class CarItemFragment : Fragment() {
 
     private lateinit var viewModel: CarItemViewModel
     private lateinit var onSaveButtonClickListener: OnSaveButtonClickListener
+    private lateinit var onItemSelectedListener: OnSaveButtonClickListener
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnSaveButtonClickListener) {
             onSaveButtonClickListener = context
+            onItemSelectedListener = context
+
         } else {
             throw RuntimeException("Activity must implement OnItemSelectedListener")
         }
+        onItemSelectedListener.onItemSelected()
     }
 
     override fun onDetach() {
@@ -162,6 +166,9 @@ class CarItemFragment : Fragment() {
     interface OnSaveButtonClickListener {
 
         fun onSaveButtonClick()
+
+        fun onItemSelected()
+
     }
 
     companion object {

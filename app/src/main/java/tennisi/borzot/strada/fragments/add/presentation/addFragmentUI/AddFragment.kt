@@ -19,22 +19,10 @@ class AddFragment : Fragment() {
 
     private lateinit var carsListAdapter: CarsListAdapter
     private lateinit var viewModel: AddFragmentViewModel
-    private lateinit var onItemSelectedListener: OnItemSelectedListener
 
     private var _binding: FragmentAddBinding? = null
     private val binding: FragmentAddBinding
         get() = _binding ?: throw RuntimeException("FragmentAddBinding == null")
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnItemSelectedListener) {
-            Log.d("onAttach", "onAttach:  work")
-            onItemSelectedListener = context
-        } else {
-            throw RuntimeException("Activity must implement OnItemSelectedListener")
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +37,6 @@ class AddFragment : Fragment() {
         }
         binding.carAddFab.setOnClickListener {
             findNavController().navigate(AddFragmentDirections.actionAddFragmentToCarItemFragment(ScreenAddMode.ADD, -1))
-            onItemSelectedListener.onItemSelected()
         }
 
         return binding.root
@@ -90,8 +77,6 @@ class AddFragment : Fragment() {
     private fun setupClickListener() {
         carsListAdapter.onCarItemClickListener = {
             findNavController().navigate(AddFragmentDirections.actionAddFragmentToCarItemFragment(ScreenAddMode.EDIT, it.id))
-            onItemSelectedListener.onItemSelected()
-
         }
     }
 
@@ -106,9 +91,4 @@ class AddFragment : Fragment() {
         _binding = null
     }
 
-    interface OnItemSelectedListener {
-
-        fun onItemSelected()
-
-    }
 }
