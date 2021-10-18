@@ -2,8 +2,8 @@ package tennisi.borzot.strada.fragments.add.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import tennisi.borzot.strada.fragments.add.domain.CarItem
-import tennisi.borzot.strada.fragments.add.domain.CarListRepository
+import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
+import tennisi.borzot.strada.fragments.add.domain.repository.CarListRepository
 import kotlin.random.Random
 
 object CarListRepositoryImpl : CarListRepository {

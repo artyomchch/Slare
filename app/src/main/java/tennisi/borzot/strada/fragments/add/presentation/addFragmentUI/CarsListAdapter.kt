@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import tennisi.borzot.strada.R
-import tennisi.borzot.strada.fragments.add.domain.CarItem
+import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
 
 class CarsListAdapter : ListAdapter<CarItem, CarItemViewHolder>(CarItemDiffCallback()) {
 

@@ -1,6 +1,7 @@
-package tennisi.borzot.strada.fragments.add.domain
+package tennisi.borzot.strada.fragments.add.domain.repository
 
 import androidx.lifecycle.LiveData
+import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
 
 interface CarListRepository {
 

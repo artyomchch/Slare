@@ -18,5 +18,12 @@
         android:id="@+id/carItemFragment"
         android:name="tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemFragment"
         android:label="CarItemFragment"
-        tools:layout="@layout/fragment_car_item"/>
+        tools:layout="@layout/fragment_car_item">
+        <argument
+            android:name="mode"
+            app:argType="tennisi.borzot.strada.fragments.add.domain.entity.ScreenAddMode" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

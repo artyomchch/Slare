@@ -11,31 +11,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.FragmentAddBinding
-import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemFragment
+import tennisi.borzot.strada.fragments.add.domain.entity.ScreenAddMode
 
 
 class AddFragment : Fragment() {
 
     private lateinit var carsListAdapter: CarsListAdapter
     private lateinit var viewModel: AddFragmentViewModel
-    private lateinit var onItemSelectedListener: OnItemSelectedListener
 
     private var _binding: FragmentAddBinding? = null
     private val binding: FragmentAddBinding
         get() = _binding ?: throw RuntimeException("FragmentAddBinding == null")
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnItemSelectedListener) {
-            Log.d("onAttach", "onAttach:  work")
-            onItemSelectedListener = context
-        } else {
-            throw RuntimeException("Activity must implement OnItemSelectedListener")
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,37 +36,11 @@ class AddFragment : Fragment() {
             carsListAdapter.submitList(it)
         }
         binding.carAddFab.setOnClickListener {
-            if (isOnePaneMode()) {
-                // launchFragment(R.id.main_car_add_container, CarItemFragment.newInstanceAddItem())
-                val args = Bundle().apply {
-                    putString(CarItemFragment.SCREEN_MODE, CarItemFragment.MODE_ADD)
-                }
-                findNavController().navigate(R.id.action_addFragment_to_carItemFragment, args)
-                onItemSelectedListener.onItemSelected()
-            } else {
-                launchFragment(R.id.car_item_container, CarItemFragment.newInstanceAddItem())
-            }
+            findNavController().navigate(AddFragmentDirections.actionAddFragmentToCarItemFragment(ScreenAddMode.ADD, -1))
         }
 
         return binding.root
     }
-
-
-    private fun isOnePaneMode(): Boolean {
-        return binding.carItemContainer == null
-    }
-
-    private fun launchFragment(currentFragment: Int, fragment: Fragment) {
-        childFragmentManager.apply {
-            popBackStack()
-            beginTransaction()
-                .replace(currentFragment, fragment)
-                .addToBackStack(null)
-                .commit()
-        }
-
-    }
-
 
     private fun setupRecyclerView() {
 
@@ -98,7 +59,7 @@ class AddFragment : Fragment() {
     }
 
     private fun setupSwipeListener() {
-        val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+        val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
             override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
                 return false
             }
@@ -115,18 +76,7 @@ class AddFragment : Fragment() {
 
     private fun setupClickListener() {
         carsListAdapter.onCarItemClickListener = {
-            if (isOnePaneMode()) {
-                val args = Bundle().apply {
-                    putString(CarItemFragment.SCREEN_MODE, CarItemFragment.MODE_EDIT)
-                    putInt(CarItemFragment.CAR_ITEM_ID, it.id)
-                }
-                findNavController().navigate(R.id.action_addFragment_to_carItemFragment, args)
-                //launchFragment(R.id.main_car_add_container, CarItemFragment.newInstanceEditItem(it.id))
-                onItemSelectedListener.onItemSelected()
-            } else {
-                launchFragment(R.id.car_item_container, CarItemFragment.newInstanceEditItem(it.id))
-            }
-
+            findNavController().navigate(AddFragmentDirections.actionAddFragmentToCarItemFragment(ScreenAddMode.EDIT, it.id))
         }
     }
 
@@ -141,9 +91,4 @@ class AddFragment : Fragment() {
         _binding = null
     }
 
-    interface OnItemSelectedListener {
-
-        fun onItemSelected()
-
-    }
 }
