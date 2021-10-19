@@ -1,5 +1,6 @@
 package tennisi.borzot.strada.utils
 
+import android.annotation.SuppressLint
 import org.ocpsoft.prettytime.PrettyTime
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -24,6 +25,7 @@ object DateUtils {
         return isTime
     }
 
+    @SuppressLint("SimpleDateFormat")
     fun dateFormat(oldStringDate: String?): String? {
         val newDate: String?
         val dateFormat = SimpleDateFormat("E, d MMM yyyy", Locale(getCountry()))

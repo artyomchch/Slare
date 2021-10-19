@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.fragments.news.domain
+package tennisi.borzot.strada.fragments.news.domain.repository
 
 import androidx.lifecycle.LiveData
 import tennisi.borzot.strada.network.pojo.Article

@@ -5,7 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import tennisi.borzot.strada.fragments.news.domain.NewsListRepository
+
+import tennisi.borzot.strada.fragments.news.domain.repository.NewsListRepository
 import tennisi.borzot.strada.network.RetrofitInstance
 import tennisi.borzot.strada.network.pojo.Article
 
@@ -26,6 +27,7 @@ object NewsListRepositoryImpl : NewsListRepository {
     }
 
     override fun getNewsList(): LiveData<List<Article>> = newsArticlesLD
+
 
     private fun updateList() {
         newsArticlesLD.postValue(newsList.toList())
