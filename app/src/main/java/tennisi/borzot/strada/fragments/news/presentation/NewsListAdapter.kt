@@ -1,23 +1,14 @@
 package tennisi.borzot.strada.fragments.news.presentation
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.network.pojo.Article
 import tennisi.borzot.strada.utils.DateUtils
 
-class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsItemViewHolder>() {
-
-    var newsList = listOf<Article>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class NewsListAdapter : ListAdapter<Article, NewsItemViewHolder>(NewsItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news, parent, false)
@@ -25,7 +16,7 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsItemViewHolder>
     }
 
     override fun onBindViewHolder(viewHolder: NewsItemViewHolder, position: Int) {
-        val newsItem = newsList[position]
+        val newsItem = getItem(position)
         Glide.with(viewHolder.itemView)
             .load(newsItem.urlToImage)
             .centerCrop()
@@ -40,17 +31,4 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.NewsItemViewHolder>
         }
     }
 
-    override fun getItemCount(): Int {
-        return newsList.size
-    }
-
-    class NewsItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val image: ImageView = view.findViewById(R.id.image_news)
-        val author: TextView = view.findViewById(R.id.author_text)
-        val publishTime: TextView = view.findViewById(R.id.published_at)
-        val title: TextView = view.findViewById(R.id.title_news)
-        val description: TextView = view.findViewById(R.id.desc_news)
-        val source: TextView = view.findViewById(R.id.source_news)
-        val time: TextView = view.findViewById(R.id.time_news)
-    }
 }

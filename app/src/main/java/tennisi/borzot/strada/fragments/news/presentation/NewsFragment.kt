@@ -26,7 +26,7 @@ class NewsFragment : Fragment() {
         viewModel = ViewModelProvider(this)[NewsFragmentViewModel::class.java]
 
         viewModel.newsList.observe(viewLifecycleOwner) {
-            adapter.newsList = it
+            adapter.submitList(it)
             binding.progressBarNews.visibility = View.GONE
         }
 
