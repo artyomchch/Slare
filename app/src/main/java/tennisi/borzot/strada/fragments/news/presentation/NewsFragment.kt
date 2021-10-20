@@ -1,5 +1,9 @@
 package tennisi.borzot.strada.fragments.news.presentation
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +11,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
+import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.FragmentNewsBinding
+
 
 class NewsFragment : Fragment() {
 
@@ -44,9 +51,32 @@ class NewsFragment : Fragment() {
     }
 
     private fun setupOnLongClickListener() {
-        newsListAdapter.onNewsItemLongClickListener = {
-            Toast.makeText(context, it.url, Toast.LENGTH_SHORT).show()
+        newsListAdapter.onNewsItemLongClickListener = { url_news ->
+            copyToClipboard(url_news.url)
+            Snackbar.make(binding.linearLayout, getString(R.string.news_url_clipboard_text), Snackbar.LENGTH_INDEFINITE)
+                .setDuration(5000)
+                .setAction(getString(R.string.share)) {
+                    sendingBinaryContent(url_news.url)
+                }
+                .show()
         }
+    }
+
+    private fun sendingBinaryContent(url_news: String) {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, url_news)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
+    }
+
+    private fun copyToClipboard(url_news: String) {
+        val myClipboard: ClipboardManager = activity?.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText(getString(R.string.text_copied_label), url_news)
+        myClipboard.setPrimaryClip(clip)
     }
 
     private fun setupRecyclerView() {

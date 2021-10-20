@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
 import tennisi.borzot.strada.R
-import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
 import tennisi.borzot.strada.network.pojo.Article
 import tennisi.borzot.strada.utils.DateUtils
 
