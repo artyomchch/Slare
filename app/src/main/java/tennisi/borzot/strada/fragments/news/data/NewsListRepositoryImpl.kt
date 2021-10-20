@@ -16,10 +16,7 @@ object NewsListRepositoryImpl : NewsListRepository {
     private var newsList = listOf<Article>()
 
     init {
-        CoroutineScope(context = Dispatchers.IO).launch {
-            newsList = getPost()
-            updateList()
-        }
+        getPostList()
     }
 
     private suspend fun getPost(): List<Article> {
@@ -28,9 +25,28 @@ object NewsListRepositoryImpl : NewsListRepository {
 
     override fun getNewsList(): LiveData<List<Article>> = newsArticlesLD
 
+    override fun updateNewsList(): LiveData<List<Article>> {
+        getPostList()
+        return newsArticlesLD
+    }
+
+
+
+    override fun addNewsList(article: Article) {
+        TODO("Not yet implemented")
+    }
+
 
     private fun updateList() {
         newsArticlesLD.postValue(newsList.toList())
+    }
+
+    private fun getPostList(){
+        CoroutineScope(context = Dispatchers.IO).launch {
+            newsList = emptyList()
+            newsList = getPost()
+            updateList()
+        }
     }
 
 }

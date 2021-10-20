@@ -23,8 +23,8 @@ class NewsFragment : Fragment() {
         get() = _binding ?: throw RuntimeException("FragmentNewsBinding == null")
 
     private lateinit var newsListAdapter: NewsListAdapter
-
     private lateinit var viewModel: NewsFragmentViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -32,16 +32,28 @@ class NewsFragment : Fragment() {
 
         setupRecyclerView()
         viewModel = ViewModelProvider(this)[NewsFragmentViewModel::class.java]
+        binding.swipeRefreshLayout.isRefreshing = true
 
         viewModel.newsList.observe(viewLifecycleOwner) {
             newsListAdapter.submitList(it)
-            binding.progressBarNews.visibility = View.GONE
+            binding.swipeRefreshLayout.isRefreshing = false
         }
 
+
+        swipeRefreshListener()
         setupClickListener()
         setupOnLongClickListener()
 
         return binding.root
+    }
+
+    private fun swipeRefreshListener() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing = true
+            newsListAdapter.submitList(viewModel.updateNewsList.value)
+            binding.swipeRefreshLayout.isRefreshing = false
+
+        }
     }
 
     private fun setupClickListener() {
@@ -68,9 +80,7 @@ class NewsFragment : Fragment() {
             putExtra(Intent.EXTRA_TEXT, url_news)
             type = "text/plain"
         }
-
-        val shareIntent = Intent.createChooser(sendIntent, null)
-        startActivity(shareIntent)
+        startActivity(Intent.createChooser(sendIntent, null))
     }
 
     private fun copyToClipboard(url_news: String) {

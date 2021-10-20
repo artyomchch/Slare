@@ -7,6 +7,6 @@ import tennisi.borzot.strada.network.pojo.Article
 class AddNewsListUseCase(private val newsListRepository: NewsListRepository) {
 
     operator fun invoke(article: Article) {
-       // newsListRepository.addNewsList(article)
+        newsListRepository.addNewsList(article)
     }
 }
