@@ -30,7 +30,7 @@ interface NewsApi {
 
         private const val API_KEY = "b7396f308f5c4d268396d4deee8b746e"
         private const val DESC = "\"audi\" OR \"auto\" OR \"car\" OR \"vehicle\""
-        private const val ARTICLE = "\"car\" OR \"vehicle\""
+        private const val ARTICLE = "car OR vehicle"
         private const val LANG = "en"
         private const val SORT = "publishedAt"
         private const val PAGE_SIZE = "100"
