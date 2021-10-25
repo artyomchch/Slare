@@ -13,5 +13,7 @@ class NewsFragmentViewModel : ViewModel() {
 
     val newsList = getNewsListUseCase.invoke()
 
-    //val updateNewsList = updateNewsListUseCase.invoke()
+    fun updateNewsList() = updateNewsListUseCase.invoke()
+
+
 }

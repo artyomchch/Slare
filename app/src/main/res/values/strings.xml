@@ -71,7 +71,7 @@
     <string name="news_image">news image</string>
     <string name="news_image_shadow">news image shadow</string>
     <string name="marker_dot"> \u2022 </string>
-    <string name="news_url_clipboard_text">\"News url copied in clipboard \"</string>
+    <string name="news_url_clipboard_text">News url copied in clipboard</string>
     <string name="share">Share</string>
     <string name="text_copied_label">your_text_to_be_copied_label</string>
 

@@ -50,9 +50,8 @@ class NewsFragment : Fragment() {
     private fun swipeRefreshListener() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             binding.swipeRefreshLayout.isRefreshing = true
-            newsListAdapter.submitList(viewModel.updateNewsList.value)
+            newsListAdapter.submitList(viewModel.updateNewsList().value)
             binding.swipeRefreshLayout.isRefreshing = false
-
         }
     }
 
