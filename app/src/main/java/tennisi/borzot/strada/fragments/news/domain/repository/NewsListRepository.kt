@@ -7,7 +7,7 @@ interface NewsListRepository {
 
     fun getNewsList(): LiveData<List<Article>>
 
-    fun updateNewsList(): LiveData<List<Article>>
+    fun updateNewsList()
 
     fun addNewsList(article: Article)
 }
