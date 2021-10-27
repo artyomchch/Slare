@@ -17,6 +17,7 @@ object NewsListRepositoryImpl : NewsListRepository {
     private var newsList1 = listOf<Article>()
     private const val DEFAULT_NUMBER_NEWS = 1
     private var pageSizeNumber = 1
+    private val scope = CoroutineScope(Dispatchers.IO)
 
     init {
         getPostList()
@@ -43,7 +44,7 @@ object NewsListRepositoryImpl : NewsListRepository {
     }
 
     private fun getPostList() {
-        CoroutineScope(context = Dispatchers.Default).launch {
+       scope.launch {
             newsList = getPost(DEFAULT_NUMBER_NEWS)
             updateList()
         }
@@ -51,7 +52,7 @@ object NewsListRepositoryImpl : NewsListRepository {
 
     private fun updateNewElementNewsItem() {
         //updateNewsList = newsList.toHashSet()
-        CoroutineScope(context = Dispatchers.IO).launch {
+        scope.launch {
             newsList = getPost(DEFAULT_NUMBER_NEWS)
             updateList()
 
