@@ -5,13 +5,13 @@ import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
 
 interface CarListRepository {
 
-    fun editCarItem(carItem: CarItem)
+    suspend fun editCarItem(carItem: CarItem)
 
-    fun addCarItem(carItem: CarItem)
+    suspend fun addCarItem(carItem: CarItem)
 
-    fun getCarItem(carItemId: Int): CarItem
+    suspend fun getCarItem(carItemId: Int): CarItem
 
-    fun deleteCarItem(carItem: CarItem)
+    suspend fun deleteCarItem(carItem: CarItem)
 
     fun getCarList(): LiveData<List<CarItem>>
 

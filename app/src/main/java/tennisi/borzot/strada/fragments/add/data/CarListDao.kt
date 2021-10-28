@@ -13,11 +13,11 @@ interface CarListDao {
     fun getCarList(): LiveData<List<CarItemDbModel>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addCarItem(carItemDbModel: CarItemDbModel)
+    suspend fun addCarItem(carItemDbModel: CarItemDbModel)
 
     @Query("DELETE FROM car_items WHERE id=:carItemId")
-    fun deleteCarItem(carItemId: Int)
+    suspend fun deleteCarItem(carItemId: Int)
 
     @Query("SELECT * FROM car_items WHERE id=:carItemId LIMIT 1")
-    fun getCarItem(carItemId: Int): CarItemDbModel
+    suspend fun getCarItem(carItemId: Int): CarItemDbModel
 }

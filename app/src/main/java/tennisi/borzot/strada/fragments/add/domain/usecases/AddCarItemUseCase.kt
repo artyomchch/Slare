@@ -5,7 +5,7 @@ import tennisi.borzot.strada.fragments.add.domain.repository.CarListRepository
 
 class AddCarItemUseCase(private val carListRepository: CarListRepository) {
 
-    operator fun invoke(carItem: CarItem) {
+    suspend operator fun invoke(carItem: CarItem) {
         carListRepository.addCarItem(carItem)
     }
 
