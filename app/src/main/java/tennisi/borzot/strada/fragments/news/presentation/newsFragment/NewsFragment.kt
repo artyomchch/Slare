@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.fragments.news.presentation
+package tennisi.borzot.strada.fragments.news.presentation.newsFragment
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.FragmentNewsBinding
@@ -21,6 +23,7 @@ class NewsFragment : Fragment() {
     private var _binding: FragmentNewsBinding? = null
     private val binding: FragmentNewsBinding
         get() = _binding ?: throw RuntimeException("FragmentNewsBinding == null")
+
 
     private lateinit var newsListAdapter: NewsListAdapter
     private lateinit var viewModel: NewsFragmentViewModel
@@ -34,17 +37,34 @@ class NewsFragment : Fragment() {
         viewModel = ViewModelProvider(this)[NewsFragmentViewModel::class.java]
         binding.swipeRefreshLayout.isRefreshing = true
 
-        viewModel.newsList.observe(viewLifecycleOwner) {
+        viewModel.newsItems.observe(viewLifecycleOwner) {
             newsListAdapter.submitList(it)
-            binding.swipeRefreshLayout.isRefreshing = false
-        }
+            with(binding){
+                swipeRefreshLayout.isRefreshing = false
+                newsRecycler.scrollToPosition(0)
+            }
 
+        }
 
         swipeRefreshListener()
         setupClickListener()
         setupOnLongClickListener()
+        setupOnScrollListener()
 
         return binding.root
+    }
+
+    private fun setupOnScrollListener() {
+        binding.newsRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+//                if (!recyclerView.canScrollVertically(1) && dy != 0) {
+//                    Log.d("scroll", "onScrolled:  in the end ")
+//                }
+
+
+            }
+        })
     }
 
     private fun swipeRefreshListener() {
@@ -57,6 +77,8 @@ class NewsFragment : Fragment() {
     private fun setupClickListener() {
         newsListAdapter.onNewsItemClickListener = {
             Toast.makeText(context, it.url, Toast.LENGTH_SHORT).show()
+            // findNavController().navigate(AddFragmentDirections.actionAddFragmentToCarItemFragment(ScreenAddMode.EDIT, it.id))
+            findNavController().navigate(NewsFragmentDirections.actionNewsFragmentToSourceFragment(it.url))
         }
     }
 

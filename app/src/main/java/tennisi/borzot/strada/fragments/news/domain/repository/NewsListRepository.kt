@@ -5,9 +5,9 @@ import tennisi.borzot.strada.network.pojo.Article
 
 interface NewsListRepository {
 
-    fun getNewsList(): LiveData<List<Article>>
+    suspend fun getNewsList(): List<Article>
 
-    fun updateNewsList()
+    suspend fun updateNewsList(): List<Article>
 
-    fun addNewsList(article: Article)
+    suspend fun addNewsList(): List<Article>
 }

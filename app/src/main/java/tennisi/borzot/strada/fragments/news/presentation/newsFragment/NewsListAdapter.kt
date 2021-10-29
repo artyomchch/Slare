@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.fragments.news.presentation
+package tennisi.borzot.strada.fragments.news.presentation.newsFragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

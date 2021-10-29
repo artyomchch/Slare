@@ -9,7 +9,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.news.presentation.NewsFragment">
+        tools:context=".fragments.news.presentation.newsFragment.NewsFragment">
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -23,8 +23,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/item_news" />
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
