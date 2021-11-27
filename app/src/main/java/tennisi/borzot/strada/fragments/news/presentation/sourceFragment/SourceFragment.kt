@@ -10,6 +10,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import tennisi.borzot.strada.databinding.FragmentSourceBinding
 import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemFragment
 
@@ -55,8 +56,20 @@ class SourceFragment : Fragment() {
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private fun webViewSetup(){
-        with (binding){
+    private fun webViewSetup() {
+
+        with(binding) {
+            with(collapsingToolbar) {
+                title = "some title"
+            }
+
+
+
+            Glide.with(root)
+                .load(args.urlPic)
+                .centerCrop()
+                .into(newsItemImage)
+
             webView.apply {
                 settings.javaScriptEnabled = true
                 webViewClient = object : WebViewClient() {
@@ -72,7 +85,6 @@ class SourceFragment : Fragment() {
 
         }
     }
-
 
 
     override fun onDestroyView() {

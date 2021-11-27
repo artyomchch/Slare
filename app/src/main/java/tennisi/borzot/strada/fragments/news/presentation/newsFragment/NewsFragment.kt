@@ -41,7 +41,7 @@ class NewsFragment : Fragment() {
             newsListAdapter.submitList(it)
             with(binding){
                 swipeRefreshLayout.isRefreshing = false
-                newsRecycler.scrollToPosition(0)
+                //newsRecycler.scrollToPosition(0)
             }
 
         }
@@ -49,23 +49,10 @@ class NewsFragment : Fragment() {
         swipeRefreshListener()
         setupClickListener()
         setupOnLongClickListener()
-        setupOnScrollListener()
 
         return binding.root
     }
 
-    private fun setupOnScrollListener() {
-        binding.newsRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-//                if (!recyclerView.canScrollVertically(1) && dy != 0) {
-//                    Log.d("scroll", "onScrolled:  in the end ")
-//                }
-
-
-            }
-        })
-    }
 
     private fun swipeRefreshListener() {
         binding.swipeRefreshLayout.setOnRefreshListener {
@@ -78,7 +65,7 @@ class NewsFragment : Fragment() {
         newsListAdapter.onNewsItemClickListener = {
             Toast.makeText(context, it.url, Toast.LENGTH_SHORT).show()
             // findNavController().navigate(AddFragmentDirections.actionAddFragmentToCarItemFragment(ScreenAddMode.EDIT, it.id))
-            findNavController().navigate(NewsFragmentDirections.actionNewsFragmentToSourceFragment(it.url))
+            findNavController().navigate(NewsFragmentDirections.actionNewsFragmentToSourceFragment(it.url, it.urlToImage))
         }
     }
 
