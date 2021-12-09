@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import tennisi.borzot.strada.fragments.add.data.CarListRepositoryImpl
+import tennisi.borzot.strada.fragments.add.data.repository.CarListRepositoryImpl
 import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
 import tennisi.borzot.strada.fragments.add.domain.usecases.AddCarItemUseCase
 import tennisi.borzot.strada.fragments.add.domain.usecases.EditCarItemUseCase

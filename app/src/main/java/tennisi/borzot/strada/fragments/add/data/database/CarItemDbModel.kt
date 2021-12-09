@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.fragments.add.data
+package tennisi.borzot.strada.fragments.add.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

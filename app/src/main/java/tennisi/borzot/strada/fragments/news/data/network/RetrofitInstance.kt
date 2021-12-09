@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.network
+package tennisi.borzot.strada.fragments.news.data.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

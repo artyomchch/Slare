@@ -1,5 +1,6 @@
-package tennisi.borzot.strada.fragments.add.data
+package tennisi.borzot.strada.fragments.add.data.mapper
 
+import tennisi.borzot.strada.fragments.add.data.database.CarItemDbModel
 import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
 
 class CarListMapper {

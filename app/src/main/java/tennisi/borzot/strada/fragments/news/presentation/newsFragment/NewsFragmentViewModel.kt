@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import tennisi.borzot.strada.fragments.news.data.NewsListRepositoryImpl
+import tennisi.borzot.strada.fragments.news.data.repository.NewsListRepositoryImpl
 import tennisi.borzot.strada.fragments.news.domain.usecases.GetNewsListUseCase
 import tennisi.borzot.strada.fragments.news.domain.usecases.UpdateNewsListUseCase
-import tennisi.borzot.strada.network.pojo.Article
+import tennisi.borzot.strada.fragments.news.data.network.pojo.Article
 
 class NewsFragmentViewModel : ViewModel() {
 

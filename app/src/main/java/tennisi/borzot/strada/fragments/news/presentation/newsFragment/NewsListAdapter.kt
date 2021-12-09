@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.ItemNewsBinding
-import tennisi.borzot.strada.network.pojo.Article
+import tennisi.borzot.strada.fragments.news.data.network.pojo.Article
 import tennisi.borzot.strada.utils.DateUtils
 
 class NewsListAdapter : ListAdapter<Article, NewsItemViewHolder>(NewsItemDiffCallback()) {

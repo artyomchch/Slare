@@ -3,11 +3,8 @@ package tennisi.borzot.strada.fragments.add.presentation.addFragmentUI
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import tennisi.borzot.strada.fragments.add.data.CarListRepositoryImpl
+import tennisi.borzot.strada.fragments.add.data.repository.CarListRepositoryImpl
 import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
 import tennisi.borzot.strada.fragments.add.domain.usecases.DeleteCarItemUseCase
 import tennisi.borzot.strada.fragments.add.domain.usecases.EditCarItemUseCase

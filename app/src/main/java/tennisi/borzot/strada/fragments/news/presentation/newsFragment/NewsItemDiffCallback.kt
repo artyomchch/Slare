@@ -1,7 +1,7 @@
 package tennisi.borzot.strada.fragments.news.presentation.newsFragment
 
 import androidx.recyclerview.widget.DiffUtil
-import tennisi.borzot.strada.network.pojo.Article
+import tennisi.borzot.strada.fragments.news.data.network.pojo.Article
 
 
 class NewsItemDiffCallback : DiffUtil.ItemCallback<Article>() {

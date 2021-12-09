@@ -1,9 +1,9 @@
-package tennisi.borzot.strada.fragments.news.data
+package tennisi.borzot.strada.fragments.news.data.repository
 
 import org.joda.time.Instant
 import tennisi.borzot.strada.fragments.news.domain.repository.NewsListRepository
-import tennisi.borzot.strada.network.RetrofitInstance
-import tennisi.borzot.strada.network.pojo.Article
+import tennisi.borzot.strada.fragments.news.data.network.RetrofitInstance
+import tennisi.borzot.strada.fragments.news.data.network.pojo.Article
 
 
 object NewsListRepositoryImpl : NewsListRepository {

@@ -1,8 +1,8 @@
-package tennisi.borzot.strada.network
+package tennisi.borzot.strada.fragments.news.data.network
 
 import retrofit2.http.GET
 import retrofit2.http.Query
-import tennisi.borzot.strada.network.pojo.NewsItem
+import tennisi.borzot.strada.fragments.news.data.network.pojo.NewsItem
 
 interface NewsApi {
 

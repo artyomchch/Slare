@@ -1,7 +1,6 @@
 package tennisi.borzot.strada.fragments.news.domain.repository
 
-import androidx.lifecycle.LiveData
-import tennisi.borzot.strada.network.pojo.Article
+import tennisi.borzot.strada.fragments.news.data.network.pojo.Article
 
 interface NewsListRepository {
 

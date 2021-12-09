@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.network.pojo
+package tennisi.borzot.strada.fragments.news.data.network.pojo
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
