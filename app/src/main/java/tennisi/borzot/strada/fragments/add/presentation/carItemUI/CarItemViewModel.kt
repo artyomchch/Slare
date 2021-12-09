@@ -1,17 +1,20 @@
 package tennisi.borzot.strada.fragments.add.presentation.carItemUI
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import tennisi.borzot.strada.fragments.add.data.CarListRepositoryImpl
-import tennisi.borzot.strada.fragments.add.domain.usecases.AddCarItemUseCase
 import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
+import tennisi.borzot.strada.fragments.add.domain.usecases.AddCarItemUseCase
 import tennisi.borzot.strada.fragments.add.domain.usecases.EditCarItemUseCase
 import tennisi.borzot.strada.fragments.add.domain.usecases.GetCarItemUseCase
 
-class CarItemViewModel : ViewModel() {
+class CarItemViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = CarListRepositoryImpl
+    private val repository = CarListRepositoryImpl(application)
 
     private val getCarItemUseCase = GetCarItemUseCase(repository)
     private val addCarItemUseCase = AddCarItemUseCase(repository)
@@ -39,8 +42,10 @@ class CarItemViewModel : ViewModel() {
 
 
     fun getCarItem(carItemId: Int) {
-        val item = getCarItemUseCase(carItemId)
-        _carItem.value = item
+        viewModelScope.launch {
+            val item = getCarItemUseCase(carItemId)
+            _carItem.value = item
+        }
     }
 
     fun addCarItem(inputName: String?, inputBrand: String?, inputModel: String?) {
@@ -49,9 +54,11 @@ class CarItemViewModel : ViewModel() {
         val model = parseName(inputModel)
         val fieldsValid = validateInput(name, brand, model)
         if (fieldsValid) {
-            val carItem = CarItem(name, brand, model, true)
-            addCarItemUseCase(carItem)
-            finishWork()
+            viewModelScope.launch {
+                val carItem = CarItem(name, brand, model, true)
+                addCarItemUseCase(carItem)
+                finishWork()
+            }
         }
 
     }
@@ -63,9 +70,11 @@ class CarItemViewModel : ViewModel() {
         val fieldsValid = validateInput(name, brand, model)
         if (fieldsValid) {
             _carItem.value?.let {
-                val item = it.copy(name = name, brand = brand, model = model)
-                editCarItemUseCase(item)
-                finishWork()
+                viewModelScope.launch {
+                    val item = it.copy(name = name, brand = brand, model = model)
+                    editCarItemUseCase(item)
+                    finishWork()
+                }
             }
         }
 
@@ -107,4 +116,5 @@ class CarItemViewModel : ViewModel() {
     private fun finishWork() {
         _shouldCloseScreen.value = Unit
     }
+
 }

@@ -12,8 +12,6 @@
     <string name="equalizer_description">equalizer description</string>
     <string name="speed_description">speed description</string>
     <string name="news_description">news description</string>
-    //news strings
-    <string name="marker_dot"> \u2022 </string>
 
     //news logs strings
     <string name="failed_to_load_users">Failed to load users</string>
@@ -62,5 +60,23 @@
     <string name="invalid_name">Invalid name</string>
     <string name="invalid_brand">Invalid brand</string>
     <string name="invalid_model">Invalid model</string>
+    //News item fragment
+    <string name="date_image">date image</string>
+    <string name="date_text">01 January 1990</string>
+    <string name="news_text_title">News text title</string>
+    <string name="news_text_description">News text description</string>
+    <string name="news_text_source">News text source</string>
+    <string name="news_text_time">news text time</string>
+    <string name="news_text_author">News text author</string>
+    <string name="news_image">news image</string>
+    <string name="news_image_shadow">news image shadow</string>
+    <string name="marker_dot"> \u2022 </string>
+    <string name="news_url_clipboard_text">News url copied in clipboard</string>
+    <string name="share">Share</string>
+    <string name="text_copied_label">your_text_to_be_copied_label</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="stop">Stop</string>
+    <string name="start">start</string>
 
 </resources>

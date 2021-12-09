@@ -12,60 +12,80 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-
-
-
-        <com.github.anastr.speedviewlib.SpeedView
-            android:id="@+id/speedView"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/speed_text"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:padding="20dp"
+            android:layout_marginTop="160dp"
+            android:text="0.0"
+            android:textSize="50sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.49"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <Button
+            android:id="@+id/start_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start"
+            app:layout_constraintBottom_toTopOf="@id/stop_button"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:sv_centerCircleColor="#FFFFFF"
-            app:sv_endDegree="370"
-            app:sv_indicator="NeedleIndicator"
-            app:sv_indicatorColor="#CD2222"
-            app:sv_indicatorLightColor="#77B2D8"
-            app:sv_indicatorWidth="20dp"
-            app:sv_markColor="#77B2D8"
-            app:sv_markHeight="10dp"
-            app:sv_marksNumber="14"
-            app:sv_maxSpeed="150"
-            app:sv_minSpeed="0"
-            app:sv_speedTextColor="#FFF"
-            app:sv_speedTextPosition="BOTTOM_CENTER"
-            app:sv_speedTextSize="40sp"
-            app:sv_startDegree="170"
-            app:sv_tickNumber="15"
-            app:sv_tickPadding="-15dp"
-            app:sv_unitTextColor="#FFF"
-            app:sv_unitUnderSpeedText="true"
-            app:sv_withTremble="false" />
-
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <Button
             android:id="@+id/stop_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="Stop"
+            android:text="@string/stop"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/start_button" />
 
         <Button
-            android:id="@+id/start_button"
+            android:id="@+id/intent_service"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="71dp"
-            android:text="start"
+            android:layout_marginTop="15dp"
+            android:text="Intent service"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/speedView" />
+            app:layout_constraintTop_toBottomOf="@+id/stop_button" />
+
+        <Button
+            android:id="@+id/job_scheduler"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Job scheduler"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/intent_service" />
+
+        <Button
+            android:id="@+id/job_intent_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Job intent service"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/job_scheduler" />
+
+        <Button
+            android:id="@+id/work_manager"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Work Manager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/job_intent_service" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

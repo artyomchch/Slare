@@ -1,5 +1,6 @@
 package tennisi.borzot.strada.services.speedService
 
+import android.app.IntentService
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
@@ -12,42 +13,35 @@ import androidx.core.app.NotificationCompat
 import kotlinx.coroutines.*
 import tennisi.borzot.strada.R
 
-class SpeedService : Service() {
+class SpeedIntentService : IntentService(NAME) {
 
-    private val coroutineScope = CoroutineScope(Dispatchers.Main)
+
 
     override fun onCreate() {
         super.onCreate()
         log("OnCreate")
+        setIntentRedelivery(true)
         createNotificationChannel()
         startForeground(NOTIFICATION_ID, createNotification())
 
     }
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        log("OnStartCommand")
 
-        coroutineScope.launch {
-            for (i in 0 until 100) {
-                delay(1000)
-                log("timer $i")
-            }
-            stopSelf()
+    override fun onHandleIntent(p0: Intent?) {
+        log("onHandleIntent")
+        for (i in 0 until 5) {
+            Thread.sleep(1000)
+            log("timer $i")
         }
-
-        return START_STICKY
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        coroutineScope.cancel()
+
         log("OnDestroy")
     }
 
 
-    override fun onBind(p0: Intent?): IBinder? {
-        TODO()
-    }
 
     private fun log(mes: String) {
         Log.d("service tag", mes)
@@ -77,9 +71,10 @@ class SpeedService : Service() {
         private const val NOTIFICATION_ID = 1
         private const val CHANNEL_ID = "channel_id"
         private const val CHANNEL_NAME = "channel_name"
+        private const val NAME = "SpeedIntentService"
 
         fun newIntent(context: Context): Intent {
-            return Intent(context, SpeedService::class.java)
+            return Intent(context, SpeedIntentService::class.java)
         }
     }
 

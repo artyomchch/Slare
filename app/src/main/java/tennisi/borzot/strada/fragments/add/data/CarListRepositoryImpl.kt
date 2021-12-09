@@ -1,54 +1,36 @@
 package tennisi.borzot.strada.fragments.add.data
 
+import android.app.Application
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
 import tennisi.borzot.strada.fragments.add.domain.repository.CarListRepository
-import kotlin.random.Random
 
-object CarListRepositoryImpl : CarListRepository {
+class CarListRepositoryImpl(application: Application) : CarListRepository {
 
-    private val carListLD = MutableLiveData<List<CarItem>>()
-    private val carList = sortedSetOf<CarItem>({ o1, o2 -> o1.id.compareTo(o2.id) })
+    private val carListDao = AppDatabase.getInstance(application).carListDao()
+    private val mapper = CarListMapper()
 
-    private var autoIncrementId = 0
-
-    init {
-        for (i in 0 until 20) {
-            val item = CarItem("Name $i", "Brand $i", "Model $i", Random.nextBoolean())
-            addCarItem(item)
-        }
+    override suspend fun editCarItem(carItem: CarItem) {
+        carListDao.addCarItem(mapper.mapEntityToDbModel(carItem))
     }
 
-    override fun editCarItem(carItem: CarItem) {
-        val oldElement = getCarItem(carItem.id)
-        carList.remove(oldElement)
-        addCarItem(carItem)
+    override suspend fun addCarItem(carItem: CarItem) {
+        carListDao.addCarItem(mapper.mapEntityToDbModel(carItem))
     }
 
-    override fun addCarItem(carItem: CarItem) {
-        if (carItem.id == CarItem.UNDEFINED_ID) {
-            carItem.id = autoIncrementId++
-        }
-        carList.add(carItem)
-        updateList()
+    override suspend fun getCarItem(carItemId: Int): CarItem {
+        val dbModel = carListDao.getCarItem(carItemId)
+        return mapper.mapDbModelToEntity(dbModel)
     }
 
-    override fun getCarItem(carItemId: Int): CarItem {
-        return carList.find {
-            it.id == carItemId
-        } ?: throw RuntimeException("Element with id $carItemId not found")
+    override suspend fun deleteCarItem(carItem: CarItem) {
+        carListDao.deleteCarItem(carItem.id)
     }
 
-    override fun deleteCarItem(carItem: CarItem) {
-        carList.remove(carItem)
-        updateList()
+    override fun getCarList(): LiveData<List<CarItem>> = Transformations.map(carListDao.getCarList()) {
+        mapper.mapListDbModelToListEntity(it)
     }
 
-    override fun getCarList(): LiveData<List<CarItem>> = carListLD
-
-    private fun updateList() {
-        carListLD.value = carList.toList()
-    }
 
 }

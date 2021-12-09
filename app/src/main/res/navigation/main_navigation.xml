@@ -11,40 +11,4 @@
     <include app:graph="@navigation/news_fragment_navigation"/>
     <include app:graph="@navigation/settings_fragment_navigation"/>
 
-<!--    <fragment-->
-<!--        android:id="@+id/addFragment"-->
-<!--        android:name="tennisi.borzot.strada.fragments.add.presentation.addFragmentUI.AddFragment"-->
-<!--        android:label="fragment_add"-->
-<!--        tools:layout="@layout/fragment_add" />-->
-<!--    <fragment-->
-<!--        android:id="@+id/equalizerFragment"-->
-<!--        android:name="tennisi.borzot.strada.fragments.equalizer.EqualizerFragment"-->
-<!--        android:label="fragment_equalizer"-->
-<!--        tools:layout="@layout/fragment_equalizer" />-->
-<!--    <fragment-->
-<!--        android:id="@+id/settingsFragment"-->
-<!--        android:name="tennisi.borzot.strada.fragments.settings.SettingsFragment"-->
-<!--        android:label="fragment_settings"-->
-<!--        tools:layout="@layout/fragment_settings" />-->
-<!--    <fragment-->
-<!--        android:id="@+id/speedFragment"-->
-<!--        android:name="tennisi.borzot.strada.fragments.speed.SpeedFragment"-->
-<!--        android:label="fragment_speed"-->
-<!--        tools:layout="@layout/fragment_speed">-->
-<!--        <action-->
-<!--            android:id="@+id/action_speedFragment_to_addFragment2"-->
-<!--            app:destination="@id/addFragment"-->
-<!--            app:launchSingleTop="false"-->
-<!--            app:popUpToInclusive="false" />-->
-<!--    </fragment>-->
-<!--    <fragment-->
-<!--        android:id="@+id/newsFragment"-->
-<!--        android:name="tennisi.borzot.strada.fragments.news.presentation.NewsFragment"-->
-<!--        android:label="fragment_news"-->
-<!--        tools:layout="@layout/fragment_news" />-->
-<!--    <fragment-->
-<!--        android:id="@+id/carItemFragment"-->
-<!--        android:name="tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemFragment"-->
-<!--        android:label="CarItemFragment"-->
-<!--        tools:layout="@layout/fragment_car_item" />-->
 </navigation>

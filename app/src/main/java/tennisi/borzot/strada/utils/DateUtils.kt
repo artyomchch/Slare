@@ -42,7 +42,7 @@ object DateUtils {
     private fun getCountry(): String {
         val locale = Locale.getDefault()
         val country = java.lang.String.valueOf(locale.country)
-        return country.toLowerCase()
+        return country.lowercase(Locale.getDefault())
     }
 
 }

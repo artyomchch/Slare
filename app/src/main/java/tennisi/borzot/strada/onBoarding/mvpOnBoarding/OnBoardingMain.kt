@@ -89,7 +89,7 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
 
     }
 
-    fun startActivityWithTransition(){
+    private fun startActivityWithTransition(){
         startActivity(Intent(this, SignInActivity::class.java))
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }

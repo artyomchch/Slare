@@ -7,7 +7,23 @@
 
     <fragment
         android:id="@+id/newsFragment"
-        android:name="tennisi.borzot.strada.fragments.news.presentation.NewsFragment"
+        android:name="tennisi.borzot.strada.fragments.news.presentation.newsFragment.NewsFragment"
         android:label="fragment_news"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_news" >
+        <action
+            android:id="@+id/action_newsFragment_to_sourceFragment"
+            app:destination="@id/sourceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sourceFragment"
+        android:name="tennisi.borzot.strada.fragments.news.presentation.sourceFragment.SourceFragment"
+        tools:layout="@layout/fragment_source"
+        android:label="SourceFragment" >
+        <argument
+            android:name="url"
+            app:argType="string" />
+        <argument
+            android:name="url_pic"
+            app:argType="string" />
+    </fragment>
 </navigation>

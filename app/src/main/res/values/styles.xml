@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="MainTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+    <style name="MainTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorWhite</item>
@@ -18,7 +18,6 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-
     <style name="FabButtonStyle" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="backgroundTint">@color/purple</item>
         <item name="tint">@color/colorWhite</item>
@@ -27,5 +26,7 @@
     <style name="AlertDialogTheme" parent="Theme.MaterialComponents.Light.Dialog.Alert">
         <item name="colorSurface">#FFFFFF</item>
     </style>
+
+
 
 </resources>

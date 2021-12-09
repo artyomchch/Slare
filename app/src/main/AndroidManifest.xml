@@ -1,33 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="tennisi.borzot.strada">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
-        android:name=".utils.MyApplication"
+
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/MainTheme">
+        android:theme="@style/MainTheme"
+        tools:replace="android:allowBackup">
         <activity
             android:name=".services.firebase.SignInActivity"
             android:exported="true" />
-
-        <receiver
-            android:name=".services.speedService.SpeedReceiver"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="speed.broadcast.receiver" />
-            </intent-filter>
-        </receiver>
-
-        <service android:name=".services.speedService.SpeedService" />
 
         <activity
             android:name=".splash.SplashActivity"
@@ -39,9 +33,21 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+
         <activity android:name=".onBoarding.mvpOnBoarding.OnBoardingMain" />
-        <activity
-            android:name=".homeScreen.presentation.MainActivity" />
+        <activity android:name=".homeScreen.presentation.MainActivity" />
+
+        <service android:name=".services.speedService.SpeedService" />
+        <service android:name=".services.speedService.SpeedIntentService" />
+        <service android:name=".services.speedService.SpeedIntentService2" />
+        <service
+            android:name=".services.speedService.SpeedJobIntentService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service
+            android:name=".services.speedService.SpeedJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+
     </application>
 
 </manifest>
