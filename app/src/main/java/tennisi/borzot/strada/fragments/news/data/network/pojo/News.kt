@@ -3,7 +3,7 @@ package tennisi.borzot.strada.fragments.news.data.network.pojo
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class NewsItem(
+data class News(
     @SerializedName("articles")
     @Expose
     val articles: List<Article>,

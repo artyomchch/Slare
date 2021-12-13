@@ -24,6 +24,11 @@
             app:argType="string" />
         <argument
             android:name="url_pic"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="source"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>

@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.FragmentSourceBinding
 import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemFragment
 
@@ -52,6 +54,7 @@ class SourceFragment : Fragment() {
 
         webViewSetup()
 
+
         return binding.root
     }
 
@@ -60,7 +63,8 @@ class SourceFragment : Fragment() {
 
         with(binding) {
             with(collapsingToolbar) {
-                title = "some title"
+                setContentScrimColor(ContextCompat.getColor(requireContext(), R.color.colorWhite))
+                title = args.source
             }
 
 
@@ -81,6 +85,7 @@ class SourceFragment : Fragment() {
                 }
                 loadUrl(args.url)
             }
+
 
 
         }

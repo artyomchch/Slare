@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.FragmentNewsBinding
@@ -65,7 +64,7 @@ class NewsFragment : Fragment() {
         newsListAdapter.onNewsItemClickListener = {
             Toast.makeText(context, it.url, Toast.LENGTH_SHORT).show()
             // findNavController().navigate(AddFragmentDirections.actionAddFragmentToCarItemFragment(ScreenAddMode.EDIT, it.id))
-            findNavController().navigate(NewsFragmentDirections.actionNewsFragmentToSourceFragment(it.url, it.urlToImage))
+            findNavController().navigate(NewsFragmentDirections.actionNewsFragmentToSourceFragment(it.url, it.imageUrl, it.source))
         }
     }
 

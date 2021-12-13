@@ -31,36 +31,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/author_text"
+
+            <FrameLayout
+                android:id="@+id/layout_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/news_text_author"
-                android:textColor="#F1F1F1"
-                app:layout_constraintBottom_toBottomOf="@+id/image_news"
-                app:layout_constraintStart_toStartOf="@+id/image_news" />
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/round_white"
+                app:layout_constraintEnd_toEndOf="parent"
 
-            <ImageView
-                android:id="@+id/shadow_bottom"
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:contentDescription="@string/news_image_shadow"
-                android:src="@drawable/shadow_bottom"
-                app:layout_constraintBottom_toBottomOf="@+id/image_news"
-                app:layout_constraintEnd_toEndOf="@+id/image_news"
-                app:layout_constraintStart_toStartOf="@+id/image_news" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <ProgressBar
-                android:id="@+id/news_progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/image_news"
-                app:layout_constraintEnd_toEndOf="@+id/image_news"
-                app:layout_constraintStart_toStartOf="@+id/image_news"
-                app:layout_constraintTop_toTopOf="@+id/image_news" />
+                <TextView
+                    android:id="@+id/author_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="@string/news_text_author" />
+            </FrameLayout>
+
 
             <FrameLayout
                 android:id="@+id/layout_date"
@@ -132,6 +124,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/desc_news" />
 
             <TextView
+                android:id="@+id/dot_news"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@string/marker_dot"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/source_news"
+                app:layout_constraintTop_toBottomOf="@+id/desc_news" />
+
+            <TextView
                 android:id="@+id/time_news"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -139,7 +142,7 @@
                 android:layout_marginBottom="10dp"
                 android:text="@string/news_text_time"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/source_news" />
+                app:layout_constraintStart_toEndOf="@+id/dot_news" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

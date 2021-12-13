@@ -6,13 +6,12 @@ import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.ItemNewsBinding
-import tennisi.borzot.strada.fragments.news.data.network.pojo.Article
-import tennisi.borzot.strada.utils.DateUtils
+import tennisi.borzot.strada.fragments.news.domain.entity.NewsItem
 
-class NewsListAdapter : ListAdapter<Article, NewsItemViewHolder>(NewsItemDiffCallback()) {
+class NewsListAdapter : ListAdapter<NewsItem, NewsItemViewHolder>(NewsItemDiffCallback()) {
 
-    var onNewsItemClickListener: ((Article) -> Unit)? = null
-    var onNewsItemLongClickListener: ((Article) -> Unit)? = null
+    var onNewsItemClickListener: ((NewsItem) -> Unit)? = null
+    var onNewsItemLongClickListener: ((NewsItem) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
         val binding = ItemNewsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -21,19 +20,20 @@ class NewsListAdapter : ListAdapter<Article, NewsItemViewHolder>(NewsItemDiffCal
 
     override fun onBindViewHolder(viewHolder: NewsItemViewHolder, position: Int) {
         val newsItem = getItem(position)
-        with(viewHolder.binding){
+        with(viewHolder.binding) {
             Glide.with(root)
-                .load(newsItem.urlToImage)
+                .load(newsItem.imageUrl)
+                .placeholder(R.drawable.ic_baseline_broken_image_24)
                 .centerCrop()
                 .into(imageNews)
             authorText.text = newsItem.author
-            publishedAt.text = DateUtils.dateFormat(newsItem.publishedAt)
+            publishedAt.text = newsItem.date
             titleNews.text = newsItem.title
             descNews.text = newsItem.description
-            sourceNews.text = newsItem.source.name
-            (viewHolder.itemView.resources.getString(R.string.marker_dot) + " " + DateUtils.dateToTimeFormat(newsItem.publishedAt)).also {
-                timeNews.text = it
-            }
+            sourceNews.text = newsItem.source
+            timeNews.text = newsItem.time
+
+
 
             root.setOnClickListener {
                 onNewsItemClickListener?.invoke(newsItem)
