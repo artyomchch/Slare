@@ -20,9 +20,15 @@ class NewsFragmentViewModel : ViewModel() {
     val newsItems: LiveData<List<NewsItem>>
         get() = _newsItems
 
+    private val _stateLoading = MutableLiveData<Boolean>()
+    val stateLoading: LiveData<Boolean>
+        get() = _stateLoading
+
     init {
         viewModelScope.launch {
+            _stateLoading.value = true
             _newsItems.value = getNewsListUseCase.invoke()
+            _stateLoading.value = false
         }
     }
 

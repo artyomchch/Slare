@@ -8,13 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.FragmentSourceBinding
 import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemFragment
+import tennisi.borzot.strada.fragments.news.presentation.newsFragment.NewsFragmentDirections
 
 
 class SourceFragment : Fragment() {
@@ -53,9 +56,17 @@ class SourceFragment : Fragment() {
         _binding = FragmentSourceBinding.inflate(inflater, container, false)
 
         webViewSetup()
+        setupBackClickListener()
 
 
         return binding.root
+    }
+
+
+    private fun setupBackClickListener() {
+        binding.toolbar.getChildAt(0).setOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -79,8 +90,12 @@ class SourceFragment : Fragment() {
                 webViewClient = object : WebViewClient() {
                     override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                         view?.loadUrl(url.toString())
-                        progressBar.visibility = View.GONE
                         return true
+                    }
+
+                    override fun onPageFinished(view: WebView?, url: String?) {
+                        progressBar.visibility = View.GONE
+                        super.onPageFinished(view, url)
                     }
                 }
                 loadUrl(args.url)

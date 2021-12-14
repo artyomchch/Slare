@@ -34,13 +34,12 @@ class NewsFragment : Fragment() {
 
         setupRecyclerView()
         viewModel = ViewModelProvider(this)[NewsFragmentViewModel::class.java]
-        binding.swipeRefreshLayout.isRefreshing = true
+
 
         viewModel.newsItems.observe(viewLifecycleOwner) {
             newsListAdapter.submitList(it)
-            with(binding){
+            with(binding) {
                 swipeRefreshLayout.isRefreshing = false
-                //newsRecycler.scrollToPosition(0)
             }
 
         }
@@ -48,8 +47,15 @@ class NewsFragment : Fragment() {
         swipeRefreshListener()
         setupClickListener()
         setupOnLongClickListener()
+        stateLoadingListener()
 
         return binding.root
+    }
+
+    private fun stateLoadingListener() {
+        viewModel.stateLoading.observe(viewLifecycleOwner){
+            if (it) binding.swipeRefreshLayout.isRefreshing = true
+        }
     }
 
 
@@ -63,7 +69,6 @@ class NewsFragment : Fragment() {
     private fun setupClickListener() {
         newsListAdapter.onNewsItemClickListener = {
             Toast.makeText(context, it.url, Toast.LENGTH_SHORT).show()
-            // findNavController().navigate(AddFragmentDirections.actionAddFragmentToCarItemFragment(ScreenAddMode.EDIT, it.id))
             findNavController().navigate(NewsFragmentDirections.actionNewsFragmentToSourceFragment(it.url, it.imageUrl, it.source))
         }
     }
@@ -71,7 +76,7 @@ class NewsFragment : Fragment() {
     private fun setupOnLongClickListener() {
         newsListAdapter.onNewsItemLongClickListener = { url_news ->
             copyToClipboard(url_news.url)
-            Snackbar.make(binding.linearLayout, getString(R.string.news_url_clipboard_text), Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(requireView(), getString(R.string.news_url_clipboard_text), Snackbar.LENGTH_INDEFINITE)
                 .setDuration(5000)
                 .setAction(getString(R.string.share)) {
                     sendingBinaryContent(url_news.url)
