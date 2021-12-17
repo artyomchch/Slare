@@ -2,8 +2,9 @@ package tennisi.borzot.strada.fragments.add.data.mapper
 
 import tennisi.borzot.strada.fragments.add.data.database.CarItemDbModel
 import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
+import javax.inject.Inject
 
-class CarListMapper {
+class CarListMapper @Inject constructor() {
 
     fun mapEntityToDbModel(carItem: CarItem) = CarItemDbModel(
         id = carItem.id,

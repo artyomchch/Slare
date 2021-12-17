@@ -1,23 +1,20 @@
 package tennisi.borzot.strada.fragments.add.presentation.addFragmentUI
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import tennisi.borzot.strada.fragments.add.data.repository.CarListRepositoryImpl
 import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
 import tennisi.borzot.strada.fragments.add.domain.usecases.DeleteCarItemUseCase
 import tennisi.borzot.strada.fragments.add.domain.usecases.EditCarItemUseCase
 import tennisi.borzot.strada.fragments.add.domain.usecases.GetCarListUseCase
+import javax.inject.Inject
 
-class AddFragmentViewModel(application: Application) : AndroidViewModel(application) {
+class AddFragmentViewModel @Inject constructor(
+    getCarListUseCase: GetCarListUseCase,
+    private val deleteCarItemUseCase: DeleteCarItemUseCase,
+    private val editCarItemUseCase: EditCarItemUseCase
+) : ViewModel() {
 
-
-    private val repository = CarListRepositoryImpl(application)
-
-    private val getCarListUseCase = GetCarListUseCase(repository)
-    private val deleteCarItemUseCase = DeleteCarItemUseCase(repository)
-    private val editCarItemUseCase = EditCarItemUseCase(repository)
 
     val carList = getCarListUseCase.invoke()
 

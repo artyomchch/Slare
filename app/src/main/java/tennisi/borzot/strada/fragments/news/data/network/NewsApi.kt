@@ -2,7 +2,7 @@ package tennisi.borzot.strada.fragments.news.data.network
 
 import retrofit2.http.GET
 import retrofit2.http.Query
-import tennisi.borzot.strada.fragments.news.data.network.pojo.News
+import tennisi.borzot.strada.fragments.news.data.network.pojo.NewsDto
 
 interface NewsApi {
 
@@ -15,7 +15,7 @@ interface NewsApi {
         @Query(QUERY_PARAM_FROM) from: String = FROM,
         @Query(QUERY_PARAM_TO) to: String = TO,
         @Query(QUERY_PARAM_PAGE_SIZE) pageSize: String = PAGE_SIZE,
-        ): News
+        ): NewsDto
 
 
     companion object {

@@ -1,13 +1,13 @@
 package tennisi.borzot.strada.fragments.news.data.mapper
 
-import tennisi.borzot.strada.fragments.news.data.network.pojo.Article
+import tennisi.borzot.strada.fragments.news.data.network.pojo.ArticleDto
 import tennisi.borzot.strada.fragments.news.domain.entity.NewsItem
 import tennisi.borzot.strada.utils.DateUtils
 
 class NewsItemMapper {
 
 
-    private fun mapNetworkModelToEntityNews(article: Article) = NewsItem(
+    private fun mapNetworkModelToEntityNews(article: ArticleDto) = NewsItem(
         url = article.url,
         imageUrl = article.urlToImage,
         author = article.author,
@@ -18,7 +18,7 @@ class NewsItemMapper {
         date = DateUtils.dateFormat(article.publishedAt)
     )
 
-    fun mapListNetworkModelToListEntityNews(list: List<Article>) =
+    fun mapListNetworkModelToListEntityNews(list: List<ArticleDto>) =
         list.map {
             mapNetworkModelToEntityNews(it)
         }

@@ -10,26 +10,45 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import tennisi.borzot.strada.databinding.FragmentAddBinding
+import tennisi.borzot.strada.di.DaggerApplicationComponent
 import tennisi.borzot.strada.fragments.add.domain.entity.ScreenAddMode
+import javax.inject.Inject
 
 
 class AddFragment : Fragment() {
 
     private lateinit var carsListAdapter: CarsListAdapter
-    private lateinit var viewModel: AddFragmentViewModel
+  //  private lateinit var viewModel: AddFragmentViewModel
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[(AddFragmentViewModel::class.java)]
+    }
+
 
     private var _binding: FragmentAddBinding? = null
     private val binding: FragmentAddBinding
         get() = _binding ?: throw RuntimeException("FragmentAddBinding == null")
 
+
+
+    private val component by lazy {
+        DaggerApplicationComponent.factory().create(requireContext())
+
+    }
+
     override fun onCreateView(
+
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
+        component.inject(this)
         _binding = FragmentAddBinding.inflate(inflater, container, false)
         setupRecyclerView()
-        viewModel = ViewModelProvider(this)[(AddFragmentViewModel::class.java)]
+     //   viewModel = ViewModelProvider(this)[(AddFragmentViewModel::class.java)]
         viewModel.carList.observe(viewLifecycleOwner) {
             carsListAdapter.submitList(it)
         }

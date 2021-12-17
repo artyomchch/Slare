@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 
-data class Article(
+data class ArticleDto(
     @SerializedName("author")
     @Expose
     val author: String,
@@ -19,7 +19,7 @@ data class Article(
     val publishedAt: String,
     @SerializedName("source")
     @Expose
-    val source: Source,
+    val source: SourceDto,
     @SerializedName("title")
     @Expose
     val title: String,
