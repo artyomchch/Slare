@@ -8,6 +8,7 @@ import tennisi.borzot.strada.fragments.add.domain.repository.CarListRepository
 @Module
 interface AddDomainModule {
 
+    @ApplicationScope
     @Binds
     fun bindCarListRepository(impl: CarListRepositoryImpl): CarListRepository
 

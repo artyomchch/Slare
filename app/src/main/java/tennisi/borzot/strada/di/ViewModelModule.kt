@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import dagger.multibindings.StringKey
 import tennisi.borzot.strada.fragments.add.presentation.addFragmentUI.AddFragmentViewModel
 import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemViewModel
 
@@ -12,12 +11,12 @@ import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemViewMod
 interface ViewModelModule {
 
     @IntoMap
-    @StringKey("AddFragmentViewModel")
+    @ViewModelKey(AddFragmentViewModel::class)
     @Binds
     fun bindAddFragmentViewModel(impl: AddFragmentViewModel): ViewModel
 
     @IntoMap
-    @StringKey("CarItemViewModel")
+    @ViewModelKey(CarItemViewModel::class)
     @Binds
     fun bindCarItemViewModel(impl: CarItemViewModel): ViewModel
 }

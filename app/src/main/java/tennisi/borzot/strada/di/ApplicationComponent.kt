@@ -6,6 +6,7 @@ import dagger.Component
 import tennisi.borzot.strada.fragments.add.presentation.addFragmentUI.AddFragment
 import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemFragment
 
+@ApplicationScope
 @Component(modules = [AddDomainModule::class, ViewModelModule::class])
 interface ApplicationComponent {
 
