@@ -1,24 +1,27 @@
 package tennisi.borzot.strada.fragments.add.presentation.carItemUI
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import tennisi.borzot.strada.fragments.add.data.repository.CarListRepositoryImpl
 import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
 import tennisi.borzot.strada.fragments.add.domain.usecases.AddCarItemUseCase
 import tennisi.borzot.strada.fragments.add.domain.usecases.EditCarItemUseCase
 import tennisi.borzot.strada.fragments.add.domain.usecases.GetCarItemUseCase
+import javax.inject.Inject
 
-class CarItemViewModel(application: Application) : AndroidViewModel(application) {
+class CarItemViewModel @Inject constructor(
+    private val getCarItemUseCase: GetCarItemUseCase,
+    private val addCarItemUseCase: AddCarItemUseCase,
+    private val editCarItemUseCase: EditCarItemUseCase
+) : ViewModel() {
 
-    private val repository = CarListRepositoryImpl(application)
+    //  private val repository = CarListRepositoryImpl(application)
 
-    private val getCarItemUseCase = GetCarItemUseCase(repository)
-    private val addCarItemUseCase = AddCarItemUseCase(repository)
-    private val editCarItemUseCase = EditCarItemUseCase(repository)
+    //   private val getCarItemUseCase = GetCarItemUseCase(repository)
+    //  private val addCarItemUseCase = AddCarItemUseCase(repository)
+    //  private val editCarItemUseCase = EditCarItemUseCase(repository)
 
     private val _errorInputName = MutableLiveData<Boolean>()
     val errorInputName: LiveData<Boolean>

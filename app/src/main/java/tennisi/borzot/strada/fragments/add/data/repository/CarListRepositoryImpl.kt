@@ -10,11 +10,12 @@ import tennisi.borzot.strada.fragments.add.domain.repository.CarListRepository
 import javax.inject.Inject
 
 class CarListRepositoryImpl @Inject constructor(
-    context: Context)
-    : CarListRepository {
+    context: Context,
+    private val mapper: CarListMapper
+) : CarListRepository {
 
     private val carListDao = AppDatabase.getInstance(context).carListDao()
-    private val mapper = CarListMapper()
+  //  private val mapper = CarListMapper()
 
     override suspend fun editCarItem(carItem: CarItem) {
         carListDao.addCarItem(mapper.mapEntityToDbModel(carItem))

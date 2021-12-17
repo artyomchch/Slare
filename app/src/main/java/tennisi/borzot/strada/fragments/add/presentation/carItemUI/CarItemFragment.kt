@@ -11,7 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import tennisi.borzot.strada.R
+import tennisi.borzot.strada.StradaApplication
 import tennisi.borzot.strada.databinding.FragmentCarItemBinding
+import tennisi.borzot.strada.fragments.add.presentation.ViewModelFactory
+import javax.inject.Inject
 
 
 class CarItemFragment : Fragment() {
@@ -22,7 +25,17 @@ class CarItemFragment : Fragment() {
 
     private val args by navArgs<CarItemFragmentArgs>()
 
-    private lateinit var viewModel: CarItemViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[(CarItemViewModel::class.java)]
+    }
+
+    private val component by lazy {
+        (requireActivity().application as StradaApplication).component
+    }
+
     private lateinit var onSaveButtonClickListener: OnSaveButtonClickListener
     private lateinit var onItemSelectedListener: OnSaveButtonClickListener
 
@@ -45,13 +58,13 @@ class CarItemFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentCarItemBinding.inflate(inflater, container, false)
+        component.inject(this)
         return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[CarItemViewModel::class.java]
         addChangeTextListeners()
         launchRightMode()
         observeViewModel()

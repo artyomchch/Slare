@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -53,7 +52,7 @@ class NewsFragment : Fragment() {
     }
 
     private fun stateLoadingListener() {
-        viewModel.stateLoading.observe(viewLifecycleOwner){
+        viewModel.stateLoading.observe(viewLifecycleOwner) {
             if (it) binding.swipeRefreshLayout.isRefreshing = true
         }
     }
@@ -68,7 +67,6 @@ class NewsFragment : Fragment() {
 
     private fun setupClickListener() {
         newsListAdapter.onNewsItemClickListener = {
-            Toast.makeText(context, it.url, Toast.LENGTH_SHORT).show()
             findNavController().navigate(NewsFragmentDirections.actionNewsFragmentToSourceFragment(it.url, it.imageUrl, it.source))
         }
     }

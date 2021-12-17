@@ -9,16 +9,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import tennisi.borzot.strada.StradaApplication
 import tennisi.borzot.strada.databinding.FragmentAddBinding
 import tennisi.borzot.strada.di.DaggerApplicationComponent
 import tennisi.borzot.strada.fragments.add.domain.entity.ScreenAddMode
+import tennisi.borzot.strada.fragments.add.presentation.ViewModelFactory
 import javax.inject.Inject
 
 
 class AddFragment : Fragment() {
 
     private lateinit var carsListAdapter: CarsListAdapter
-  //  private lateinit var viewModel: AddFragmentViewModel
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -35,8 +36,7 @@ class AddFragment : Fragment() {
 
 
     private val component by lazy {
-        DaggerApplicationComponent.factory().create(requireContext())
-
+        (requireActivity().application as StradaApplication).component
     }
 
     override fun onCreateView(
@@ -48,7 +48,6 @@ class AddFragment : Fragment() {
         component.inject(this)
         _binding = FragmentAddBinding.inflate(inflater, container, false)
         setupRecyclerView()
-     //   viewModel = ViewModelProvider(this)[(AddFragmentViewModel::class.java)]
         viewModel.carList.observe(viewLifecycleOwner) {
             carsListAdapter.submitList(it)
         }
