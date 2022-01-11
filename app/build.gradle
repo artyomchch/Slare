@@ -63,12 +63,12 @@ dependencies {
     // Dots Indicator
     implementation 'com.tbuonomo:dotsindicator:4.2'
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
     // Google button
     implementation 'com.shobhitpuri.custombuttons:google-signin:1.1.0'
     // Firebase
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
-    implementation 'com.google.android.gms:play-services-auth:20.0.0'
+    implementation 'com.google.android.gms:play-services-auth:20.0.1'
     implementation 'com.firebaseui:firebase-ui-auth:4.3.2'
     // Kotlin flow
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
@@ -84,12 +84,12 @@ dependencies {
     // Gson
     implementation 'com.google.code.gson:gson:2.8.8'
     // Navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.0-beta02'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.0-beta02'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.0-rc01'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.0-rc01'
     // Room
-    implementation 'androidx.room:room-runtime:2.3.0'
-    implementation 'androidx.room:room-ktx:2.3.0'
-    kapt 'androidx.room:room-compiler:2.3.0'
+    implementation 'androidx.room:room-runtime:2.4.0'
+    implementation 'androidx.room:room-ktx:2.4.0'
+    kapt 'androidx.room:room-compiler:2.4.0'
     //jetpack Work Manager
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
     // Dagger 2

@@ -7,7 +7,7 @@ import tennisi.borzot.strada.fragments.add.presentation.addFragmentUI.AddFragmen
 import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemFragment
 
 @ApplicationScope
-@Component(modules = [AddDomainModule::class, ViewModelModule::class])
+@Component(modules = [AddDomainModule::class, ViewModelModule::class, AppDatabaseModule::class])
 interface ApplicationComponent {
 
     fun inject(fragment: AddFragment)

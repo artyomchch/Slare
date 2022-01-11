@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import tennisi.borzot.strada.StradaApplication
 import tennisi.borzot.strada.databinding.FragmentAddBinding
-import tennisi.borzot.strada.di.DaggerApplicationComponent
 import tennisi.borzot.strada.fragments.add.domain.entity.ScreenAddMode
 import tennisi.borzot.strada.fragments.add.presentation.ViewModelFactory
 import javax.inject.Inject
@@ -32,7 +31,6 @@ class AddFragment : Fragment() {
     private var _binding: FragmentAddBinding? = null
     private val binding: FragmentAddBinding
         get() = _binding ?: throw RuntimeException("FragmentAddBinding == null")
-
 
 
     private val component by lazy {
