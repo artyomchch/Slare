@@ -37,37 +37,38 @@ Project for Google Play
 
 ## Splash Screen
 ###### Загрузочный экран
-![alt text](sourse/screen_app/splash.png)
-<img src="sourse/screen_app/splash.png" alt="drawing" height="900"/>
+<img src="sourse/screen_app/splash.png" alt="drawing" height="700"/>
 
 ## OnBoarding Screen
 ###### Экран с введением на тему безопасности, а также для подтверждения запрашиваемых разрешений
-![alt text](sourse/screen_app/onboarding1.png)
-![alt text](sourse/screen_app/onboarding2.png)
-![alt text](sourse/screen_app/onboarding3.png)
+<img src="sourse/screen_app/onboarding1.png" alt="drawing" height="700"/>
+<img src="sourse/screen_app/onboarding2.png" alt="drawing" height="700"/>
+<img src="sourse/screen_app/onboarding3.png" alt="drawing" height="700"/>
+
 
 ## Auth Screen
 ###### Экран с авторизацией
-![alt text](sourse/screen_app/authscreen.png)
+<img src="sourse/screen_app/authscreen.png" alt="drawing" height="700"/>
 
 ## Add Screen 
 ###### Экран с просмотром и добавлением автомобилей (В разработке)
-![alt text](sourse/screen_app/addcar.png)
-![alt text](sourse/screen_app/addcar2.png)
+<img src="sourse/screen_app/addcar.png" alt="drawing" height="700"/>
+<img src="sourse/screen_app/addcar2.png" alt="drawing" height="700"/>
 
 ## Equalizer Screen 
 ###### Экран с добавление профилей для машины (В разработке)
-![alt text](sourse/screen_app/equalizer.png)
+<img src="sourse/screen_app/equalizer.png" alt="drawing" height="700"/>
 
 ## Speed Screen
 ###### Экран с запуском серивиса  (В разработке)
-![alt text](sourse/screen_app/speed.png)
+<img src="sourse/screen_app/speed.png" alt="drawing" height="700"/>
 
 ## News Screen
 ###### Экран с просмотром новостей 
-![alt text](sourse/screen_app/news1.png)
-![alt text](sourse/screen_app/news2.png)
+<img src="sourse/screen_app/news1.png" alt="drawing" height="700"/>
+<img src="sourse/screen_app/news2.png" alt="drawing" height="700"/>
+
 
 ## Settings Screen 
 ###### Экран с изменением настроек (В разработке)
-![alt text](sourse/screen_app/settings.png)
+<img src="sourse/screen_app/settings.png" alt="drawing" height="700"/>
