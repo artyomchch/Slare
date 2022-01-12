@@ -3,27 +3,27 @@
 Project for Google Play
 
 1. Начало разработки
-
-+ [User Flow Diagram](#User-Flow-Diagram)
-+ [Wireframes](#Headers)
-+ [Протипирование](#Prot)
-
+    1.1 [User Flow Diagram](#User-Flow-Diagram)
+    1.2 Wireframes
+    1.3 Протипирование
 2. Экраны и их описание
-
-+ [Splash Screen](#Links)
-+ [OnBoarding](#Emphasis)
-+ [Add Car Fragment](#Code)
-+ [Add Screen](#Images)
-+ [Equalizer Screen](#Links)
-+ [Speed Screen](#Emphasis)
-+ [News Screen](#Code)
-+ [Settings Screen](#Images)
-
-3. Gif
-
-+ [Приложение](#Backslash Escapes);
-
+    2.1 [Splash Screen](#Links)
+    2.2 [OnBoarding](#Emphasis)
+    2.3 [Auth Screen](#d)
+    2.4 [Add Car Fragment](#Code)
+    2.5 [Add Screen](#Images)
+    2.6 [Equalizer Screen](#Links)
+    2.7 [Speed Screen](#Emphasis)
+    2.8 [News Screen](#Code)
+    2.9 [Settings Screen](#Images)
+3. Дополнительная информация
+   3.1 Dagger
+   3.2 Coroutines
+   3.3 Firebase
+   3.4 Services
 4. Заключение
+
+
 
 ## User Flow Diagram
 
