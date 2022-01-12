@@ -24,27 +24,27 @@ Project for Google Play
 
 ## User Flow Diagram
 
-###### На данной диаграмме показано взаимодейсвтия пользователя с ознокомительным экраном и регистрацией,а также фрагментом добавления автомобиля
+#### На данной диаграмме показано взаимодейсвтия пользователя с ознокомительным экраном и регистрацией,а также фрагментом добавления автомобиля
 
 ![alt text](sourse/user_flow_diagram/user_flow_part_1.png)
 
-###### На данной диаграмме показано взаимодейсвтия пользователя с эквалайзером и настроек громкости звука, а также взаимодействия с глобальным выбором настроек
+#### На данной диаграмме показано взаимодейсвтия пользователя с эквалайзером и настроек громкости звука, а также взаимодействия с глобальным выбором настроек
 
 ![alt text](sourse/user_flow_diagram/user_flow_part_2.png)
 
-###### На данной диаграмме показано взаимодейсвтия пользователя с сервисом по опредленюю скорости, выбором приложений, с Mirror фрагментом (экран для проекции), с настройками приложения и RSS новостями
+#### На данной диаграмме показано взаимодейсвтия пользователя с сервисом по опредленюю скорости, выбором приложений, с Mirror фрагментом (экран для проекции), с настройками приложения и RSS новостями
 
 ![alt text](sourse/user_flow_diagram/user_flow_part_3.png)
 
 ## Splash Screen
 
-###### Загрузочный экран
+#### Загрузочный экран
 
 <img src="sourse/screen_app/splash.png" alt="drawing" height="700"/>
 
 ## OnBoarding Screen
 
-###### Экран с введением на тему безопасности, а также для подтверждения запрашиваемых разрешений
+#### Экран с введением на тему безопасности, а также для подтверждения запрашиваемых разрешений
 
 <img src="sourse/screen_app/onboarding1.png" alt="drawing" height="700"/>    <img src="sourse/screen_app/onboarding2.png" alt="drawing" height="700"/>
 
@@ -52,38 +52,38 @@ Project for Google Play
 
 ## Auth Screen
 
-###### Экран с авторизацией
+#### Экран с авторизацией
 
 <img src="sourse/screen_app/authscreen.png" alt="drawing" height="700"/>
 
 ## Add Screen
 
-###### Экран с просмотром и добавлением автомобилей (В разработке)
+#### Экран с просмотром и добавлением автомобилей (В разработке)
 
 <img src="sourse/screen_app/addcar.png" alt="drawing" height="700"/>   <img src="sourse/screen_app/addcar2.png" alt="drawing" height="700"/>
 
 
 ## Equalizer Screen
 
-###### Экран с добавление профилей для машины (В разработке)
+#### Экран с добавление профилей для машины (В разработке)
 
 <img src="sourse/screen_app/equalizer.png" alt="drawing" height="700"/>
 
 ## Speed Screen
 
-###### Экран с запуском серивиса  (В разработке)
+#### Экран с запуском серивиса  (В разработке)
 
 <img src="sourse/screen_app/speed.png" alt="drawing" height="700"/>
 
 ## News Screen
 
-###### Экран с просмотром новостей
+#### Экран с просмотром новостей
 
 <img src="sourse/screen_app/news1.png" alt="drawing" height="700"/>  <img src="sourse/screen_app/news2.png" alt="drawing" height="700"/>
 
 
 ## Settings Screen
 
-###### Экран с изменением настроек (В разработке)
+#### Экран с изменением настроек (В разработке)
 
 <img src="sourse/screen_app/settings.png" alt="drawing" height="700"/>
