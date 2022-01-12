@@ -28,7 +28,7 @@ Project for Google Play
 
 ###### На данной диаграмме показано взаимодейсвтия пользователя с ознокомительным экраном и регистрацией,а также фрагментом добавления автомобиля
 ![alt text](sourse/user_flow_diagram/user_flow_part_1.png)
-
+<img src="sourse/user_flow_diagram/user_flow_part_1.png" alt="drawing" width="200"/>
 ###### На данной диаграмме показано взаимодейсвтия пользователя с эквалайзером и настроек громкости звука, а также взаимодействия с глобальным выбором настроек
 ![alt text](sourse/user_flow_diagram/user_flow_part_2.png)
 
