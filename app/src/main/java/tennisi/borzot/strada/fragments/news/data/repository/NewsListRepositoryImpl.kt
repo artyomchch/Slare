@@ -2,22 +2,25 @@ package tennisi.borzot.strada.fragments.news.data.repository
 
 import org.joda.time.Instant
 import tennisi.borzot.strada.fragments.news.data.mapper.NewsItemMapper
+import tennisi.borzot.strada.fragments.news.data.network.NewsApi
 import tennisi.borzot.strada.fragments.news.data.network.RetrofitInstance
 import tennisi.borzot.strada.fragments.news.data.network.pojo.ArticleDto
 import tennisi.borzot.strada.fragments.news.domain.entity.NewsItem
 import tennisi.borzot.strada.fragments.news.domain.repository.NewsListRepository
+import javax.inject.Inject
 
 
-object NewsListRepositoryImpl : NewsListRepository {
+class NewsListRepositoryImpl @Inject constructor(
+    private val mapper: NewsItemMapper,
+    private val retrofit: NewsApi
+) : NewsListRepository {
 
     private var newsList = listOf<ArticleDto>()
     private var olderTime = String()
     private var newestTime = String()
     private var updateNewsList = listOf<ArticleDto>()
-    private val mapper = NewsItemMapper()
-    private const val ADD_SECOND = 5
 
-    private val retrofit = RetrofitInstance.api
+   // private val retrofit = RetrofitInstance.api
 
 
     override suspend fun getNewsList(): List<NewsItem> {
@@ -50,6 +53,10 @@ object NewsListRepositoryImpl : NewsListRepository {
     private fun oldestNews(oldestTime: String): String {
         val oldTime = Instant.parse(oldestTime).toDateTime()
         return oldTime.minusSeconds(ADD_SECOND).toString()
+    }
+
+    companion object{
+        private const val ADD_SECOND = 5
     }
 
 

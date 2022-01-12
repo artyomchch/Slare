@@ -1,4 +1,7 @@
 package tennisi.borzot.strada.fragments.news.presentation.sourceFragment
 
-class SourceFragmentViewModel {
+import androidx.lifecycle.ViewModel
+import javax.inject.Inject
+
+class SourceFragmentViewModel @Inject constructor(): ViewModel() {
 }

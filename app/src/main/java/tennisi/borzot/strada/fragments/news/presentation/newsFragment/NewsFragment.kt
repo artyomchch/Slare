@@ -13,7 +13,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import tennisi.borzot.strada.R
+import tennisi.borzot.strada.StradaApplication
 import tennisi.borzot.strada.databinding.FragmentNewsBinding
+import tennisi.borzot.strada.fragments.add.presentation.ViewModelFactory
+import javax.inject.Inject
 
 
 class NewsFragment : Fragment() {
@@ -23,16 +26,28 @@ class NewsFragment : Fragment() {
         get() = _binding ?: throw RuntimeException("FragmentNewsBinding == null")
 
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[(NewsFragmentViewModel::class.java)]
+    }
+
     private lateinit var newsListAdapter: NewsListAdapter
-    private lateinit var viewModel: NewsFragmentViewModel
+
+    private val component by lazy {
+        (requireActivity().application as StradaApplication).component
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
+        component.inject(this)
         _binding = FragmentNewsBinding.inflate(inflater, container, false)
 
         setupRecyclerView()
-        viewModel = ViewModelProvider(this)[NewsFragmentViewModel::class.java]
+        //  viewModel = ViewModelProvider(this)[NewsFragmentViewModel::class.java]
+
 
 
         viewModel.newsItems.observe(viewLifecycleOwner) {

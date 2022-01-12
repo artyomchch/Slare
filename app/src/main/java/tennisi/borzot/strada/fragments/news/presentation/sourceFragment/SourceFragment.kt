@@ -8,16 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import tennisi.borzot.strada.R
+import tennisi.borzot.strada.StradaApplication
 import tennisi.borzot.strada.databinding.FragmentSourceBinding
+import tennisi.borzot.strada.fragments.add.presentation.ViewModelFactory
 import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemFragment
-import tennisi.borzot.strada.fragments.news.presentation.newsFragment.NewsFragmentDirections
+import javax.inject.Inject
 
 
 class SourceFragment : Fragment() {
@@ -27,6 +28,17 @@ class SourceFragment : Fragment() {
         get() = _binding ?: throw RuntimeException("FragmentSourceBinding == null")
 
     private val args by navArgs<SourceFragmentArgs>()
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[(SourceFragmentViewModel::class.java)]
+    }
+
+    private val component by lazy {
+        (requireActivity().application as StradaApplication).component
+    }
 
     private lateinit var onSaveButtonClickListener: CarItemFragment.OnSaveButtonClickListener
     private lateinit var onItemSelectedListener: CarItemFragment.OnSaveButtonClickListener
@@ -53,6 +65,7 @@ class SourceFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        component.inject(this)
         _binding = FragmentSourceBinding.inflate(inflater, container, false)
 
         webViewSetup()
@@ -100,8 +113,6 @@ class SourceFragment : Fragment() {
                 }
                 loadUrl(args.url)
             }
-
-
 
         }
     }

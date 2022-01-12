@@ -5,16 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import tennisi.borzot.strada.fragments.news.data.repository.NewsListRepositoryImpl
 import tennisi.borzot.strada.fragments.news.domain.entity.NewsItem
 import tennisi.borzot.strada.fragments.news.domain.usecases.GetNewsListUseCase
 import tennisi.borzot.strada.fragments.news.domain.usecases.UpdateNewsListUseCase
+import javax.inject.Inject
 
-class NewsFragmentViewModel : ViewModel() {
+class NewsFragmentViewModel @Inject constructor(
+    private val getNewsListUseCase: GetNewsListUseCase,
+    private val updateNewsListUseCase: UpdateNewsListUseCase
+) : ViewModel() {
 
-    private val repository = NewsListRepositoryImpl
-    private val getNewsListUseCase = GetNewsListUseCase(repository)
-    private val updateNewsListUseCase = UpdateNewsListUseCase(repository)
 
     private val _newsItems = MutableLiveData<List<NewsItem>>()
     val newsItems: LiveData<List<NewsItem>>

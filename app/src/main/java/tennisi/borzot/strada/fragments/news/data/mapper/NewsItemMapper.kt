@@ -3,8 +3,9 @@ package tennisi.borzot.strada.fragments.news.data.mapper
 import tennisi.borzot.strada.fragments.news.data.network.pojo.ArticleDto
 import tennisi.borzot.strada.fragments.news.domain.entity.NewsItem
 import tennisi.borzot.strada.utils.DateUtils
+import javax.inject.Inject
 
-class NewsItemMapper {
+class NewsItemMapper @Inject constructor() {
 
 
     private fun mapNetworkModelToEntityNews(article: ArticleDto) = NewsItem(
