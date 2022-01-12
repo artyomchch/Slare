@@ -10,11 +10,11 @@ Project for Google Play
     1. [Splash Screen](#Splash-Screen)
     2. [OnBoarding](#OnBoarding-Screen)
     3. [Auth Screen](#Auth-Screen)
-    4. [Add Screen](#Add-Screen (В разработке))
-    5. [Equalizer Screen](#Equalizer-Screen (В разработке))
-    6. [Speed Screen](#Speed-Screen (В разработке))
+    4. [Add Screen](#Add-Screen)
+    5. [Equalizer Screen](#Equalizer-Screen)
+    6. [Speed Screen](#Speed-Screen)
     7. [News Screen](#News-Screen)
-    8. [Settings Screen](#Settings-Screen (В разработке))
+    8. [Settings Screen](#Settings-Screen)
 3. Дополнительная информация
     1. Dagger
     2. Coroutines
@@ -50,17 +50,17 @@ Project for Google Play
 ###### Экран с авторизацией
 ![alt text](sourse/screen_app/authscreen.png)
 
-## Add Screen (В разработке)
-###### Экран с просмотром и добавлением автомобилей
+## Add Screen 
+###### Экран с просмотром и добавлением автомобилей (В разработке)
 ![alt text](sourse/screen_app/addcar.png)
 ![alt text](sourse/screen_app/addcar2.png)
 
-## Equalizer Screen (В разработке)
-###### Экран с добавление профилей для машины
+## Equalizer Screen 
+###### Экран с добавление профилей для машины (В разработке)
 ![alt text](sourse/screen_app/equalizer.png)
 
-## Speed Screen (В разработке)
-###### Экран с запуском серивиса 
+## Speed Screen
+###### Экран с запуском серивиса  (В разработке)
 ![alt text](sourse/screen_app/speed.png)
 
 ## News Screen
@@ -68,6 +68,6 @@ Project for Google Play
 ![alt text](sourse/screen_app/news1.png)
 ![alt text](sourse/screen_app/news2.png)
 
-## Settings Screen (В разработке)
-###### Экран с изменением настроек 
+## Settings Screen 
+###### Экран с изменением настроек (В разработке)
 ![alt text](sourse/screen_app/settings.png)
