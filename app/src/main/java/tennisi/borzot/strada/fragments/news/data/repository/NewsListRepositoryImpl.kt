@@ -20,8 +20,6 @@ class NewsListRepositoryImpl @Inject constructor(
     private var newestTime = String()
     private var updateNewsList = listOf<ArticleDto>()
 
-   // private val retrofit = RetrofitInstance.api
-
 
     override suspend fun getNewsList(): List<NewsItem> {
         newsList = retrofit.getPost().article
