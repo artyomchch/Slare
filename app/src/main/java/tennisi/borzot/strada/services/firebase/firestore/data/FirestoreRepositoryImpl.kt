@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class FirestoreRepositoryImpl @Inject constructor() : FirestoreRepository {
 
-    val db = Firebase.firestore
+    private val db = Firebase.firestore
 
     override suspend fun addCarItemCloud(carItemCloud: CarItemCloud) {
         db.collection(COLLECTION_NAME)
