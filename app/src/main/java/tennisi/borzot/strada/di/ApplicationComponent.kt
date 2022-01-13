@@ -9,7 +9,8 @@ import tennisi.borzot.strada.fragments.news.presentation.newsFragment.NewsFragme
 import tennisi.borzot.strada.fragments.news.presentation.sourceFragment.SourceFragment
 
 @ApplicationScope
-@Component(modules = [AddDomainModule::class, ViewModelModule::class, AppDatabaseModule::class, NewsDomainModule::class, AppInternetModule::class])
+@Component(modules = [AddDomainModule::class, ViewModelModule::class, AppDatabaseModule::class,
+    NewsDomainModule::class, AppInternetModule::class, FirestoreModule::class])
 interface ApplicationComponent {
 
     fun inject(fragment: AddFragment)

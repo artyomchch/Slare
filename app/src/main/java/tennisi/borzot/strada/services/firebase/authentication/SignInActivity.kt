@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.services.firebase
+package tennisi.borzot.strada.services.firebase.authentication
 
 import android.content.Intent
 import android.graphics.Typeface

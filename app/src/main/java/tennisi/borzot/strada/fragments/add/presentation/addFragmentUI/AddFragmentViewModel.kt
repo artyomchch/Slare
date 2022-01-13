@@ -2,17 +2,21 @@ package tennisi.borzot.strada.fragments.add.presentation.addFragmentUI
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
 import tennisi.borzot.strada.fragments.add.domain.usecases.DeleteCarItemUseCase
 import tennisi.borzot.strada.fragments.add.domain.usecases.EditCarItemUseCase
 import tennisi.borzot.strada.fragments.add.domain.usecases.GetCarListUseCase
+import tennisi.borzot.strada.services.firebase.firestore.domain.usecases.DeleteCarItemCloudUseCase
 import javax.inject.Inject
 
 class AddFragmentViewModel @Inject constructor(
     getCarListUseCase: GetCarListUseCase,
     private val deleteCarItemUseCase: DeleteCarItemUseCase,
-    private val editCarItemUseCase: EditCarItemUseCase
+    private val editCarItemUseCase: EditCarItemUseCase,
+    private val deleteCarItemCloudUseCase: DeleteCarItemCloudUseCase
 ) : ViewModel() {
 
 
@@ -28,6 +32,9 @@ class AddFragmentViewModel @Inject constructor(
     fun deleteCarItem(carItem: CarItem) {
         viewModelScope.launch {
             deleteCarItemUseCase(carItem)
+        }
+        CoroutineScope(Dispatchers.IO).launch {
+            deleteCarItemCloudUseCase(carItem.name)
         }
     }
 

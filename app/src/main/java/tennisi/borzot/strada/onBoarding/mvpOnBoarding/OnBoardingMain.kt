@@ -10,7 +10,7 @@ import androidx.viewpager.widget.ViewPager
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.ActivityOnBoardingMainBinding
 import tennisi.borzot.strada.onBoarding.OnBoardingViewPagerAdapter
-import tennisi.borzot.strada.services.firebase.SignInActivity
+import tennisi.borzot.strada.services.firebase.authentication.SignInActivity
 
 
 class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {

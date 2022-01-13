@@ -4,24 +4,24 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
 import tennisi.borzot.strada.fragments.add.domain.usecases.AddCarItemUseCase
 import tennisi.borzot.strada.fragments.add.domain.usecases.EditCarItemUseCase
 import tennisi.borzot.strada.fragments.add.domain.usecases.GetCarItemUseCase
+import tennisi.borzot.strada.services.firebase.firestore.domain.entity.CarItemCloud
+import tennisi.borzot.strada.services.firebase.firestore.domain.usecases.AddCarItemCloudUseCase
 import javax.inject.Inject
 
 class CarItemViewModel @Inject constructor(
     private val getCarItemUseCase: GetCarItemUseCase,
     private val addCarItemUseCase: AddCarItemUseCase,
-    private val editCarItemUseCase: EditCarItemUseCase
+    private val editCarItemUseCase: EditCarItemUseCase,
+    private val addCarItemCloudUseCase: AddCarItemCloudUseCase
 ) : ViewModel() {
 
-    //  private val repository = CarListRepositoryImpl(application)
-
-    //   private val getCarItemUseCase = GetCarItemUseCase(repository)
-    //  private val addCarItemUseCase = AddCarItemUseCase(repository)
-    //  private val editCarItemUseCase = EditCarItemUseCase(repository)
 
     private val _errorInputName = MutableLiveData<Boolean>()
     val errorInputName: LiveData<Boolean>
@@ -62,8 +62,11 @@ class CarItemViewModel @Inject constructor(
                 addCarItemUseCase(carItem)
                 finishWork()
             }
+            CoroutineScope(Dispatchers.IO).launch {
+                val carItemCloud = CarItemCloud(name, brand, model, true)
+                addCarItemCloudUseCase(carItemCloud)
+            }
         }
-
     }
 
     fun editCarItem(inputName: String?, inputBrand: String?, inputModel: String?) {
@@ -82,6 +85,16 @@ class CarItemViewModel @Inject constructor(
         }
 
     }
+
+//    private fun addCarItemInCloud(name: String, brand: String, model: String) {
+//        val db = Firebase.firestore
+//        val car = CarItemCloud(name, brand, model, false)
+//        db.collection("userCar")
+//            .add(car)
+//            .addOnFailureListener {
+//                Log.d("firestore", "addCarItemInCloud not add data ")
+//            }
+//    }
 
     fun resetErrorInputName() {
         _errorInputName.value = false

@@ -21,7 +21,7 @@
         android:name=".StradaApplication"
         tools:replace="android:allowBackup">
         <activity
-            android:name=".services.firebase.SignInActivity"
+            android:name=".services.firebase.authentication.SignInActivity"
             android:exported="true" />
 
         <activity

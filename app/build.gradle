@@ -5,6 +5,7 @@ plugins {
     id 'androidx.navigation.safeargs'
     id 'com.google.gms.google-services'
     id 'kotlin-parcelize'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -42,7 +43,7 @@ repositories {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -67,10 +68,15 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
     // Google button
     implementation 'com.shobhitpuri.custombuttons:google-signin:1.1.0'
-    // Firebase
+    // Firebase Auth
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
     implementation 'com.google.android.gms:play-services-auth:20.0.1'
     implementation 'com.firebaseui:firebase-ui-auth:4.3.2'
+    //Firebase Firestore
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.0.0'
+    //Crashlytics and Analytics libraries
+    implementation 'com.google.firebase:firebase-crashlytics:18.2.6'
+    implementation 'com.google.firebase:firebase-analytics:20.0.2'
     // Kotlin flow
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0'
@@ -88,9 +94,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.0-rc01'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.0-rc01'
     // Room
-    implementation 'androidx.room:room-runtime:2.4.0'
-    implementation 'androidx.room:room-ktx:2.4.0'
-    kapt 'androidx.room:room-compiler:2.4.0'
+    implementation 'androidx.room:room-runtime:2.4.1'
+    implementation 'androidx.room:room-ktx:2.4.1'
+    kapt 'androidx.room:room-compiler:2.4.1'
     //jetpack Work Manager
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
     // Dagger 2
