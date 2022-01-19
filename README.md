@@ -16,7 +16,7 @@ Project for Google Play
     7. [News Screen](#News-Screen)
     8. [Settings Screen](#Settings-Screen)
 3. Дополнительная информация
-    1. Dagger
+    1. Figma [a link](https://www.figma.com/file/s7FofJfoXsVwVq6Mq1XHH7/Strada?node-id=643%3A1683)
     2. Coroutines
     3. Firebase
     4. Services

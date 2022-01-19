@@ -1,6 +1,7 @@
 package tennisi.borzot.strada.services.firebase.firestore.data
 
 import android.util.Log
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import tennisi.borzot.strada.services.firebase.firestore.domain.entity.CarItemCloud
@@ -12,7 +13,7 @@ class FirestoreRepositoryImpl @Inject constructor() : FirestoreRepository {
     private val db = Firebase.firestore
 
     override suspend fun addCarItemCloud(carItemCloud: CarItemCloud) {
-        db.collection(COLLECTION_NAME)
+        db.collection(COLLECTION_NAME_ID)
             .document(carItemCloud.name)
             .set(carItemCloud)
             .addOnFailureListener {
@@ -21,7 +22,7 @@ class FirestoreRepositoryImpl @Inject constructor() : FirestoreRepository {
     }
 
     override suspend fun deleteCarItemCloud(name: String) {
-        db.collection(COLLECTION_NAME)
+        db.collection(COLLECTION_NAME_ID)
             .document(name)
             .delete()
             .addOnFailureListener {
@@ -30,6 +31,6 @@ class FirestoreRepositoryImpl @Inject constructor() : FirestoreRepository {
     }
 
     companion object {
-        private const val COLLECTION_NAME = "userCar"
+        private val COLLECTION_NAME_ID = Firebase.auth.currentUser?.uid.toString()
     }
 }
