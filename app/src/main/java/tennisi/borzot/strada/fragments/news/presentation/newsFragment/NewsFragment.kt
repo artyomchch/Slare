@@ -46,8 +46,6 @@ class NewsFragment : Fragment() {
         _binding = FragmentNewsBinding.inflate(inflater, container, false)
 
         setupRecyclerView()
-        //  viewModel = ViewModelProvider(this)[NewsFragmentViewModel::class.java]
-
 
 
         viewModel.newsItems.observe(viewLifecycleOwner) {

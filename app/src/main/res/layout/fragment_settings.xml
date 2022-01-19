@@ -11,28 +11,47 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/dev_load"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="50dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/about_list_of_car"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/settings_recycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="center"
-            android:text="Sorry, but we are trying to fix something that cannot be fixed."
-            android:textSize="24sp"
-
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="11dp"
+            android:background="@color/colorWhite"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dev_load" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:spanCount="2"
+            tools:listitem="@layout/item_settings" />
+
+        <TextView
+            android:id="@+id/description_about_me"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/contact_information"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toTopOf="@+id/version_number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/version_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:includeFontPadding="false"
+            android:text="@string/version_app"
+            android:textSize="@dimen/lowest_settings_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

@@ -78,5 +78,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="stop">Stop</string>
     <string name="start">start</string>
+    //Settings Fragment
+    <string name="settings_item_information">settings item information</string>
+    <string name="account">Account</string>
+    <string name="settings_account_desc">Logging in or out\nof your account</string>
+    <string name="version_app">Version: 1.0.0</string>
+    <string name="contact_information">Contact with me:\nKozlov Artyom\nartyom.ch.ch@gmail.com</string>
 
 </resources>

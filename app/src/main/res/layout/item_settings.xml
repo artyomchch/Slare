@@ -1,24 +1,63 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="150dp"
-    android:layout_height="150dp"
-    android:layout_margin="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="125dp"
+    android:layout_margin="5dp"
     app:cardBackgroundColor="#F4F4F4"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/settings_holder_image"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@color/colorWhite">
-
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@color/colorWhite"
+            android:contentDescription="@string/settings_item_information">
         </ImageView>
+
+        <ImageView
+            android:id="@+id/settings_image"
+            app:layout_constraintTop_toTopOf="@id/settings_holder_image"
+            app:layout_constraintStart_toStartOf="@id/settings_holder_image"
+            app:layout_constraintEnd_toEndOf="@id/settings_holder_image"
+            app:layout_constraintBottom_toBottomOf="@id/settings_holder_image"
+            android:src="@drawable/ic_settings_account_24"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:contentDescription="@string/settings_item_information">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/settings_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/account"
+            android:includeFontPadding="false"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/settings_holder_image"
+            app:layout_constraintStart_toStartOf="@id/settings_holder_image">
+        </TextView>
+
+        <TextView
+            android:id="@+id/settings_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:layout_marginTop="10dp"
+            android:textSize="@dimen/lowest_settings_size"
+            android:text="@string/settings_account_desc"
+            app:layout_constraintTop_toBottomOf="@id/settings_label"
+            app:layout_constraintStart_toStartOf="@id/settings_label">
+
+        </TextView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
