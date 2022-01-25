@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import tennisi.borzot.strada.databinding.FragmentSettingsBinding
-import tennisi.borzot.strada.fragments.news.presentation.newsFragment.NewsListAdapter
 
 
 class SettingsFragment : Fragment() {
@@ -26,10 +26,18 @@ class SettingsFragment : Fragment() {
 
         setupRecyclerView()
 
+        setupOnClickListener()
+
         return binding.root
     }
 
-    private fun setupRecyclerView(){
+    private fun setupOnClickListener() {
+        adapter.onSettingsItemClickListener = {
+            Toast.makeText(requireContext(), "${it.name} not working now", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setupRecyclerView() {
         adapter = SettingsListAdapter()
         binding.settingsRecycler.adapter = adapter
     }

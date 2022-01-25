@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="125dp"
     android:layout_margin="5dp"
+    android:foreground="?android:attr/selectableItemBackground"
     app:cardBackgroundColor="#F4F4F4"
     app:cardCornerRadius="5dp">
 
@@ -10,52 +11,50 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
+        <View
             android:id="@+id/settings_holder_image"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:background="@color/colorWhite"
-            android:contentDescription="@string/settings_item_information">
-        </ImageView>
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/circle_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/settings_image"
-            app:layout_constraintTop_toTopOf="@id/settings_holder_image"
-            app:layout_constraintStart_toStartOf="@id/settings_holder_image"
-            app:layout_constraintEnd_toEndOf="@id/settings_holder_image"
-            app:layout_constraintBottom_toBottomOf="@id/settings_holder_image"
-            android:src="@drawable/ic_settings_account_24"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:contentDescription="@string/settings_item_information">
-        </ImageView>
+            android:contentDescription="@string/settings_item_information"
+            android:src="@drawable/ic_settings_account_24"
+            app:layout_constraintBottom_toBottomOf="@id/settings_holder_image"
+            app:layout_constraintEnd_toEndOf="@id/settings_holder_image"
+            app:layout_constraintStart_toStartOf="@id/settings_holder_image"
+            app:layout_constraintTop_toTopOf="@id/settings_holder_image" />
 
         <TextView
             android:id="@+id/settings_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/account"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/roboto"
+            android:textSize="@dimen/standard_bigger"
             android:includeFontPadding="false"
+            android:text="@string/account"
             android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@+id/settings_holder_image"
-            app:layout_constraintStart_toStartOf="@id/settings_holder_image">
-        </TextView>
+            app:layout_constraintStart_toStartOf="@id/settings_holder_image"
+            app:layout_constraintTop_toBottomOf="@+id/settings_holder_image" />
 
         <TextView
             android:id="@+id/settings_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/roboto"
             android:includeFontPadding="false"
-            android:layout_marginTop="10dp"
-            android:textSize="@dimen/lowest_settings_size"
             android:text="@string/settings_account_desc"
-            app:layout_constraintTop_toBottomOf="@id/settings_label"
-            app:layout_constraintStart_toStartOf="@id/settings_label">
+            app:layout_constraintStart_toStartOf="@id/settings_label"
+            app:layout_constraintTop_toBottomOf="@id/settings_label">
 
         </TextView>
 
