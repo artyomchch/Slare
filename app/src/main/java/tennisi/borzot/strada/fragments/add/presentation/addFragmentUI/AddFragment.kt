@@ -1,5 +1,6 @@
 package tennisi.borzot.strada.fragments.add.presentation.addFragmentUI
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -38,12 +39,10 @@ class AddFragment : Fragment() {
     }
 
     override fun onCreateView(
-
-
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        component.inject(this)
+
         _binding = FragmentAddBinding.inflate(inflater, container, false)
         setupRecyclerView()
         viewModel.carList.observe(viewLifecycleOwner) {
@@ -54,6 +53,11 @@ class AddFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     private fun setupRecyclerView() {

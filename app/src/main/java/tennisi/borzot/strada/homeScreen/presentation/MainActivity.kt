@@ -87,14 +87,14 @@ class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListe
 
     private fun hideResource() {
         with(binding) {
-            mainFragmentToolbar.linearLayoutToolBar.visibility = View.GONE
+            mainFragmentToolbar.toolbar.visibility = View.GONE
             bottomNavigationMenu.visibility = View.GONE
         }
     }
 
     private fun showResource() {
         with(binding) {
-            mainFragmentToolbar.linearLayoutToolBar.visibility = View.VISIBLE
+            mainFragmentToolbar.toolbar.visibility = View.VISIBLE
             bottomNavigationMenu.visibility = View.VISIBLE
         }
     }

@@ -2,6 +2,7 @@ package tennisi.borzot.strada.fragments.news.presentation.newsFragment
 
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
 import android.content.Intent
 import android.os.Bundle
@@ -42,7 +43,7 @@ class NewsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        component.inject(this)
+
         _binding = FragmentNewsBinding.inflate(inflater, container, false)
 
         setupRecyclerView()
@@ -62,6 +63,11 @@ class NewsFragment : Fragment() {
         stateLoadingListener()
 
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     private fun stateLoadingListener() {

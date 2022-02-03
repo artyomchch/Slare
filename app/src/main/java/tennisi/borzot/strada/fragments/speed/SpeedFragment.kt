@@ -32,6 +32,12 @@ class SpeedFragment : Fragment() {
     ): View {
         _binding = FragmentSpeedBinding.inflate(inflater, container, false)
 
+        listeners()
+        return binding.root
+    }
+
+
+    private fun listeners(){
 
         binding.startButton.setOnClickListener {
             ContextCompat.startForegroundService(requireContext(), SpeedService.newIntent(requireContext()))
@@ -75,9 +81,11 @@ class SpeedFragment : Fragment() {
                 SpeedWorker.makeRequest(page++)
             )
         }
+    }
 
-
-        return binding.root
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

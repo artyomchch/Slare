@@ -1,6 +1,7 @@
 package tennisi.borzot.strada.fragments.add.data.database
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -28,6 +29,7 @@ abstract class AppDatabase : RoomDatabase() {
                     DB_NAME
                 ).build()
                 db = instance
+                Log.d("Object see", "Database  ${this}")
                 return instance
             }
         }
