@@ -17,6 +17,18 @@ interface NewsApi {
         @Query(QUERY_PARAM_PAGE_SIZE) pageSize: String = PAGE_SIZE,
         ): NewsDto
 
+    @GET("everything")
+    suspend fun getPostPaging(
+        @Query(QUERY_PARAM_API_KEY) apiKey: String = API_KEY,
+        @Query(QUERY_PARAM_ARTICLE) desc: String = ARTICLE,
+        @Query(QUERY_PARAM_LANG) lang: String = LANG,
+        @Query(QUERY_PARAM_SORT) sort: String = SORT,
+        @Query(QUERY_PARAM_FROM) from: String = FROM,
+        @Query(QUERY_PARAM_TO) to: String = TO,
+        @Query(QUERY_PARAM_PAGE) page: Int = PAGE,
+        @Query(QUERY_PARAM_PAGE_SIZE) pageSize: Int = PAGE_SIZE_PAGE,
+    ): NewsDto
+
 
     companion object {
         private const val QUERY_PARAM_API_KEY = "apiKey"
@@ -25,6 +37,7 @@ interface NewsApi {
         private const val QUERY_PARAM_SORT = "sortBy"
         private const val QUERY_PARAM_FROM = "from"
         private const val QUERY_PARAM_TO = "to"
+        private const val QUERY_PARAM_PAGE = "page"
         private const val QUERY_PARAM_PAGE_SIZE = "pageSize"
 
 
@@ -35,5 +48,8 @@ interface NewsApi {
         private const val FROM = ""
         private const val TO = ""
         private const val PAGE_SIZE = "100"
+        private const val PAGE_SIZE_PAGE = 20
+        private const val PAGE = 1
+
     }
 }

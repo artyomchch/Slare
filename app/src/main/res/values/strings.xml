@@ -84,5 +84,6 @@
     <string name="settings_account_desc">Logging in or out\nof your account</string>
     <string name="version_app">Version: 1.0.0</string>
     <string name="contact_information">Contact with me:\nKozlov Artyom\nartyom.ch.ch@gmail.com</string>
+    <string name="load_error">Oops, can\'t load data</string>
 
 </resources>

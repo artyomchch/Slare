@@ -1,10 +1,14 @@
 package tennisi.borzot.strada.fragments.news.data.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import kotlinx.coroutines.flow.Flow
 import org.joda.time.Instant
 import tennisi.borzot.strada.fragments.news.data.mapper.NewsItemMapper
 import tennisi.borzot.strada.fragments.news.data.network.NewsApi
-import tennisi.borzot.strada.fragments.news.data.network.RetrofitInstance
 import tennisi.borzot.strada.fragments.news.data.network.pojo.ArticleDto
+import tennisi.borzot.strada.fragments.news.data.pagination.NewsPagingSource
 import tennisi.borzot.strada.fragments.news.domain.entity.NewsItem
 import tennisi.borzot.strada.fragments.news.domain.repository.NewsListRepository
 import javax.inject.Inject
@@ -43,6 +47,26 @@ class NewsListRepositoryImpl @Inject constructor(
         return mapper.mapListNetworkModelToListEntityNews(newsList)
     }
 
+    override fun getPagedNews(): Flow<PagingData<NewsItem>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { NewsPagingSource(retrofit, mapper) }
+        ).flow
+    }
+
+    fun refreshPagedNews(): Flow<PagingData<NewsItem>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { NewsPagingSource(retrofit, mapper) }
+        ).flow
+    }
+
     private fun newestNews(newestTime: String): String {
         val newTime = Instant.parse(newestTime).toDateTime()
         return newTime.plusSeconds(ADD_SECOND).toString()
@@ -53,7 +77,7 @@ class NewsListRepositoryImpl @Inject constructor(
         return oldTime.minusSeconds(ADD_SECOND).toString()
     }
 
-    companion object{
+    companion object {
         private const val ADD_SECOND = 5
     }
 

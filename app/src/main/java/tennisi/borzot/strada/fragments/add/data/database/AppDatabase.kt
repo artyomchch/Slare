@@ -29,7 +29,6 @@ abstract class AppDatabase : RoomDatabase() {
                     DB_NAME
                 ).build()
                 db = instance
-                Log.d("Object see", "Database  ${this}")
                 return instance
             }
         }

@@ -11,8 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.StradaApplication
 import tennisi.borzot.strada.databinding.FragmentNewsBinding
@@ -34,7 +37,10 @@ class NewsFragment : Fragment() {
         ViewModelProvider(this, viewModelFactory)[(NewsFragmentViewModel::class.java)]
     }
 
-    private lateinit var newsListAdapter: NewsListAdapter
+
+    private lateinit var newsPagingAdapter: NewsPagingAdapter
+    private lateinit var loaderStateAdapter: LoaderStateAdapter
+    private lateinit var mainLoadStateHolder: LoaderStateAdapter.LoaderViewHolder
 
     private val component by lazy {
         (requireActivity().application as StradaApplication).component
@@ -48,21 +54,33 @@ class NewsFragment : Fragment() {
 
         setupRecyclerView()
 
-
-        viewModel.newsItems.observe(viewLifecycleOwner) {
-            newsListAdapter.submitList(it)
-            with(binding) {
-                swipeRefreshLayout.isRefreshing = false
-            }
-
-        }
-
-        swipeRefreshListener()
         setupClickListener()
         setupOnLongClickListener()
-        stateLoadingListener()
+        setupSwipeToRefresh()
 
         return binding.root
+    }
+
+    private fun observeNews() {
+        lifecycleScope.launch {
+            viewModel.newsFlow.collectLatest { pagingData ->
+                newsPagingAdapter.submitData(pagingData)
+            }
+        }
+    }
+
+    private fun observeLoadState() {
+        lifecycleScope.launch {
+            newsPagingAdapter.loadStateFlow.collectLatest { state ->
+                mainLoadStateHolder.bind(state.refresh)
+            }
+        }
+    }
+
+    private fun setupSwipeToRefresh() {
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            newsPagingAdapter.refresh()
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -70,28 +88,15 @@ class NewsFragment : Fragment() {
         super.onAttach(context)
     }
 
-    private fun stateLoadingListener() {
-        viewModel.stateLoading.observe(viewLifecycleOwner) {
-            if (it) binding.swipeRefreshLayout.isRefreshing = true
-        }
-    }
-
-
-    private fun swipeRefreshListener() {
-        binding.swipeRefreshLayout.setOnRefreshListener {
-            binding.swipeRefreshLayout.isRefreshing = true
-            viewModel.updateNewsList()
-        }
-    }
 
     private fun setupClickListener() {
-        newsListAdapter.onNewsItemClickListener = {
+        newsPagingAdapter.onNewsItemClickListener = {
             findNavController().navigate(NewsFragmentDirections.actionNewsFragmentToSourceFragment(it.url, it.imageUrl, it.source))
         }
     }
 
     private fun setupOnLongClickListener() {
-        newsListAdapter.onNewsItemLongClickListener = { url_news ->
+        newsPagingAdapter.onNewsItemLongClickListener = { url_news ->
             copyToClipboard(url_news.url)
             Snackbar.make(requireView(), getString(R.string.news_url_clipboard_text), Snackbar.LENGTH_INDEFINITE)
                 .setDuration(5000)
@@ -101,6 +106,7 @@ class NewsFragment : Fragment() {
                 .show()
         }
     }
+
 
     private fun sendingBinaryContent(url_news: String) {
         val sendIntent: Intent = Intent().apply {
@@ -118,9 +124,22 @@ class NewsFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        newsListAdapter = NewsListAdapter()
-        binding.newsRecycler.adapter = newsListAdapter
+        newsPagingAdapter = NewsPagingAdapter()
+        val tryAgainAction: TryAgainAction = { newsPagingAdapter.retry() }
+        loaderStateAdapter = LoaderStateAdapter(tryAgainAction)
+        binding.newsRecycler.adapter = newsPagingAdapter.withLoadStateFooter(loaderStateAdapter)
+
+        mainLoadStateHolder = LoaderStateAdapter.LoaderViewHolder(
+            binding.loadStateView,
+            binding.swipeRefreshLayout,
+            tryAgainAction
+        )
+
+        observeNews()
+        observeLoadState()
+
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

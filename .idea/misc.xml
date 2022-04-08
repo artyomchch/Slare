@@ -64,15 +64,21 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Slare/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2394736842105263" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/drawable/circle_view.xml" value="0.17543859649122806" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/drawable/ic_settings_service_24.xml" value="0.17543859649122806" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout-land/activity_main.xml" value="0.2244268077601411" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout-land/fragment_news.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/activity_main.xml" value="0.1763157894736842" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/fragment_add.xml" value="0.14649122807017545" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/fragment_car_item.xml" value="0.14649122807017545" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/fragment_equalizer.xml" value="0.22" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/fragment_news.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/fragment_settings.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/fragment_source.xml" value="0.14649122807017545" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/item_cars.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/item_loader.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/item_news.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/item_settings.xml" value="0.8163636363636364" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/tool_bar.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/menu/bottom_menu.xml" value="0.22324561403508772" />
         <entry key="app/src/main/res/layout/item_news.xml" value="0.33" />
       </map>
     </option>

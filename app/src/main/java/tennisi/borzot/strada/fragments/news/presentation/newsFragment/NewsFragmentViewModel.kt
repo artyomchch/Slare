@@ -1,42 +1,24 @@
 package tennisi.borzot.strada.fragments.news.presentation.newsFragment
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import kotlinx.coroutines.flow.Flow
 import tennisi.borzot.strada.fragments.news.domain.entity.NewsItem
-import tennisi.borzot.strada.fragments.news.domain.usecases.GetNewsListUseCase
-import tennisi.borzot.strada.fragments.news.domain.usecases.UpdateNewsListUseCase
+import tennisi.borzot.strada.fragments.news.domain.usecases.GetNewsPagingListUseCase
 import javax.inject.Inject
 
+
 class NewsFragmentViewModel @Inject constructor(
-    private val getNewsListUseCase: GetNewsListUseCase,
-    private val updateNewsListUseCase: UpdateNewsListUseCase
+    private val getNewsPagingListUseCase: GetNewsPagingListUseCase
 ) : ViewModel() {
 
-
-    private val _newsItems = MutableLiveData<List<NewsItem>>()
-    val newsItems: LiveData<List<NewsItem>>
-        get() = _newsItems
-
-    private val _stateLoading = MutableLiveData<Boolean>()
-    val stateLoading: LiveData<Boolean>
-        get() = _stateLoading
-
-    init {
-        viewModelScope.launch {
-            _stateLoading.value = true
-            _newsItems.value = getNewsListUseCase.invoke()
-            _stateLoading.value = false
-        }
-    }
+    var newsFlow: Flow<PagingData<NewsItem>> = getNewsPagingListUseCase.invoke().cachedIn(viewModelScope)
 
 
-    fun updateNewsList() {
-        viewModelScope.launch {
-            _newsItems.value = updateNewsListUseCase.invoke()
-        }
+    fun refresh() {
+        this.newsFlow = getNewsPagingListUseCase.invoke().cachedIn(viewModelScope)
     }
 
 

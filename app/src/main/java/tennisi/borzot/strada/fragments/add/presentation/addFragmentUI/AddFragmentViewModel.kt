@@ -1,5 +1,6 @@
 package tennisi.borzot.strada.fragments.add.presentation.addFragmentUI
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
@@ -16,7 +17,7 @@ class AddFragmentViewModel @Inject constructor(
     getCarListUseCase: GetCarListUseCase,
     private val deleteCarItemUseCase: DeleteCarItemUseCase,
     private val editCarItemUseCase: EditCarItemUseCase,
-    private val deleteCarItemCloudUseCase: DeleteCarItemCloudUseCase
+    private val deleteCarItemCloudUseCase: DeleteCarItemCloudUseCase,
 ) : ViewModel() {
 
 
@@ -28,6 +29,7 @@ class AddFragmentViewModel @Inject constructor(
             editCarItemUseCase(newItem)
         }
     }
+
 
     fun deleteCarItem(carItem: CarItem) {
         viewModelScope.launch {
