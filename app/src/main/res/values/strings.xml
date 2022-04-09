@@ -50,6 +50,7 @@
     <string name="model_of_car">Model of car</string>
     <string name="it_s_fab_button">it\'s FAB button</string>
     <string name="brand_car_item">Brand car item</string>
+    <string name="warning_add_car">Looks like you didn\'t add a car\nto add, click on the plus</string>
     //Car Item fragment
     <string name="save">Save</string>
     <string name="add_vehicle">Add vehicle</string>
@@ -85,5 +86,6 @@
     <string name="version_app">Version: 1.0.0</string>
     <string name="contact_information">Contact with me:\nKozlov Artyom\nartyom.ch.ch@gmail.com</string>
     <string name="load_error">Oops, can\'t load data</string>
+
 
 </resources>

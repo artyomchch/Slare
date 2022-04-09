@@ -1,6 +1,7 @@
 package tennisi.borzot.strada.fragments.add.presentation.addFragmentUI
 
-import android.content.Context
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
@@ -20,13 +21,23 @@ class AddFragmentViewModel @Inject constructor(
     private val deleteCarItemCloudUseCase: DeleteCarItemCloudUseCase,
 ) : ViewModel() {
 
+    private val _observerItems = MutableLiveData<CarObserver<Boolean>>()
+    val observerItems: LiveData<CarObserver<Boolean>>
+        get() = _observerItems
+
 
     val carList = getCarListUseCase.invoke()
+
+
+    fun observe() {
+        if (carList.value.isNullOrEmpty()) _observerItems.value = CarObserver.Warning() else _observerItems.value = CarObserver.Success()
+    }
 
     fun changeEnableState(carItem: CarItem) {
         viewModelScope.launch {
             val newItem = carItem.copy(enable = !carItem.enable)
             editCarItemUseCase(newItem)
+
         }
     }
 

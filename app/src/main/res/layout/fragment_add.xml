@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main_car_add_container"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_car_add_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
@@ -27,20 +27,34 @@
             tools:listitem="@layout/item_cars" />
 
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="wrap_content"
+            android:layout_height="400dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/text_add_car_warning"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/nocar"
+            tools:visibility="visible" />
+
         <TextView
-            android:id="@+id/about_list_of_car"
+            android:id="@+id/text_add_car_warning"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
+            android:layout_gravity="center"
             android:gravity="center"
-            android:paddingLeft="80dp"
-            android:paddingRight="80dp"
-            android:text="@string/add_car_warning_text"
-            android:textSize="18sp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/warning_add_car"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/animation_view" />
+
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/car_add_fab"
@@ -48,10 +62,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
+            android:contentDescription="@string/add_car"
             android:src="@drawable/ic_baseline_add_white"
             app:layout_constraintBottom_toBottomOf="@+id/cars_recycler"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:contentDescription="@string/add_car" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
