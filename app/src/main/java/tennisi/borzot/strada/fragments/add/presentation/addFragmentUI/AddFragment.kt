@@ -2,7 +2,6 @@ package tennisi.borzot.strada.fragments.add.presentation.addFragmentUI
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,17 +52,14 @@ class AddFragment : Fragment() {
         return binding.root
     }
 
-    private fun observeState(){
-        viewModel.observerItems.observe(viewLifecycleOwner){ state->
-            when (state){
-
+    private fun observeState() {
+        viewModel.observerItems.observe(viewLifecycleOwner) { state ->
+            when (state) {
                 is CarObserver.Warning -> {
-                    Log.d("state", "observeState: $state")
                     binding.animationView.visibility = View.VISIBLE
                     binding.textAddCarWarning.visibility = View.VISIBLE
                 }
                 is CarObserver.Success -> {
-                    Log.d("state", "observeState: $state")
                     binding.animationView.visibility = View.GONE
                     binding.textAddCarWarning.visibility = View.GONE
 
@@ -73,15 +69,14 @@ class AddFragment : Fragment() {
     }
 
 
-
-    private fun observeRecycler(){
+    private fun observeRecycler() {
         viewModel.carList.observe(viewLifecycleOwner) {
             carsListAdapter.submitList(it)
             viewModel.observe()
         }
     }
 
-    private fun navigateItem(){
+    private fun navigateItem() {
         binding.carAddFab.setOnClickListener {
             findNavController().navigate(AddFragmentDirections.actionAddFragmentToCarItemFragment(ScreenAddMode.ADD, -1))
         }
@@ -135,7 +130,6 @@ class AddFragment : Fragment() {
             viewModel.changeEnableState(it)
         }
     }
-
 
 
     override fun onDestroyView() {

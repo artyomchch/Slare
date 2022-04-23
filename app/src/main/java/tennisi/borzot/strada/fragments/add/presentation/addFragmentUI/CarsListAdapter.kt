@@ -35,6 +35,7 @@ class CarsListAdapter : ListAdapter<CarItem, CarItemViewHolder>(CarItemDiffCallb
             onCarItemClickListener?.invoke(carsItem)
         }
 
+
     }
 
     override fun getItemViewType(position: Int): Int {
