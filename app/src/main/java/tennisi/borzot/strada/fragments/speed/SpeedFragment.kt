@@ -37,7 +37,7 @@ class SpeedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSpeedBinding.inflate(inflater, container, false)
-        animate()
+        //animate()
         listeners()
 
 
@@ -53,17 +53,17 @@ class SpeedFragment : Fragment() {
     private fun listeners() {
 
         binding.startStopButton.setOnClickListener {
-            if (statusAnimation) {
-                animationCircle.apply {
-                    end()
-                    cancel()
-                }
-                binding.startStopButton.text = "Stop"
-            } else {
-                animationCircle.start()
-                binding.startStopButton.text = "Start"
-            }
-            statusAnimation = !statusAnimation
+//            if (statusAnimation) {
+//                animationCircle.apply {
+//                    end()
+//                    cancel()
+//                }
+//                binding.startStopButton.text = "Stop"
+//            } else {
+//               // animationCircle.start()
+//                binding.startStopButton.text = "Start"
+//            }
+//            statusAnimation = !statusAnimation
         }
     }
 
@@ -114,21 +114,21 @@ class SpeedFragment : Fragment() {
 
     private fun animate() {
 
-        animationCircle = ObjectAnimator.ofPropertyValuesHolder(
-            binding.animationCircle,
-            PropertyValuesHolder.ofFloat("scaleX", 2.5f),
-            PropertyValuesHolder.ofFloat("scaleY", 2.5f),
-            PropertyValuesHolder.ofFloat("alpha", 1f, 0f),
-            PropertyValuesHolder.ofFloat("rotation", 0f, 360f),
-
-        )
-        with (animationCircle) {
-            duration = 2000
-            interpolator = LinearInterpolator()
-            repeatCount = INFINITE
-            start()
-
-        }
+//        animationCircle = ObjectAnimator.ofPropertyValuesHolder(
+//            binding.animationCircle,
+//            PropertyValuesHolder.ofFloat("scaleX", 2.5f),
+//            PropertyValuesHolder.ofFloat("scaleY", 2.5f),
+//            PropertyValuesHolder.ofFloat("alpha", 1f, 0f),
+//            PropertyValuesHolder.ofFloat("rotation", 0f, 360f),
+//
+//        )
+//        with (animationCircle) {
+//            duration = 2000
+//            interpolator = LinearInterpolator()
+//            repeatCount = INFINITE
+//            start()
+//
+//        }
 
 
 
@@ -137,7 +137,7 @@ class SpeedFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        animationCircle.cancel()
+        //animationCircle.cancel()
 
         _binding = null
     }

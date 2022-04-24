@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/colorPrimaryDark">
+    android:color="@color/mainBlue">
     <item android:id="@android:id/mask">
         <shape android:shape="oval">
-            <solid android:color="@color/colorPrimaryDark" />
-
+            <solid android:color="@color/mainBlue" />
         </shape>
     </item>
 
     <item android:id="@android:id/background">
         <shape android:shape="oval">
             <gradient
-                android:angle="90"
-
-                android:startColor="@color/colorPrimary"
+                android:angle="180"
+                android:endColor="#7B388E"
+                android:startColor="#731BE4"
                 android:type="linear" />
+
 
         </shape>
     </item>
