@@ -73,8 +73,7 @@ Project for Google Play
 
 #### Экран с запуском серивиса 
 
-<img src="source/screen_app/speed_start.png" alt="drawing" height="700"/>
-<img src="source/screen_app/speed_stop.png" alt="drawing" height="700"/>
+<img src="source/screen_app/speed_start.png" alt="drawing" height="700"/>     <img src="source/screen_app/speed_stop.png" alt="drawing" height="700"/>
 
 ## News Screen
 
