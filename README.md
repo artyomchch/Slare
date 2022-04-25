@@ -79,10 +79,10 @@ Project for Google Play
 
 #### Экран с просмотром новостей
 
-<img src="source/screen_app/news1.png" alt="drawing" height="700"/>
-<img src="source/screen_app/news_error.png" alt="drawing" height="700"/> <img src="source/screen_app/no_more.png" alt="drawing" height="700"/>
+<img src="source/screen_app/news1.png" alt="drawing" height="700"/>      <img src="source/screen_app/news2.png" alt="drawing" height="700"/>
+<img src="source/screen_app/news_error.png" alt="drawing" height="700"/>     <img src="source/screen_app/no_more.png" alt="drawing" height="700"/>
 
-<img src="source/screen_app/news2.png" alt="drawing" height="700"/>
+
 
 
 ## Settings Screen
