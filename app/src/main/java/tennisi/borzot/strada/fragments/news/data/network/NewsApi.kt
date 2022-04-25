@@ -42,8 +42,8 @@ interface NewsApi {
 
 
         private const val API_KEY = "b7396f308f5c4d268396d4deee8b746e"
-        private const val ARTICLE = "car OR vehicle"
-        private const val LANG = "en"
+        private const val ARTICLE = "автомобиль OR машина OR авто OR bmw OR audi OR tesla"
+        private const val LANG = "ru"
         private const val SORT = "publishedAt"
         private const val FROM = ""
         private const val TO = ""

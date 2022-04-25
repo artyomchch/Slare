@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.cancellable
 import tennisi.borzot.strada.fragments.news.domain.entity.NewsItem
 import tennisi.borzot.strada.fragments.news.domain.usecases.GetNewsPagingListUseCase
 import javax.inject.Inject
@@ -22,4 +23,8 @@ class NewsFragmentViewModel @Inject constructor(
     }
 
 
+    override fun onCleared() {
+        newsFlow.cancellable()
+        super.onCleared()
+    }
 }

@@ -30,7 +30,7 @@ class AddFragmentViewModel @Inject constructor(
 
 
     fun observe() {
-        if (carList.value.isNullOrEmpty()) _observerItems.value = CarObserver.Warning() else _observerItems.value = CarObserver.Success()
+        if (carList.value.isNullOrEmpty()) _observerItems.value = CarObserver.Warning(true) else _observerItems.value = CarObserver.Success()
     }
 
     fun changeEnableState(carItem: CarItem) {
