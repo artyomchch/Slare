@@ -26,7 +26,7 @@ class NewsListRepositoryImpl @Inject constructor(
 
 
     override suspend fun getNewsList(): List<NewsItem> {
-        newsList = retrofit.getPost().article
+       // newsList = retrofit.getPost().article
         olderTime = newsList[newsList.size - 1].publishedAt
         newestTime = newsList[0].publishedAt
         return mapper.mapListNetworkModelToListEntityNews(newsList)
@@ -34,7 +34,7 @@ class NewsListRepositoryImpl @Inject constructor(
 
 
     override suspend fun updateNewsList(): List<NewsItem> {
-        updateNewsList = retrofit.getPost(from = newestNews(newestTime)).article + newsList
+       // updateNewsList = retrofit.getPost(from = newestNews(newestTime)).article + newsList
         newsList = updateNewsList
         newestTime = newsList[0].publishedAt
         return mapper.mapListNetworkModelToListEntityNews(updateNewsList)
@@ -42,7 +42,7 @@ class NewsListRepositoryImpl @Inject constructor(
 
 
     override suspend fun addNewsList(): List<NewsItem> {
-        newsList = newsList + retrofit.getPost(to = oldestNews(olderTime)).article
+       // newsList = newsList + retrofit.getPost(to = oldestNews(olderTime)).article
         olderTime = newsList[newsList.size - 1].publishedAt
         return mapper.mapListNetworkModelToListEntityNews(newsList)
     }
