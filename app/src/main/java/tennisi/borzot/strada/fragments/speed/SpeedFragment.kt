@@ -20,7 +20,7 @@ class SpeedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSpeedBinding.inflate(inflater, container, false)
-      //  restoreState(savedInstanceState)
+
         return binding.root
     }
 
@@ -74,8 +74,6 @@ class SpeedFragment : Fragment() {
         _binding = null
     }
 
-    companion object {
-        private const val MOTION_LAYOUT_STATE_KEY = 1
-    }
+
 
 }

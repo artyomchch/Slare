@@ -57,13 +57,11 @@ class AddFragment : Fragment() {
             when (state) {
                 is CarObserver.Warning -> {
                     binding.animationView.visibility = View.VISIBLE
-                  //  if (state.stateRepeat) binding.animationView.frame = binding.animationView.maxFrame.toInt()
                     binding.textAddCarWarning.visibility = View.VISIBLE
                 }
                 is CarObserver.Success -> {
                     binding.animationView.visibility = View.GONE
                     binding.textAddCarWarning.visibility = View.GONE
-
                 }
             }
         }
