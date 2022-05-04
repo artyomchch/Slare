@@ -12,13 +12,15 @@ class SpeedWorker(
     override fun doWork(): Result {
         log("doWork")
         val page = workerParameters.inputData.getInt(PAGE, 0)
-        for (i in 0 until 5) {
+        for (i in 0 until 10) {
             Thread.sleep(1000)
             log("timer $i  $page")
         }
         return Result.success()
 
     }
+
+
 
     private fun log(mes: String) {
         Log.d("service tag", "SpeedWorker $mes")
@@ -38,7 +40,6 @@ class SpeedWorker(
         }
 
         private fun makeConstraints() = Constraints.Builder()
-            .setRequiresCharging(true)
             .build()
     }
 

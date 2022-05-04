@@ -23,19 +23,6 @@ class EqualizerFragment : Fragment() {
     ): View {
         val binding: FragmentEqualizerBinding by lazy(LazyThreadSafetyMode.NONE) { FragmentEqualizerBinding.inflate(inflater, container, false) }
 
-        Glide.with(this)
-            .asGif()
-            .load("https://media4.giphy.com/media/gG6OcTSRWaSis/giphy.gif")
-            .into(binding.fixLoad)
-
-        binding.fixLoad.setOnClickListener {
-            doCrash()
-        }
-
-
-        binding.upload.setOnClickListener {
-            rx(binding.infoCounter)
-        }
 
         return binding.root
     }

@@ -390,7 +390,10 @@
         motion:duration="600"
         motion:staggered=".55"
         motion:motionInterpolator="linear">
-        <OnClick motion:targetId="@+id/start_stop_button" />
+        <OnClick
+            motion:targetId="@+id/start_stop_button"
+            
+            />
     </Transition>
     <Transition
         motion:constraintSetEnd="@+id/end"

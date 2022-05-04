@@ -1,75 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    android:layout_marginTop="100dp"
     android:background="#FFFFFF"
     tools:context=".fragments.equalizer.EqualizerFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <com.lukelorusso.verticalseekbar.VerticalSeekBar
+        app:layout_constraintStart_toStartOf="parent"
+        app:vsb_click_to_set_progress="true"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+
+        app:vsb_bar_corner_radius="15dp"
+        android:layout_width="20dp"
+        android:layout_height="280dp"/>
+
+    <com.lukelorusso.verticalseekbar.VerticalSeekBar
+        app:layout_constraintStart_toStartOf="parent"
+        app:vsb_click_to_set_progress="true"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        app:vsb_bar_corner_radius="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_width="20dp"
+        android:layout_height="280dp"/>
+
+    <com.lukelorusso.verticalseekbar.VerticalSeekBar
+        app:layout_constraintStart_toStartOf="parent"
+        app:vsb_click_to_set_progress="true"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        app:vsb_bar_corner_radius="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_width="20dp"
+        android:layout_height="280dp"/>
+
+    <com.lukelorusso.verticalseekbar.VerticalSeekBar
+        app:layout_constraintStart_toStartOf="parent"
+        app:vsb_click_to_set_progress="true"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        app:vsb_progress="50"
+        android:layout_marginStart="10dp"
+        app:vsb_bar_corner_radius="15dp"
+        android:layout_width="20dp"
+        android:layout_height="280dp"/>
 
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/fix_load"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <com.lukelorusso.verticalseekbar.VerticalSeekBar
+        app:layout_constraintStart_toStartOf="parent"
+        app:vsb_click_to_set_progress="true"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        app:vsb_bar_corner_radius="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_width="20dp"
+        android:layout_height="280dp"/>
 
-        <TextView
-            android:id="@+id/about_list_of_car"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="center"
-            android:text="We're in control, just trying not to kill each other"
-            android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fix_load" />
 
-        <TextView
-            android:id="@+id/info_upload"
-            android:layout_marginTop="60dp"
-            android:textSize="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upload config about car to Firebase Storage"
-            android:gravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/about_list_of_car">
-
-        </TextView>
-
-        <Button
-            android:id="@+id/upload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upload config"
-            android:layout_marginTop="15dp"
-            app:layout_constraintTop_toBottomOf="@+id/info_upload"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-        </Button>
-
-        <TextView
-            android:id="@+id/info_counter"
-            android:layout_marginTop="60dp"
-            android:textSize="40dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Counter: "
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/upload">
-        </TextView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</FrameLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

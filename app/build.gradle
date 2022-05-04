@@ -38,7 +38,6 @@ android {
 
 
 
-
 repositories {
     maven {
         url "https://jitpack.io"
@@ -76,12 +75,12 @@ dependencies {
     implementation 'com.shobhitpuri.custombuttons:google-signin:1.1.0'
     // Firebase Auth
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.3'
-    implementation 'com.google.android.gms:play-services-auth:20.1.0'
+    implementation 'com.google.android.gms:play-services-auth:20.2.0'
     implementation 'com.firebaseui:firebase-ui-auth:4.3.2'
     //Firebase Firestore
-    implementation 'com.google.firebase:firebase-firestore-ktx:24.1.0'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.1.1'
     //Crashlytics and Analytics libraries
-    implementation 'com.google.firebase:firebase-crashlytics:18.2.9'
+    implementation 'com.google.firebase:firebase-crashlytics:18.2.10'
     implementation 'com.google.firebase:firebase-analytics:20.1.2'
     // Kotlin flow
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
@@ -117,7 +116,10 @@ dependencies {
     implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
     // lottie
     implementation 'com.airbnb.android:lottie:5.0.3'
-
+    // vertical seekbar
+    implementation 'com.github.lukelorusso:VerticalSeekBar:1.2.7'
+    // Fused Location
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
     // debug
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
     // testImplementation 'org.junit.jupiter:junit-jupiter'
