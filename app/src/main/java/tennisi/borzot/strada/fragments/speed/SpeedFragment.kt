@@ -8,7 +8,6 @@ import android.content.pm.PackageManager
 import android.media.AudioManager
 import android.net.Uri
 import android.os.Bundle
-import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,16 +17,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
-import com.google.android.gms.location.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.StradaApplication
 import tennisi.borzot.strada.databinding.FragmentSpeedBinding
@@ -59,16 +59,13 @@ class SpeedFragment : Fragment() {
         (requireActivity().application as StradaApplication).component
     }
 
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-
-    // globally declare LocationRequest
-    private lateinit var locationRequest: LocationRequest
-
-    // globally declare LocationCallback
-    private lateinit var locationCallback: LocationCallback
 
     private var page = 0
 
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
 
     override fun onAttach(context: Context) {
         component.inject(this)
@@ -82,11 +79,8 @@ class SpeedFragment : Fragment() {
         _binding = FragmentSpeedBinding.inflate(inflater, container, false)
         val audioManager = requireActivity().application.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         val workManager = WorkManager.getInstance(requireContext().applicationContext)
-
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext().applicationContext)
-
-
-
+     //   val locationDTO = LocationDTO("--")
+    //    onMessageEvent(locationDTO)
         upVolume(audioManager)
         downVolume(audioManager)
         showCurrentPercent(audioManager)
@@ -94,38 +88,7 @@ class SpeedFragment : Fragment() {
         setupStopButton(workManager)
         observeCurrentSpeed()
 
-
         return binding.root
-    }
-
-    private fun getLocationUpdates() {
-        locationRequest = LocationRequest.create().apply {
-            interval = 100
-            fastestInterval = 50
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-            maxWaitTime = 100
-        }
-        locationCallback = object : LocationCallback() {
-            override fun onLocationResult(p0: LocationResult) {
-                if (p0.locations.isNotEmpty()) {
-                    Log.d("speed", "onLocationResult: ${p0.lastLocation.speed}")
-                    viewModel.setSpeedValue(p0.lastLocation.speed.format(2))
-                }
-                super.onLocationResult(p0)
-            }
-
-        }
-    }
-
-    fun Float.format(digits: Int) = "%.${digits}f".format(this).toFloat()
-
-    @SuppressLint("MissingPermission")
-    private fun startLocationUpdates() {
-        fusedLocationProviderClient.requestLocationUpdates(
-            locationRequest,
-            locationCallback,
-            Looper.getMainLooper()
-        )
     }
 
 
@@ -180,40 +143,36 @@ class SpeedFragment : Fragment() {
                 workManager.enqueueUniqueWork(
                     SpeedWorker.WORK_NAME,
                     ExistingWorkPolicy.REPLACE,
-                    SpeedWorker.makeRequest(page++)
+                    SpeedWorker.makeRequest(true)
                 )
-            }
-
-//            if (hasLocationGranted()) {
-//                fusedLocationProviderClient.lastLocation.addOnSuccessListener { s ->
-//                    if (s != null) {
-//                        Log.d("Speed", "setupStartButton: ${s.speed}")
-//                        viewModel.setSpeedValue(s.speed)
-//                    }
-//                }
-//            }
-
-            if (hasLocationGranted()){
-                getLocationUpdates()
-                startLocationUpdates()
 
             }
+
             false
         }
     }
 
-    private fun hasLocationGranted() =
-        ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: LocationDTO?) {
+        binding.speedTextView.text = event?.speed
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this);
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setupStopButton(workManager: WorkManager) {
         binding.stopButton.setOnTouchListener { _, event ->
-
             if (event.action == MotionEvent.ACTION_UP) {
-                Log.d("Click", " click stop")
-                workManager.cancelUniqueWork(SpeedWorker.WORK_NAME)
+                workManager.enqueueUniqueWork(
+                    SpeedWorker.WORK_NAME,
+                    ExistingWorkPolicy.REPLACE,
+                    SpeedWorker.makeRequest(false)
+                )
+
             }
-            fusedLocationProviderClient.removeLocationUpdates(locationCallback)
             false
         }
     }
@@ -249,18 +208,16 @@ class SpeedFragment : Fragment() {
     }
 
 
-    override fun onPause() {
-        fusedLocationProviderClient.removeLocationUpdates(locationCallback)
-        super.onPause()
-    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
-
         _binding = null
     }
 
     private companion object {
+        private const val CHANNEL_ID = "channel_id"
+        private const val CHANNEL_NAME = "channel_name"
 
     }
 

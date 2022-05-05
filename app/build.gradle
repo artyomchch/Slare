@@ -120,6 +120,9 @@ dependencies {
     implementation 'com.github.lukelorusso:VerticalSeekBar:1.2.7'
     // Fused Location
     implementation 'com.google.android.gms:play-services-location:19.0.1'
+    //eventbus
+    implementation 'org.greenrobot:eventbus:3.2.0'
+
     // debug
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
     // testImplementation 'org.junit.jupiter:junit-jupiter'
