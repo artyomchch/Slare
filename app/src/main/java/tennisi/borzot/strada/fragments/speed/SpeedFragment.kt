@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.media.AudioManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,32 +20,60 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
+import com.google.android.gms.location.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import tennisi.borzot.strada.R
+import tennisi.borzot.strada.StradaApplication
 import tennisi.borzot.strada.databinding.FragmentSpeedBinding
+import tennisi.borzot.strada.fragments.add.presentation.ViewModelFactory
 import tennisi.borzot.strada.services.speedService.SpeedWorker
+import javax.inject.Inject
 
 
 class SpeedFragment : Fragment() {
-
 
     private var _binding: FragmentSpeedBinding? = null
     private val binding: FragmentSpeedBinding
         get() = _binding ?: throw RuntimeException("FragmentSpeedBinding == null")
 
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[(SpeedFragmentViewModel::class.java)]
+    }
+
     private val locationPermissionRequestLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions(),
         ::onGotPermissionsForLocation
     )
 
+    private val component by lazy {
+        (requireActivity().application as StradaApplication).component
+    }
+
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
+    // globally declare LocationRequest
+    private lateinit var locationRequest: LocationRequest
+
+    // globally declare LocationCallback
+    private lateinit var locationCallback: LocationCallback
+
     private var page = 0
 
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,15 +83,56 @@ class SpeedFragment : Fragment() {
         val audioManager = requireActivity().application.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         val workManager = WorkManager.getInstance(requireContext().applicationContext)
 
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext().applicationContext)
+
+
 
         upVolume(audioManager)
         downVolume(audioManager)
         showCurrentPercent(audioManager)
         setupStartButton(workManager)
         setupStopButton(workManager)
+        observeCurrentSpeed()
 
 
         return binding.root
+    }
+
+    private fun getLocationUpdates() {
+        locationRequest = LocationRequest.create().apply {
+            interval = 100
+            fastestInterval = 50
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+            maxWaitTime = 100
+        }
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(p0: LocationResult) {
+                if (p0.locations.isNotEmpty()) {
+                    Log.d("speed", "onLocationResult: ${p0.lastLocation.speed}")
+                    viewModel.setSpeedValue(p0.lastLocation.speed.format(2))
+                }
+                super.onLocationResult(p0)
+            }
+
+        }
+    }
+
+    fun Float.format(digits: Int) = "%.${digits}f".format(this).toFloat()
+
+    @SuppressLint("MissingPermission")
+    private fun startLocationUpdates() {
+        fusedLocationProviderClient.requestLocationUpdates(
+            locationRequest,
+            locationCallback,
+            Looper.getMainLooper()
+        )
+    }
+
+
+    private fun observeCurrentSpeed() {
+        viewModel.observerSpeed.observe(viewLifecycleOwner) {
+            binding.speedTextView.text = it.toString()
+        }
     }
 
     private fun onGotPermissionsForLocation(grantResults: Map<String, Boolean>) {
@@ -76,26 +146,6 @@ class SpeedFragment : Fragment() {
             }
         }
     }
-
-
-
-
-//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        when (requestCode) {
-//            RQ_PERMISSION_LOCATION_CODE -> {
-//                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    onLocationPermissionsGranted()
-//                } else {
-//                    if (!shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION)) {
-//                        askUserForOpeningAppSettings()
-//                    } else {
-//                        Toast.makeText(context, getString(R.string.permission_denied), Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            }
-//        }
-//    }
 
     private fun askUserForOpeningAppSettings() {
         val appSettingsIntent = Intent(
@@ -121,12 +171,11 @@ class SpeedFragment : Fragment() {
     }
 
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint("ClickableViewAccessibility", "MissingPermission")
     private fun setupStartButton(workManager: WorkManager) {
         binding.startStopButton.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_UP) {
                 Log.d("Click", " click start")
-                //checkLocationPermission()
                 locationPermissionRequestLauncher.launch(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION))
                 workManager.enqueueUniqueWork(
                     SpeedWorker.WORK_NAME,
@@ -134,9 +183,27 @@ class SpeedFragment : Fragment() {
                     SpeedWorker.makeRequest(page++)
                 )
             }
+
+//            if (hasLocationGranted()) {
+//                fusedLocationProviderClient.lastLocation.addOnSuccessListener { s ->
+//                    if (s != null) {
+//                        Log.d("Speed", "setupStartButton: ${s.speed}")
+//                        viewModel.setSpeedValue(s.speed)
+//                    }
+//                }
+//            }
+
+            if (hasLocationGranted()){
+                getLocationUpdates()
+                startLocationUpdates()
+
+            }
             false
         }
     }
+
+    private fun hasLocationGranted() =
+        ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setupStopButton(workManager: WorkManager) {
@@ -146,6 +213,7 @@ class SpeedFragment : Fragment() {
                 Log.d("Click", " click stop")
                 workManager.cancelUniqueWork(SpeedWorker.WORK_NAME)
             }
+            fusedLocationProviderClient.removeLocationUpdates(locationCallback)
             false
         }
     }
@@ -181,13 +249,19 @@ class SpeedFragment : Fragment() {
     }
 
 
+    override fun onPause() {
+        fusedLocationProviderClient.removeLocationUpdates(locationCallback)
+        super.onPause()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
+
         _binding = null
     }
 
     private companion object {
-        const val RQ_PERMISSION_LOCATION_CODE = 1
+
     }
 
 

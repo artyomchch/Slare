@@ -8,6 +8,7 @@ import tennisi.borzot.strada.fragments.add.presentation.addFragmentUI.AddFragmen
 import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemViewModel
 import tennisi.borzot.strada.fragments.news.presentation.newsFragment.NewsFragmentViewModel
 import tennisi.borzot.strada.fragments.news.presentation.sourceFragment.SourceFragmentViewModel
+import tennisi.borzot.strada.fragments.speed.SpeedFragmentViewModel
 
 @Module
 interface ViewModelModule {
@@ -21,6 +22,11 @@ interface ViewModelModule {
     @ViewModelKey(CarItemViewModel::class)
     @Binds
     fun bindCarItemViewModel(impl: CarItemViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(SpeedFragmentViewModel::class)
+    @Binds
+    fun bindSpeedFragmentViewModel(impl: SpeedFragmentViewModel): ViewModel
 
     @IntoMap
     @ViewModelKey(NewsFragmentViewModel::class)

@@ -7,6 +7,7 @@ import tennisi.borzot.strada.fragments.add.presentation.addFragmentUI.AddFragmen
 import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemFragment
 import tennisi.borzot.strada.fragments.news.presentation.newsFragment.NewsFragment
 import tennisi.borzot.strada.fragments.news.presentation.sourceFragment.SourceFragment
+import tennisi.borzot.strada.fragments.speed.SpeedFragment
 
 @ApplicationScope
 @Component(
@@ -22,6 +23,8 @@ interface ApplicationComponent {
     fun inject(fragment: NewsFragment)
 
     fun inject(fragment: SourceFragment)
+
+    fun inject(fragment: SpeedFragment)
 
     @Component.Factory
     interface ApplicationComponentFactory {
