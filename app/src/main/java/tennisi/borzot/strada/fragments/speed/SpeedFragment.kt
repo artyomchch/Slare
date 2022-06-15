@@ -2,12 +2,15 @@ package tennisi.borzot.strada.fragments.speed
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.ServiceConnection
 import android.content.pm.PackageManager
 import android.media.AudioManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.IBinder
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,22 +20,20 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.work.ExistingWorkPolicy
-import androidx.work.WorkManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.StradaApplication
 import tennisi.borzot.strada.databinding.FragmentSpeedBinding
 import tennisi.borzot.strada.fragments.add.presentation.ViewModelFactory
-import tennisi.borzot.strada.services.speedService.SpeedWorker
+import tennisi.borzot.strada.services.speedService.SpeedForegroundService
 import javax.inject.Inject
 
 
@@ -59,12 +60,27 @@ class SpeedFragment : Fragment() {
         (requireActivity().application as StradaApplication).component
     }
 
+    private val serviceConnection = object : ServiceConnection {
+        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+            val binder = (service as? SpeedForegroundService.LocalBinder) ?: return
+            val foregroundService = binder.getService()
+            foregroundService.onSpeedListenerChange = { speedValue ->
+                viewModel.setSpeedValue(speedValue)
+            }
+        }
 
-    private var page = 0
+        override fun onServiceDisconnected(name: ComponentName?) {
+            TODO("Not yet implemented")
+        }
+    }
+
 
     override fun onStart() {
         super.onStart()
-        EventBus.getDefault().register(this)
+        requireActivity().bindService(
+            SpeedForegroundService.newIntent(this.requireContext()),
+            serviceConnection, 0
+        )
     }
 
     override fun onAttach(context: Context) {
@@ -78,14 +94,14 @@ class SpeedFragment : Fragment() {
     ): View {
         _binding = FragmentSpeedBinding.inflate(inflater, container, false)
         val audioManager = requireActivity().application.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-        val workManager = WorkManager.getInstance(requireContext().applicationContext)
-     //   val locationDTO = LocationDTO("--")
-    //    onMessageEvent(locationDTO)
+        //  val workManager = WorkManager.getInstance(requireContext().applicationContext)
+        //   val locationDTO = LocationDTO("--")
+        //    onMessageEvent(locationDTO)
         upVolume(audioManager)
         downVolume(audioManager)
         showCurrentPercent(audioManager)
-        setupStartButton(workManager)
-        setupStopButton(workManager)
+        setupStartButton()
+        setupStopButton()
         observeCurrentSpeed()
 
         return binding.root
@@ -135,16 +151,17 @@ class SpeedFragment : Fragment() {
 
 
     @SuppressLint("ClickableViewAccessibility", "MissingPermission")
-    private fun setupStartButton(workManager: WorkManager) {
+    private fun setupStartButton() {
         binding.startStopButton.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_UP) {
                 Log.d("Click", " click start")
                 locationPermissionRequestLauncher.launch(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION))
-                workManager.enqueueUniqueWork(
-                    SpeedWorker.WORK_NAME,
-                    ExistingWorkPolicy.REPLACE,
-                    SpeedWorker.makeRequest(true)
-                )
+//                workManager.enqueueUniqueWork(
+//                    SpeedWorker.WORK_NAME,
+//                    ExistingWorkPolicy.REPLACE,
+//                    SpeedWorker.makeRequest(true)
+//                )
+                ContextCompat.startForegroundService(this.requireContext(), SpeedForegroundService.newIntent(this.requireContext()))
 
             }
 
@@ -152,25 +169,24 @@ class SpeedFragment : Fragment() {
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onMessageEvent(event: LocationDTO?) {
-        binding.speedTextView.text = event?.speed
-    }
 
     override fun onStop() {
         super.onStop()
-        EventBus.getDefault().unregister(this);
+        requireActivity().unbindService(serviceConnection)
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun setupStopButton(workManager: WorkManager) {
+    private fun setupStopButton() {
         binding.stopButton.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_UP) {
-                workManager.enqueueUniqueWork(
-                    SpeedWorker.WORK_NAME,
-                    ExistingWorkPolicy.REPLACE,
-                    SpeedWorker.makeRequest(false)
-                )
+
+                requireActivity().stopService(SpeedForegroundService.newIntent(requireContext()))
+//                workManager.enqueueUniqueWork(
+//                    SpeedWorker.WORK_NAME,
+//                    ExistingWorkPolicy.REPLACE,
+//                    SpeedWorker.makeRequest(false)
+                //  )
 
             }
             false
@@ -206,8 +222,6 @@ class SpeedFragment : Fragment() {
         val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
         return (100 * currentVolume / maxVolume).toString()
     }
-
-
 
 
     override fun onDestroyView() {

@@ -39,6 +39,7 @@
 
         <activity android:name=".onBoarding.mvpOnBoarding.OnBoardingMain" />
         <activity android:name=".homeScreen.presentation.MainActivity" />
+        <service android:name=".services.speedService.SpeedForegroundService" />
 
 
     </application>
