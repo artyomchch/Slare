@@ -1,4 +1,4 @@
-package tennisi.borzot.strada.fragments.add.presentation.addFragmentUI
+package tennisi.borzot.strada.fragments.add.presentation.addFragmentUI.setuprecycler
 
 import androidx.recyclerview.widget.DiffUtil
 import tennisi.borzot.strada.fragments.add.domain.entity.CarItem

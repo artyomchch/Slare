@@ -47,6 +47,10 @@
     <string name="add_car_warning_text">You don\'t have cars in the list yet, click on the icon to add it</string>
     <string name="name_of_car">Name of car</string>
     <string name="brand_of_car">Brand of car</string>
+    <string name="space">&#160;</string>
+    <string name="chosen_profile">Chosen profile:</string>
+    <string name="name_of_profile">none</string>
+    <string name="package_value">package</string>
     <string name="model_of_car">Model of car</string>
     <string name="it_s_fab_button">it\'s FAB button</string>
     <string name="brand_car_item">Brand car item</string>
@@ -97,6 +101,8 @@
     <string name="permission_denied">Permission denied</string>
     <string name="warning_permission_denied_dialog">You have denied permissions forever. You can change your decision in app settings\n\n
         Would you like to open app settings?</string>
+    <string name="sorting">sorting</string>
+    <string name="filter">filter</string>
 
 
 </resources>

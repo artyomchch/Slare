@@ -38,6 +38,7 @@
 
     //main color
     <color name="purple">#731BE4</color>
+    <color name="grey_photo">#FF7C7878</color>
 
 
 </resources>

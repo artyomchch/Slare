@@ -11,6 +11,7 @@ class CarListMapper @Inject constructor() {
         name = carItem.name,
         brand = carItem.brand,
         model = carItem.model,
+        pathToPic =  carItem.pathToPic,
         enable = carItem.enable
     )
 
@@ -19,6 +20,7 @@ class CarListMapper @Inject constructor() {
         name = carItemDbModel.name,
         brand = carItemDbModel.brand,
         model = carItemDbModel.model,
+        pathToPic =  carItemDbModel.pathToPic,
         enable = carItemDbModel.enable
     )
 

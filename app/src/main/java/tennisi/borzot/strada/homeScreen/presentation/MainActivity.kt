@@ -63,17 +63,28 @@ class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListe
 
 
     private fun changingTabs(nameFragment: String) {
-        if (nameFragment == FRAGMENT_ADD)
-            setResource(getString(R.string.vehicle), R.drawable.ic_baseline_add_purple)
-        if (nameFragment == FRAGMENT_EQUALIZER)
-            setResource(getString(R.string.equalizer), R.drawable.ic_baseline_equalizer_purple)
-        if (nameFragment == FRAGMENT_SPEED)
-            setResource(getString(R.string.speed), R.drawable.ic_baseline_speed_purple)
-        if (nameFragment == FRAGMENT_NEWS)
-            setResource(getString(R.string.news), R.drawable.ic_baseline_rss_feed_purple)
-        if (nameFragment == FRAGMENT_SETTINGS)
-            setResource(getString(R.string.settings), R.drawable.ic_baseline_settings_purple)
-
+        when (nameFragment) {
+            FRAGMENT_ADD -> {
+                setResource(getString(R.string.vehicle), R.drawable.ic_baseline_add_purple)
+                binding.mainFragmentToolbar.toolbar.visibility = View.GONE
+            }
+            FRAGMENT_EQUALIZER -> {
+                setResource(getString(R.string.equalizer), R.drawable.ic_baseline_equalizer_purple)
+                showResource()
+            }
+            FRAGMENT_SPEED -> {
+                setResource(getString(R.string.speed), R.drawable.ic_baseline_speed_purple)
+                showResource()
+            }
+            FRAGMENT_NEWS -> {
+                setResource(getString(R.string.news), R.drawable.ic_baseline_rss_feed_purple)
+                showResource()
+            }
+            FRAGMENT_SETTINGS -> {
+                setResource(getString(R.string.settings), R.drawable.ic_baseline_settings_purple)
+                showResource()
+            }
+        }
     }
 
     private fun setResource(title: String, imageResource: Int) {
@@ -105,7 +116,7 @@ class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListe
     }
 
     override fun onSaveButtonClick() {
-        showResource()
+        binding.bottomNavigationMenu.visibility = View.VISIBLE
     }
 
     companion object {

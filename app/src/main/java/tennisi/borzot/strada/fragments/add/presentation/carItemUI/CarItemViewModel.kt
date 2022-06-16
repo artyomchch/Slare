@@ -51,14 +51,15 @@ class CarItemViewModel @Inject constructor(
         }
     }
 
-    fun addCarItem(inputName: String?, inputBrand: String?, inputModel: String?) {
+    fun addCarItem(inputName: String?, inputBrand: String?, inputModel: String?, imageUri: String) {
+
         val name = parseName(inputName)
         val brand = parseName(inputBrand)
         val model = parseName(inputModel)
         val fieldsValid = validateInput(name, brand, model)
         if (fieldsValid) {
             viewModelScope.launch {
-                val carItem = CarItem(name, brand, model, true)
+                val carItem = CarItem(name, brand, model, pathToPic = imageUri, true)
                 addCarItemUseCase(carItem)
                 finishWork()
             }
@@ -69,7 +70,7 @@ class CarItemViewModel @Inject constructor(
         }
     }
 
-    fun editCarItem(inputName: String?, inputBrand: String?, inputModel: String?) {
+    fun editCarItem(inputName: String?, inputBrand: String?, inputModel: String?, imageUri: String) {
         val name = parseName(inputName)
         val brand = parseName(inputBrand)
         val model = parseName(inputModel)
@@ -77,7 +78,7 @@ class CarItemViewModel @Inject constructor(
         if (fieldsValid) {
             _carItem.value?.let {
                 viewModelScope.launch {
-                    val item = it.copy(name = name, brand = brand, model = model)
+                    val item = it.copy(name = name ,brand = brand, model = model, pathToPic = imageUri)
                     editCarItemUseCase(item)
                     finishWork()
                 }

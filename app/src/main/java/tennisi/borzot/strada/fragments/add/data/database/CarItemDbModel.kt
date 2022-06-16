@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class CarItemDbModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
+    val pathToPic: String,
     val name: String,
     val brand: String,
     val model: String,
