@@ -84,8 +84,9 @@
             <ImageView
                 android:id="@+id/image_picker"
                 android:layout_width="match_parent"
-                android:layout_height="146dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:layout_margin="6dp"
                 android:contentDescription="@string/add_car"
                 android:src="@drawable/ic_baseline_add_black" />
         </FrameLayout>

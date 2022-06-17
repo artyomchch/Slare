@@ -11,6 +11,7 @@ import android.provider.MediaStore
 import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,10 +22,12 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.StradaApplication
 import tennisi.borzot.strada.databinding.FragmentCarItemBinding
 import tennisi.borzot.strada.fragments.add.presentation.ViewModelFactory
+import java.io.File
 import javax.inject.Inject
 
 
@@ -219,6 +222,8 @@ class CarItemFragment : Fragment() {
                 editProfileField.setText(it.name)
                 editBrandField.setText(it.brand)
                 editModelField.setText(it.model)
+//                Log.d("TAG", "launchEditMode: ${it.pathToPic}")
+//                imagePicker.setImageURI(it.pathToPic.toUri())
 
             }
             saveButton.setOnClickListener {

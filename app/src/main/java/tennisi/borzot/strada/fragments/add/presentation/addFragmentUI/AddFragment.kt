@@ -100,7 +100,7 @@ class AddFragment : Fragment() {
             }
         }
 
-        setupOnLongClickListener()
+       // setupOnLongClickListener()
         setupClickListener()
         setupSwipeListener()
     }
@@ -145,6 +145,7 @@ class AddFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+
     }
 
 }
