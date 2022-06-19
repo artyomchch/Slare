@@ -1,7 +1,7 @@
 # Strada
 
 
-##Preview
+## Preview
 <img src="source/gif/preview.gif" alt="drawing"/> 
 Project for Google Play
 
