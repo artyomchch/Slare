@@ -1,5 +1,6 @@
 package tennisi.borzot.strada.homeScreen.presentation
 
+
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,8 +11,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.appbar.AppBarLayout.LayoutParams.*
-import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 import com.google.firebase.auth.FirebaseAuth
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.ActivityMainBinding
@@ -60,8 +61,6 @@ class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListe
     }
 
 
-
-
     private fun authentication() {
         auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
@@ -75,44 +74,37 @@ class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListe
 
 
     private fun changingTabs(nameFragment: String) {
-        with (binding) {
+        with(binding) {
             when (nameFragment) {
                 FRAGMENT_ADD -> {
                     carAddFab?.visibility = View.VISIBLE
                     mainCollapsing?.title = getString(R.string.my_garage)
                     mainAppbar?.setExpanded(true)
                     enableToolBarScrolling()
-                    showResource()
-
                 }
                 FRAGMENT_EQUALIZER -> {
                     carAddFab?.visibility = View.GONE
                     mainCollapsing?.title = getString(R.string.equalizer)
                     mainAppbar?.setExpanded(false)
                     enableToolBarScrolling()
-                    showResource()
                 }
                 FRAGMENT_SPEED -> {
                     carAddFab?.visibility = View.GONE
                     mainCollapsing?.title = getString(R.string.speed)
                     mainAppbar?.setExpanded(false)
                     enableToolBarScrolling()
-                    showResource()
                 }
                 FRAGMENT_NEWS -> {
                     carAddFab?.visibility = View.GONE
                     mainCollapsing?.title = getString(R.string.news)
                     mainAppbar?.setExpanded(true)
                     enableToolBarScrolling()
-                    showResource()
                 }
                 FRAGMENT_SETTINGS -> {
                     carAddFab?.visibility = View.GONE
                     mainCollapsing?.title = getString(R.string.settings)
                     mainAppbar?.setExpanded(true)
                     disableToolBarScrolling()
-
-                    showResource()
                 }
 
             }
@@ -121,13 +113,12 @@ class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListe
     }
 
 
-    fun disableToolBarScrolling() {
+    private fun disableToolBarScrolling() {
         val params = binding.mainCollapsing?.layoutParams as AppBarLayout.LayoutParams
         params.scrollFlags = 0
     }
 
-    fun enableToolBarScrolling() {
-
+    private fun enableToolBarScrolling() {
         val params = binding.mainCollapsing?.layoutParams as AppBarLayout.LayoutParams
         params.scrollFlags = SCROLL_FLAG_SCROLL or SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
     }
@@ -143,14 +134,14 @@ class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListe
 
     private fun hideResource() {
         with(binding) {
-          //  mainFragmentToolbar.toolbar.visibility = View.GONE
+            mainAppbar?.layoutParams?.height = 0
             bottomNavigationMenu.visibility = View.GONE
         }
     }
 
     private fun showResource() {
         with(binding) {
-         //   mainFragmentToolbar.toolbar.visibility = View.VISIBLE
+            mainAppbar?.layoutParams?.height = 420
             bottomNavigationMenu.visibility = View.VISIBLE
         }
     }
@@ -161,6 +152,7 @@ class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListe
     }
 
     override fun onSaveButtonClick() {
+        showResource()
         binding.bottomNavigationMenu.visibility = View.VISIBLE
     }
 
