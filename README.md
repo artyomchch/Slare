@@ -1,5 +1,8 @@
 # Strada
 
+
+##Preview
+<img src="source/gif/preview.gif" alt="drawing"/> 
 Project for Google Play
 
 1. Начало разработки

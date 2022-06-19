@@ -134,14 +134,15 @@ class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListe
 
     private fun hideResource() {
         with(binding) {
-            mainAppbar?.layoutParams?.height = 0
+            HEIGHT_APPBAR = mainAppbar?.measuredHeight!!
+            mainAppbar.layoutParams?.height = 0
             bottomNavigationMenu.visibility = View.GONE
         }
     }
 
     private fun showResource() {
         with(binding) {
-            mainAppbar?.layoutParams?.height = 420
+            mainAppbar?.layoutParams?.height = HEIGHT_APPBAR
             bottomNavigationMenu.visibility = View.VISIBLE
         }
     }
@@ -157,6 +158,7 @@ class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListe
     }
 
     companion object {
+        private var HEIGHT_APPBAR = 0
         private const val FRAGMENT_ADD = "fragment_add"
         private const val FRAGMENT_EQUALIZER = "fragment_equalizer"
         private const val FRAGMENT_SPEED = "fragment_speed"

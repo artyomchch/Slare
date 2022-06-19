@@ -258,6 +258,6 @@ class CarItemFragment : Fragment() {
         const val MODE_EDIT = "EDIT"
         const val MODE_ADD = "ADD"
         private const val IMAGE_PICK_CODE = 1000
-        private  var IMAGE_URI = ""
+        private var IMAGE_URI = ""
     }
 }
