@@ -6,13 +6,19 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.bumptech.glide.Glide
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.AppBarLayout.LayoutParams.*
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.firebase.auth.FirebaseAuth
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.databinding.ActivityMainBinding
+import tennisi.borzot.strada.fragments.add.domain.entity.ScreenAddMode
+import tennisi.borzot.strada.fragments.add.presentation.addFragmentUI.AddFragmentDirections
 import tennisi.borzot.strada.fragments.add.presentation.carItemUI.CarItemFragment
+
 
 class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListener {
 
@@ -35,6 +41,10 @@ class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListe
         observeViewModel()
         authentication()
 
+        binding.carAddFab?.setOnClickListener {
+            findNavController(R.id.fragment_container).navigate(AddFragmentDirections.actionAddFragmentToCarItemFragment(ScreenAddMode.ADD, -1))
+        }
+
     }
 
     private fun observeViewModel() {
@@ -50,6 +60,8 @@ class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListe
     }
 
 
+
+
     private fun authentication() {
         auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
@@ -63,29 +75,61 @@ class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListe
 
 
     private fun changingTabs(nameFragment: String) {
-        when (nameFragment) {
-            FRAGMENT_ADD -> {
-                setResource(getString(R.string.vehicle), R.drawable.ic_baseline_add_purple)
-          //      binding.mainFragmentToolbar.toolbar.visibility = View.GONE
-              //  binding.mainFragmentToolbar.toolbar.visibility = View.GONE
-            }
-            FRAGMENT_EQUALIZER -> {
-                setResource(getString(R.string.equalizer), R.drawable.ic_baseline_equalizer_purple)
-                showResource()
-            }
-            FRAGMENT_SPEED -> {
-                setResource(getString(R.string.speed), R.drawable.ic_baseline_speed_purple)
-                showResource()
-            }
-            FRAGMENT_NEWS -> {
-                setResource(getString(R.string.news), R.drawable.ic_baseline_rss_feed_purple)
-                showResource()
-            }
-            FRAGMENT_SETTINGS -> {
-                setResource(getString(R.string.settings), R.drawable.ic_baseline_settings_purple)
-                showResource()
+        with (binding) {
+            when (nameFragment) {
+                FRAGMENT_ADD -> {
+                    carAddFab?.visibility = View.VISIBLE
+                    mainCollapsing?.title = getString(R.string.my_garage)
+                    mainAppbar?.setExpanded(true)
+                    enableToolBarScrolling()
+                    showResource()
+
+                }
+                FRAGMENT_EQUALIZER -> {
+                    carAddFab?.visibility = View.GONE
+                    mainCollapsing?.title = getString(R.string.equalizer)
+                    mainAppbar?.setExpanded(false)
+                    enableToolBarScrolling()
+                    showResource()
+                }
+                FRAGMENT_SPEED -> {
+                    carAddFab?.visibility = View.GONE
+                    mainCollapsing?.title = getString(R.string.speed)
+                    mainAppbar?.setExpanded(false)
+                    enableToolBarScrolling()
+                    showResource()
+                }
+                FRAGMENT_NEWS -> {
+                    carAddFab?.visibility = View.GONE
+                    mainCollapsing?.title = getString(R.string.news)
+                    mainAppbar?.setExpanded(true)
+                    enableToolBarScrolling()
+                    showResource()
+                }
+                FRAGMENT_SETTINGS -> {
+                    carAddFab?.visibility = View.GONE
+                    mainCollapsing?.title = getString(R.string.settings)
+                    mainAppbar?.setExpanded(true)
+                    disableToolBarScrolling()
+
+                    showResource()
+                }
+
             }
         }
+
+    }
+
+
+    fun disableToolBarScrolling() {
+        val params = binding.mainCollapsing?.layoutParams as AppBarLayout.LayoutParams
+        params.scrollFlags = 0
+    }
+
+    fun enableToolBarScrolling() {
+
+        val params = binding.mainCollapsing?.layoutParams as AppBarLayout.LayoutParams
+        params.scrollFlags = SCROLL_FLAG_SCROLL or SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
     }
 
     private fun setResource(title: String, imageResource: Int) {

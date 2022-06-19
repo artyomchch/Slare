@@ -103,6 +103,8 @@
         Would you like to open app settings?</string>
     <string name="sorting">sorting</string>
     <string name="filter">filter</string>
+    <string name="my_garage">My garage</string>
+    <string name="s">Speed</string>
 
 
 </resources>

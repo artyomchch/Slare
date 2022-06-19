@@ -80,9 +80,9 @@ class AddFragment : Fragment() {
     }
 
     private fun navigateItem() {
-        binding.carAddFab.setOnClickListener {
-            findNavController().navigate(AddFragmentDirections.actionAddFragmentToCarItemFragment(ScreenAddMode.ADD, -1))
-        }
+//        binding.carAddFab.setOnClickListener {
+//            findNavController().navigate(AddFragmentDirections.actionAddFragmentToCarItemFragment(ScreenAddMode.ADD, -1))
+//        }
     }
 
     override fun onAttach(context: Context) {
