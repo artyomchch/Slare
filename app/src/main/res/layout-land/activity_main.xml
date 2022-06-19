@@ -7,14 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".homeScreen.presentation.MainActivity">
 
-    <include
-        android:id="@+id/mainFragmentToolbar"
-        layout="@layout/tool_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <include-->
+<!--        android:id="@+id/mainFragmentToolbar"-->
+<!--        layout="@layout/tool_bar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 
     <androidx.fragment.app.FragmentContainerView
@@ -27,7 +27,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainFragmentToolbar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_menu"

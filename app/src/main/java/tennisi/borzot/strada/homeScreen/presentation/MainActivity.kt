@@ -54,11 +54,11 @@ class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListe
         auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
 
-        Glide.with(this)
-            .load(currentUser?.photoUrl)
-            .circleCrop()
-            .placeholder(R.drawable.ic_user_avatar)
-            .into(binding.mainFragmentToolbar.toolbarImageSignIn)
+//        Glide.with(this)
+//            .load(currentUser?.photoUrl)
+//            .circleCrop()
+//            .placeholder(R.drawable.ic_user_avatar)
+//            .into(binding.mainFragmentToolbar.toolbarImageSignIn)
     }
 
 
@@ -66,7 +66,8 @@ class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListe
         when (nameFragment) {
             FRAGMENT_ADD -> {
                 setResource(getString(R.string.vehicle), R.drawable.ic_baseline_add_purple)
-                binding.mainFragmentToolbar.toolbar.visibility = View.GONE
+          //      binding.mainFragmentToolbar.toolbar.visibility = View.GONE
+              //  binding.mainFragmentToolbar.toolbar.visibility = View.GONE
             }
             FRAGMENT_EQUALIZER -> {
                 setResource(getString(R.string.equalizer), R.drawable.ic_baseline_equalizer_purple)
@@ -88,24 +89,24 @@ class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListe
     }
 
     private fun setResource(title: String, imageResource: Int) {
-        with(binding) {
-            mainFragmentToolbar.apply {
-                toolbarText.text = title
-                toolbarImageItem.setImageResource(imageResource)
-            }
-        }
+//        with(binding) {
+//            mainFragmentToolbar.apply {
+//                toolbarText.text = title
+//                toolbarImageItem.setImageResource(imageResource)
+//            }
+//        }
     }
 
     private fun hideResource() {
         with(binding) {
-            mainFragmentToolbar.toolbar.visibility = View.GONE
+          //  mainFragmentToolbar.toolbar.visibility = View.GONE
             bottomNavigationMenu.visibility = View.GONE
         }
     }
 
     private fun showResource() {
         with(binding) {
-            mainFragmentToolbar.toolbar.visibility = View.VISIBLE
+         //   mainFragmentToolbar.toolbar.visibility = View.VISIBLE
             bottomNavigationMenu.visibility = View.VISIBLE
         }
     }
