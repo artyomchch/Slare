@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -32,7 +31,7 @@
                 android:fitsSystemWindows="true"
                 app:collapsedTitleTextColor="@color/black"
                 app:expandedTitleMarginEnd="64dp"
-                app:expandedTitleMarginStart="48dp"
+                app:expandedTitleMarginStart="40dp"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:statusBarScrim="@color/colorWhite"
                 app:title="@string/my_garage">
@@ -44,7 +43,23 @@
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
                     app:menu="@menu/top_app_bar"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                    <ImageView
+                        android:layout_marginEnd="12dp"
+                        android:id="@+id/account_info"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_user_avatar"
+                        android:focusable="true"
+                        android:contentDescription="@string/account" />
+
+                </androidx.appcompat.widget.Toolbar>
+
+
+
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 

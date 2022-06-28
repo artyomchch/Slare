@@ -1,16 +1,13 @@
 package tennisi.borzot.strada.fragments.news.presentation.sourceFragment
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.WebSettings
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import tennisi.borzot.strada.R
@@ -32,9 +29,9 @@ class SourceFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    private val viewModel by lazy {
-        ViewModelProvider(this, viewModelFactory)[(SourceFragmentViewModel::class.java)]
-    }
+//    private val viewModel by lazy {
+//        ViewModelProvider(this, viewModelFactory)[(SourceFragmentViewModel::class.java)]
+//    }
 
     private val component by lazy {
         (requireActivity().application as StradaApplication).component
@@ -68,11 +65,26 @@ class SourceFragment : Fragment() {
         component.inject(this)
         _binding = FragmentSourceBinding.inflate(inflater, container, false)
 
+        setToolBar()
         webViewSetup()
         setupBackClickListener()
 
 
         return binding.root
+    }
+
+    private fun setToolBar() {
+        with(binding) {
+            with(collapsingToolbar) {
+                setContentScrimColor(ContextCompat.getColor(context, R.color.colorWhite))
+                title = args.source
+            }
+
+            Glide.with(root)
+                .load(args.urlPic)
+                .centerCrop()
+                .into(newsItemImage)
+        }
     }
 
 
@@ -82,39 +94,15 @@ class SourceFragment : Fragment() {
         }
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
+
     private fun webViewSetup() {
-
-        with(binding) {
-            with(collapsingToolbar) {
-                setContentScrimColor(ContextCompat.getColor(requireContext(), R.color.colorWhite))
-                title = args.source
-            }
-
-
-
-            Glide.with(root)
-                .load(args.urlPic)
-                .centerCrop()
-                .into(newsItemImage)
-
-            webView.apply {
-                settings.javaScriptEnabled = true
-                webViewClient = object : WebViewClient() {
-                    override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-                        view?.loadUrl(url.toString())
-                        return true
-                    }
-
-                    override fun onPageFinished(view: WebView?, url: String?) {
-                        progressBar.visibility = View.GONE
-                        super.onPageFinished(view, url)
-                    }
-                }
-                loadUrl(args.url)
-            }
-
+        with(binding.webView) {
+            loadUrl(args.url)
+            settings.javaScriptEnabled = true
+            settings.mixedContentMode = WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE
+            webViewClient = MyWebViewClient(requireActivity().applicationContext, binding.progressBar, binding.errorAnim)
         }
+
     }
 
 

@@ -19,11 +19,13 @@ import tennisi.borzot.strada.R
 class SpeedForegroundService : Service() {
 
 
-    private val coroutineScope = CoroutineScope(Dispatchers.Default)
+    private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     private lateinit var locationRequest: LocationRequest
 
     private lateinit var locationCallback: LocationCallback
+
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     var onSpeedListenerChange: ((Float) -> Unit)? = null
 
@@ -36,14 +38,15 @@ class SpeedForegroundService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        val state = intent?.getBooleanExtra(START_STOP_FLAG, false) ?: false
         log("OnStartCommand")
-        coroutineScope.launch {
-            getLocationUpdates(true, this@SpeedForegroundService)
-            for (i in 0 until 100) {
-                delay(1000)
-                log("Timer: $i")
+        if (state) {
+            coroutineScope.launch {
+                getLocationUpdates()
             }
         }
+        else stopLocation()
+
         return START_STICKY
     }
 
@@ -53,7 +56,7 @@ class SpeedForegroundService : Service() {
     }
 
     override fun onBind(intent: Intent?): IBinder {
-       return LocalBinder()
+        return LocalBinder()
     }
 
 
@@ -70,8 +73,8 @@ class SpeedForegroundService : Service() {
     }
 
     private fun createNotification() = NotificationCompat.Builder(this, CHANNEL_ID)
-        .setContentTitle("Title")
-        .setContentText("Text")
+        .setContentTitle("Speed service activate")
+        .setContentText("Now you can check your speed: ")
         .setSmallIcon(R.drawable.ic_app_icon)
         .build()
 
@@ -81,37 +84,41 @@ class SpeedForegroundService : Service() {
 
 
     @SuppressLint("MissingPermission")
-    private fun getLocationUpdates(state: Boolean, context: Context) {
+    private fun getLocationUpdates() {
 
-        val fusedLocationProviderClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
         locationRequest = LocationRequest.create().apply {
             interval = 100
             fastestInterval = 50
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+            priority = Priority.PRIORITY_HIGH_ACCURACY
             maxWaitTime = 100
         }
-        if (state) {
-            locationCallback = object : LocationCallback() {
-                override fun onLocationResult(p0: LocationResult) {
-                    if (p0.locations.isNotEmpty()) {
-                        coroutineScope.launch {
-                            onSpeedListenerChange?.invoke((p0.lastLocation.speed * 3.6).format(1))
-                        }
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(p0: LocationResult) {
+                if (p0.locations.isNotEmpty()) {
+                    coroutineScope.launch {
+                        p0.lastLocation?.speed?.times(3.6)?.let { onSpeedListenerChange?.invoke(it.format(1)) }
+                        Log.d("location", "onLocationResult: ${p0.lastLocation?.speed?.times(3.6)}")
                     }
-                    super.onLocationResult(p0)
                 }
+                super.onLocationResult(p0)
             }
-            LOCATION_CALL = locationCallback
-            fusedLocationProviderClient.requestLocationUpdates(locationRequest, LOCATION_CALL, Looper.getMainLooper())
         }
+        LOCATION_CALL = locationCallback
+        fusedLocationProviderClient.requestLocationUpdates(locationRequest, LOCATION_CALL, Looper.getMainLooper())
+
     }
 
     fun Double.format(digits: Int) = ("%.${digits}f".format(this).toFloat())
 
-    inner class LocalBinder: Binder(){
-
+    inner class LocalBinder : Binder() {
         fun getService() = this@SpeedForegroundService
+    }
+
+    private fun stopLocation() {
+        fusedLocationProviderClient.removeLocationUpdates(LOCATION_CALL)
+        coroutineScope.cancel()
     }
 
 
@@ -123,8 +130,12 @@ class SpeedForegroundService : Service() {
         private const val CHANNEL_NAME = "channel_name"
         private const val NOTIFICATION_ID = 1
 
-        fun newIntent(context: Context): Intent {
-            return Intent(context, SpeedForegroundService::class.java)
+        private const val START_STOP_FLAG = "start_stop"
+
+        fun newIntent(context: Context, state: Boolean): Intent {
+            return Intent(context, SpeedForegroundService::class.java).apply {
+                putExtra(START_STOP_FLAG, state)
+            }
         }
 
     }

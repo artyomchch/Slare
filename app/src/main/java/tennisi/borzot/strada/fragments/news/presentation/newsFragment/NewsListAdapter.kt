@@ -26,7 +26,6 @@ class NewsListAdapter : ListAdapter<NewsItem, NewsItemViewHolder>(NewsItemDiffCa
                 .placeholder(R.drawable.ic_baseline_broken_image_24)
                 .centerCrop()
                 .into(imageNews)
-            //authorText.text = newsItem.author
             publishedAt.text = newsItem.date
             titleNews.text = newsItem.title
             descNews.text = newsItem.description

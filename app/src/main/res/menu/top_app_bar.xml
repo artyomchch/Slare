@@ -16,9 +16,16 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/account"
-        android:icon="@drawable/ic_user_avatar"
-        android:title="@string/no_users"
-        android:contentDescription="@string/no_users"
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/searching"
+        android:contentDescription="@string/searching"
         app:showAsAction="ifRoom" />
+
+<!--    <item-->
+<!--        android:id="@+id/account"-->
+<!--        android:icon="@drawable/ic_user_avatar"-->
+<!--        android:title="@string/no_users"-->
+<!--        android:contentDescription="@string/no_users"-->
+<!--        app:showAsAction="ifRoom" />-->
 </menu>

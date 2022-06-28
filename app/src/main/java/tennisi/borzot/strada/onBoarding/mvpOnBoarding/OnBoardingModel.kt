@@ -1,14 +1,15 @@
 package tennisi.borzot.strada.onBoarding.mvpOnBoarding
 
 import android.app.Application
-import android.content.Context
-import android.content.SharedPreferences
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import tennisi.borzot.strada.R
+import tennisi.borzot.strada.splash.DataStoreRepository
 
 class OnBoardingModel : OnBoardingInterface.Model {
 
-    var sharedPreference: SharedPreferences? = null
-    var dataList: MutableList<OnBoardingData> = arrayListOf()
+    private var dataList: MutableList<OnBoardingData> = arrayListOf()
 
     override fun createData(application: Application) {
         dataList.add(
@@ -35,10 +36,11 @@ class OnBoardingModel : OnBoardingInterface.Model {
     }
 
     override fun savePrefData(application: Application) {
-        sharedPreference = application.applicationContext.getSharedPreferences(application.getString(R.string.pref), Context.MODE_PRIVATE)
-        val editor = sharedPreference!!.edit()
-        editor.putBoolean("isFirstTimeRun", true)
-        editor.apply()
+        val saveData = DataStoreRepository(application)
+        CoroutineScope(Dispatchers.IO).launch {
+            saveData.saveToDataStore(DataStoreRepository.FIRST)
+        }
+
     }
 
     override fun getDataTitle(): MutableList<OnBoardingData> = dataList

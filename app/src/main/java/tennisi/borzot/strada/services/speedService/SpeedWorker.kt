@@ -13,7 +13,6 @@ import com.google.android.gms.location.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.greenrobot.eventbus.EventBus
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.fragments.speed.LocationDTO
 
@@ -82,13 +81,13 @@ class SpeedWorker(
             locationCallback = object : LocationCallback() {
                 override fun onLocationResult(p0: LocationResult) {
                     if (p0.locations.isNotEmpty()) {
-                        log("${p0.lastLocation.speed.format(2)} ${Thread.currentThread()}")
+                        log("${p0.lastLocation?.speed?.format(2)} ${Thread.currentThread()}")
                         coroutineScope.launch {
-                            SPEED = p0.lastLocation.speed.format(2)
+                         //   SPEED = p0.lastLocation?.speed?.format(2) ?:
                             val notification = notificationBuilder.setContentText(SPEED.toString()).build()
                             val foregroundInfo = ForegroundInfo(NOTIFICATION_ID, notification)
                             setForeground(foregroundInfo)
-                            EventBus.getDefault().post(LocationDTO(SPEED.toString()))
+                      //      EventBus.getDefault().post(LocationDTO(SPEED.toString()))
                         }
 
                     }

@@ -143,6 +143,7 @@ class NewsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        binding.newsRecycler.adapter = null
         _binding = null
     }
 }

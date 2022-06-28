@@ -41,7 +41,6 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
 
         presenter = OnBoardingPresenter(this)
         presenter?.createData(application)
-        presenter?.savePrefData(application)
         dataList = presenter!!.getDataTitle()
         presenter!!.viewPager()
 
@@ -58,7 +57,6 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
     override fun buttonNext() {
         binding.nextButton.setOnClickListener {
             presenter?.buttonNext(this, binding.screenPager)
-
         }
     }
 
@@ -83,6 +81,7 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
     private fun onGotPermissionsForLocation(grantResults: Map<String, Boolean>) {
         if (grantResults.entries.all { it.value }) {
             startActivityWithTransition()
+            presenter?.savePrefData(application)
             Toast.makeText(this, getString(R.string.permission_granted), Toast.LENGTH_SHORT).show()
         } else {
             if (!shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_COARSE_LOCATION)) {
@@ -109,6 +108,7 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
                 }
                 .setPositiveButton(R.string.next_button) {_, _ ->
                     startActivityWithTransition()
+                    presenter?.savePrefData(application)
                 }
                 .create()
                 .show()
@@ -117,6 +117,7 @@ class OnBoardingMain : AppCompatActivity(), OnBoardingInterface.View {
 
     private fun startActivityWithTransition(){
         startActivity(Intent(this, SignInActivity::class.java))
+        finish()
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 }
