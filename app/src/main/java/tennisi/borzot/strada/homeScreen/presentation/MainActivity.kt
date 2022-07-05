@@ -155,6 +155,7 @@ class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListe
             HEIGHT_APPBAR = mainAppbar.measuredHeight
             mainAppbar.layoutParams?.height = 0
             bottomNavigationMenu.visibility = View.GONE
+            carAddFab.visibility = View.GONE
         }
     }
 
@@ -162,6 +163,8 @@ class MainActivity : AppCompatActivity(), CarItemFragment.OnSaveButtonClickListe
         with(binding) {
             mainAppbar.layoutParams?.height = HEIGHT_APPBAR
             bottomNavigationMenu.visibility = View.VISIBLE
+            carAddFab.visibility = View.VISIBLE
+
         }
     }
 

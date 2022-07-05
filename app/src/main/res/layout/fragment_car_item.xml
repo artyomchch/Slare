@@ -11,6 +11,20 @@
         android:background="@color/colorWhite"
         tools:context=".fragments.add.presentation.carItemUI.CarItemFragment">
 
+        <TextView
+            android:id="@+id/title_for_add_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/add_new_car"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/brand_text_field"
@@ -21,7 +35,7 @@
             android:hint="@string/hint_brand"
             app:layout_constraintBottom_toTopOf="@+id/model_text_field"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_for_add_car"
             app:layout_constraintVertical_chainStyle="packed">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -31,6 +45,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/model_text_field"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -38,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:hint="@string/hint_model"
-            app:layout_constraintBottom_toTopOf="@+id/profile_text_field"
+            app:layout_constraintBottom_toTopOf="@+id/frame_profile"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/brand_text_field">
 
@@ -49,22 +64,46 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/profile_text_field"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <LinearLayout
+            android:id="@+id/frame_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:hint="@string/chosen_profile"
+            android:orientation="horizontal"
+            android:weightSum="1"
             app:layout_constraintBottom_toTopOf="@+id/photo_picker"
             app:layout_constraintTop_toBottomOf="@id/model_text_field">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_profile_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/profile_text_field"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:hint="@string/chosen_profile">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_profile_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/config_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="6dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="7dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/settings_profile"
+                android:src="@drawable/ic_settings" />
+
+        </LinearLayout>
 
         <FrameLayout
             android:id="@+id/photo_picker"
@@ -77,9 +116,9 @@
             android:background="@drawable/rectangle_photo"
             android:clickable="true"
             android:focusable="true"
-            app:layout_constraintBottom_toTopOf="@+id/save_button"
+            app:layout_constraintBottom_toTopOf="@+id/check_box_enable"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_text_field">
+            app:layout_constraintTop_toBottomOf="@+id/frame_profile">
 
             <ImageView
                 android:id="@+id/image_picker"
@@ -90,6 +129,20 @@
                 android:contentDescription="@string/add_car"
                 android:src="@drawable/ic_baseline_add_black" />
         </FrameLayout>
+
+        <CheckBox
+            android:id="@+id/check_box_enable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/state_as_default"
+            app:layout_constraintBottom_toTopOf="@+id/save_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/photo_picker">
+
+        </CheckBox>
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/save_button"

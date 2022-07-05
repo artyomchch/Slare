@@ -52,5 +52,14 @@
         <item name="android:background">@drawable/cancel_red_button</item>
     </style>
 
+    <style name="card_view_style">
+        <item name="cardBackgroundColor">#B3FF00AB</item>
+    </style>
+
+    <style name="roundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
 
 </resources>

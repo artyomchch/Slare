@@ -69,22 +69,24 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/drawable/circle_view.xml" value="0.17543859649122806" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/drawable/ic_music.xml" value="0.2135" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/drawable/ic_settings_service_24.xml" value="0.17543859649122806" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/drawable/item_gradient.xml" value="0.167" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/drawable/rectangle_photo.xml" value="0.283" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/drawable/round_button_blue.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/drawable/splash.xml" value="0.283" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout-land/activity_main.xml" value="0.2244268077601411" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout-land/fragment_add.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout-land/fragment_news.xml" value="0.31040564373897706" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/car_item_warning.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/fragment_add.xml" value="0.25" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/fragment_car_item.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/fragment_car_item.xml" value="0.4675438596491228" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/fragment_equalizer.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/fragment_news.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/fragment_settings.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/fragment_source.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/fragment_speed.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/item_cars.xml" value="0.3087719298245614" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/item_cars_choosen.xml" value="0.5" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/item_cars_disable.xml" value="0.3087719298245614" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/item_loader.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Strada/app/src/main/res/layout/item_news.xml" value="0.3087719298245614" />

@@ -5,6 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import tennisi.borzot.strada.fragments.add.data.database.models.CarItemDbModel
 
 @Dao
 interface CarListDao {

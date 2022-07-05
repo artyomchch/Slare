@@ -11,6 +11,7 @@ import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
 import tennisi.borzot.strada.fragments.add.domain.usecases.DeleteCarItemUseCase
 import tennisi.borzot.strada.fragments.add.domain.usecases.EditCarItemUseCase
 import tennisi.borzot.strada.fragments.add.domain.usecases.GetCarListUseCase
+import tennisi.borzot.strada.fragments.add.domain.usecases.GetCarSoundListUseCase
 import tennisi.borzot.strada.services.firebase.firestore.domain.usecases.DeleteCarItemCloudUseCase
 import javax.inject.Inject
 
@@ -19,6 +20,7 @@ class AddFragmentViewModel @Inject constructor(
     private val deleteCarItemUseCase: DeleteCarItemUseCase,
     private val editCarItemUseCase: EditCarItemUseCase,
     private val deleteCarItemCloudUseCase: DeleteCarItemCloudUseCase,
+    private val getCarSoundListUseCase: GetCarSoundListUseCase
 ) : ViewModel() {
 
     private val _observerItems = MutableLiveData<CarObserver<Boolean>>()
@@ -27,19 +29,21 @@ class AddFragmentViewModel @Inject constructor(
 
 
     val carList = getCarListUseCase.invoke()
+    val carSound = getCarSoundListUseCase.invoke(1)
+
 
 
     fun observe() {
         if (carList.value.isNullOrEmpty()) _observerItems.value = CarObserver.Warning(true) else _observerItems.value = CarObserver.Success()
     }
 
-    fun changeEnableState(carItem: CarItem) {
-        viewModelScope.launch {
-            val newItem = carItem.copy(enable = !carItem.enable)
-            editCarItemUseCase(newItem)
-
-        }
-    }
+//    fun changeEnableState(carItem: CarItem) {
+//        viewModelScope.launch {
+//            val newItem = carItem.copy(enable = !carItem.enable)
+//            editCarItemUseCase(newItem)
+//
+//        }
+//    }
 
 
     fun deleteCarItem(carItem: CarItem) {
@@ -47,7 +51,7 @@ class AddFragmentViewModel @Inject constructor(
             deleteCarItemUseCase(carItem)
         }
         CoroutineScope(Dispatchers.IO).launch {
-            deleteCarItemCloudUseCase(carItem.name)
+            deleteCarItemCloudUseCase(carItem.brand)
         }
     }
 

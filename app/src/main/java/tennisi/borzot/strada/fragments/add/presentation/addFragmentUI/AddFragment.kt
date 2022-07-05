@@ -3,6 +3,7 @@ package tennisi.borzot.strada.fragments.add.presentation.addFragmentUI
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,6 +53,10 @@ class AddFragment : Fragment() {
         observeRecycler()
         navigateItem()
         observeState()
+
+        viewModel.carSound.observe(viewLifecycleOwner) {
+            Log.d("list sound", " $it ")
+        }
 
         return binding.root
     }
@@ -121,7 +126,7 @@ class AddFragment : Fragment() {
                     MyButton(requireContext(), "Edit", 60, 0, Color.parseColor("#FF9502"),
                         object : SwipeListenerButton {
                             override fun onClick(pos: Int) {
-                                findNavController().navigate(AddFragmentDirections.actionAddFragmentToCarItemFragment(ScreenAddMode.ADD, -1))
+                                findNavController().navigate(AddFragmentDirections.actionAddFragmentToCarItemFragment(ScreenAddMode.EDIT, item.id))
                             }
                         })
                 )
@@ -134,6 +139,7 @@ class AddFragment : Fragment() {
         carsListAdapter.onCarItemClickListener = {
             findNavController().navigate(AddFragmentDirections.actionAddFragmentToCarItemFragment(ScreenAddMode.EDIT, it.id))
         }
+
     }
 
     private fun setupOnLongClickListener() {

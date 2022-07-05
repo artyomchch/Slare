@@ -11,7 +11,6 @@ import android.provider.MediaStore
 import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,12 +21,10 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.StradaApplication
 import tennisi.borzot.strada.databinding.FragmentCarItemBinding
 import tennisi.borzot.strada.fragments.add.presentation.ViewModelFactory
-import java.io.File
 import javax.inject.Inject
 
 
@@ -140,9 +137,9 @@ class CarItemFragment : Fragment() {
 
 
     private fun observeViewModel() {
-        viewModel.errorInputName.observe(viewLifecycleOwner) {
+        viewModel.errorInputProfile.observe(viewLifecycleOwner) {
             val message = if (it) {
-                getString(R.string.invalid_name)
+                getString(R.string.invalid_profile)
             } else {
                 null
             }
@@ -184,7 +181,7 @@ class CarItemFragment : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                viewModel.resetErrorInputName()
+                viewModel.resetErrorInputProfile()
             }
 
             override fun afterTextChanged(p0: Editable?) {}
@@ -217,25 +214,36 @@ class CarItemFragment : Fragment() {
     private fun launchEditMode() {
         with(binding) {
             viewModel.getCarItem(args.id)
+            titleForAddCar.text = getText(R.string.edit_current_car)
             viewModel.carItem.observe(viewLifecycleOwner) {
-
-                editProfileField.setText(it.name)
                 editBrandField.setText(it.brand)
                 editModelField.setText(it.model)
-//                Log.d("TAG", "launchEditMode: ${it.pathToPic}")
-//                imagePicker.setImageURI(it.pathToPic.toUri())
-
+                editProfileField.setText(it.profile)
+                checkBoxEnable.isChecked = it.enable
             }
             saveButton.setOnClickListener {
-                viewModel.editCarItem(editProfileField.text?.toString(), editBrandField.text?.toString(), editModelField.text?.toString(), imageUri = IMAGE_URI)
+                viewModel.editCarItem(
+                    editBrandField.text?.toString(),
+                    editModelField.text?.toString(),
+                    editProfileField.text?.toString(),
+                    imageUri = IMAGE_URI,
+                    checkBoxEnable.isChecked
+                )
             }
         }
     }
 
     private fun launchAddMode() {
         with(binding) {
+            titleForAddCar.text = getText(R.string.add_new_car)
             saveButton.setOnClickListener {
-                viewModel.addCarItem(editProfileField.text?.toString(), editBrandField.text?.toString(), editModelField.text?.toString(), imageUri = IMAGE_URI)
+                viewModel.addCarItem(
+                    editBrandField.text?.toString(),
+                    editModelField.text?.toString(),
+                    editProfileField.text?.toString(),
+                    imageUri = IMAGE_URI,
+                    checkBoxEnable.isChecked
+                )
             }
         }
 

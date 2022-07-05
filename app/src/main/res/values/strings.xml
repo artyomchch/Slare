@@ -62,7 +62,7 @@
     <string name="hint_name">Name:</string>
     <string name="hint_brand">Brand:</string>
     <string name="hint_model">Model:</string>
-    <string name="invalid_name">Invalid name</string>
+    <string name="invalid_profile">Invalid profile</string>
     <string name="invalid_brand">Invalid brand</string>
     <string name="invalid_model">Invalid model</string>
     //News item fragment
@@ -106,6 +106,10 @@
     <string name="my_garage">My garage</string>
     <string name="s">Speed</string>
     <string name="searching">search</string>
+    <string name="state_as_default">Set as default</string>
+    <string name="add_new_car">Add new car:</string>
+    <string name="edit_current_car">Edit current car:</string>
+    <string name="settings_profile">settings_profile</string>
 
 
 </resources>

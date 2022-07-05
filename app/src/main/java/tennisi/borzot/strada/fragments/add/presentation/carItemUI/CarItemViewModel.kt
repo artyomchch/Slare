@@ -23,9 +23,9 @@ class CarItemViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    private val _errorInputName = MutableLiveData<Boolean>()
-    val errorInputName: LiveData<Boolean>
-        get() = _errorInputName
+    private val _errorInputProfile = MutableLiveData<Boolean>()
+    val errorInputProfile: LiveData<Boolean>
+        get() = _errorInputProfile
 
     private val _errorInputBrand = MutableLiveData<Boolean>()
     val errorInputBrand: LiveData<Boolean>
@@ -51,34 +51,35 @@ class CarItemViewModel @Inject constructor(
         }
     }
 
-    fun addCarItem(inputName: String?, inputBrand: String?, inputModel: String?, imageUri: String) {
+    fun addCarItem(inputBrand: String?, inputModel: String?, inputProfile: String?, imageUri: String, enable: Boolean) {
 
-        val name = parseName(inputName)
+        val profile = parseName(inputProfile)
         val brand = parseName(inputBrand)
         val model = parseName(inputModel)
-        val fieldsValid = validateInput(name, brand, model)
+        val fieldsValid = validateInput(profile, brand, model)
         if (fieldsValid) {
             viewModelScope.launch {
-                val carItem = CarItem(name, brand, model, pathToPic = imageUri, true)
+                val carItem = CarItem(brand, model, profile, pathToPic = imageUri, enable)
                 addCarItemUseCase(carItem)
                 finishWork()
             }
             CoroutineScope(Dispatchers.IO).launch {
-                val carItemCloud = CarItemCloud(name, brand, model, true)
+                val carItemCloud = CarItemCloud(brand, model, profile, true)
                 addCarItemCloudUseCase(carItemCloud)
             }
         }
     }
 
-    fun editCarItem(inputName: String?, inputBrand: String?, inputModel: String?, imageUri: String) {
-        val name = parseName(inputName)
+    fun editCarItem(inputBrand: String?, inputModel: String?, inputProfile: String?, imageUri: String, enable: Boolean) {
+
         val brand = parseName(inputBrand)
         val model = parseName(inputModel)
-        val fieldsValid = validateInput(name, brand, model)
+        val profile = parseName(inputProfile)
+        val fieldsValid = validateInput(brand, model, profile)
         if (fieldsValid) {
             _carItem.value?.let {
                 viewModelScope.launch {
-                    val item = it.copy(name = name ,brand = brand, model = model, pathToPic = imageUri)
+                    val item = it.copy(brand = brand, model = model, profile = profile, pathToPic = imageUri, enable = enable)
                     editCarItemUseCase(item)
                     finishWork()
                 }
@@ -97,8 +98,8 @@ class CarItemViewModel @Inject constructor(
 //            }
 //    }
 
-    fun resetErrorInputName() {
-        _errorInputName.value = false
+    fun resetErrorInputProfile() {
+        _errorInputProfile.value = false
     }
 
     fun resetErrorInputBrand() {
@@ -113,10 +114,10 @@ class CarItemViewModel @Inject constructor(
         return inputName?.trim() ?: ""
     }
 
-    private fun validateInput(name: String, brand: String, model: String): Boolean {
+    private fun validateInput(brand: String, model: String, profile: String): Boolean {
         var result = true
-        if (name.isBlank()) {
-            _errorInputName.value = true
+        if (profile.isBlank()) {
+            _errorInputProfile.value = true
             result = false
         }
         if (brand.isBlank()) {

@@ -20,6 +20,12 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
     }
 
     buildFeatures {
@@ -101,9 +107,10 @@ dependencies {
     // Room
     implementation 'androidx.room:room-runtime:2.4.2'
     implementation 'androidx.room:room-ktx:2.4.2'
+    kapt 'androidx.room:room-compiler:2.4.2'
+    //testing
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
     androidTestImplementation 'org.testng:testng:6.9.6'
-    kapt 'androidx.room:room-compiler:2.4.2'
     //jetpack Work Manager
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
     // Dagger 2
@@ -122,6 +129,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:20.0.0'
     // datastore
     implementation 'androidx.datastore:datastore-preferences:1.0.0'
+    // image viewer
+    implementation 'com.github.stfalcon-studio:StfalconImageViewer:v1.0.1'
 
     // debug
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
