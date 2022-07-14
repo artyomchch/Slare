@@ -14,6 +14,10 @@ interface CarListRepository {
 
     suspend fun deleteCarItem(carItem: CarItem)
 
+    suspend fun resetEnableFromCar(carItemId: Int)
+
+    suspend fun resetEnableFromCarWithAddCar()
+
     fun getCarList(): LiveData<List<CarItem>>
 
     fun getConfigListById(carItemId: Int): LiveData<List<SoundItem>>

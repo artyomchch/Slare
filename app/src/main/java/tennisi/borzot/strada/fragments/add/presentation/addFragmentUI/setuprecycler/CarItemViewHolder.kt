@@ -12,7 +12,6 @@ import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
 sealed class CarItemViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder(binding.root) {
 
 
-
     class EnableViewHolder(private val binding: ItemCarsBinding) : CarItemViewHolder(binding) {
 
         fun bind(carsItem: CarItem) {
@@ -34,10 +33,10 @@ sealed class CarItemViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder(b
                         .load(image.pathToPic)
                         .placeholder(R.drawable.ic_app_icon)
                         .into(view)
-                }.show()
+                }.withBackgroundColorResource(R.color.colorPicture)
+                    .show()
             }
         }
-
 
 
     }
@@ -63,7 +62,9 @@ sealed class CarItemViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder(b
                         .load(image.pathToPic)
                         .placeholder(R.drawable.ic_app_icon)
                         .into(view)
-                }.show()
+
+                }.withBackgroundColorResource(R.color.colorPicture)
+                    .show()
             }
 
 

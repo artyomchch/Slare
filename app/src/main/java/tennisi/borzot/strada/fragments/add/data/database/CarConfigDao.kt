@@ -18,8 +18,8 @@ interface CarConfigDao {
             "  ON config_sound.id = car_config_sound.config_id WHERE car_config_sound.car_id = :carId")
     fun getSoundAndConfig(carId: Int): LiveData<Map<SoundDbModel, CarConfigSoundDbModel?>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun setActiveFlagForCarConfigSound(carConfigSoundDbModel: CarConfigSoundDbModel)
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    suspend fun setActiveFlagForCarConfigSound(carConfigSoundDbModel: CarConfigSoundDbModel)
 
 //    @Query("SELECT * FROM car_items")
 //    fun getCarList(): LiveData<List<CarItemDbModel>>

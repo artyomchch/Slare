@@ -20,6 +20,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import tennisi.borzot.strada.R
 import tennisi.borzot.strada.StradaApplication
@@ -85,6 +86,7 @@ class CarItemFragment : Fragment() {
         launchRightMode()
         observeViewModel()
         uploadPhoto()
+        setupConfigClickListener()
     }
 
     private fun uploadPhoto() {
@@ -169,6 +171,15 @@ class CarItemFragment : Fragment() {
         }
     }
 
+    private fun setupConfigClickListener() {
+
+        binding.configButton.setOnClickListener {
+            findNavController().navigate(CarItemFragmentDirections.actionCarItemFragmentToSoundFragment())
+        }
+
+
+    }
+
     private fun launchRightMode() {
         when (args.mode.toString()) {
             MODE_EDIT -> launchEditMode()
@@ -229,6 +240,7 @@ class CarItemFragment : Fragment() {
                     imageUri = IMAGE_URI,
                     checkBoxEnable.isChecked
                 )
+                if (checkBoxEnable.isChecked) viewModel.resetEnableFromCar(args.id)
             }
         }
     }
@@ -244,6 +256,7 @@ class CarItemFragment : Fragment() {
                     imageUri = IMAGE_URI,
                     checkBoxEnable.isChecked
                 )
+                if (checkBoxEnable.isChecked) viewModel.resetEnableFromCarWithAddNew()
             }
         }
 

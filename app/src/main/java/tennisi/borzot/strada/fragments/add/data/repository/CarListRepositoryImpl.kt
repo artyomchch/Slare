@@ -34,6 +34,14 @@ class CarListRepositoryImpl @Inject constructor(
         carListDao.deleteCarItem(carItem.id)
     }
 
+    override suspend fun resetEnableFromCar(carItemId: Int) {
+        carListDao.resetEnableFromCar(carItemId)
+    }
+
+    override suspend fun resetEnableFromCarWithAddCar() {
+        carListDao.resetEnableFromCarWithAddNew()
+    }
+
     override fun getCarList(): LiveData<List<CarItem>> = Transformations.map(carListDao.getCarList()) {
         mapper.mapListDbModelToListEntity(it)
     }

@@ -142,10 +142,10 @@ class AddFragment : Fragment() {
 
     }
 
-    private fun setupOnLongClickListener() {
-        carsListAdapter.onCarItemLongClickListener = {
-        }
-    }
+//    private fun setupOnLongClickListener() {
+//        carsListAdapter.onCarItemLongClickListener = {
+//        }
+//    }
 
 
     override fun onDestroyView() {

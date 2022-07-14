@@ -8,9 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import tennisi.borzot.strada.fragments.add.domain.entity.CarItem
-import tennisi.borzot.strada.fragments.add.domain.usecases.AddCarItemUseCase
-import tennisi.borzot.strada.fragments.add.domain.usecases.EditCarItemUseCase
-import tennisi.borzot.strada.fragments.add.domain.usecases.GetCarItemUseCase
+import tennisi.borzot.strada.fragments.add.domain.usecases.*
 import tennisi.borzot.strada.services.firebase.firestore.domain.entity.CarItemCloud
 import tennisi.borzot.strada.services.firebase.firestore.domain.usecases.AddCarItemCloudUseCase
 import javax.inject.Inject
@@ -19,7 +17,9 @@ class CarItemViewModel @Inject constructor(
     private val getCarItemUseCase: GetCarItemUseCase,
     private val addCarItemUseCase: AddCarItemUseCase,
     private val editCarItemUseCase: EditCarItemUseCase,
-    private val addCarItemCloudUseCase: AddCarItemCloudUseCase
+    private val resetEnableFromCarWithAddNew: ResetEnableFromCarWithAddNew,
+    private val resetEnableFromCar: ResetEnableFromCar,
+    private val addCarItemCloudUseCase: AddCarItemCloudUseCase,
 ) : ViewModel() {
 
 
@@ -48,6 +48,18 @@ class CarItemViewModel @Inject constructor(
         viewModelScope.launch {
             val item = getCarItemUseCase(carItemId)
             _carItem.value = item
+        }
+    }
+
+    fun resetEnableFromCar(carItemId: Int){
+        viewModelScope.launch {
+            resetEnableFromCar.invoke(carItemId)
+        }
+    }
+
+    fun resetEnableFromCarWithAddNew(){
+        viewModelScope.launch {
+            resetEnableFromCarWithAddNew.invoke()
         }
     }
 

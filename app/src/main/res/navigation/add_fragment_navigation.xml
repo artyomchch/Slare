@@ -25,5 +25,17 @@
         <argument
             android:name="id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_carItemFragment_to_soundFragment"
+            app:destination="@id/soundFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+    <fragment
+        android:id="@+id/soundFragment"
+        android:name="tennisi.borzot.strada.fragments.add.presentation.soundItem.SoundFragment"
+        android:label="fragment_sound"
+        tools:layout="@layout/fragment_sound" />
 </navigation>
