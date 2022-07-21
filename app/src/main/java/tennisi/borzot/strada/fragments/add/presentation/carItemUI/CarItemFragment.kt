@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -15,9 +16,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.net.toUri
+import androidx.core.view.drawToBitmap
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -26,6 +29,9 @@ import tennisi.borzot.strada.R
 import tennisi.borzot.strada.StradaApplication
 import tennisi.borzot.strada.databinding.FragmentCarItemBinding
 import tennisi.borzot.strada.fragments.add.presentation.ViewModelFactory
+import tennisi.borzot.strada.utils.InternalStorageSave
+import tennisi.borzot.strada.utils.setImage
+import tennisi.borzot.strada.utils.splitDataUniqueId
 import javax.inject.Inject
 
 
@@ -36,6 +42,8 @@ class CarItemFragment : Fragment() {
         get() = _binding ?: throw RuntimeException("FragmentCarItemBinding == null")
 
     private val args by navArgs<CarItemFragmentArgs>()
+
+    private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -82,6 +90,7 @@ class CarItemFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        openGallery()
         addChangeTextListeners()
         launchRightMode()
         observeViewModel()
@@ -95,20 +104,22 @@ class CarItemFragment : Fragment() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
-            IMAGE_URI = data?.data.toString()
-
-            binding.imagePicker.setImageURI(IMAGE_URI.toUri())
+    private fun openGallery(){
+        galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result->
+            if (result.resultCode == Activity.RESULT_OK && result.data != null) {
+                imageUri = result.data?.data.toString()
+                binding.imagePicker.setImageURI(imageUri.toUri())
+            }
         }
     }
+
+
 
     private fun onGotPermissionsForStorage(grantResults: Map<String, Boolean>) {
         if (grantResults.entries.all { it.value }) {
             Toast.makeText(context, getString(R.string.permission_granted), Toast.LENGTH_SHORT).show()
             val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
-            startActivityForResult(gallery, IMAGE_PICK_CODE)
+                galleryLauncher.launch(gallery)
         } else {
             if (!shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 askUserForOpeningAppSettings()
@@ -231,15 +242,18 @@ class CarItemFragment : Fragment() {
                 editModelField.setText(it.model)
                 editProfileField.setText(it.profile)
                 checkBoxEnable.isChecked = it.enable
+                imagePicker.setImage(requireContext(), it.pathToPic)
+
             }
             saveButton.setOnClickListener {
                 viewModel.editCarItem(
                     editBrandField.text?.toString(),
                     editModelField.text?.toString(),
                     editProfileField.text?.toString(),
-                    imageUri = IMAGE_URI,
+                    imageUri = imageUri.split("/").last(),
                     checkBoxEnable.isChecked
                 )
+                InternalStorageSave.saveToInternalStorage(binding.imagePicker.drawToBitmap(Bitmap.Config.ARGB_8888), imageUri.splitDataUniqueId())
                 if (checkBoxEnable.isChecked) viewModel.resetEnableFromCar(args.id)
             }
         }
@@ -253,14 +267,15 @@ class CarItemFragment : Fragment() {
                     editBrandField.text?.toString(),
                     editModelField.text?.toString(),
                     editProfileField.text?.toString(),
-                    imageUri = IMAGE_URI,
+                    imageUri = imageUri.split("/").last(),
                     checkBoxEnable.isChecked
                 )
+                InternalStorageSave.saveToInternalStorage(binding.imagePicker.drawToBitmap(Bitmap.Config.ARGB_8888), imageUri.splitDataUniqueId())
                 if (checkBoxEnable.isChecked) viewModel.resetEnableFromCarWithAddNew()
             }
         }
-
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -278,7 +293,6 @@ class CarItemFragment : Fragment() {
     companion object {
         const val MODE_EDIT = "EDIT"
         const val MODE_ADD = "ADD"
-        private const val IMAGE_PICK_CODE = 1000
-        private var IMAGE_URI = ""
+        private var imageUri = ""
     }
 }
